@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2025-07-24
+
+### New Features
+
+- initial commit
+- update .tool-versions
+- minimal running phoenix server
+- add github action for CI/CD
+- CI/CD should use master branch by default
+- update mcp.json
+- add DX tooling for semver changelog
+
+### Bug Fixes
+
+- merge conflict in .gitignore
+
 ### New Features
 
 - initial commit

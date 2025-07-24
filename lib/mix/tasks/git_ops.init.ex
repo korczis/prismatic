@@ -36,17 +36,17 @@ defmodule Mix.Tasks.GitOps.Init do
     end
 
     # Initialize git if not already initialized
-    unless File.exists?(".git") do
+    _git_init_result = unless File.exists?(".git") do
       Mix.shell().info("Initializing git repository...")
-      System.cmd("git", ["init"], stderr_to_stdout: true)
+      {_, _} = System.cmd("git", ["init"], stderr_to_stdout: true)
     end
 
     # Create initial commit if no commits exist
     {result, _} = System.cmd("git", ["log", "-1"], stderr_to_stdout: true)
-    if String.contains?(result, "fatal: your current branch") do
+    _git_commit_result = if String.contains?(result, "fatal: your current branch") do
       Mix.shell().info("Creating initial commit...")
-      System.cmd("git", ["add", "."], stderr_to_stdout: true)
-      System.cmd("git", ["commit", "-m", "feat: Initial commit"], stderr_to_stdout: true)
+      {_, _} = System.cmd("git", ["add", "."], stderr_to_stdout: true)
+      {_, _} = System.cmd("git", ["commit", "-m", "feat: Initial commit"], stderr_to_stdout: true)
     end
 
     Mix.shell().info("git_ops initialized successfully!")

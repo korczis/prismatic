@@ -31,6 +31,19 @@ version-patch: git-ops-init
   @echo "Bumping patch version..."
   mix prismatic.version --patch
 
+# Static analysis tasks
+dialyzer-setup:
+  @echo "Setting up Dialyzer PLT..."
+  mix dialyzer_setup
+
+dialyzer:
+  @echo "Running Dialyzer..."
+  mix dialyzer
+
+ci:
+  @echo "Running CI checks..."
+  mix ci
+
 # Release tasks
 release-major: version-major changelog
   @echo "Major version release complete"

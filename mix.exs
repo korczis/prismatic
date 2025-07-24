@@ -4,13 +4,32 @@ defmodule Prismatic.MixProject do
   def project do
     [
       app: :prismatic,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       listeners: [Phoenix.CodeReloader],
+
+      # Dialyzer configuration
+      dialyzer: [
+        plt_add_apps: [:ex_unit, :mix],
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        plt_core_path: "priv/plts/",
+        plt_local_path: "priv/plts/",
+        ignore_warnings: ".dialyzer_ignore.exs",
+        flags: [
+          :error_handling,
+          :underspecs,
+          :unmatched_returns,
+          :extra_return,
+          :missing_return
+        ],
+        exclude_files: [
+          "lib/mix/tasks/git_ops.init.ex"
+        ]
+      ],
 
       # ExDoc configuration
       name: "Prismatic",
@@ -85,7 +104,8 @@ defmodule Prismatic.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
-      {:git_ops, "~> 2.6", only: [:dev, :test], runtime: false}
+      {:git_ops, "~> 2.6", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -101,6 +121,9 @@ defmodule Prismatic.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      dialyzer_setup: ["cmd mkdir -p priv/plts", "dialyzer --build-plt"],
+      dialyzer: ["dialyzer"],
+      ci: ["format --check-formatted", "test", "dialyzer"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind prismatic", "esbuild prismatic"],
       "assets.deploy": [

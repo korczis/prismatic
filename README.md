@@ -158,6 +158,73 @@ end
 - Use Markdown formatting for better readability
 - Add typespecs to functions for better documentation
 
+## Static Analysis with Dialyzer
+
+This project uses [Dialyzer](https://www.erlang.org/doc/man/dialyzer.html) via [Dialyxir](https://github.com/jeremyjh/dialyxir) for static code analysis. Dialyzer helps detect type errors, unreachable code, unnecessary tests, and other code improvements.
+
+### Setting Up Dialyzer
+
+The project is already configured with Dialyxir. The PLT (Persistent Lookup Table) files are stored in `priv/plts/` directory. To set up Dialyzer for the first time:
+
+```bash
+# Create PLT directory and build the PLT
+mix dialyzer_setup
+```
+
+This only needs to be done once, or when dependencies change significantly.
+
+### Running Dialyzer
+
+To run Dialyzer on the project:
+
+```bash
+# Run Dialyzer
+mix dialyzer
+```
+
+You can also use the Justfile task:
+
+```bash
+just dialyzer
+```
+
+### Continuous Integration
+
+Dialyzer is part of the CI pipeline and can be run along with tests and formatting checks:
+
+```bash
+mix ci
+```
+
+### Ignoring Warnings
+
+Some warnings from Dialyzer might be false positives or not relevant to your project. These can be ignored by adding patterns to the `.dialyzer_ignore.exs` file in the project root.
+
+The project has been configured to ignore specific warnings in the git_ops tasks that are not critical to fix. This improves developer experience by focusing on relevant warnings.
+
+### Adding Type Specifications
+
+To get the most out of Dialyzer, add type specifications to your functions:
+
+```elixir
+@spec add(integer(), integer()) :: integer()
+def add(a, b) do
+  a + b
+end
+```
+
+Type specifications improve code documentation and help Dialyzer detect type errors.
+
+### Dialyzer Warning Flags
+
+The project is configured to check for the following types of issues:
+
+- `:error_handling` - Functions that do not handle certain return values
+- `:underspecs` - Type specifications that are too loose
+- `:unmatched_returns` - Function calls where the return value doesn't match the expected type
+- `:extra_return` - Functions that return values not specified in their type specs
+- `:missing_return` - Functions that don't return values specified in their type specs
+
 ## Changelog and Version Management
 
 This project uses [git_ops](https://github.com/zachdaniel/git_ops) for semantic versioning and changelog generation based on conventional commit messages.
