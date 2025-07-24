@@ -10,7 +10,32 @@ defmodule Prismatic.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      listeners: [Phoenix.CodeReloader]
+      listeners: [Phoenix.CodeReloader],
+
+      # ExDoc configuration
+      name: "Prismatic",
+      source_url: "https://github.com/korczis/prismatic",
+      homepage_url: "https://github.com/korczis/prismatic",
+      docs: [
+        main: "readme", # The main page in the docs
+        extras: ["README.md"],
+        logo: "priv/static/images/logo.svg",
+        assets: %{"priv/static/images" => "assets"},
+        formatters: ["html", "epub"],
+        groups_for_modules: [
+          "Web": [
+            PrismaticWeb,
+            ~r/PrismaticWeb\..*/
+          ],
+          "Core": [
+            Prismatic,
+            ~r/Prismatic\..*/
+          ]
+        ],
+        groups_for_extras: [
+          "Guides": ~r/guides\/[^\/]+\.md/
+        ]
+      ]
     ]
   end
 
@@ -58,7 +83,9 @@ defmodule Prismatic.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:git_ops, "~> 2.6", only: [:dev, :test], runtime: false}
     ]
   end
 

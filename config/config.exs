@@ -60,6 +60,65 @@ config :logger, :default_formatter,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Configure git_ops for changelog generation and version management
+config :git_ops,
+  mix_project: Prismatic.MixProject,
+  changelog_file: "CHANGELOG.md",
+  repository_url: "https://github.com/yourusername/prismatic",
+  # Manage the version numbers in mix.exs
+  version_tag_prefix: "v",
+  # Using conventional commit format
+  types: [
+    # Changes that affect the build system or external dependencies
+    build: [
+      "build",
+      "ci",
+      "chore"
+    ],
+    # Documentation only changes
+    docs: [
+      "docs",
+      "doc"
+    ],
+    # A new feature
+    feat: [
+      "feat",
+      "feature"
+    ],
+    # A bug fix
+    fix: [
+      "fix"
+    ],
+    # Performance improvements
+    perf: [
+      "perf",
+      "performance"
+    ],
+    # Code refactoring without functionality changes
+    refactor: [
+      "refactor"
+    ],
+    # Changes that do not affect the meaning of the code
+    style: [
+      "style"
+    ],
+    # Adding missing tests or correcting existing tests
+    test: [
+      "test"
+    ]
+  ],
+  # The format of the changelog entries
+  changelog_sections: [
+    feat: "New Features",
+    fix: "Bug Fixes",
+    perf: "Performance Improvements",
+    refactor: "Code Refactoring",
+    docs: "Documentation Updates",
+    build: "Build System",
+    test: "Tests",
+    style: "Styling"
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

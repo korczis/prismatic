@@ -26,6 +26,12 @@ defmodule PrismaticWeb.Endpoint do
     gzip: not code_reloading?,
     only: PrismaticWeb.static_paths()
 
+  # Serve documentation files from "doc" directory at "/doc" path
+  plug Plug.Static,
+    at: "/doc",
+    from: "doc",
+    gzip: false
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
