@@ -1,0 +1,150 @@
+name: Elixir CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    
+    services:
+      db:
+        image: postgres:17
+        ports: ['5432:5432']
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: '1.17.4' # Specific version as requested
+        otp-version: '28.0.2'    # Specific version as requested
+    
+    - name: Restore dependencies cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          deps
+          _build
+        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-mix-
+    
+    - name: Install dependencies
+      run: mix deps.get
+    
+    - name: Run tests
+      run: mix test
+      env:
+        MIX_ENV: test
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/prismatic_test
+
+  build_release:
+    name: Build Release
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      with:
+        elixir-version: '1.17.4'
+        otp-version: '28.0.2'
+    
+    - name: Restore dependencies cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          deps
+          _build
+        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-mix-
+    
+    - name: Install dependencies
+      run: mix deps.get
+    
+    - name: Compile
+      run: MIX_ENV=prod mix compile
+    
+    - name: Setup assets
+      run: |
+        mix assets.setup
+        mix assets.deploy
+      env:
+        MIX_ENV: prod
+    
+    - name: Generate release
+      run: MIX_ENV=prod mix release
+      env:
+        SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        PHX_HOST: ${{ secrets.PHX_HOST }}
+    
+    - name: Create artifact
+      run: |
+        mkdir -p _release
+        tar -czf _release/prismatic-release.tar.gz -C _build/prod/rel/prismatic .
+    
+    - name: Upload release artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: release
+        path: _release/prismatic-release.tar.gz
+        retention-days: 5
+
+  deploy:
+    name: Deploy
+    needs: build_release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download release artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: release
+        path: _release
+    
+    # This is a placeholder for your actual deployment steps
+    # You would typically use SSH to connect to your server and deploy the release
+    - name: Deploy to server
+      run: |
+        echo "Deploying to server..."
+        # Example deployment using SSH (you would need to set up SSH keys in GitHub secrets)
+        # Install SSH key
+        # mkdir -p ~/.ssh
+        # echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        # chmod 600 ~/.ssh/id_rsa
+        # ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+        
+        # Copy the release to the server
+        # scp _release/prismatic-release.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/
+        
+        # Extract and deploy the release
+        # ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+        #   mkdir -p /opt/prismatic
+        #   tar -xzf /tmp/prismatic-release.tar.gz -C /opt/prismatic
+        #   cd /opt/prismatic
+        #   ./bin/prismatic stop || true
+        #   ./bin/prismatic daemon
+        # EOF
+      env:
+        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
