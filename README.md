@@ -17,18 +17,18 @@ This project uses GitHub Actions for continuous integration and deployment with 
 
 The workflow consists of three main jobs:
 
-1. **Test**: Runs on every push and pull request to the main branch
+1. **Test**: Runs on every push and pull request to the master branch
    - Sets up Elixir 1.17.4 and Erlang 28.0.2
    - Caches dependencies
    - Runs the test suite against a Postgres database
 
-2. **Build Release**: Runs only on pushes to the main branch
+2. **Build Release**: Runs only on pushes to the master branch
    - Compiles the application in production mode with PostgreSQL 17
    - Builds and processes assets
    - Creates a Phoenix release
    - Packages the release as a tarball artifact
 
-3. **Deploy**: Runs after a successful build on the main branch
+3. **Deploy**: Runs after a successful build on the master branch
    - Downloads the release artifact
    - Deploys it to the production server
 
@@ -44,6 +44,14 @@ For deployment:
 - `SSH_PRIVATE_KEY`: SSH private key for deployment
 - `SSH_HOST`: Hostname of your deployment server
 - `SSH_USER`: Username for SSH connection
+
+You can use the provided script to help generate these secrets:
+
+```bash
+./scripts/generate_github_secrets.sh
+```
+
+This script will generate a `SECRET_KEY_BASE` and provide instructions for setting up the other required secrets.
 
 ### Manual Deployment
 

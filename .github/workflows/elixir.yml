@@ -2,9 +2,9 @@ name: Elixir CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 permissions:
   contents: read
@@ -57,7 +57,7 @@ jobs:
   build_release:
     name: Build Release
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     
     steps:
@@ -113,7 +113,7 @@ jobs:
   deploy:
     name: Deploy
     needs: build_release
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     
     steps:
@@ -123,28 +123,28 @@ jobs:
         name: release
         path: _release
     
-    # This is a placeholder for your actual deployment steps
-    # You would typically use SSH to connect to your server and deploy the release
+    # Deploy using SSH to connect to the server
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+    
     - name: Deploy to server
       run: |
         echo "Deploying to server..."
-        # Example deployment using SSH (you would need to set up SSH keys in GitHub secrets)
-        # Install SSH key
-        # mkdir -p ~/.ssh
-        # echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        # chmod 600 ~/.ssh/id_rsa
-        # ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-        
         # Copy the release to the server
-        # scp _release/prismatic-release.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/
+        scp _release/prismatic-release.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/tmp/
         
         # Extract and deploy the release
-        # ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-        #   mkdir -p /opt/prismatic
-        #   tar -xzf /tmp/prismatic-release.tar.gz -C /opt/prismatic
-        #   cd /opt/prismatic
-        #   ./bin/prismatic stop || true
-        #   ./bin/prismatic daemon
-        # EOF
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          mkdir -p /opt/prismatic
+          tar -xzf /tmp/prismatic-release.tar.gz -C /opt/prismatic
+          cd /opt/prismatic
+          ./bin/prismatic stop || true
+          ./bin/prismatic daemon
+          echo "Deployment completed successfully"
+        EOF
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
