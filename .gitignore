@@ -1,17 +1,7 @@
-<<<<<<< HEAD
-/_build
-/cover
-/deps
-/doc
-/.fetch
-erl_crash.dump
-*.ez
-*.beam
-/config/*.secret.exs
-.elixir_ls/
-=======
 # The directory Mix will write compiled artifacts to.
 /_build/
+
+/config/*.secret.exs
 
 # If you run "mix test --cover", coverage assets end up here.
 /cover/
@@ -24,6 +14,10 @@ erl_crash.dump
 
 # Ignore .fetch files in case you like to edit your project deps locally.
 /.fetch
+
+*.beam
+
+.elixir_ls/
 
 # If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
@@ -46,5 +40,3 @@ prismatic-*.tar
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log
 /assets/node_modules/
-
->>>>>>> ee4b87b (feat: initial commit)
