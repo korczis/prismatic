@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="{{ lang | default(value="en") }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
+    <meta name="description" content="{{ page.description | default(value=config.description) }}">
+    
+    <!-- SEO and Open Graph -->
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}">
+    <meta property="og:description" content="{{ page.description | default(value=config.description) }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.permalink | default(value=config.base_url) }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}">
+    <meta name="twitter:description" content="{{ page.description | default(value=config.description) }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.permalink | default(value=config.base_url) }}">
+    
+    <!-- GitHub compatibility meta -->
+    <meta name="github-compatible" content="true">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ get_url(path="favicon.ico") }}">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+    
+    <!-- Search -->
+    {% if config.build_search_index %}
+    <link rel="search" type="application/opensearchdescription+xml" title="{{ config.title }}" href="{{ get_url(path="opensearch.xml") }}">
+    {% endif %}
+    
+    <!-- RSS Feed -->
+    {% if config.generate_feed %}
+    <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path="atom.xml") }}">
+    {% endif %}
+    
+    <!-- Math notation support -->
+    {% if page.extra.math_notation or page.extra.math %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {% endif %}
+    
+    <!-- Mermaid diagrams -->
+    {% if page.extra.mermaid_diagrams or page.extra.mermaid %}
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    {% endif %}
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <div class="nav-container">
+                <a href="{{ config.base_url }}" class="site-title">
+                    <span class="site-icon">🔮</span>
+                    {{ config.title }}
+                </a>
+                
+                <!-- Main navigation -->
+                <ul class="nav-menu">
+                    <li><a href="{{ get_url(path="@/architecture/_index.md") }}">Architecture</a></li>
+                    <li><a href="{{ get_url(path="@/agents/_index.md") }}">Agents</a></li>
+                    <li><a href="{{ get_url(path="@/applications/_index.md") }}">Applications</a></li>
+                    <li><a href="{{ get_url(path="@/nabla-infinity/_index.md") }}">Research</a></li>
+                    <li><a href="{{ get_url(path="@/ghl/_index.md") }}">License</a></li>
+                </ul>
+                
+                <!-- Search -->
+                {% if config.build_search_index %}
+                <div class="search-container">
+                    <input type="search" id="search" placeholder="Search documentation...">
+                    <div id="search-results"></div>
+                </div>
+                {% endif %}
+                
+                <!-- Language switcher -->
+                {% if config.languages %}
+                <div class="language-switcher">
+                    {% for lang_code, lang_config in config.languages %}
+                    <a href="{{ lang_config.base_url | default(value=config.base_url) }}" 
+                       class="lang-link {% if lang == lang_code %}active{% endif %}">
+                        {{ lang_code | upper }}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- GitHub link -->
+                {% if config.extra.github_repo %}
+                <a href="{{ config.extra.github_repo }}" class="github-link" target="_blank" rel="noopener">
+                    <span class="github-icon">📁</span>
+                    GitHub
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Main content -->
+    <main id="main-content" class="main-content">
+        {% block content %}{% endblock content %}
+    </main>
+    
+    <!-- Table of Contents (if enabled) -->
+    {% if page.extra.toc and page.toc %}
+    <aside class="toc-sidebar">
+        <nav class="toc">
+            <h3>Table of Contents</h3>
+            {{ page.toc | safe }}
+        </nav>
+    </aside>
+    {% endif %}
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Prismatic Framework</h4>
+                <p>Advanced AI Agent Framework for real-world applications</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="{{ get_url(path="@/architecture/_index.md") }}">Architecture</a></li>
+                    <li><a href="{{ get_url(path="@/agents/_index.md") }}">Agents</a></li>
+                    <li><a href="{{ get_url(path="@/applications/_index.md") }}">Applications</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Research</h4>
+                <ul>
+                    <li><a href="{{ get_url(path="@/nabla-infinity/_index.md") }}">Nabla-Infinity</a></li>
+                    <li><a href="{{ get_url(path="@/kompendium/_index.md") }}">Kompendium</a></li>
+                    <li><a href="{{ get_url(path="@/nlp/_index.md") }}">NLP Patterns</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="{{ get_url(path="@/ghl/_index.md") }}">General Honest License</a></li>
+                    <li><a href="{{ config.extra.github_repo }}" target="_blank">Source Code</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Prismatic Framework. Licensed under the <a href="{{ get_url(path="@/ghl/_index.md") }}">General Honest License</a>.</p>
+            <p>Built with <a href="https://www.getzola.org/" target="_blank">Zola</a> • Hosted on GitHub Pages</p>
+        </div>
+    </footer>
+    
+    <!-- Search functionality -->
+    {% if config.build_search_index %}
+    <script src="{{ get_url(path="search.js") }}"></script>
+    {% endif %}
+    
+    <!-- Reading time and word count -->
+    {% if config.extra.show_reading_time and page.reading_time %}
+    <script>
+        // Add reading time to page
+        document.addEventListener('DOMContentLoaded', function() {
+            const readingTime = {{ page.reading_time }};
+            const wordCount = {{ page.word_count | default(value=0) }};
+            
+            // You can add reading time display logic here
+        });
+    </script>
+    {% endif %}
+</body>
+</html>

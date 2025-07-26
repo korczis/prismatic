@@ -1,0 +1,53 @@
+base_url = "https://docs.prismatic.dev"
+title = "Prismatic Documentation"
+description = "Comprehensive AI Agent Framework Documentation"
+default_language = "en"
+compile_sass = true
+minify_html = true
+build_search_index = true
+generate_feed = true
+feed_filename = "atom.xml"
+
+[markdown]
+highlight_code = true
+highlight_theme = "github"
+render_emoji = true
+external_links_target_blank = true
+external_links_no_follow = true
+external_links_no_referrer = true
+smart_punctuation = true
+
+[extra]
+github_repo = "https://github.com/korczis/prismatic"
+edit_page = true
+show_reading_time = true
+show_word_count = true
+
+# Multilingual support
+[languages.en]
+title = "Prismatic Documentation"
+description = "AI Agent Framework Documentation"
+weight = 1
+
+[languages.cs]
+title = "Prismatic Dokumentace"
+description = "Dokumentace AI Agent Framework"
+weight = 2
+
+# Custom taxonomies for our content
+[taxonomies]
+tag = { paginate_by = 20, feed = true }
+category = { paginate_by = 15, feed = true }
+audience = { paginate_by = 10 }
+difficulty = { paginate_by = 10 }
+content_type = { paginate_by = 15 }
+language = { paginate_by = 20 }
+status = { paginate_by = 10 }
+
+[search]
+include_title = true
+include_description = true
+include_path = true
+include_content = true
+include_taxonomies = ["tags", "categories"]
+truncate_content_length = 200

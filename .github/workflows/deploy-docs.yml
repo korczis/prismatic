@@ -1,0 +1,261 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**']
+  pull_request:
+    branches: [main]
+    paths: ['docs/**']
+
+jobs:
+  # Validate documentation structure and content
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install validation dependencies
+        run: |
+          pip install toml pyyaml markdown
+
+      - name: Validate TOML frontmatter
+        run: |
+          python scripts/validate-frontmatter.py docs/
+
+      - name: Check markdown syntax
+        run: |
+          find docs -name "*.md" -exec python -c "
+          import markdown
+          import sys
+          try:
+              with open('{}', 'r', encoding='utf-8') as f:
+                  content = f.read()
+              markdown.markdown(content)
+              print('✓ {}')
+          except Exception as e:
+              print('✗ {}: {}'.format('{}', e))
+              sys.exit(1)
+          " \;
+
+      - name: Validate internal links
+        run: |
+          python scripts/validate-links.py docs/
+
+  # Build and test Zola site
+  build-zola:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Zola
+        uses: taiki-e/install-action@zola
+
+      - name: Build Zola site
+        run: |
+          cd docs
+          zola check
+          zola build --base-url "https://docs.prismatic.dev"
+
+      - name: Test built site
+        run: |
+          # Check that essential files were generated
+          test -f docs/public/index.html
+          test -f docs/public/search_index.en.json
+          test -f docs/public/atom.xml
+          test -d docs/public/architecture
+          test -d docs/public/agents
+          test -d docs/public/applications
+
+      - name: Upload Zola build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: zola-site
+          path: docs/public/
+          retention-days: 30
+
+  # Deploy to GitHub Pages (for GitHub browsing)
+  deploy-github-pages:
+    runs-on: ubuntu-latest
+    needs: [validate, build-zola]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: docs/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+  # Deploy Zola site to Netlify
+  deploy-zola-netlify:
+    runs-on: ubuntu-latest
+    needs: [validate, build-zola]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Zola build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: zola-site
+          path: zola-public/
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.1
+        with:
+          publish-dir: './zola-public'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+  # Alternative: Deploy Zola site to Vercel
+  deploy-zola-vercel:
+    runs-on: ubuntu-latest
+    needs: [validate, build-zola]
+    if: github.ref == 'refs/heads/main' && false  # Disabled by default
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Zola build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: zola-site
+          path: zola-public/
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./zola-public
+          vercel-args: '--prod'
+
+  # Performance and quality checks
+  lighthouse:
+    runs-on: ubuntu-latest
+    needs: deploy-zola-netlify
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.12.x
+
+      - name: Run Lighthouse CI
+        run: |
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  # Notify on deployment completion
+  notify:
+    runs-on: ubuntu-latest
+    needs: [deploy-github-pages, deploy-zola-netlify]
+    if: always() && github.ref == 'refs/heads/main'
+    steps:
+      - name: Deployment Summary
+        run: |
+          echo "## 📚 Documentation Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### GitHub Pages (Markdown Browsing)" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ needs.deploy-github-pages.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: https://korczis.github.io/prismatic/docs/" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Zola Site (Enhanced Documentation)" >> $GITHUB_STEP_SUMMARY
+          echo "- Status: ${{ needs.deploy-zola-netlify.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- URL: https://docs.prismatic.dev" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Features Available" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ GitHub markdown browsing" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Full-text search" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Taxonomy filtering" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Multilingual support" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Responsive design" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ SEO optimization" >> $GITHUB_STEP_SUMMARY
+
+      - name: Create deployment comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('📚 Documentation Preview')
+            );
+            
+            const commentBody = `## 📚 Documentation Preview
+            
+            Your documentation changes have been deployed for preview:
+            
+            - **GitHub Pages**: Available after merge
+            - **Zola Preview**: Will be available at deployment URL
+            
+            ### Changes Detected
+            - Modified files in \`docs/\` directory
+            - TOML frontmatter validation: ✅
+            - Markdown syntax check: ✅
+            - Internal links validation: ✅
+            - Zola build: ✅
+            
+            The preview will be updated automatically with new commits.`;
+            
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }

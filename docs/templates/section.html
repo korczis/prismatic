@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="{{ config.default_language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if section.title %}{{ section.title }} - {% endif %}{{ config.title }}</title>
+    <meta name="description" content="{% if section.description %}{{ section.description }}{% else %}{{ config.description }}{% endif %}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ get_url(path='favicon.ico') }}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav">
+            <div class="nav-brand">
+                <a href="{{ get_url(path='@/_index.md') }}">{{ config.title }}</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ get_url(path='@/architecture/_index.md') }}">Architecture</a></li>
+                <li><a href="{{ get_url(path='@/agents/_index.md') }}">Agents</a></li>
+                <li><a href="{{ get_url(path='@/applications/_index.md') }}">Applications</a></li>
+                <li><a href="{{ get_url(path='@/societies/_index.md') }}">Societies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="section-header">
+                <h1>{{ section.title }}</h1>
+                {% if section.description %}
+                <p class="section-description">{{ section.description }}</p>
+                {% endif %}
+            </div>
+
+            <div class="section-content">
+                {{ section.content | safe }}
+            </div>
+
+            {% if section.pages %}
+            <div class="section-pages">
+                <h2>Pages in this section</h2>
+                <ul class="page-list">
+                {% for page in section.pages %}
+                    <li>
+                        <a href="{{ page.permalink }}">{{ page.title }}</a>
+                        {% if page.description %}
+                        <p>{{ page.description }}</p>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if section.subsections %}
+            <div class="subsections">
+                <h2>Subsections</h2>
+                <ul class="subsection-list">
+                {% for subsection in section.subsections %}
+                    <li>
+                        <a href="{{ subsection.permalink }}">{{ subsection.title }}</a>
+                        {% if subsection.description %}
+                        <p>{{ subsection.description }}</p>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now() | date(format="%Y") }} Prismatic AI Agent Framework. Licensed under the General Honest License.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ get_url(path='search.js') }}"></script>
+</body>
+</html>
