@@ -11,6 +11,7 @@ The society system enables:
 - **Agent Impersonation**: Users can act as agents within scenarios
 - **Persistent Scenarios**: Save and restore complex interaction states
 - **Real-time Analytics**: Track agent traits and interaction patterns
+- **[Psychological Warfare Defense](../psychological-warfare/)**: Group-level manipulation detection and coordinated countermeasures
 
 ## 🏗️ Architecture
 
@@ -37,9 +38,13 @@ graph TB
     E --> E2[Agent Context]
     E --> E3[Action Tracking]
     
+    H[Psychological Warfare Defense] --> A
+    H --> H1[Group Threat Detection]
+    H --> H2[Coordinated Countermeasures]
+    H --> H3[Manipulation Pattern Analysis]
+    
     F[Society Blackboard] --> A
     G[LiveView Interface] --> A
-```
 
 ## 🎭 Society Types
 
@@ -56,6 +61,8 @@ Inspired by professional crisis negotiation training systems:
 - **Decision Point Analysis**: Identify key moments in negotiations
 - **Outcome Analytics**: Measure training effectiveness
 - **Replay System**: Review and analyze completed scenarios
+- **[Psychological Warfare Defense](../psychological-warfare/)**: Detect and counter manipulation attempts during crisis scenarios
+- **Manipulation Resistance Training**: Build psychological resilience through controlled exposure scenarios
 
 ### Research Groups
 - Shared knowledge base
@@ -103,7 +110,12 @@ Prismatic.Society.Communication.broadcast_to_society(
 # Create crisis scenario society
 {:ok, society} = Prismatic.Society.create_society("Crisis Room 1", :crisis_scenario, %{
   global_prompt: "This is a psychiatric crisis training scenario. Maintain professional demeanor.",
-  scenario_template: "psychiatric_crisis"
+  scenario_template: "psychiatric_crisis",
+  psychological_warfare_config: %{
+    manipulation_detection_enabled: true,
+    resistance_training_mode: true,
+    threat_escalation_protocols: [:alert_supervisor, :log_incident, :provide_countermeasures]
+  }
 })
 
 # Create specialized agents
@@ -154,3 +166,4 @@ Prismatic.IExAdvanced.export_session(society.id, :json)
 - [Blackboard System](../blackboard/README.md) - Communication backbone
 - [Analytics](../analytics/README.md) - Real-time tracking and analysis
 - [UI Documentation](../ui/README.md) - LiveView interface details
+- [Psychological Warfare](../psychological-warfare/README.md) - Manipulation detection and countermeasures for society-level defense
