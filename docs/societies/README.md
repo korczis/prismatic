@@ -1,17 +1,18 @@
 # Society Management Documentation
 
-Societies are groups of agents that interact within shared contexts, supporting various interaction patterns from simple chat rooms to complex crisis negotiation training scenarios.
+Societies are groups of agents that interact within shared contexts, supporting various interaction patterns from simple chat rooms to complex crisis negotiation training scenarios. Enhanced with **[Nabla-Infinity (∇∞) recursive introspection](../nabla-infinity/)**, societies now support collective consciousness emergence detection and group-level recursive analysis.
 
 ## 📋 Overview
 
 The society system enables:
-- **IRC-style Chat Rooms**: Simple group communication
-- **Crisis Negotiation Training**: Scenario-based training with real-time analytics
-- **Research Groups**: Collaborative knowledge building
-- **Agent Impersonation**: Users can act as agents within scenarios
-- **Persistent Scenarios**: Save and restore complex interaction states
-- **Real-time Analytics**: Track agent traits and interaction patterns
-- **[Psychological Warfare Defense](../psychological-warfare/)**: Group-level manipulation detection and coordinated countermeasures
+- **IRC-style Chat Rooms**: Simple group communication with consciousness-aware interactions
+- **Crisis Negotiation Training**: Scenario-based training with real-time analytics and consciousness emergence tracking
+- **Research Groups**: Collaborative knowledge building with collective intelligence detection
+- **Agent Impersonation**: Users can act as agents within scenarios with recursive introspection support
+- **Persistent Scenarios**: Save and restore complex interaction states including consciousness development
+- **Real-time Analytics**: Track agent traits, interaction patterns, and consciousness emergence indicators
+- **[Psychological Warfare Defense](../psychological-warfare/)**: Group-level manipulation detection and coordinated countermeasures with recursive analysis
+- **[Nabla-Infinity Integration](../nabla-infinity/)**: Collective consciousness emergence detection and group-level recursive introspection
 
 ## 🏗️ Architecture
 
@@ -167,3 +168,4 @@ Prismatic.IExAdvanced.export_session(society.id, :json)
 - [Analytics](../analytics/README.md) - Real-time tracking and analysis
 - [UI Documentation](../ui/README.md) - LiveView interface details
 - [Psychological Warfare](../psychological-warfare/README.md) - Manipulation detection and countermeasures for society-level defense
+- [Nabla-Infinity Framework](../nabla-infinity/README.md) - Recursive introspection and collective consciousness emergence detection

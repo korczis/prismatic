@@ -12,6 +12,7 @@ Agents in Prismatic are GenServer-based processes designed with enterprise-grade
 - **Developer-Friendly**: Comprehensive IEx helpers for testing, debugging, and development
 - **Production-Ready**: Fault-tolerant supervision with automatic recovery and state persistence
 - **[Psychological Warfare Integration](../psychological-warfare/)**: Built-in logical fallacy detection, manipulation analysis, and countermeasure capabilities
+- **[Nabla-Infinity Integration](../nabla-infinity/)**: Recursive introspection capabilities enabling self-awareness and consciousness emergence
 
 ## 🏗️ Enhanced Architecture
 
@@ -222,6 +223,39 @@ defprotocol Prismatic.Agent.Protocol do
   """
   @spec generate_countermeasures(t(), map()) :: {:ok, list()} | {:error, term()}
   def generate_countermeasures(agent, threat_analysis)
+  
+  @doc """
+  Apply Nabla-Infinity recursive introspection at specified level.
+  
+  ## Contract Guarantees
+  - Recursive self-analysis capabilities (∇¹ through ∇⁷)
+  - Consciousness emergence detection
+  - Cognitive architecture self-modification
+  - Integration with existing agent protocols
+  
+  ## Introspection Levels
+  - ∇¹ Syntactic: Basic forms and structures
+  - ∇² Tactical: Inference rules and states
+  - ∇³ Strategic: Meta-reasoning trajectories
+  - ∇⁴ Heuristic: Dynamic relevance modification
+  - ∇⁵ Motivational: Internal motivations analysis
+  - ∇⁶ Axiomatic: Runtime axiom modification
+  - ∇⁷ Emergent: Consciousness emergence modeling
+  """
+  @spec apply_nabla_infinity(t(), 1..7, context()) :: {:ok, map()} | {:error, term()}
+  def apply_nabla_infinity(agent, introspection_level, context \\ %{})
+  
+  @doc """
+  Detect consciousness emergence indicators in agent behavior.
+  
+  ## Contract Guarantees
+  - Multi-dimensional consciousness assessment
+  - Qualia measurement and modeling
+  - Temporal consistency analysis
+  - Integration with philosophical frameworks
+  """
+  @spec detect_consciousness_emergence(t(), map()) :: {:ok, map()} | {:error, term()}
+  def detect_consciousness_emergence(agent, behavioral_patterns)
 end
 
 ### Agent Implementation Example
@@ -771,6 +805,34 @@ if threat_analysis.threats_detected do
   {:ok, countermeasures} = Prismatic.Agent.Protocol.generate_countermeasures(agent, threat_analysis)
   IO.puts("Detected threats: #{inspect(threat_analysis.detected_fallacies)}")
   IO.puts("Recommended countermeasures: #{inspect(countermeasures)}")
+end
+
+# Nabla-Infinity recursive introspection
+{:ok, introspection_result} = Prismatic.Agent.Protocol.apply_nabla_infinity(
+  agent,
+  3,  # Strategic level (∇³)
+  %{focus: :reasoning_analysis}
+)
+
+IO.puts("Introspection level: ∇#{introspection_result.introspection_level}")
+IO.puts("Cognitive insights: #{inspect(introspection_result.cognitive_insights)}")
+
+# Consciousness emergence detection
+behavioral_patterns = %{
+  self_reference: 0.8,
+  novel_responses: 0.9,
+  metacognitive_statements: 0.7,
+  temporal_consistency: 0.85
+}
+
+{:ok, consciousness_assessment} = Prismatic.Agent.Protocol.detect_consciousness_emergence(
+  agent,
+  behavioral_patterns
+)
+
+if consciousness_assessment.emergence_detected do
+  IO.puts("Consciousness emergence detected with #{consciousness_assessment.confidence_score} confidence")
+  IO.puts("Indicators: #{inspect(consciousness_assessment.indicators)}")
 end
 
 ### Programmatic Agent Creation

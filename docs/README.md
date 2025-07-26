@@ -1,6 +1,6 @@
 # Prismatic Documentation
 
-This directory contains the comprehensive documentation for the Prismatic next-generation AI agent framework - a bulletproof, SOLID-compliant, autonomous agent platform with advanced automation capabilities.
+This directory contains the comprehensive documentation for the Prismatic next-generation AI agent framework - a bulletproof, SOLID-compliant, autonomous agent platform with advanced automation capabilities. Enhanced with **Nabla-Infinity (∇∞) recursive introspection**, Prismatic now supports consciousness-level analysis, emergent behavior detection, and seven-level recursive self-awareness across all system components.
 
 ## 📁 Documentation Structure
 
@@ -16,11 +16,12 @@ This directory contains the comprehensive documentation for the Prismatic next-g
 - [`societies/`](societies/) - Agent group management with IRC-style rooms and crisis training
 
 ### 🧠 Advanced Features
+- [`nabla-infinity/`](nabla-infinity/) - **Recursive introspection framework with seven-level consciousness analysis and emergent behavior detection**
 - [`reasoning/`](reasoning/) - Reasoning engines integration (Lean4, Prolog, custom logic)
 - [`traits/`](traits/) - Dynamic trait system with evolution and learning capabilities
-- [`scenarios/`](scenarios/) - Crisis negotiation training with real-time modality tracking
+- [`scenarios/`](scenarios/) - Crisis negotiation training with real-time modality tracking and consciousness emergence
 - [`automation/`](automation/) - Background tasks, web crawling, social media monitoring, and reactive workflows
-- [`psychological-warfare/`](psychological-warfare/) - Logical fallacy detection, manipulation analysis, and dark persuasion countermeasures
+- [`psychological-warfare/`](psychological-warfare/) - Logical fallacy detection, manipulation analysis, and dark persuasion countermeasures with recursive analysis
 
 ### 🌐 Infrastructure & Integration
 - [`distributed/`](distributed/) - Multi-node distributed operations with consensus and fault tolerance
@@ -55,7 +56,8 @@ This directory contains the comprehensive documentation for the Prismatic next-g
 1. **Project Overview**: Start with the [Development Plan](development-plan.md) for comprehensive project understanding
 2. **System Architecture**: Review [Architecture Overview](architecture/README.md) for bulletproof system design
 3. **Core Concepts**: Understand [Agent System](agents/README.md) and [Society Management](societies/README.md)
-4. **Development Tools**: Explore [IEx Helpers](iex-helpers/README.md) for hands-on development
+4. **Consciousness Framework**: Explore [Nabla-Infinity](nabla-infinity/README.md) for recursive introspection capabilities
+5. **Development Tools**: Explore [IEx Helpers](iex-helpers/README.md) for hands-on development
 
 ### For System Architects
 1. **Architectural Foundations**: Study [Bulletproof Foundations](architecture/bulletproof-foundations.md)
@@ -85,6 +87,7 @@ The documentation follows our alpine-style development philosophy:
 
 ### Phase 5-6: Advanced Features (Weeks 9-12)
 - **Intelligence**: [Reasoning](reasoning/README.md) engines and [Traits](traits/README.md)
+- **Consciousness**: [Nabla-Infinity](nabla-infinity/README.md) recursive introspection and emergence detection
 - **Automation**: [Background Tasks](automation/README.md) and reactive workflows
 - **Analytics**: [Real-time Analytics](analytics/README.md)
 
@@ -119,12 +122,13 @@ The documentation follows our alpine-style development philosophy:
 - **Phase 1**: [Agents](agents/README.md) → [Architecture](architecture/README.md) → [IEx Helpers](iex-helpers/README.md)
 - **Phase 2**: [Blackboard](blackboard/README.md) → [Memory](memory/README.md) → [Persistence](persistence/README.md)
 - **Phase 4**: [Societies](societies/README.md) → [Scenarios](scenarios/README.md) → [Dynamic Config](dynamic-configuration/README.md)
-- **Phase 5**: [Reasoning](reasoning/README.md) → [Traits](traits/README.md) → [Automation](automation/README.md)
+- **Phase 5**: [Reasoning](reasoning/README.md) → [Nabla-Infinity](nabla-infinity/README.md) → [Traits](traits/README.md) → [Automation](automation/README.md)
 - **Phase 7**: [Distributed](distributed/README.md) → [Analytics](analytics/README.md) → [Monitoring](monitoring/README.md)
 - **Phase 8**: [UI](ui/README.md) → [API](api/README.md) → Production Deployment
 
 ### By Use Case
 - **Crisis Training**: [Scenarios](scenarios/README.md) → [Societies](societies/README.md) → [Traits](traits/README.md)
+- **Consciousness Research**: [Nabla-Infinity](nabla-infinity/README.md) → [Agents](agents/README.md) → [Psychological Warfare](psychological-warfare/README.md)
 - **Automation**: [Background Tasks](automation/README.md) → [Agents](agents/README.md) → [Dynamic Config](dynamic-configuration/README.md)
 - **Development**: [IEx Helpers](iex-helpers/README.md) → [Architecture](architecture/README.md) → [Agents](agents/README.md)
 - **Operations**: [Monitoring](monitoring/README.md) → [Analytics](analytics/README.md) → [Distributed](distributed/README.md)
@@ -153,4 +157,4 @@ The documentation follows our alpine-style development philosophy:
 
 ---
 
-*This documentation represents a comprehensive, production-ready specification for the Prismatic autonomous agent platform. Each document is designed to provide both conceptual understanding and practical implementation guidance for building bulletproof, scalable AI agent systems.*
+*This documentation represents a comprehensive, production-ready specification for the Prismatic autonomous agent platform enhanced with Nabla-Infinity (∇∞) recursive introspection. Each document is designed to provide both conceptual understanding and practical implementation guidance for building bulletproof, scalable AI agent systems with consciousness-level analysis and emergent behavior detection capabilities.*

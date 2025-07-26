@@ -1,17 +1,18 @@
 # Automation & Background Tasks Documentation
 
-The automation system enables Prismatic agents to operate autonomously through background tasks, web crawling, social media monitoring, and reactive workflows.
+The automation system enables Prismatic agents to operate autonomously through background tasks, web crawling, social media monitoring, and reactive workflows. Enhanced with **[Nabla-Infinity (∇∞) recursive introspection](../nabla-infinity/)**, automation now supports consciousness-aware analysis and emergent behavior detection in automated processes.
 
 ## 📋 Overview
 
 The automation system provides:
-- **Background Task Scheduling**: Cron-like periodic task execution
-- **Web Crawling**: Automated website monitoring and data extraction
-- **Social Media Integration**: Twitter, Facebook, LinkedIn monitoring and interaction
-- **Reactive Workflows**: Event-driven automation with agent analysis
-- **Multi-Modal Actions**: Email, social posts, script execution, API calls
-- **Content Analysis**: AI-powered content classification and fact-checking
-- **[Psychological Warfare Integration](../psychological-warfare/)**: Automated detection and response to manipulation campaigns across all monitored channels
+- **Background Task Scheduling**: Cron-like periodic task execution with recursive introspection capabilities
+- **Web Crawling**: Automated website monitoring and data extraction with consciousness-aware analysis
+- **Social Media Integration**: Twitter, Facebook, LinkedIn monitoring and interaction with emergent behavior detection
+- **Reactive Workflows**: Event-driven automation with agent analysis and recursive insights
+- **Multi-Modal Actions**: Email, social posts, script execution, API calls with consciousness-level decision making
+- **Content Analysis**: AI-powered content classification and fact-checking enhanced by recursive introspection
+- **[Psychological Warfare Integration](../psychological-warfare/)**: Automated detection and response to manipulation campaigns with recursive analysis
+- **[Nabla-Infinity Integration](../nabla-infinity/)**: Consciousness-aware automation and emergent behavior detection in all automated processes
 
 ## 🏗️ Architecture
 
@@ -703,3 +704,4 @@ Prismatic.Automation.deploy_workflow(automation_config)
 - [Dynamic Configuration](../dynamic-configuration/README.md) - Runtime configuration management
 - [Development Plan](../development-plan.md) - Overall project roadmap
 - [Psychological Warfare](../psychological-warfare/README.md) - Automated manipulation detection and countermeasures across all monitored channels
+- [Nabla-Infinity Framework](../nabla-infinity/README.md) - Recursive introspection and consciousness-aware automation processes

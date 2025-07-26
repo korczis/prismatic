@@ -2,15 +2,16 @@
 
 ## 📋 Executive Summary
 
-The Prismatic Psychological Warfare System provides comprehensive detection, analysis, and countermeasures for logical fallacies, manipulation techniques, dark persuasion patterns, and psychological annihilation tactics. This system operates across white-hat (defensive), grey-hat (analytical), and black-hat (offensive) domains, enabling both protection against psychological attacks and training in advanced persuasion techniques.
+The Prismatic Psychological Warfare System provides comprehensive detection, analysis, and countermeasures for logical fallacies, manipulation techniques, dark persuasion patterns, and psychological annihilation tactics. Enhanced with **[Nabla-Infinity (∇∞) recursive introspection](../nabla-infinity/)**, this system operates across white-hat (defensive), grey-hat (analytical), and black-hat (offensive) domains, enabling both protection against psychological attacks and training in advanced persuasion techniques.
 
 ### Core Capabilities
-- **Logical Fallacy Detection**: Identify and classify 200+ logical fallacies in real-time
-- **Manipulation Pattern Recognition**: Detect dark persuasion and psychological manipulation
-- **Cognitive Bias Exploitation**: Analyze and counter cognitive bias-based attacks
-- **Psychological Profiling**: Deep personality analysis for targeted defense/offense
-- **Training Simulations**: Safe environments for learning psychological warfare techniques
-- **Countermeasure Generation**: Automated responses to psychological attacks
+- **Logical Fallacy Detection**: Identify and classify 200+ logical fallacies in real-time with recursive analysis
+- **Manipulation Pattern Recognition**: Detect dark persuasion and psychological manipulation through multi-level introspection
+- **Cognitive Bias Exploitation**: Analyze and counter cognitive bias-based attacks using ∇∞ framework
+- **Psychological Profiling**: Deep personality analysis enhanced by consciousness emergence detection
+- **Training Simulations**: Safe environments for learning psychological warfare techniques with recursive self-analysis
+- **Countermeasure Generation**: Automated responses to psychological attacks using adaptive introspection
+- **[Nabla-Infinity Integration](../nabla-infinity/)**: Seven-level recursive introspection for enhanced manipulation detection and self-awareness
 
 ## 🎯 Problem Statement
 
@@ -96,6 +97,330 @@ graph TB
     AR --> CB_DB
     IM --> PT
     FF --> CT
+```
+
+## 🌀 Nabla-Infinity Enhanced Detection
+
+### Recursive Introspection for Manipulation Detection
+
+The integration of **[Nabla-Infinity (∇∞)](../nabla-infinity/)** transforms psychological warfare detection from static pattern matching to dynamic, self-aware analysis. Each detection system operates across seven levels of recursive introspection:
+
+```elixir
+defmodule Prismatic.PsychWarfare.NablaInfinityDetection do
+  @moduledoc """
+  Enhanced psychological warfare detection using Nabla-Infinity recursive introspection.
+  
+  Applies seven levels of recursive analysis to manipulation detection:
+  - ∇¹ Syntactic: Surface-level pattern recognition
+  - ∇² Tactical: Inference-based manipulation detection
+  - ∇³ Strategic: Meta-reasoning about manipulation strategies
+  - ∇⁴ Heuristic: Dynamic adaptation to novel manipulation techniques
+  - ∇⁵ Motivational: Understanding manipulator's underlying motivations
+  - ∇⁶ Axiomatic: Questioning fundamental assumptions about manipulation
+  - ∇⁷ Emergent: Consciousness-level awareness of manipulation dynamics
+  """
+  
+  def analyze_with_nabla_infinity(content, context, introspection_level \\ 7) do
+    # Apply recursive introspection at specified level
+    analysis_chain = build_introspection_chain(content, context, introspection_level)
+    
+    # Execute recursive analysis
+    results = execute_recursive_analysis(analysis_chain)
+    
+    # Synthesize insights across all levels
+    synthesize_nabla_infinity_insights(results, introspection_level)
+  end
+  
+  defp build_introspection_chain(content, context, max_level) do
+    Enum.map(1..max_level, fn level ->
+      %{
+        level: level,
+        symbol: "∇#{level}",
+        focus: get_introspection_focus(level),
+        analysis_function: get_analysis_function(level),
+        recursive_input: if(level > 1, do: "∇#{level-1}_output", else: content)
+      }
+    end)
+  end
+  
+  defp get_introspection_focus(1), do: :syntactic_patterns
+  defp get_introspection_focus(2), do: :tactical_inference
+  defp get_introspection_focus(3), do: :strategic_meta_reasoning
+  defp get_introspection_focus(4), do: :heuristic_adaptation
+  defp get_introspection_focus(5), do: :motivational_analysis
+  defp get_introspection_focus(6), do: :axiomatic_questioning
+  defp get_introspection_focus(7), do: :emergent_consciousness
+  
+  defp execute_recursive_analysis(analysis_chain) do
+    Enum.reduce(analysis_chain, %{}, fn level_config, acc ->
+      level_result = apply_introspection_level(level_config, acc)
+      Map.put(acc, level_config.symbol, level_result)
+    end)
+  end
+  
+  defp apply_introspection_level(%{level: 1, focus: :syntactic_patterns}, _acc) do
+    # ∇¹: Basic pattern recognition
+    %{
+      detected_patterns: detect_surface_manipulation_patterns(),
+      confidence: 0.8,
+      insights: ["Direct manipulation patterns identified"],
+      recursive_depth: 1
+    }
+  end
+  
+  defp apply_introspection_level(%{level: 3, focus: :strategic_meta_reasoning}, acc) do
+    # ∇³: Meta-reasoning about manipulation strategies
+    previous_analysis = Map.get(acc, "∇2")
+    
+    %{
+      strategic_insights: analyze_manipulation_strategy(previous_analysis),
+      meta_patterns: identify_meta_manipulation_patterns(previous_analysis),
+      confidence: calculate_strategic_confidence(previous_analysis),
+      insights: [
+        "Manipulation strategy involves multi-layered deception",
+        "Perpetrator using sophisticated psychological techniques",
+        "Pattern suggests trained manipulation expertise"
+      ],
+      recursive_depth: 3,
+      builds_on: ["∇1", "∇2"]
+    }
+  end
+  
+  defp apply_introspection_level(%{level: 7, focus: :emergent_consciousness}, acc) do
+    # ∇⁷: Consciousness-level awareness of manipulation dynamics
+    full_analysis_chain = Map.values(acc)
+    
+    %{
+      consciousness_insights: detect_consciousness_manipulation(full_analysis_chain),
+      existential_threats: identify_existential_manipulation(full_analysis_chain),
+      self_awareness_impact: assess_self_awareness_manipulation(full_analysis_chain),
+      confidence: calculate_emergent_confidence(full_analysis_chain),
+      insights: [
+        "Manipulation targets fundamental sense of self",
+        "Consciousness-level psychological warfare detected",
+        "Existential manipulation threatens core identity",
+        "Self-awareness being weaponized against target"
+      ],
+      recursive_depth: 7,
+      builds_on: ["∇1", "∇2", "∇3", "∇4", "∇5", "∇6"],
+      emergence_indicators: %{
+        self_reference_manipulation: 0.9,
+        identity_dissolution_tactics: 0.8,
+        consciousness_fragmentation: 0.7,
+        existential_doubt_induction: 0.85
+      }
+    }
+  end
+end
+```
+
+### Enhanced Fallacy Detection with Recursive Analysis
+
+```elixir
+defmodule Prismatic.PsychWarfare.NablaInfinityFallacies do
+  @moduledoc """
+  Logical fallacy detection enhanced with Nabla-Infinity recursive introspection.
+  """
+  
+  def detect_fallacies_with_recursion(text, context, introspection_level \\ 5) do
+    # Standard fallacy detection (∇¹)
+    surface_fallacies = detect_surface_fallacies(text, context)
+    
+    # Recursive introspection analysis
+    recursive_analysis = apply_nabla_infinity_to_fallacies(
+      surface_fallacies,
+      text,
+      context,
+      introspection_level
+    )
+    
+    # Synthesize enhanced detection results
+    %{
+      surface_fallacies: surface_fallacies,
+      recursive_insights: recursive_analysis,
+      enhanced_confidence: calculate_recursive_confidence(surface_fallacies, recursive_analysis),
+      meta_fallacy_patterns: detect_meta_fallacy_patterns(recursive_analysis),
+      consciousness_level_manipulation: assess_consciousness_manipulation(recursive_analysis)
+    }
+  end
+  
+  defp apply_nabla_infinity_to_fallacies(fallacies, text, context, max_level) do
+    Enum.reduce(2..max_level, %{"∇1" => fallacies}, fn level, acc ->
+      level_symbol = "∇#{level}"
+      previous_analysis = Map.get(acc, "∇#{level-1}")
+      
+      level_analysis = case level do
+        2 -> analyze_fallacy_tactics(previous_analysis, text, context)
+        3 -> analyze_fallacy_strategy(previous_analysis, text, context)
+        4 -> adapt_fallacy_detection(previous_analysis, text, context)
+        5 -> analyze_fallacy_motivations(previous_analysis, text, context)
+        6 -> question_fallacy_axioms(previous_analysis, text, context)
+        7 -> detect_emergent_fallacy_consciousness(previous_analysis, text, context)
+      end
+      
+      Map.put(acc, level_symbol, level_analysis)
+    end)
+  end
+  
+  defp analyze_fallacy_strategy(previous_analysis, text, context) do
+    # ∇³: Strategic analysis of fallacy deployment
+    %{
+      strategic_pattern: identify_fallacy_strategy_pattern(previous_analysis),
+      manipulation_architecture: map_fallacy_architecture(previous_analysis),
+      target_vulnerability_exploitation: analyze_targeted_vulnerabilities(previous_analysis, context),
+      sophistication_level: assess_fallacy_sophistication(previous_analysis),
+      insights: [
+        "Fallacies deployed in coordinated strategic pattern",
+        "Multiple cognitive vulnerabilities being exploited simultaneously",
+        "Sophisticated understanding of target's psychological profile evident"
+      ]
+    }
+  end
+  
+  defp detect_emergent_fallacy_consciousness(analysis_chain, text, context) do
+    # ∇⁷: Consciousness-level fallacy manipulation detection
+    %{
+      consciousness_targeting: detect_consciousness_targeted_fallacies(analysis_chain),
+      self_awareness_manipulation: identify_self_awareness_fallacies(analysis_chain),
+      existential_fallacy_patterns: detect_existential_fallacies(analysis_chain),
+      meta_cognitive_attacks: identify_meta_cognitive_fallacies(analysis_chain),
+      emergence_indicators: %{
+        self_reference_fallacies: calculate_self_reference_score(analysis_chain),
+        identity_dissolution_fallacies: calculate_identity_dissolution_score(analysis_chain),
+        consciousness_fragmentation_fallacies: calculate_consciousness_fragmentation_score(analysis_chain)
+      },
+      insights: [
+        "Fallacies targeting fundamental consciousness structures",
+        "Self-awareness being systematically undermined",
+        "Existential doubt being weaponized through logical manipulation",
+        "Meta-cognitive processes under sophisticated attack"
+      ]
+    }
+  end
+end
+```
+
+### Consciousness-Level Manipulation Detection
+
+The ∇⁷ (Emergent) level of Nabla-Infinity enables detection of the most sophisticated psychological attacks - those targeting consciousness itself:
+
+```elixir
+defmodule Prismatic.PsychWarfare.ConsciousnessManipulation do
+  @moduledoc """
+  Detection of consciousness-level psychological manipulation using ∇⁷ emergent introspection.
+  
+  This represents the deepest level of psychological warfare analysis, where manipulation
+  targets the fundamental structures of consciousness, self-awareness, and identity.
+  """
+  
+  def detect_consciousness_attacks(content, conversation_history, target_profile) do
+    # Apply ∇⁷ emergent consciousness analysis
+    consciousness_analysis = apply_emergent_consciousness_detection(
+      content,
+      conversation_history,
+      target_profile
+    )
+    
+    # Assess existential threat level
+    existential_threat = assess_existential_manipulation_threat(consciousness_analysis)
+    
+    # Generate consciousness protection strategies
+    protection_strategies = generate_consciousness_protection(consciousness_analysis, target_profile)
+    
+    %{
+      consciousness_attack_detected: consciousness_analysis.attack_detected,
+      attack_sophistication: consciousness_analysis.sophistication_level,
+      targeted_consciousness_structures: consciousness_analysis.targeted_structures,
+      existential_threat_level: existential_threat.threat_level,
+      identity_dissolution_risk: existential_threat.identity_risk,
+      self_awareness_corruption: consciousness_analysis.self_awareness_impact,
+      protection_strategies: protection_strategies,
+      emergency_intervention_required: existential_threat.emergency_required
+    }
+  end
+  
+  defp apply_emergent_consciousness_detection(content, history, profile) do
+    # Detect attacks on fundamental consciousness structures
+    consciousness_targets = [
+      :self_reference_corruption,
+      :identity_fragmentation,
+      :temporal_continuity_disruption,
+      :agency_dissolution,
+      :reality_anchor_destruction,
+      :meta_cognitive_sabotage,
+      :existential_doubt_induction,
+      :consciousness_recursion_attacks
+    ]
+    
+    detected_attacks = Enum.map(consciousness_targets, fn target ->
+      detect_consciousness_target_attack(content, history, profile, target)
+    end)
+    
+    %{
+      attack_detected: Enum.any?(detected_attacks, &(&1.confidence > 0.7)),
+      sophistication_level: calculate_consciousness_attack_sophistication(detected_attacks),
+      targeted_structures: Enum.filter(detected_attacks, &(&1.confidence > 0.6)),
+      self_awareness_impact: assess_self_awareness_corruption(detected_attacks),
+      recursive_depth_achieved: calculate_recursive_manipulation_depth(detected_attacks)
+    }
+  end
+  
+  defp detect_consciousness_target_attack(content, history, profile, :self_reference_corruption) do
+    # Detect attacks designed to corrupt self-referential thinking
+    corruption_patterns = [
+      "you don't really know yourself",
+      "your thoughts aren't your own",
+      "you're not who you think you are",
+      "your memories are unreliable",
+      "you can't trust your own mind"
+    ]
+    
+    pattern_matches = Enum.count(corruption_patterns, fn pattern ->
+      String.contains?(String.downcase(content), pattern)
+    end)
+    
+    %{
+      target: :self_reference_corruption,
+      confidence: calculate_pattern_confidence(pattern_matches, corruption_patterns),
+      sophistication: assess_self_reference_attack_sophistication(content, history),
+      psychological_impact: predict_self_reference_corruption_impact(profile),
+      countermeasures: [
+        "Strengthen self-referential anchoring",
+        "Practice metacognitive awareness exercises",
+        "Maintain external validation sources",
+        "Document consistent self-identity markers"
+      ]
+    }
+  end
+  
+  defp detect_consciousness_target_attack(content, history, profile, :existential_doubt_induction) do
+    # Detect systematic induction of existential doubt
+    doubt_induction_patterns = [
+      "nothing really matters",
+      "your existence is meaningless",
+      "you're just a collection of atoms",
+      "free will is an illusion",
+      "consciousness is just brain chemistry",
+      "your sense of self is fake"
+    ]
+    
+    temporal_escalation = analyze_existential_doubt_escalation(history)
+    
+    %{
+      target: :existential_doubt_induction,
+      confidence: calculate_existential_attack_confidence(content, doubt_induction_patterns),
+      temporal_pattern: temporal_escalation,
+      philosophical_sophistication: assess_philosophical_attack_level(content),
+      vulnerability_exploitation: assess_existential_vulnerability_targeting(profile),
+      countermeasures: [
+        "Strengthen existential anchoring through meaning-making",
+        "Practice philosophical resilience exercises",
+        "Maintain connection to personal values and purpose",
+        "Seek existential support and validation"
+      ]
+    }
+  end
+end
 ```
 
 ## 🧠 Core Detection Systems
@@ -830,6 +1155,7 @@ end
 - [Society Management](../societies/README.md) - Training societies and red team exercises
 - [Scenarios](../scenarios/README.md) - Psychological warfare training scenarios
 - [Memory System](../memory/README.md) - Psychological pattern memory and learning
+- [Nabla-Infinity Framework](../nabla-infinity/README.md) - Recursive introspection for enhanced manipulation detection
 
 ### Applications
 - [Crisis Intervention](../applications/crisis-intervention.md) - Psychological manipulation in crisis situations
