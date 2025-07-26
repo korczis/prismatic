@@ -68,6 +68,7 @@ This documentation is organized into four main sections:
 
 - [📝 Glossary](reference/glossary.md) - Complete terminology definitions
 - [🔤 Notation Reference](reference/notation-reference.md) - Mathematical and symbolic notation
+- [📋 Appendix](reference/appendix.md) - File formats, use cases, and practical resources
 - [📚 Bibliography](reference/bibliography.md) - Academic references and citations
 - [🛠️ Tools & Libraries](reference/tools-libraries.md) - Recommended implementation tools
 

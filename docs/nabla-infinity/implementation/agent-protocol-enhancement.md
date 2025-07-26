@@ -2,7 +2,7 @@
 
 ## 📋 Overview
 
-This document details the enhancement of the existing [`Prismatic.Agent.Protocol`](../agents/README.md:101) to support Nabla-Infinity recursive introspection capabilities, enabling agents to analyze and transform their own cognitive processes.
+This document details the enhancement of the existing Prismatic.Agent.Protocol to support Nabla-Infinity recursive introspection capabilities, enabling agents to analyze and transform their own cognitive processes.
 
 ## 🧬 Enhanced Protocol Definition
 

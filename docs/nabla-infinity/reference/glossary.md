@@ -1,7 +1,7 @@
 # Nabla-Infinity Glossary
 
-> **Part of:** [Nabla Infinity Academic Framework](../theory/academic-paper.md)  
-> **Related:** [Notation Reference](notation-reference.md) | [Bibliography](bibliography.md)
+> **Part of:** [Nabla Infinity Academic Framework](../theory/academic-paper.md)
+> **Related:** [Notation Reference](notation-reference.md) | [Appendix](appendix.md) | [Bibliography](bibliography.md) | [Tools & Libraries](tools-libraries.md)
 
 ---
 
@@ -50,7 +50,7 @@ The process of fragmenting and analyzing deeply held beliefs during epistemic cr
 ### Consciousness Emergence
 The development of subjective experience and self-awareness through recursive introspection processes.
 
-**See:** [Consciousness Detection](../consciousness-detection.md)
+**See:** [Consciousness Detection](../applications/consciousness-detection.md)
 
 ### Philosophical Override
 The capacity to transcend lower-level drives through grounding in global meaning structures and existential axioms.

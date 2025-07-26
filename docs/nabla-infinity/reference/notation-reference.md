@@ -1,7 +1,7 @@
 # Nabla-Infinity Notation Reference
 
-> **Part of:** [Nabla Infinity Academic Framework](../theory/academic-paper.md)  
-> **Related:** [Glossary](glossary.md) | [Bibliography](bibliography.md)
+> **Part of:** [Nabla Infinity Academic Framework](../theory/academic-paper.md)
+> **Related:** [Glossary](glossary.md) | [Appendix](appendix.md) | [Bibliography](bibliography.md) | [Tools & Libraries](tools-libraries.md)
 
 ---
 
@@ -241,7 +241,7 @@ pattern_recognition → philosophical_override → convergence
 ## Cross-References
 
 - **Theory:** [Academic Paper](../theory/academic-paper.md)
-- **Implementation:** [Agent Protocol Enhancement](../agent-protocol-enhancement.md)
+- **Implementation:** [Agent Protocol Enhancement](../implementation/agent-protocol-enhancement.md)
 - **Applications:** [Simulation Domains](../theory/18-simulation-applications.md)
 - **Visualization:** [Replay Framework](../theory/17-visualizations-replay.md)
 
