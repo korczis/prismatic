@@ -1,3 +1,25 @@
++++
+title = "Agent System Documentation"
+description = "Individual agent design, protocols, memory systems, and behavioral patterns for the Prismatic AI framework - the bulletproof foundation with protocol-based architecture"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["agents", "ai", "protocols", "behavior", "elixir", "genserver", "architecture"]
+categories = ["technical"]
+audience = ["developers"]
+difficulty = ["intermediate", "advanced"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+show_code_examples = true
+api_reference = true
++++
+
 # Agent System Documentation
 
 The agent system is the bulletproof foundation of Prismatic, providing generic, extensible agent infrastructure that supports any cognitive model through protocol-based architecture and SOLID principles.

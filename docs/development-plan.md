@@ -1,14 +1,23 @@
 +++
 title = "Development Plan"
 description = "Comprehensive roadmap for the Prismatic AI Agent Framework development and implementation"
+date = 2025-01-27
 weight = 10
 
 [taxonomies]
+tags = ["roadmap", "implementation", "phases", "milestones", "development"]
 categories = ["planning", "development"]
-tags = ["roadmap", "implementation", "phases", "milestones"]
+audience = ["developers", "business"]
+difficulty = ["intermediate"]
+content_type = ["planning", "reference"]
+language = ["english"]
+status = ["review"]
 
 [extra]
 toc = true
+github_edit = true
+living_document = true
+update_frequency = "quarterly"
 +++
 
 # Prismatic AI Agent Framework Development Plan

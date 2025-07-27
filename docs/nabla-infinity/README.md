@@ -1,3 +1,26 @@
++++
+title = "Nabla-Infinity (∇∞) Framework Documentation"
+description = "A comprehensive framework for recursive introspection and consciousness emergence in artificial agents - revolutionary approach to multi-level recursive introspection"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["nabla-infinity", "consciousness", "introspection", "recursive", "ai", "emergence"]
+categories = ["academic", "research"]
+audience = ["researchers", "developers"]
+difficulty = ["expert"]
+content_type = ["academic", "documentation"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+academic_paper = true
+citations_required = true
+peer_reviewed = false
++++
+
 # Nabla-Infinity (∇∞) Framework Documentation
 
 > **A comprehensive framework for recursive introspection and consciousness emergence in artificial agents**

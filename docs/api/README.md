@@ -1,3 +1,24 @@
++++
+title = "API Documentation"
+description = "REST and GraphQL interfaces for external integration, programmatic access, and third-party application development with the Prismatic framework"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["api", "rest", "graphql", "integration", "external", "interface"]
+categories = ["technical"]
+audience = ["developers"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["draft"]
+
+[extra]
+toc = true
+github_edit = true
+api_reference = true
++++
+
 # API Documentation
 
 The API system provides REST and GraphQL interfaces for external integration, programmatic access, and third-party application development.

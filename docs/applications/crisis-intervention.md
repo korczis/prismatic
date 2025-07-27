@@ -1,14 +1,23 @@
 +++
 title = "Crisis Intervention Application"
 description = "AI-powered crisis negotiation and intervention system for emergency response scenarios"
+date = 2025-01-27
 weight = 1
 
 [taxonomies]
-categories = ["applications", "crisis-management"]
 tags = ["crisis", "negotiation", "emergency", "intervention", "ai-agents"]
+categories = ["applications", "crisis-management"]
+audience = ["medical", "developers", "business"]
+difficulty = ["intermediate"]
+content_type = ["use-case"]
+language = ["english"]
+status = ["complete"]
 
 [extra]
 toc = true
+github_edit = true
+featured_application = true
+demo_available = false
 +++
 
 # Crisis Intervention Application

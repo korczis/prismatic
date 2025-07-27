@@ -1,8 +1,29 @@
 +++
 title = "NLP Patterns"
 description = "Explore advanced NLP patterns, linguistic structures, and cognitive frameworks used in Prismatic."
+date = 2025-01-27
 sort_by = "title"
-weight = 3
+template = "section.html"
+weight = 50
+
+[taxonomies]
+tags = ["nlp", "patterns", "linguistics", "cognitive", "frameworks"]
+categories = ["academic", "research"]
+audience = ["researchers", "developers"]
+difficulty = ["advanced"]
+content_type = ["academic", "documentation"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+section_icon = "🧠"
+show_subsections = true
+navigation_weight = 50
+section_type = "academic"
+landing_page = true
+featured_pages = ["clean-language", "meta-model-questioning"]
+toc = true
+github_edit = true
 insert_anchor_links = "right"
 +++
 

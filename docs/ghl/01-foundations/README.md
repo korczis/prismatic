@@ -1,3 +1,31 @@
++++
+title = "Foundations"
+description = "Core definitions, ownership principles, and fundamental concepts that underpin the entire General Honest License framework"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["foundations", "definitions", "ownership", "license", "concepts"]
+categories = ["legal"]
+audience = ["legal", "developers"]
+difficulty = ["advanced"]
+content_type = ["legal"]
+language = ["english"]
+status = ["final"]
+
+[extra]
+toc = true
+github_edit = true
+license_name = "General Honest License"
+license_short = "GHL"
+license_version = "1.0"
+license_status = "final"
+sovereign = true
+author = "Tomas Korcak"
+jurisdiction = "Czech Republic"
+legal_binding = true
++++
+
 # Foundations
 
 This section establishes the core definitions, ownership principles, and fundamental concepts that underpin the entire General Honest License framework.

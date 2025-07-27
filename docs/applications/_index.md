@@ -1,7 +1,7 @@
 +++
 title = "Real-World Applications"
 description = "Production-ready implementations of the Prismatic AI framework across industries including crisis intervention, algorithmic trading, and content moderation"
-date = 2025-01-26
+date = 2025-01-27
 sort_by = "weight"
 template = "section.html"
 weight = 40

@@ -1,7 +1,24 @@
 +++
 title = "Clean Language"
-description = "Technika pro zkoumání osobních metafor a symbolického myšlení"
-date = 2025-03-12
+description = "Technika pro zkoumání osobních metafor a symbolického myšlení - komunikační technika s minimálním vnášením předpokladů"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["clean-language", "metafory", "nlp", "komunikace", "symbolické-modelování"]
+categories = ["academic", "research"]
+audience = ["researchers", "developers"]
+difficulty = ["advanced"]
+content_type = ["academic", "tutorial"]
+language = ["czech", "english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+academic_paper = true
+citations_required = true
+peer_reviewed = false
 +++
 
 # Clean Language

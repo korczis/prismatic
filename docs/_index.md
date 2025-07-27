@@ -1,7 +1,7 @@
 +++
 title = "Prismatic Documentation"
 description = "Comprehensive AI Agent Framework Documentation - Advanced multi-agent systems, crisis intervention, and consciousness research"
-date = 2025-01-26
+date = 2025-01-27
 template = "index.html"
 
 [taxonomies]

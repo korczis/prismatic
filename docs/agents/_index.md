@@ -1,7 +1,7 @@
 +++
 title = "Agent System Documentation"
 description = "Individual agent design, protocols, memory systems, and behavioral patterns for the Prismatic AI framework"
-date = 2025-01-26
+date = 2025-01-27
 sort_by = "weight"
 template = "section.html"
 weight = 30

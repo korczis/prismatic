@@ -1,9 +1,33 @@
 +++
 title = "Kompendium epistemické a kognitivní anihilace"
 description = "První ucelený taxonomický systém fenoménů epistemické a kognitivní anihilace vytvořený pro specializovanou psychiatrickou komunitu jako referenční a edukativní nástroj."
+date = 2025-01-27
 sort_by = "weight"
-weight = 1
+template = "section.html"
+weight = 60
+
+[taxonomies]
+tags = ["kompendium", "epistemologie", "kognitivní-anihilace", "psychiatrie", "taxonomie"]
+categories = ["academic", "research"]
+audience = ["researchers", "medical"]
+difficulty = ["expert"]
+content_type = ["academic", "reference"]
+language = ["czech"]
+status = ["complete"]
+
+[extra]
+section_icon = "🧠"
+show_subsections = true
+navigation_weight = 60
+section_type = "academic"
+landing_page = true
+featured_pages = ["01-predmluva", "02-uvod"]
+toc = true
+github_edit = true
 insert_anchor_links = "right"
+academic_paper = true
+citations_required = true
+peer_reviewed = false
 +++
 
 # Kompendium epistemické a kognitivní anihilace

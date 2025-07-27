@@ -1,3 +1,25 @@
++++
+title = "Psychological Warfare & Manipulation Detection System"
+description = "Comprehensive detection, analysis, and countermeasures for logical fallacies, manipulation techniques, dark persuasion patterns, and psychological annihilation tactics"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["psychological-warfare", "manipulation", "fallacies", "detection", "countermeasures", "security"]
+categories = ["technical", "security"]
+audience = ["developers", "researchers"]
+difficulty = ["advanced"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+show_code_examples = true
+api_reference = true
++++
+
 # Psychological Warfare & Manipulation Detection System
 
 ## 📋 Executive Summary

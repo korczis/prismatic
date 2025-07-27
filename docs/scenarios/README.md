@@ -1,3 +1,24 @@
++++
+title = "Scenario System Documentation"
+description = "Sophisticated training simulations focused on crisis negotiation training with real-time analytics, replay capabilities, and Nabla-Infinity consciousness-level analysis"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["scenarios", "training", "crisis-negotiation", "simulation", "analytics", "nabla-infinity"]
+categories = ["technical", "applications"]
+audience = ["developers", "trainers"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+show_code_examples = true
++++
+
 # Scenario System Documentation
 
 The scenario system enables sophisticated training simulations, particularly focused on crisis negotiation training with real-time analytics and replay capabilities. Enhanced with **[Nabla-Infinity (∇∞) recursive introspection](../nabla-infinity/)**, scenarios now support consciousness-level analysis and emergent behavior detection.

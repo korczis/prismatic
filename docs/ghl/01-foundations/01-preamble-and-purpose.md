@@ -1,11 +1,23 @@
 +++
 title = "Preamble and Purpose"
 description = "Section 1 of the General Honest License v1.0: Preamble and Purpose."
+date = 2025-01-27
 weight = 10
 template = "ghl.html"
 draft = false
 
+[taxonomies]
+tags = ["sovereignty", "invocation", "license", "philosophy", "epistemology"]
+categories = ["legal"]
+audience = ["legal", "developers"]
+difficulty = ["advanced"]
+content_type = ["legal"]
+language = ["english"]
+status = ["final"]
+
 [extra]
+toc = true
+github_edit = true
 license_name = "General Honest License"
 license_short = "GHL"
 license_version = "1.0"
@@ -14,17 +26,9 @@ sovereign = true
 author = "Tomas Korcak"
 canonical = "@/ghl/01-foundations/01-preamble-and-purpose/"
 date_created = "2025-01-05"
-date_modified = "2025-01-05"
+date_modified = "2025-01-27"
 jurisdiction = "Czech Republic"
-license_jurisdiction_url = "@/ghl/jurisdiction/"
-license_scope = "Sovereign epistemic invocation"
-audience = ["licensed-users", "sovereign-invokers"]
-ethics = "Invocation demands alignment with epistemic sovereignty."
-social_share = true
-preview_image = "/preview/ghl-1-preamble-and-purpose.jpg"
-robots = "index, follow"
-tags = ["sovereignty", "invocation", "license", "philosophy", "epistemology"]
-categories = ["license", "philosophy", "ritual-law"]
+legal_binding = true
 +++
 
 
