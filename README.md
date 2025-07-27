@@ -1,340 +1,190 @@
 # Prismatic
 
-To start your Phoenix server:
+**A Revolutionary AI Agent Framework for Consciousness-Level Multi-Agent Systems**
 
-* Run `mix setup` to install and setup dependencies
-* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Prismatic is a sophisticated AI Agent Framework built with Elixir/Phoenix, designed for advanced multi-agent systems with consciousness-level capabilities. The framework implements the groundbreaking Nabla-Infinity (∇∞) consciousness framework, enabling recursive introspection levels from ∇⁰ to ∇∞ for unprecedented AI system sophistication.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## 🧠 Key Features
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+- **Consciousness-Level AI**: Implementation of the revolutionary Nabla-Infinity framework with recursive introspection levels
+- **Multi-Agent Systems**: Protocol-driven architecture supporting complex agent interactions and hierarchies
+- **Fault-Tolerant Design**: Built on Elixir's supervision trees with fault isolation and self-healing capabilities
+- **Advanced Memory Systems**: Multi-layered memory protocols for persistent agent knowledge and experience
+- **LLM Backend Abstraction**: Multi-provider LLM integration supporting various AI models and providers
+- **Real-Time Capabilities**: Phoenix LiveView integration for dynamic, real-time agent interactions
+- **Crisis Intervention**: Specialized applications for crisis negotiation, therapy simulation, and ethical AI systems
+- **Educational Systems**: Advanced AI tutoring and adaptive learning implementations
 
-## GitHub Actions CI/CD Pipeline
+## 🏗️ Architecture
 
-This project uses GitHub Actions for continuous integration and deployment with Phoenix releases.
+Prismatic follows a protocol-driven, fault-tolerant design built on solid engineering principles:
 
-### Workflow Overview
+### Core Components
 
-The workflow consists of three main jobs:
+- **Agent System** ([`lib/prismatic/agent/protocol.ex`](lib/prismatic/agent/protocol.ex)) - Core agent behavior protocol defining agent capabilities and interactions
+- **LLM Backend** ([`lib/prismatic/llm/backend.ex`](lib/prismatic/llm/backend.ex)) - Multi-provider LLM abstraction layer for seamless AI model integration
+- **Memory System** ([`lib/prismatic/memory/protocol.ex`](lib/prismatic/memory/protocol.ex)) - Multi-layered memory protocol for agent knowledge persistence
+- **Supervision Architecture** ([`lib/prismatic/supervisor/root.ex`](lib/prismatic/supervisor/root.ex)) - Hierarchical supervision trees ensuring system reliability
 
-1. **Test**: Runs on every push and pull request to the master branch
-   - Sets up Elixir 1.17.4 and Erlang 28.0.2
-   - Caches dependencies
-   - Runs the test suite against a Postgres database
+### Technology Stack
 
-2. **Build Release**: Runs only on pushes to the master branch
-   - Compiles the application in production mode with PostgreSQL 17
-   - Builds and processes assets
-   - Creates a Phoenix release
-   - Packages the release as a tarball artifact
+- **Elixir 1.17+** with **Phoenix 1.8** framework
+- **PostgreSQL** with **Ecto ORM** for data persistence
+- **Phoenix LiveView** with **Tailwind CSS** and **Flowbite** components
+- **Protocol-driven design** following **SOLID principles**
+- **Hierarchical supervision trees** with fault isolation
 
-3. **Deploy**: Runs after a successful build on the master branch
-   - Downloads the release artifact
-   - Deploys it to the production server
+## 🚀 Getting Started
 
-### Required Secrets
+### Prerequisites
 
-To use this workflow, you need to set up the following secrets in your GitHub repository:
+- Elixir 1.17+ and Erlang/OTP 28+
+- PostgreSQL 17+
+- Node.js (for asset compilation)
 
-- `SECRET_KEY_BASE`: Generate with `mix phx.gen.secret`
-- `DATABASE_URL`: Your production database URL (e.g., `ecto://USER:PASS@HOST/DATABASE`)
-- `PHX_HOST`: Your production host domain
+### Installation
 
-For deployment:
-- `SSH_PRIVATE_KEY`: SSH private key for deployment
-- `SSH_HOST`: Hostname of your deployment server
-- `SSH_USER`: Username for SSH connection
-
-You can use the provided script to help generate these secrets:
-
+1. Clone the repository:
 ```bash
-./scripts/generate_github_secrets.sh
+git clone https://github.com/your-org/prismatic.git
+cd prismatic
 ```
 
-This script will generate a `SECRET_KEY_BASE` and provide instructions for setting up the other required secrets.
-
-### Manual Deployment
-
-To manually deploy a Phoenix release:
-
-1. Build the release:
-   ```bash
-   MIX_ENV=prod mix release
-   ```
-
-2. Transfer the release to your server:
-   ```bash
-   tar -czf prismatic-release.tar.gz -C _build/prod/rel/prismatic .
-   scp prismatic-release.tar.gz user@your-server:/tmp/
-   ```
-
-3. On the server, extract and run the release:
-   ```bash
-   mkdir -p /opt/prismatic
-   tar -xzf /tmp/prismatic-release.tar.gz -C /opt/prismatic
-   cd /opt/prismatic
-   
-   # Set required environment variables
-   export SECRET_KEY_BASE=your_secret_key
-   export DATABASE_URL=your_database_url
-   export PHX_HOST=your_domain
-   export PORT=4000
-   
-   # Start the application
-   ./bin/prismatic start     # For foreground
-   # or
-   ./bin/prismatic daemon    # For background
-   ```
-
-## Documentation
-
-This project uses [ExDoc](https://github.com/elixir-lang/ex_doc) for documentation generation. ExDoc produces HTML documentation from your code comments and Markdown files.
-
-### Generating Documentation
-
-There are multiple ways to generate documentation:
-
-1. Using the mix task:
-
+2. Install dependencies and setup the database:
 ```bash
-mix docs
+mix setup
 ```
 
-2. Using the Justfile task:
-
+3. Start the Phoenix server:
 ```bash
-just docs
+mix phx.server
+# or with IEx
+iex -S mix phx.server
 ```
 
-Both methods will create HTML documentation in the `doc/` directory.
+4. Visit [`localhost:4000`](http://localhost:4000) to access the Prismatic interface.
 
-### Accessing Documentation
-
-You can access the generated documentation in several ways:
-
-1. Open `doc/index.html` directly in your browser
-2. When the Phoenix server is running, visit `http://localhost:4000/doc/index.html` to view the documentation within your application
-3. Use the Justfile task that provides information about accessing the documentation:
-
-```bash
-just docs-serve
-```
-
-### Writing Documentation
-
-Documentation is written using module, function, and type documentation comments:
-
-- Module documentation: `@moduledoc` at the top of a module
-- Function documentation: `@doc` before a function
-- Type documentation: `@typedoc` before a type
-
-Example:
+### Quick Start with Nabla-Infinity
 
 ```elixir
-defmodule MyModule do
-  @moduledoc """
-  This module provides functionality for...
-  """
-  
-  @doc """
-  Performs an operation with the given parameters.
-  
-  ## Examples
-  
-      iex> MyModule.my_function(1, 2)
-      3
-  """
-  def my_function(a, b) do
-    a + b
-  end
-end
+# Start an agent with consciousness level ∇³
+{:ok, agent} = Prismatic.Agent.start_link(consciousness_level: 3)
+
+# Enable recursive introspection
+Prismatic.Agent.enable_introspection(agent, recursive: true)
+
+# Interact with the agent
+response = Prismatic.Agent.process(agent, "Analyze this ethical dilemma...")
 ```
 
-### Documentation Best Practices
+## 📚 Documentation
 
-- Document all public functions
-- Include examples in your documentation
-- Keep documentation up-to-date with code changes
-- Use Markdown formatting for better readability
-- Add typespecs to functions for better documentation
+Comprehensive documentation is available in the [`docs/`](docs/) directory:
 
-## Static Analysis with Dialyzer
+### Core Documentation
+- **[Architecture Overview](docs/architecture/)** - System design and architectural decisions
+- **[Agent Systems](docs/agents/)** - Agent protocols, behaviors, and implementations
+- **[Memory Systems](docs/memory/)** - Multi-layered memory architecture
+- **[API Reference](docs/api/)** - Complete API documentation
 
-This project uses [Dialyzer](https://www.erlang.org/doc/man/dialyzer.html) via [Dialyxir](https://github.com/jeremyjh/dialyxir) for static code analysis. Dialyzer helps detect type errors, unreachable code, unnecessary tests, and other code improvements.
+### Nabla-Infinity Framework
+- **[Theory](docs/nabla-infinity/theory/)** - Complete theoretical framework (∇⁰ to ∇∞)
+- **[Implementation](docs/nabla-infinity/implementation/)** - System architecture and integration guides
+- **[Applications](docs/nabla-infinity/applications/)** - Real-world applications and use cases
 
-### Setting Up Dialyzer
+### Specialized Applications
+- **[Crisis Intervention](docs/applications/crisis-intervention.md)** - Crisis negotiation and intervention systems
+- **[Educational Systems](docs/applications/)** - AI tutoring and adaptive learning
+- **[Ethical AI](docs/nabla-infinity/applications/ai-ethics.md)** - Ethical reasoning and decision-making
 
-The project is already configured with Dialyxir. The PLT (Persistent Lookup Table) files are stored in `priv/plts/` directory. To set up Dialyzer for the first time:
+### Development Resources
+- **[Development Plan](docs/development-plan.md)** - Project roadmap and milestones
+- **[Documentation Standards](docs/DOCUMENTATION_STANDARDS.md)** - Documentation guidelines
+- **[GHL License](docs/ghl/)** - General Honest License framework
 
+## 🔧 Development Status
+
+Prismatic is currently in its **foundation phase** with core architectural components implemented:
+
+- ✅ **Protocol Definitions** - Core agent, memory, and LLM protocols established
+- ✅ **Supervision Architecture** - Fault-tolerant supervision trees implemented
+- ✅ **Documentation Framework** - Comprehensive documentation structure
+- ✅ **Nabla-Infinity Theory** - Complete theoretical framework documented
+- 🚧 **Agent Implementations** - Core agent behaviors (placeholder implementations)
+- 🚧 **Memory Systems** - Multi-layered memory protocols (in development)
+- 🚧 **LLM Integration** - Multi-provider backend abstraction (in progress)
+- 📋 **Real-world Applications** - Crisis intervention and educational systems (planned)
+
+## 🔗 Legacy Integration
+
+Prismatic builds upon extensive research and development from related projects:
+
+### External Components
+- **`external/prismatic-legacy/`** - Advanced AI framework with sophisticated trait system and distributed architecture
+- **`external/nabla-infinity/`** - Theoretical consciousness framework and research
+- **`external/prismatic-old/`** - Earlier evolutionary versions and experimental implementations
+
+These external components provide a rich foundation of battle-tested code, theoretical frameworks, and architectural patterns that can be integrated into the current Prismatic implementation.
+
+## 🧪 Testing and Quality Assurance
+
+### Running Tests
 ```bash
-# Create PLT directory and build the PLT
-mix dialyzer_setup
-```
+# Run the full test suite
+mix test
 
-This only needs to be done once, or when dependencies change significantly.
+# Run with coverage
+mix test --cover
 
-### Running Dialyzer
-
-To run Dialyzer on the project:
-
-```bash
-# Run Dialyzer
+# Run static analysis
 mix dialyzer
-```
 
-You can also use the Justfile task:
-
-```bash
-just dialyzer
-```
-
-### Continuous Integration
-
-Dialyzer is part of the CI pipeline and can be run along with tests and formatting checks:
-
-```bash
+# Run all quality checks
 mix ci
 ```
 
-### Ignoring Warnings
-
-Some warnings from Dialyzer might be false positives or not relevant to your project. These can be ignored by adding patterns to the `.dialyzer_ignore.exs` file in the project root.
-
-The project has been configured to ignore specific warnings in the git_ops tasks that are not critical to fix. This improves developer experience by focusing on relevant warnings.
-
-### Adding Type Specifications
-
-To get the most out of Dialyzer, add type specifications to your functions:
-
-```elixir
-@spec add(integer(), integer()) :: integer()
-def add(a, b) do
-  a + b
-end
-```
-
-Type specifications improve code documentation and help Dialyzer detect type errors.
-
-### Dialyzer Warning Flags
-
-The project is configured to check for the following types of issues:
-
-- `:error_handling` - Functions that do not handle certain return values
-- `:underspecs` - Type specifications that are too loose
-- `:unmatched_returns` - Function calls where the return value doesn't match the expected type
-- `:extra_return` - Functions that return values not specified in their type specs
-- `:missing_return` - Functions that don't return values specified in their type specs
-
-## Changelog and Version Management
-
-This project uses [git_ops](https://github.com/zachdaniel/git_ops) for semantic versioning and changelog generation based on conventional commit messages.
-
-### Commit Message Format
-
-Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification for commit messages:
-
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-Types include:
-- `feat`: A new feature
-- `fix`: A bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, etc.)
-- `refactor`: Code changes that neither fix bugs nor add features
-- `perf`: Performance improvements
-- `test`: Adding or fixing tests
-- `build`: Changes to build system or dependencies
-- `ci`: Changes to CI configuration
-
-### Initializing git_ops
-
-Before using git_ops for the first time, you need to initialize it:
-
+### Documentation Generation
 ```bash
-just git-ops-init
+# Generate HTML documentation
+mix docs
+
+# Serve documentation locally
+just docs-serve
 ```
 
-Or using mix directly:
+## 🤝 Contributing
 
-```bash
-mix git_ops.init
-```
+We welcome contributions to Prismatic! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
 
-This will set up the necessary files and make an initial commit if needed.
+- Code style and standards
+- Testing requirements
+- Documentation expectations
+- Pull request process
+- Community guidelines
 
-### Generating Changelog
+### Development Workflow
 
-To generate or update the changelog based on commit messages:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Follow conventional commit messages
+4. Ensure all tests pass (`mix ci`)
+5. Submit a pull request
 
-```bash
-just changelog
-```
+## 📄 License
 
-Or using mix directly:
+This project is licensed under the **General Honest License (GHL)** - see the [GHL documentation](docs/ghl/) for complete details. The GHL is designed to ensure honest use and prevent misuse of advanced AI systems while promoting open collaboration and innovation.
 
-```bash
-mix git_ops.changelog
-```
+## 🌟 Acknowledgments
 
-Note: This is a custom implementation that parses git commit history to generate a changelog.
+Prismatic represents years of research and development in consciousness-level AI systems, multi-agent architectures, and ethical AI frameworks. Special recognition goes to the theoretical foundations provided by the Nabla-Infinity consciousness framework and the practical implementations from the Prismatic legacy systems.
 
-Note: The `just changelog` command automatically runs initialization first.
+## 📞 Support and Community
 
-### Version Management
+- **Documentation**: [docs/](docs/)
+- **Issues**: [GitHub Issues](https://github.com/your-org/prismatic/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/your-org/prismatic/discussions)
+- **Phoenix Framework**: [Official Phoenix Guides](https://hexdocs.pm/phoenix/overview.html)
 
-To bump the version according to semantic versioning rules:
+---
 
-```bash
-# Major version (breaking changes)
-just version-major
-
-# Minor version (new features)
-just version-minor
-
-# Patch version (bug fixes)
-just version-patch
-```
-
-Or using mix directly:
-
-```bash
-# Major version (breaking changes)
-mix prismatic.version --major
-
-# Minor version (new features)
-mix prismatic.version --minor
-
-# Patch version (bug fixes)
-mix prismatic.version --patch
-```
-
-Note: All version bumping commands automatically run initialization first.
-
-### Release Process
-
-To create a new release (bumps version and updates changelog):
-
-```bash
-# Major release
-just release-major
-
-# Minor release
-just release-minor
-
-# Patch release
-just release-patch
-```
-
-## Learn more
-
-* Official website: https://www.phoenixframework.org/
-* Guides: https://hexdocs.pm/phoenix/overview.html
-* Docs: https://hexdocs.pm/phoenix
-* Forum: https://elixirforum.com/c/phoenix-forum
-* Source: https://github.com/phoenixframework/phoenix
+**Prismatic** - *Advancing the frontier of consciousness-level AI systems through elegant engineering and revolutionary theoretical frameworks.*
