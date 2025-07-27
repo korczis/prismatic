@@ -1,3 +1,26 @@
++++
+title = "Society Management Documentation"
+description = "Groups of agents that interact within shared contexts, supporting interaction patterns from chat rooms to crisis negotiation training with collective consciousness emergence detection"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["societies", "agents", "communication", "crisis-negotiation", "chat-rooms", "nabla-infinity", "psychological-warfare"]
+categories = ["technical", "systems"]
+audience = ["developers", "trainers"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+show_code_examples = true
+integration_points = ["nabla-infinity", "psychological-warfare", "scenarios"]
+society_types = ["chat_room", "crisis_scenario", "research_group"]
++++
+
 # Society Management Documentation
 
 Societies are groups of agents that interact within shared contexts, supporting various interaction patterns from simple chat rooms to complex crisis negotiation training scenarios. Enhanced with **[Nabla-Infinity (∇∞) recursive introspection](../nabla-infinity/)**, societies now support collective consciousness emergence detection and group-level recursive analysis.

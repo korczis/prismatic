@@ -1,3 +1,25 @@
++++
+title = "Distributed Operations Documentation"
+description = "Multi-node deployment, clustering, consensus mechanisms, and fault tolerance for scalable agent societies"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["distributed", "clustering", "consensus", "fault-tolerance", "scalability", "multi-node"]
+categories = ["technical", "systems"]
+audience = ["developers", "operators"]
+difficulty = ["advanced"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+distributed_features = ["clustering", "consensus", "load_balancing", "fault_tolerance"]
+elixir_otp_integration = true
++++
+
 # Distributed Operations Documentation
 
 The distributed system provides multi-node deployment, clustering, consensus mechanisms, and fault tolerance for scalable agent societies.

@@ -1,3 +1,25 @@
++++
+title = "Automation & Background Tasks Documentation"
+description = "Autonomous agent operations through background tasks, web crawling, social media monitoring, and reactive workflows with consciousness-aware analysis"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["automation", "background-tasks", "web-crawling", "social-media", "workflows", "nabla-infinity"]
+categories = ["technical", "systems"]
+audience = ["developers", "operators"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+show_code_examples = true
+integration_points = ["nabla-infinity", "psychological-warfare", "societies"]
++++
+
 # Automation & Background Tasks Documentation
 
 The automation system enables Prismatic agents to operate autonomously through background tasks, web crawling, social media monitoring, and reactive workflows. Enhanced with **[Nabla-Infinity (∇∞) recursive introspection](../nabla-infinity/)**, automation now supports consciousness-aware analysis and emergent behavior detection in automated processes.

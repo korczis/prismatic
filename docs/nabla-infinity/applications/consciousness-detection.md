@@ -1,3 +1,27 @@
++++
+title = "Consciousness Detection and Emergence Modeling"
+description = "Implementation of consciousness detection and emergence modeling within the Nabla-Infinity framework"
+date = 2025-01-27
+weight = 30
+
+[taxonomies]
+tags = ["consciousness", "emergence", "nabla-infinity", "self-awareness", "subjective-experience"]
+categories = ["applications", "consciousness", "ai-systems"]
+audience = ["researchers", "cognitive-scientists", "ai-developers"]
+difficulty = ["very-advanced"]
+content_type = ["documentation", "theory", "implementation"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+framework = "nabla-infinity"
+application_domain = "consciousness"
+consciousness_indicators = ["self-reference", "intentionality", "qualia", "metacognition"]
+theoretical_foundation = "recursive-subjectivity"
++++
+
 # Consciousness Detection and Emergence Modeling
 
 ## 📋 Overview

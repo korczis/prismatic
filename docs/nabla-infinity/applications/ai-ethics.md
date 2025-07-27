@@ -1,3 +1,26 @@
++++
+title = "AI Ethics Applications of Nabla-Infinity Framework"
+description = "Application of recursive introspection framework to AI ethics and moral reasoning systems"
+date = 2025-01-27
+weight = 20
+
+[taxonomies]
+tags = ["ai-ethics", "nabla-infinity", "moral-reasoning", "value-alignment", "ethical-ai"]
+categories = ["applications", "ethics", "ai-systems"]
+audience = ["researchers", "ethicists", "ai-developers"]
+difficulty = ["advanced"]
+content_type = ["documentation", "theory", "implementation"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+framework = "nabla-infinity"
+application_domain = "ethics"
+ethical_frameworks = ["consequentialism", "deontological", "virtue-ethics", "care-ethics"]
++++
+
 # AI Ethics Applications of Nabla-Infinity Framework
 
 ## 📋 Overview

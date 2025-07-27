@@ -1,3 +1,26 @@
++++
+title = "Dynamic Configuration System"
+description = "Runtime modification of modalities, traits, templates, and other system components without requiring application restarts"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["dynamic-configuration", "runtime-modification", "modalities", "traits", "templates", "hot-swapping"]
+categories = ["technical", "configuration"]
+audience = ["developers", "operators"]
+difficulty = ["advanced"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+show_code_examples = true
+dynamic_features = ["modalities", "traits", "templates", "rules"]
+versioning_support = true
++++
+
 # Dynamic Configuration System
 
 The dynamic configuration system allows runtime modification of modalities, traits, templates, and other system components without requiring application restarts.

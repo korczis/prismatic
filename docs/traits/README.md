@@ -1,3 +1,25 @@
++++
+title = "Traits System Documentation"
+description = "Dynamic personality modeling, behavioral patterns, and adaptive characteristics for agents with evolution and learning capabilities"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["traits", "personality", "behavioral-patterns", "adaptive-characteristics", "evolution", "learning"]
+categories = ["technical", "cognitive-systems"]
+audience = ["developers", "researchers"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+trait_categories = ["cognitive", "emotional", "behavioral", "social"]
+evolution_features = true
++++
+
 # Traits System Documentation
 
 The traits system provides dynamic personality modeling, behavioral patterns, and adaptive characteristics for agents with evolution and learning capabilities.

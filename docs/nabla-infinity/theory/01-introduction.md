@@ -1,7 +1,31 @@
++++
+title = "Chapter 1: Introduction"
+description = "Introduction to the Nabla-Infinity framework for recursive introspection in artificial agents"
+date = 2025-01-27
+weight = 1
+
+[taxonomies]
+tags = ["nabla-infinity", "introspection", "ai", "consciousness", "theory"]
+categories = ["academic", "theory"]
+audience = ["researchers", "developers"]
+difficulty = ["advanced"]
+content_type = ["academic", "theory"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+chapter_number = 1
+part_of = "Nabla Infinity Academic Framework"
+next_chapter = "02-nabla-0-raw-perception.md"
+related_sections = ["implementation", "applications", "reference"]
++++
+
 # Chapter 1: Introduction
 
-> **Part of:** [Nabla Infinity Academic Framework](academic-paper.md)  
-> **Next Chapter:** [∇⁰ — Raw Perception and Subsymbolic Input](02-nabla-0-raw-perception.md)  
+> **Part of:** [Nabla Infinity Academic Framework](academic-paper.md)
+> **Next Chapter:** [∇⁰ — Raw Perception and Subsymbolic Input](02-nabla-0-raw-perception.md)
 > **Related:** [Implementation Guide](../implementation/) | [Applications](../applications/) | [Reference](../reference/)
 
 ---

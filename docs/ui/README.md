@@ -1,3 +1,26 @@
++++
+title = "User Interface Documentation"
+description = "Web-based interfaces for system management, agent interaction, and real-time monitoring of the Prismatic framework"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["ui", "web-interface", "dashboard", "real-time", "phoenix-liveview", "management"]
+categories = ["technical", "interface"]
+audience = ["developers", "operators"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+framework = "phoenix-liveview"
+real_time_features = true
+responsive_design = true
++++
+
 # User Interface Documentation
 
 The UI system provides web-based interfaces for system management, agent interaction, and real-time monitoring of the Prismatic framework.

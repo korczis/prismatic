@@ -1,3 +1,24 @@
++++
+title = "Memory System Documentation"
+description = "Multi-layered memory architecture for agents supporting working, episodic, semantic, and procedural memory patterns"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["memory", "cognitive-architecture", "working-memory", "episodic-memory", "semantic-memory", "procedural-memory"]
+categories = ["technical", "cognitive-systems"]
+audience = ["developers", "researchers"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+memory_types = ["working", "episodic", "semantic", "procedural"]
++++
+
 # Memory System Documentation
 
 The memory system provides multi-layered memory architecture for agents, supporting working memory, episodic memory, semantic memory, and procedural memory patterns.

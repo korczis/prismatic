@@ -1,3 +1,26 @@
++++
+title = "IEx Helpers Documentation"
+description = "Developer-friendly interface for creating, testing, and debugging agents and societies from the Elixir interactive shell"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["iex", "helpers", "development", "debugging", "agents", "societies"]
+categories = ["development", "tools"]
+audience = ["developers", "testers"]
+difficulty = ["intermediate"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+code_examples = true
+development_tools = true
+interactive_shell = true
++++
+
 # IEx Helpers Documentation
 
 The IEx helpers provide a powerful, developer-friendly interface for creating, testing, and debugging agents and societies directly from the Elixir interactive shell.

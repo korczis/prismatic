@@ -1,3 +1,25 @@
++++
+title = "Reasoning System Documentation"
+description = "Formal reasoning capabilities, logic engines, and inference mechanisms for intelligent decision-making and problem-solving"
+date = 2025-01-27
+weight = 10
+
+[taxonomies]
+tags = ["reasoning", "logic", "inference", "formal-reasoning", "decision-making", "lean4", "prolog"]
+categories = ["technical", "reasoning-systems"]
+audience = ["developers", "researchers"]
+difficulty = ["advanced"]
+content_type = ["documentation", "reference"]
+language = ["english"]
+status = ["complete"]
+
+[extra]
+toc = true
+github_edit = true
+formal_systems = ["lean4", "prolog"]
+reasoning_types = ["formal", "probabilistic", "causal", "temporal", "abductive"]
++++
+
 # Reasoning System Documentation
 
 The reasoning system provides formal reasoning capabilities, logic engines, and inference mechanisms for intelligent decision-making and problem-solving.
