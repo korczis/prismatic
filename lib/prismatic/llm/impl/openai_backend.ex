@@ -32,7 +32,7 @@ defmodule Prismatic.LLM.Impl.OpenAIBackend do
 
   require Logger
 
-  alias Prismatic.LLM.Backend.{CircuitBreaker, RetryLogic, MetricsCollector}
+  alias Prismatic.LLM.Backend.{CircuitBreaker, MetricsCollector, RetryLogic}
 
   @default_model "gpt-4"
   @default_timeout 30_000
@@ -200,21 +200,25 @@ defmodule Prismatic.LLM.Impl.OpenAIBackend do
     # Use circuit breaker and retry logic
     CircuitBreaker.call(:openai, fn ->
       RetryLogic.with_retry(fn ->
-        case Req.post(url,
-          body: json_body,
-          headers: headers,
-          receive_timeout: timeout,
-          retry: false  # We handle retries ourselves
-        ) do
-          {:ok, %{status: 200, body: body}} ->
-            {:ok, body}
-          {:ok, %{status: status, body: body}} ->
-            {:error, {:api_error, status, body}}
-          {:error, reason} ->
-            {:error, {:request_failed, reason}}
-        end
+        execute_http_request(url, json_body, headers, timeout)
       end, max_retries: Map.get(config, :max_retries, 3))
     end)
+  end
+
+  defp execute_http_request(url, json_body, headers, timeout) do
+    case Req.post(url,
+      body: json_body,
+      headers: headers,
+      receive_timeout: timeout,
+      retry: false  # We handle retries ourselves
+    ) do
+      {:ok, %{status: 200, body: body}} ->
+        {:ok, body}
+      {:ok, %{status: status, body: body}} ->
+        {:error, {:api_error, status, body}}
+      {:error, reason} ->
+        {:error, {:request_failed, reason}}
+    end
   end
 
   defp build_api_url(config) do
@@ -244,9 +248,9 @@ defmodule Prismatic.LLM.Impl.OpenAIBackend do
   end
 
   defp get_model_max_tokens("gpt-4"), do: 8192
-  defp get_model_max_tokens("gpt-4-32k"), do: 32768
+  defp get_model_max_tokens("gpt-4-32k"), do: 32_768
   defp get_model_max_tokens("gpt-3.5-turbo"), do: 4096
-  defp get_model_max_tokens("gpt-3.5-turbo-16k"), do: 16384
+  defp get_model_max_tokens("gpt-3.5-turbo-16k"), do: 16_384
   defp get_model_max_tokens(_), do: 4096
 
   defp get_model_cost_per_token("gpt-4"), do: 0.00003

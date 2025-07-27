@@ -83,23 +83,14 @@ defmodule Prismatic.Supervisor.Root do
 
   Supervisor specification with child processes.
   """
+  @spec init(term()) :: {:ok, {Supervisor.sup_flags(), [Supervisor.child_spec()]}}
   @impl true
   def init(_init_arg) do
-    Logger.info("Initializing Prismatic supervision tree")
+    Logger.warning("Prismatic.Supervisor.Root is a placeholder - not yet implemented")
 
-    children = [
-      # Infrastructure layer - databases, caches, external connections
-      {Prismatic.Supervisor.Infrastructure, []},
-
-      # Data layer - repositories, data access
-      {Prismatic.Supervisor.Data, []},
-
-      # Core business logic layer
-      {Prismatic.Supervisor.Core, []},
-
-      # Web interface layer
-      {PrismaticWeb.Endpoint, []}
-    ]
+    # This is a placeholder implementation. Return an empty supervisor spec
+    # since the actual child supervisors are not yet implemented.
+    children = []
 
     opts = [
       strategy: :one_for_one,
@@ -108,7 +99,6 @@ defmodule Prismatic.Supervisor.Root do
       name: __MODULE__
     ]
 
-    Logger.info("Root supervisor initialized with #{length(children)} child supervisors")
     Supervisor.init(children, opts)
   end
 
@@ -119,7 +109,13 @@ defmodule Prismatic.Supervisor.Root do
 
   Map containing supervisor and child process information.
   """
-  @spec get_status() :: map()
+  @spec get_status() :: %{
+    :children => [{term(), term(), term(), term()}],
+    :status => :not_running | :running,
+    :children_by_status => map(),
+    :children_count => non_neg_integer(),
+    :pid => pid()
+  }
   def get_status do
     case Process.whereis(__MODULE__) do
       nil ->

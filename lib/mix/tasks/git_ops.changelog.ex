@@ -28,63 +28,80 @@ defmodule Mix.Tasks.GitOps.Changelog do
     changelog_content = File.read!("CHANGELOG.md")
 
     # Add commits to the Unreleased section
-    new_content = if String.contains?(changelog_content, "## [Unreleased]") do
-      # Extract commit types and messages
-      commit_entries = commits
-                      |> String.split("\n")
-                      |> Enum.map(fn commit ->
-                        [_hash, message] = String.split(commit, " ", parts: 2)
-                        message
-                      end)
-                      |> Enum.filter(fn message ->
-                        Regex.match?(~r/^(feat|fix|docs|style|refactor|perf|test|build|ci):/, message)
-                      end)
-                      |> Enum.map(fn message ->
-                        type = message |> String.split(":", parts: 2) |> List.first()
-                        desc = message |> String.split(":", parts: 2) |> List.last() |> String.trim()
-                        {type, desc}
-                      end)
-
-      # Group commits by type
-      grouped_commits = Enum.reduce(commit_entries, %{}, fn {type, desc}, acc ->
-        Map.update(acc, type, [desc], fn descs -> [desc | descs] end)
-      end)
-
-      # Generate changelog sections
-      sections = %{
-        "feat" => "New Features",
-        "fix" => "Bug Fixes",
-        "perf" => "Performance Improvements",
-        "refactor" => "Code Refactoring",
-        "docs" => "Documentation Updates",
-        "build" => "Build System",
-        "test" => "Tests",
-        "style" => "Styling"
-      }
-
-      # Replace the Unreleased section
-      unreleased_section = "## [Unreleased]\n\n" <>
-        (Enum.map(sections, fn {type, title} ->
-          entries = Map.get(grouped_commits, type, [])
-          if Enum.empty?(entries) do
-            ""
-          else
-            section_content = "### #{title}\n\n"
-            entries_content = Enum.map(entries, fn desc -> "- #{desc}\n" end) |> Enum.join("")
-            section_content <> entries_content <> "\n"
-          end
-        end)
-        |> Enum.join(""))
-
-      # Replace the Unreleased section in the changelog
-      String.replace(changelog_content, ~r/## \[Unreleased\].*?(?=##|\z)/s, unreleased_section)
-    else
-      changelog_content
-    end
+    new_content = update_changelog_content(changelog_content, commits)
 
     # Write the updated changelog
     File.write!("CHANGELOG.md", new_content)
 
     Mix.shell().info("Changelog generated successfully!")
+  end
+
+  defp update_changelog_content(changelog_content, commits) do
+    if String.contains?(changelog_content, "## [Unreleased]") do
+      commit_entries = parse_commit_entries(commits)
+      grouped_commits = group_commits_by_type(commit_entries)
+      unreleased_section = generate_unreleased_section(grouped_commits)
+
+      String.replace(changelog_content, ~r/## \[Unreleased\].*?(?=##|\z)/s, unreleased_section)
+    else
+      changelog_content
+    end
+  end
+
+  defp parse_commit_entries(commits) do
+    commits
+    |> String.split("\n")
+    |> Enum.map(fn commit ->
+      [_hash, message] = String.split(commit, " ", parts: 2)
+      message
+    end)
+    |> Enum.filter(fn message ->
+      Regex.match?(~r/^(feat|fix|docs|style|refactor|perf|test|build|ci):/, message)
+    end)
+    |> Enum.map(fn message ->
+      type = message |> String.split(":", parts: 2) |> List.first()
+      desc = message |> String.split(":", parts: 2) |> List.last() |> String.trim()
+      {type, desc}
+    end)
+  end
+
+  defp group_commits_by_type(commit_entries) do
+    Enum.reduce(commit_entries, %{}, fn {type, desc}, acc ->
+      Map.update(acc, type, [desc], fn descs -> [desc | descs] end)
+    end)
+  end
+
+  defp generate_unreleased_section(grouped_commits) do
+    sections = get_changelog_sections()
+
+    "## [Unreleased]\n\n" <>
+      Enum.map_join(sections, "", fn {type, title} ->
+        generate_section_content(grouped_commits, type, title)
+      end)
+  end
+
+  defp get_changelog_sections do
+    %{
+      "feat" => "New Features",
+      "fix" => "Bug Fixes",
+      "perf" => "Performance Improvements",
+      "refactor" => "Code Refactoring",
+      "docs" => "Documentation Updates",
+      "build" => "Build System",
+      "test" => "Tests",
+      "style" => "Styling"
+    }
+  end
+
+  defp generate_section_content(grouped_commits, type, title) do
+    entries = Map.get(grouped_commits, type, [])
+
+    if Enum.empty?(entries) do
+      ""
+    else
+      section_content = "### #{title}\n\n"
+      entries_content = Enum.map_join(entries, "", fn desc -> "- #{desc}\n" end)
+      section_content <> entries_content <> "\n"
+    end
   end
 end

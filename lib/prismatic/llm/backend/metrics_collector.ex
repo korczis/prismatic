@@ -461,7 +461,7 @@ defmodule Prismatic.LLM.Backend.MetricsCollector do
 
   ## Private Implementation
 
-  @spec setup_telemetry_handlers(list(atom())) :: :ok
+  @spec setup_telemetry_handlers(list(atom())) :: :ok | {:error, :already_exists}
   defp setup_telemetry_handlers(prefix) do
     # Attach telemetry handlers for external monitoring systems
     :telemetry.attach_many(
@@ -475,12 +475,12 @@ defmodule Prismatic.LLM.Backend.MetricsCollector do
     )
   end
 
-  @spec handle_telemetry_event(list(atom()), map(), map(), term()) :: :ok
+  @spec handle_telemetry_event(list(atom()), map(), map(), term()) :: :ok | nil
   defp handle_telemetry_event(event_name, _measurements, metadata, _config) do
     case event_name do
       [:prismatic, :llm, :backend, :request] ->
         if metadata.result == :error do
-          Logger.warn("LLM Backend request failed: #{metadata.backend} - #{inspect(metadata.data)}")
+          Logger.warning("LLM Backend request failed: #{metadata.backend} - #{inspect(metadata.data)}")
         end
 
       [:prismatic, :llm, :backend, :circuit_breaker] ->
@@ -491,7 +491,19 @@ defmodule Prismatic.LLM.Backend.MetricsCollector do
     end
   end
 
-  @spec emit_telemetry_event(atom(), map()) :: :ok
+  @spec emit_telemetry_event(:circuit_breaker | :request, %{
+    :backend => atom(),
+    :timestamp => integer(),
+    :data => %{
+      :cost => float(),
+      :error_type => atom(),
+      :latency => non_neg_integer(),
+      :model => binary(),
+      :tokens => non_neg_integer()
+    },
+    :event => :close | :half_open | :open,
+    :result => :error | :success
+  }) :: :ok
   defp emit_telemetry_event(event_type, metadata) do
     event_name = @telemetry_prefix ++ [event_type]
     measurements = %{timestamp: System.monotonic_time(:millisecond)}
@@ -499,7 +511,18 @@ defmodule Prismatic.LLM.Backend.MetricsCollector do
     :telemetry.execute(event_name, measurements, metadata)
   end
 
-  @spec init_global_metrics() :: global_metrics()
+  @spec init_global_metrics() :: %{
+    :average_latency => float(),
+    :error_breakdown => %{},
+    :error_rate => float(),
+    :failed_requests => 0,
+    :last_request_time => nil,
+    :requests_per_minute => float(),
+    :successful_requests => 0,
+    :total_cost => float(),
+    :total_requests => 0,
+    :total_tokens => 0
+  }
   defp init_global_metrics do
     %{
       total_requests: 0,

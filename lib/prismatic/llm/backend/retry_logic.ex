@@ -48,8 +48,8 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
 
   ## Examples
 
-      iex> RetryLogic.with_retry(fn -> make_api_call() end, max_retries: 3)
-      {:ok, result}
+      iex> RetryLogic.with_retry(fn -> {:ok, "success"} end, max_retries: 3)
+      {:ok, "success"}
 
       iex> RetryLogic.with_retry(fn -> {:error, :timeout} end, max_retries: 2)
       {:error, :timeout}
@@ -88,48 +88,82 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
   """
   @spec retryable_error?(term()) :: boolean()
   def retryable_error?({:error, reason}) do
+    network_error?(reason) or
+    retryable_api_error?(reason) or
+    rate_limit_error?(reason) or
+    generic_retryable_error?(reason)
+  end
+
+  def retryable_error?(_), do: false
+
+  # Helper functions for error classification
+
+  defp network_error?(reason) do
     case reason do
-      # Network and connectivity errors - retryable
       :timeout -> true
       :econnrefused -> true
       :econnreset -> true
       :ehostunreach -> true
       :enetunreach -> true
       {:request_failed, _} -> true
-
-      # HTTP status code errors
-      {:api_error, status, _body} when status in [429, 500, 502, 503, 504] -> true
-      {:api_error, status, _body} when status in [400, 401, 403, 404] -> false
-
-      # Rate limiting - retryable with backoff
-      :rate_limit_exceeded -> true
-      :quota_exceeded -> false  # Don't retry quota issues
-
-      # Authentication errors - not retryable
-      :invalid_api_key -> false
-      :authentication_failed -> false
-      :authorization_failed -> false
-
-      # Validation errors - not retryable
-      :invalid_request -> false
-      :invalid_model -> false
-      :invalid_parameters -> false
-
-      # Circuit breaker - not retryable (handled at higher level)
-      :circuit_breaker_open -> false
-
-      # Generic errors - retryable by default
-      _ -> true
+      _ -> false
     end
   end
 
-  def retryable_error?(_), do: false
+  defp retryable_api_error?(reason) do
+    case reason do
+      {:api_error, status, _body} when status in [429, 500, 502, 503, 504] -> true
+      _ -> false
+    end
+  end
+
+  defp rate_limit_error?(reason) do
+    case reason do
+      :rate_limit_exceeded -> true
+      _ -> false
+    end
+  end
+
+  defp generic_retryable_error?(reason) do
+    not non_retryable_error?(reason)
+  end
+
+  defp non_retryable_error?(reason) do
+    non_retryable_api_error?(reason) or
+    quota_error?(reason) or
+    authentication_error?(reason) or
+    validation_error?(reason) or
+    circuit_breaker_error?(reason)
+  end
+
+  defp non_retryable_api_error?(reason) do
+    case reason do
+      {:api_error, status, _body} when status in [400, 401, 403, 404] -> true
+      _ -> false
+    end
+  end
+
+  defp quota_error?(reason) do
+    reason == :quota_exceeded
+  end
+
+  defp authentication_error?(reason) do
+    reason in [:invalid_api_key, :authentication_failed, :authorization_failed]
+  end
+
+  defp validation_error?(reason) do
+    reason in [:invalid_request, :invalid_model, :invalid_parameters]
+  end
+
+  defp circuit_breaker_error?(reason) do
+    reason == :circuit_breaker_open
+  end
 
   # Private helper functions
 
-  defp execute_with_retry(fun, %{attempt: attempt, max_retries: max_retries} = state)
+  defp execute_with_retry(_fun, %{attempt: attempt, max_retries: max_retries})
        when attempt > max_retries do
-    Logger.warn("Max retries (#{max_retries}) exceeded")
+    Logger.warning("Max retries (#{max_retries}) exceeded")
     {:error, :max_retries_exceeded}
   end
 
@@ -137,7 +171,7 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
     attempt_start = System.monotonic_time(:millisecond)
 
     case safe_execute(fun) do
-      {:ok, result} = success ->
+      {:ok, _result} = success ->
         log_success(state, attempt_start)
         success
 
@@ -157,21 +191,19 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
   end
 
   defp safe_execute(fun) do
-    try do
-      case fun.() do
-        {:ok, result} -> {:ok, result}
-        {:error, reason} -> {:error, reason}
-        result -> {:ok, result}  # Assume success if not explicitly an error tuple
-      end
-    rescue
-      error ->
-        {:error, {:exception, error}}
-    catch
-      :exit, reason ->
-        {:error, {:exit, reason}}
-      :throw, value ->
-        {:error, {:throw, value}}
+    case fun.() do
+      {:ok, result} -> {:ok, result}
+      {:error, reason} -> {:error, reason}
+      result -> {:ok, result}  # Assume success if not explicitly an error tuple
     end
+  rescue
+    error ->
+      {:error, {:exception, error}}
+  catch
+    :exit, reason ->
+      {:error, {:exit, reason}}
+    :throw, value ->
+      {:error, {:throw, value}}
   end
 
   defp calculate_delay(%{attempt: attempt, base_delay: base_delay, max_delay: max_delay,
@@ -191,7 +223,7 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
   end
 
   defp log_success(state, attempt_start) do
-    duration = System.monotonic_time(:millisecond) - attempt_start
+    _duration = System.monotonic_time(:millisecond) - attempt_start
     total_duration = System.monotonic_time(:millisecond) - state.start_time
 
     if state.attempt > 0 do
@@ -203,12 +235,12 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
     duration = System.monotonic_time(:millisecond) - attempt_start
     delay = calculate_delay(state)
 
-    Logger.warn("Retry attempt #{state.attempt + 1}/#{state.max_retries} failed: #{inspect(reason)} " <>
+    Logger.warning("Retry attempt #{state.attempt + 1}/#{state.max_retries} failed: #{inspect(reason)} " <>
                 "(#{duration}ms), retrying in #{delay}ms")
   end
 
   defp log_final_failure(state, reason, attempt_start) do
-    duration = System.monotonic_time(:millisecond) - attempt_start
+    _duration = System.monotonic_time(:millisecond) - attempt_start
     total_duration = System.monotonic_time(:millisecond) - state.start_time
 
     if retryable_error?({:error, reason}) do
@@ -279,9 +311,9 @@ defmodule Prismatic.LLM.Backend.RetryLogic do
 
   ## Examples
 
-      iex> retryable_fn = RetryLogic.make_retryable(fn -> api_call() end, max_retries: 2)
+      iex> retryable_fn = RetryLogic.make_retryable(fn -> {:ok, "success"} end, max_retries: 2)
       iex> retryable_fn.()
-      {:ok, result}
+      {:ok, "success"}
   """
   def make_retryable(fun, opts \\ []) when is_function(fun, 0) do
     fn -> with_retry(fun, opts) end

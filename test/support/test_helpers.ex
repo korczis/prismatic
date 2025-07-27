@@ -9,16 +9,17 @@ defmodule Prismatic.TestHelpers do
   import ExUnit.Assertions
   import Mox
 
-  alias Prismatic.Agent.Protocol, as: AgentProtocol
-  alias Prismatic.Memory.Protocol, as: MemoryProtocol
+  # Note: These aliases are used in commented/disabled test functions
+  # alias Prismatic.Agent.Protocol, as: AgentProtocol
   alias Prismatic.LLM.Backend
+  # alias Prismatic.Memory.Protocol, as: MemoryProtocol
 
   @doc """
   Sets up mocks for all external dependencies.
 
   This should be called in test setup to ensure clean mock state.
   """
-  def setup_mocks do
+  def setup_mocks(_context) do
     # Verify mocks are called as expected
     verify_on_exit!()
 

@@ -103,8 +103,8 @@ defmodule Prismatic.LLM.Backend do
   - `[:prismatic, :llm, :backend, :health_check]` - Health check results
   """
 
-  alias Prismatic.LLM.Backend.{CircuitBreaker, RetryLogic, MetricsCollector}
-  alias Prismatic.LLM.Impl.{OpenAIBackend, AnthropicBackend, TestBackend}
+  alias Prismatic.LLM.Backend.{CircuitBreaker, RetryLogic}
+  alias Prismatic.LLM.Impl.{AnthropicBackend, OpenAIBackend, TestBackend}
 
   @typedoc "Backend configuration map"
   @type config :: %{
@@ -245,8 +245,8 @@ defmodule Prismatic.LLM.Backend do
 
   ## Examples
 
-      iex> {:ok, config} = LLM.Backend.create_config(:test, %{})
-      iex> {:ok, info} = LLM.Backend.get_model_info(config)
+      iex> {:ok, config} = Prismatic.LLM.Backend.create_config(:test, %{})
+      iex> {:ok, info} = Prismatic.LLM.Backend.get_model_info(config)
       iex> info.provider
       :test
       iex> is_integer(info.max_tokens)
@@ -283,7 +283,7 @@ defmodule Prismatic.LLM.Backend do
       iex> LLM.Backend.create_config(:invalid, %{})
       {:error, {:unsupported_backend, :invalid}}
   """
-  @spec create_config(backend_type(), map()) :: {:ok, config()} | {:error, term()}
+  @spec create_config(backend_type(), map()) :: {:ok, map()} | {:error, term()}
   def create_config(backend_type, options \\ %{}) do
     case validate_backend_type(backend_type) do
       :ok ->
@@ -370,8 +370,8 @@ defmodule Prismatic.LLM.Backend do
 
   ## Examples
 
-      iex> {:ok, config} = LLM.Backend.create_config(:test, %{})
-      iex> {:ok, info} = LLM.Backend.get_model_info(config)
+      iex> {:ok, config} = Prismatic.LLM.Backend.create_config(:test, %{})
+      iex> {:ok, info} = Prismatic.LLM.Backend.get_model_info(config)
       iex> info.name
       "test-model-v1"
   """
@@ -392,20 +392,20 @@ defmodule Prismatic.LLM.Backend do
 
   ## Examples
 
-      iex> backends = LLM.Backend.available_backends()
+      iex> backends = Prismatic.LLM.Backend.available_backends()
       iex> :test in backends
       true
       iex> :openai in backends
       true
   """
-  @spec available_backends() :: [backend_type()]
+  @spec available_backends() :: [:anthropic | :local | :openai | :test]
   def available_backends do
     [:openai, :anthropic, :test, :local]
   end
 
   ## Private Implementation
 
-  @spec validate_backend_type(term()) :: :ok | {:error, term()}
+  @spec validate_backend_type(term()) :: :ok | {:error, {:unsupported_backend, term()}}
   defp validate_backend_type(backend_type) when backend_type in [:openai, :anthropic, :test, :local] do
     :ok
   end

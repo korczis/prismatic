@@ -7,6 +7,7 @@ defmodule Prismatic.MixProject do
       version: "0.1.1",
       elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
+      elixirc_options: [warnings_as_errors: true],
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -102,7 +103,7 @@ defmodule Prismatic.MixProject do
   def application do
     [
       mod: {Prismatic.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :mnesia]
     ]
   end
 
@@ -148,6 +149,13 @@ defmodule Prismatic.MixProject do
 
       # AI/LLM Dependencies
       {:uuid, "~> 1.1"},
+
+      # Memory System Dependencies
+      {:cachex, "~> 3.6"},
+      {:nebulex, "~> 2.6"},
+      {:shards, "~> 1.1"},
+      {:decorator, "~> 1.4"},
+      {:telemetry_registry, "~> 0.3"},
 
       # Development Tools
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},

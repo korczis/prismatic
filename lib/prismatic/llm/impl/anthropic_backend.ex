@@ -32,7 +32,7 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
 
   require Logger
 
-  alias Prismatic.LLM.Backend.{CircuitBreaker, RetryLogic, MetricsCollector}
+  alias Prismatic.LLM.Backend.{CircuitBreaker, MetricsCollector, RetryLogic}
 
   @default_model "claude-3-sonnet-20240229"
   @default_timeout 30_000
@@ -191,21 +191,25 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
     # Use circuit breaker and retry logic
     CircuitBreaker.call(:anthropic, fn ->
       RetryLogic.with_retry(fn ->
-        case Req.post(url,
-          body: json_body,
-          headers: headers,
-          receive_timeout: timeout,
-          retry: false  # We handle retries ourselves
-        ) do
-          {:ok, %{status: 200, body: body}} ->
-            {:ok, body}
-          {:ok, %{status: status, body: body}} ->
-            {:error, {:api_error, status, body}}
-          {:error, reason} ->
-            {:error, {:request_failed, reason}}
-        end
+        execute_http_request(url, json_body, headers, timeout)
       end, max_retries: Map.get(config, :max_retries, 3))
     end)
+  end
+
+  defp execute_http_request(url, json_body, headers, timeout) do
+    case Req.post(url,
+      body: json_body,
+      headers: headers,
+      receive_timeout: timeout,
+      retry: false  # We handle retries ourselves
+    ) do
+      {:ok, %{status: 200, body: body}} ->
+        {:ok, body}
+      {:ok, %{status: status, body: body}} ->
+        {:error, {:api_error, status, body}}
+      {:error, reason} ->
+        {:error, {:request_failed, reason}}
+    end
   end
 
   defp build_api_url(config) do

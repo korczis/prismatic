@@ -62,8 +62,8 @@ defmodule Prismatic.LLM.Backend.CircuitBreaker do
 
   ## Examples
 
-      iex> CircuitBreaker.call(:openai, fn -> make_api_call() end)
-      {:ok, result}
+      iex> CircuitBreaker.call(:openai, fn -> {:ok, "success"} end)
+      {:ok, "success"}
 
       iex> CircuitBreaker.call(:openai, fn -> {:error, :timeout} end)
       {:error, :timeout}
@@ -191,7 +191,7 @@ defmodule Prismatic.LLM.Backend.CircuitBreaker do
       duration = end_time - start_time
 
       # Update metrics
-      updated_metrics = update_metrics(state.metrics, :success, duration)
+      _updated_metrics = update_metrics(state.metrics, :success, duration)
 
       result
     rescue
@@ -200,7 +200,7 @@ defmodule Prismatic.LLM.Backend.CircuitBreaker do
         duration = end_time - start_time
 
         # Update metrics
-        updated_metrics = update_metrics(state.metrics, :error, duration)
+        _updated_metrics = update_metrics(state.metrics, :error, duration)
 
         {:error, error}
     catch
@@ -209,7 +209,7 @@ defmodule Prismatic.LLM.Backend.CircuitBreaker do
     end
   end
 
-  defp handle_call_result({:ok, _result} = success, %{state: :half_open} = state) do
+  defp handle_call_result({:ok, _result}, %{state: :half_open} = state) do
     new_success_count = state.success_count + 1
 
     if new_success_count >= state.success_threshold do
@@ -241,7 +241,7 @@ defmodule Prismatic.LLM.Backend.CircuitBreaker do
 
     if new_failure_count >= state.failure_threshold and state.state == :closed do
       # Trip the circuit breaker
-      Logger.warn("Circuit breaker #{state.name} tripped to open state after #{new_failure_count} failures")
+      Logger.warning("Circuit breaker #{state.name} tripped to open state after #{new_failure_count} failures")
 
       %{new_state |
         state: :open,
@@ -258,14 +258,14 @@ defmodule Prismatic.LLM.Backend.CircuitBreaker do
   end
   defp should_attempt_reset?(_), do: false
 
-  defp update_metrics(metrics, :success, duration) do
+  defp update_metrics(metrics, :success, _duration) do
     %{metrics |
       total_calls: metrics.total_calls + 1,
       successful_calls: metrics.successful_calls + 1
     }
   end
 
-  defp update_metrics(metrics, :error, duration) do
+  defp update_metrics(metrics, :error, _duration) do
     %{metrics |
       total_calls: metrics.total_calls + 1,
       failed_calls: metrics.failed_calls + 1

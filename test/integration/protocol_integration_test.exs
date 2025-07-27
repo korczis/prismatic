@@ -9,16 +9,15 @@ defmodule Prismatic.Integration.ProtocolIntegrationTest do
   use ExUnit.Case, async: false
 
   import Prismatic.TestHelpers
-  import Prismatic.PropertyHelpers
 
   alias Prismatic.Agent.Protocol, as: AgentProtocol
-  alias Prismatic.Memory.Protocol, as: MemoryProtocol
   alias Prismatic.LLM.Backend
+  alias Prismatic.Memory.Protocol, as: MemoryProtocol
 
   @moduletag :integration
 
   setup do
-    setup_mocks()
+    setup_mocks(%{})
 
     # Start required services for integration tests
     {:ok, _} = start_supervised(Prismatic.EventBus)
@@ -58,7 +57,7 @@ defmodule Prismatic.Integration.ProtocolIntegrationTest do
 
       # First session
       {:ok, agent1} = Prismatic.Agent.TestImpl.new(agent_config)
-      {:ok, response1} = AgentProtocol.process_message(agent1, "Remember: the sky is blue", %{})
+      {:ok, _response1} = AgentProtocol.process_message(agent1, "Remember: the sky is blue", %{})
 
       # Serialize agent state
       {:ok, serialized} = AgentProtocol.serialize(agent1)
@@ -156,8 +155,8 @@ defmodule Prismatic.Integration.ProtocolIntegrationTest do
       end)
 
       # Verify conversation flow
-      {_msg1, response1} = Enum.at(responses, 0)
-      {_msg2, response2} = Enum.at(responses, 1)
+      {_msg1, _response1} = Enum.at(responses, 0)
+      {_msg2, _response2} = Enum.at(responses, 1)
       {_msg3, response3} = Enum.at(responses, 2)
       {_msg4, response4} = Enum.at(responses, 3)
 
@@ -218,7 +217,7 @@ defmodule Prismatic.Integration.ProtocolIntegrationTest do
       {:ok, agent} = Prismatic.Agent.TestImpl.new(agent_config)
 
       # Simulate memory failure
-      {:ok, agent_state} = AgentProtocol.get_state(agent)
+      {:ok, _agent_state} = AgentProtocol.get_state(agent)
 
       # Agent should continue functioning even with memory issues
       {:ok, response} = AgentProtocol.process_message(agent, "Hello", %{})
