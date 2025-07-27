@@ -1,0 +1,8 @@
+# This directory contains architectural diagrams and charts for the Prismatic documentation
+# 
+# Directory structure:
+# - architecture/     - System architecture diagrams
+# - protocols/        - Protocol interaction diagrams  
+# - implementations/  - Implementation flow charts
+# - benchmarks/       - Performance benchmark charts
+# - coverage/         - Test coverage visualizations

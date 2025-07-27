@@ -49,8 +49,7 @@ defmodule Prismatic.Agent.Protocol do
   - `{:ok, response}` - Successful processing with response
   - `{:error, reason}` - Processing failed with reason
   """
-  @spec process_message(term(), String.t(), map()) :: {:ok, String.t()} | {:error, term()}
-  def process_message(agent, message, context)
+  @callback process_message(term(), String.t(), map()) :: {:ok, String.t()} | {:error, term()}
 
   @doc """
   Get the current state of the agent.
@@ -64,8 +63,7 @@ defmodule Prismatic.Agent.Protocol do
   - `{:ok, state}` - Current agent state
   - `{:error, reason}` - Failed to retrieve state
   """
-  @spec get_state(term()) :: {:ok, map()} | {:error, term()}
-  def get_state(agent)
+  @callback get_state(term()) :: {:ok, map()} | {:error, term()}
 
   @doc """
   Update the agent's configuration.
@@ -80,8 +78,7 @@ defmodule Prismatic.Agent.Protocol do
   - `{:ok, updated_agent}` - Agent with updated configuration
   - `{:error, reason}` - Configuration update failed
   """
-  @spec update_config(term(), map()) :: {:ok, term()} | {:error, term()}
-  def update_config(agent, config)
+  @callback update_config(term(), map()) :: {:ok, term()} | {:error, term()}
 
   @doc """
   Serialize the agent for persistence or transmission.
@@ -95,6 +92,5 @@ defmodule Prismatic.Agent.Protocol do
   - `{:ok, serialized_data}` - Serialized agent data
   - `{:error, reason}` - Serialization failed
   """
-  @spec serialize(term()) :: {:ok, binary()} | {:error, term()}
-  def serialize(agent)
+  @callback serialize(term()) :: {:ok, binary()} | {:error, term()}
 end

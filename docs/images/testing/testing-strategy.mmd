@@ -1,0 +1,102 @@
+graph TB
+    subgraph "Testing Pyramid"
+        subgraph "Unit Tests - Foundation"
+            UNIT[Unit Tests<br/>✅ Framework Ready<br/>ExUnit + Mox]
+            UNIT_AGENT[Agent Protocol Tests<br/>📋 Planned]
+            UNIT_MEM[Memory Protocol Tests<br/>📋 Planned]
+            UNIT_LLM[LLM Backend Tests<br/>📋 Planned]
+        end
+        
+        subgraph "Integration Tests - Interactions"
+            INT[Integration Tests<br/>✅ Framework Ready<br/>Cross-Protocol Testing]
+            INT_AGENT_MEM[Agent-Memory Integration<br/>📋 Planned]
+            INT_AGENT_LLM[Agent-LLM Integration<br/>📋 Planned]
+            INT_MEM_LLM[Memory-LLM Integration<br/>📋 Planned]
+        end
+        
+        subgraph "Property Tests - Invariants"
+            PROP[Property-Based Tests<br/>✅ Framework Ready<br/>StreamData]
+            PROP_DETERMINISM[Determinism Properties<br/>📋 Planned]
+            PROP_CONSISTENCY[Consistency Properties<br/>📋 Planned]
+            PROP_SERIALIZATION[Serialization Properties<br/>📋 Planned]
+        end
+        
+        subgraph "Performance Tests - Benchmarks"
+            PERF[Performance Tests<br/>✅ Framework Ready<br/>Benchee]
+            PERF_THROUGHPUT[Throughput Benchmarks<br/>📋 Planned]
+            PERF_LATENCY[Latency Benchmarks<br/>📋 Planned]
+            PERF_MEMORY[Memory Usage Tests<br/>📋 Planned]
+        end
+    end
+    
+    subgraph "Test Infrastructure"
+        HELPERS[Test Helpers<br/>✅ Complete<br/>Mocks & Generators]
+        COVERAGE[Coverage Reporting<br/>✅ Complete<br/>ExCoveralls]
+        CI[CI Pipeline<br/>✅ Complete<br/>GitHub Actions]
+        QUALITY[Quality Gates<br/>✅ Complete<br/>Dialyzer + Credo]
+    end
+    
+    subgraph "Test Data & Mocks"
+        MOCKS[Mock Implementations<br/>✅ Ready<br/>LLM & External Services]
+        GENERATORS[Data Generators<br/>✅ Ready<br/>StreamData Generators]
+        FIXTURES[Test Fixtures<br/>📋 Planned<br/>Sample Data Sets]
+    end
+    
+    %% Unit test dependencies
+    UNIT --> UNIT_AGENT
+    UNIT --> UNIT_MEM
+    UNIT --> UNIT_LLM
+    
+    %% Integration test dependencies
+    INT --> INT_AGENT_MEM
+    INT --> INT_AGENT_LLM
+    INT --> INT_MEM_LLM
+    
+    %% Property test dependencies
+    PROP --> PROP_DETERMINISM
+    PROP --> PROP_CONSISTENCY
+    PROP --> PROP_SERIALIZATION
+    
+    %% Performance test dependencies
+    PERF --> PERF_THROUGHPUT
+    PERF --> PERF_LATENCY
+    PERF --> PERF_MEMORY
+    
+    %% Infrastructure connections
+    HELPERS --> UNIT
+    HELPERS --> INT
+    HELPERS --> PROP
+    
+    MOCKS --> UNIT
+    MOCKS --> INT
+    
+    GENERATORS --> PROP
+    GENERATORS --> PERF
+    
+    FIXTURES --> INT
+    FIXTURES --> PERF
+    
+    %% CI integration
+    UNIT --> COVERAGE
+    INT --> COVERAGE
+    PROP --> COVERAGE
+    PERF --> CI
+    
+    COVERAGE --> CI
+    QUALITY --> CI
+    
+    %% Test execution flow
+    UNIT_AGENT --> INT_AGENT_MEM
+    UNIT_AGENT --> INT_AGENT_LLM
+    UNIT_MEM --> INT_AGENT_MEM
+    UNIT_MEM --> INT_MEM_LLM
+    UNIT_LLM --> INT_AGENT_LLM
+    UNIT_LLM --> INT_MEM_LLM
+    
+    classDef complete fill:#90EE90,stroke:#006400,stroke-width:2px
+    classDef ready fill:#F0E68C,stroke:#B8860B,stroke-width:2px
+    classDef planned fill:#E6E6FA,stroke:#4B0082,stroke-width:2px
+    
+    class HELPERS,COVERAGE,CI,QUALITY,MOCKS,GENERATORS complete
+    class UNIT,INT,PROP,PERF ready
+    class UNIT_AGENT,UNIT_MEM,UNIT_LLM,INT_AGENT_MEM,INT_AGENT_LLM,INT_MEM_LLM,PROP_DETERMINISM,PROP_CONSISTENCY,PROP_SERIALIZATION,PERF_THROUGHPUT,PERF_LATENCY,PERF_MEMORY,FIXTURES planned

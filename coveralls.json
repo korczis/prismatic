@@ -1,0 +1,24 @@
+{
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "cover/",
+    "template_path": "cover/coverage.html.eex",
+    "minimum_coverage": 85
+  },
+  "terminal_options": {
+    "file_column_width": 40
+  },
+  "html_options": {
+    "title": "Prismatic Test Coverage Report"
+  },
+  "skip_files": [
+    "test/",
+    "deps/",
+    "benchmarks/",
+    "_build/",
+    "lib/mix/tasks/"
+  ],
+  "custom_stop_words": [
+    "defp do_not_cover"
+  ]
+}

@@ -60,8 +60,7 @@ defmodule Prismatic.Memory.Protocol do
   - `{:ok, updated_memory}` - Successfully stored data
   - `{:error, reason}` - Storage failed
   """
-  @spec store(term(), atom(), String.t(), term()) :: {:ok, term()} | {:error, term()}
-  def store(memory, type, key, value)
+  @callback store(term(), atom(), String.t(), term()) :: {:ok, term()} | {:error, term()}
 
   @doc """
   Retrieve data from memory.
@@ -78,8 +77,7 @@ defmodule Prismatic.Memory.Protocol do
   - `{:error, :not_found}` - Key not found
   - `{:error, reason}` - Retrieval failed
   """
-  @spec retrieve(term(), atom(), String.t()) :: {:ok, term()} | {:error, term()}
-  def retrieve(memory, type, key)
+  @callback retrieve(term(), atom(), String.t()) :: {:ok, term()} | {:error, term()}
 
   @doc """
   Consolidate working memory to long-term storage.
@@ -96,8 +94,7 @@ defmodule Prismatic.Memory.Protocol do
   - `{:ok, consolidated_memory}` - Successfully consolidated
   - `{:error, reason}` - Consolidation failed
   """
-  @spec consolidate(term()) :: {:ok, term()} | {:error, term()}
-  def consolidate(memory)
+  @callback consolidate(term()) :: {:ok, term()} | {:error, term()}
 
   @doc """
   Remove data from memory.
@@ -114,8 +111,7 @@ defmodule Prismatic.Memory.Protocol do
   - `{:error, :not_found}` - Key not found
   - `{:error, reason}` - Removal failed
   """
-  @spec forget(term(), atom(), String.t()) :: {:ok, term()} | {:error, term()}
-  def forget(memory, type, key)
+  @callback forget(term(), atom(), String.t()) :: {:ok, term()} | {:error, term()}
 
   @doc """
   Search memory with pattern matching.
@@ -131,6 +127,5 @@ defmodule Prismatic.Memory.Protocol do
   - `{:ok, results}` - List of matching key-value pairs
   - `{:error, reason}` - Search failed
   """
-  @spec search(term(), atom(), String.t()) :: {:ok, list()} | {:error, term()}
-  def search(memory, type, pattern)
+  @callback search(term(), atom(), String.t()) :: {:ok, list()} | {:error, term()}
 end

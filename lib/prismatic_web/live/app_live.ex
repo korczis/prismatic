@@ -21,4 +21,3 @@ defmodule PrismaticWeb.AppLive do
     Layouts.theme_toggle(assigns)
   end
 end
-m

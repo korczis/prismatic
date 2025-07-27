@@ -1,0 +1,80 @@
+graph TB
+    subgraph "Agent Layer"
+        AGENT[Agent Protocol<br/>process_message/3<br/>get_state/1<br/>update_config/2<br/>serialize/1]
+    end
+    
+    subgraph "Memory Layer"
+        MEM[Memory Protocol<br/>store/4<br/>retrieve/3<br/>query/3<br/>consolidate/1<br/>forget/3]
+        
+        subgraph "Memory Types"
+            WORK[Working Memory<br/>Current Context]
+            EPIS[Episodic Memory<br/>Experiences & Events]
+            SEM[Semantic Memory<br/>Facts & Knowledge]
+            PROC[Procedural Memory<br/>Skills & Procedures]
+        end
+    end
+    
+    subgraph "LLM Layer"
+        LLM[LLM Backend<br/>generate_response/3<br/>validate_config/1<br/>health_check/1<br/>get_model_info/1]
+        
+        subgraph "LLM Providers"
+            OPENAI[OpenAI Backend<br/>GPT-4, GPT-3.5]
+            ANTHROPIC[Anthropic Backend<br/>Claude-3]
+            LOCAL[Local Backend<br/>Ollama, Custom]
+            TEST[Test Backend<br/>Mock Responses]
+        end
+    end
+    
+    subgraph "Infrastructure Layer"
+        CB[Circuit Breaker<br/>Fault Protection]
+        RETRY[Retry Logic<br/>Resilience]
+        METRICS[Metrics Collection<br/>Observability]
+        CONFIG[Configuration<br/>Management]
+    end
+    
+    %% Agent to Memory interactions
+    AGENT -->|store experiences| MEM
+    AGENT -->|retrieve context| MEM
+    AGENT -->|query knowledge| MEM
+    
+    %% Memory type interactions
+    MEM --> WORK
+    MEM --> EPIS
+    MEM --> SEM
+    MEM --> PROC
+    
+    %% Agent to LLM interactions
+    AGENT -->|generate response| LLM
+    AGENT -->|validate config| LLM
+    
+    %% LLM provider selection
+    LLM --> OPENAI
+    LLM --> ANTHROPIC
+    LLM --> LOCAL
+    LLM --> TEST
+    
+    %% Infrastructure integration
+    LLM --> CB
+    CB --> RETRY
+    RETRY --> METRICS
+    METRICS --> CONFIG
+    
+    %% Memory consolidation flow
+    WORK -->|consolidate| EPIS
+    WORK -->|consolidate| SEM
+    WORK -->|consolidate| PROC
+    
+    %% Cross-layer data flow
+    LLM -->|cache responses| SEM
+    EPIS -->|provide context| LLM
+    SEM -->|enhance prompts| LLM
+    
+    classDef protocol fill:#E1F5FE,stroke:#0277BD,stroke-width:2px
+    classDef implementation fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px
+    classDef infrastructure fill:#E8F5E8,stroke:#2E7D32,stroke-width:2px
+    classDef memory fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
+    
+    class AGENT,MEM,LLM protocol
+    class OPENAI,ANTHROPIC,LOCAL,TEST implementation
+    class CB,RETRY,METRICS,CONFIG infrastructure
+    class WORK,EPIS,SEM,PROC memory
