@@ -15,10 +15,12 @@ Welcome to the Prismatic project documentation. This modular documentation syste
 | Section | Purpose | Key Documents |
 |---------|---------|---------------|
 | **[Core](core/)** | Essential system knowledge | [Architecture](core/architecture-overview.md), [Tech Stack](core/tech-stack.md) |
-| **[Guides](guides/)** | How-to and best practices | [Developer Experience](guides/developer-experience.md), [Coding Standards](guides/coding-standards.md) |
+| **[Guides](guides/)** | How-to and best practices | [Developer Experience](guides/developer-experience.md), [Navigation System](guides/documentation-navigation-standards.md) |
 | **[Reference](reference/)** | Lookups and specifications | [Glossary](reference/glossary.md), [API Docs](reference/api-endpoints.md) |
 | **[Architecture](architecture/)** | Design decisions | [ADRs](architecture/), [System Diagrams](architecture/system-diagrams.md) |
 | **[Operations](operations/)** | Deployment and maintenance | [Deployment](operations/deployment-procedures.md), [Troubleshooting](operations/troubleshooting.md) |
+
+> **📍 Navigation Note**: Each section directory contains a standardized navigation section in its README.md file, providing consistent signpost navigation throughout the documentation system.
 
 ## Documentation Principles
 
@@ -37,6 +39,87 @@ Each document has a **single, focused purpose** and can be maintained independen
 - **Consistent Formatting**: Standardized structure and style
 - **Living Documentation**: Updated with code changes
 - **Validated Links**: Cross-references checked and maintained
+
+## Navigation System
+
+### Standardized Navigation Structure
+
+Every README.md file in the `/docs/` directory includes a **standardized navigation section** that serves as a directory signpost. This system ensures consistent, automated navigation that stays synchronized with the actual directory structure.
+
+#### Navigation System Features
+
+- **🧭 Consistent Format**: Every directory has identical navigation structure
+- **🔄 Automated Synchronization**: Navigation updates automatically when directories change
+- **🔗 Validated Links**: All navigation links are verified and maintained
+- **📍 Breadcrumb Navigation**: Clear hierarchical context in every document
+- **⚡ Mix Task Integration**: Automated tools for navigation management
+
+#### Navigation Section Components
+
+Each navigation section includes:
+
+1. **Current Location Breadcrumb**: Shows hierarchical position
+2. **Subdirectories Table**: Links to immediate subdirectories with descriptions
+3. **Quick Links**: Parent directory, documentation home, and search
+4. **Related Documentation**: Cross-references to relevant sections
+
+#### Example Navigation Section
+
+```markdown
+<!-- NAV_START -->
+## Navigation
+
+**Current Location**: [Home](../README.md) > [Guides](README.md) > Feature Workflow
+
+### Subdirectories
+
+| Directory | Description | Key Documents |
+|-----------|-------------|---------------|
+| [`workflows/`](workflows/) | Development workflow procedures | [Feature Branch](workflows/feature-branch.md), [Release Process](workflows/release-process.md) |
+| [`standards/`](standards/) | Code quality and style guidelines | [Coding Standards](standards/coding-standards.md), [Review Process](standards/review-process.md) |
+
+### Quick Links
+
+- **📚 [Parent Directory](../README.md)** - Return to documentation home
+- **🏠 [Documentation Home](../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+
+### Related Documentation
+
+- [Cross-Reference Guide](../_meta/cross-reference-guide.md) - Documentation linking standards
+- [Maintenance Process](../_meta/maintenance-process.md) - How to update documentation
+<!-- NAV_END -->
+```
+
+#### Automation Tools
+
+The navigation system includes automated maintenance tools:
+
+```bash
+# Update all navigation sections
+mix docs.nav.update
+
+# Validate navigation integrity
+mix docs.nav.validate
+
+# Migrate existing files to new format
+mix docs.nav.migrate --backup
+
+# Show navigation system status
+mix docs.nav.validate --verbose
+```
+
+#### Implementation Standards
+
+- **HTML Comment Markers**: Navigation sections are wrapped in `<!-- NAV_START -->` and `<!-- NAV_END -->` markers
+- **Consistent Positioning**: Navigation appears after document title and description, before main content
+- **Automated Updates**: CI/CD pipelines automatically maintain navigation synchronization
+- **Quality Validation**: Regular checks ensure all navigation links are valid and current
+
+For complete implementation details, see:
+- [Documentation Navigation Standards](guides/documentation-navigation-standards.md) - Complete system specifications
+- [Navigation Templates](guides/documentation-navigation-templates.md) - Template formats and positioning rules
+- [Mix Tasks Implementation](guides/documentation-navigation-mix-tasks.md) - Automation tools and usage
 
 ## Finding Information
 
@@ -81,14 +164,21 @@ Each document has a **single, focused purpose** and can be maintained independen
 
 ### Update Triggers
 - **Code Changes** → Update related guides and references
-- **Architecture Decisions** → Create ADRs and update overviews  
+- **Architecture Decisions** → Create ADRs and update overviews
 - **New Features** → Update user guides and API documentation
 - **Bug Fixes** → Update troubleshooting guides
+- **Directory Changes** → Automatic navigation section updates
 
 ### Quality Assurance
 - **Weekly**: Link validation and cross-reference checks
 - **Monthly**: Content review and accuracy validation
 - **Quarterly**: Structure assessment and improvement planning
+
+### Navigation System Maintenance
+- **Automatic Updates**: Navigation sections update automatically when directory structure changes
+- **Validation**: `mix docs.nav.validate` checks navigation integrity
+- **CI/CD Integration**: Pipeline automation ensures navigation stays synchronized
+- **Manual Override**: Use `mix docs.nav.update --force` for manual navigation updates
 
 For detailed maintenance procedures, see [Documentation Maintenance](/_meta/maintenance-process.md).
 
@@ -116,7 +206,7 @@ For detailed maintenance procedures, see [Documentation Maintenance](/_meta/main
 # Start development
 mix phx.server
 
-# Run tests  
+# Run tests
 mix test
 
 # Deploy to production
@@ -124,6 +214,11 @@ mix release
 
 # Format code
 mix format
+
+# Documentation navigation management
+mix docs.nav.update        # Update all navigation sections
+mix docs.nav.validate      # Validate navigation integrity
+mix docs.nav.migrate       # Migrate existing files to navigation system
 ```
 
 ### Key Directories
@@ -141,9 +236,16 @@ docs/                    # This documentation
 - **Configuration**: [`config/`](../config/)
 
 ## Meta Documentation
+
+### Documentation System
 - [Naming Conventions](_meta/naming-conventions.md) - File and directory standards
 - [Maintenance Process](_meta/maintenance-process.md) - Documentation upkeep procedures
 - [Cross-Reference Guide](_meta/cross-reference-guide.md) - Linking standards and practices
+
+### Navigation System
+- [Documentation Navigation Standards](guides/documentation-navigation-standards.md) - Complete navigation system specifications
+- [Navigation Templates](guides/documentation-navigation-templates.md) - Template formats and positioning rules
+- [Navigation Mix Tasks](guides/documentation-navigation-mix-tasks.md) - Automation tools and implementation
 
 ---
 
