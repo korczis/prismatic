@@ -23,7 +23,7 @@ defmodule Prismatic.MixProject do
   def application do
     [
       mod: {Prismatic.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -40,6 +40,7 @@ defmodule Prismatic.MixProject do
       {:phoenix_pubsub, "~> 2.1"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
+      {:ecto_psql_extras, "~> 0.8"},
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.5"},
       {:finch, "~> 0.13"}
