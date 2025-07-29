@@ -24,17 +24,17 @@ defmodule Mix.Tasks.Docs do
   ## Available Commands
 
   ### Core Analysis
-  - [`docs.analyze`](`Mix.Tasks.Docs.Analyze`) - Comprehensive documentation analysis
-  - [`docs.validate`](`Mix.Tasks.Docs.Validate`) - Validate documentation consistency
-  - [`docs.report`](`Mix.Tasks.Docs.Report`) - Generate comprehensive analysis report
+  - [`docs.analyze`](`Mix.Tasks.Docs.Tasks.Analyze`) - Comprehensive documentation analysis
+  - [`docs.validate`](`Mix.Tasks.Docs.Tasks.Validate`) - Validate documentation consistency
+  - [`docs.report`](`Mix.Tasks.Docs.Tasks.Report`) - Generate comprehensive analysis report
 
   ### Content Extraction
-  - [`docs.extract_adrs`](`Mix.Tasks.Docs.ExtractAdrs`) - Extract Architecture Decision Records
-  - [`docs.extract_examples`](`Mix.Tasks.Docs.ExtractExamples`) - Extract and categorize code examples
-  - [`docs.trace`](`Mix.Tasks.Docs.Trace`) - Generate traceability markers
+  - [`docs.extract_adrs`](`Mix.Tasks.Docs.Tasks.ExtractAdrs`) - Extract Architecture Decision Records
+  - [`docs.extract_examples`](`Mix.Tasks.Docs.Tasks.ExtractExamples`) - Extract and categorize code examples
+  - [`docs.trace`](`Mix.Tasks.Docs.Tasks.Trace`) - Generate traceability markers
 
   ### AI Integration
-  - [`docs.ai_data`](`Mix.Tasks.Docs.AiData`) - Generate AI-friendly structured data
+  - [`docs.ai_data`](`Mix.Tasks.Docs.Tasks.AiData`) - Generate AI-friendly structured data
 
   ## Integration Examples
 
@@ -63,181 +63,13 @@ defmodule Mix.Tasks.Docs do
 
   use Mix.Task
 
+  alias Mix.Tasks.Docs.Dispatcher
+
   @shortdoc "Enterprise documentation analysis toolkit - run 'mix docs --help' for commands"
 
   @impl Mix.Task
   def run(args) do
-    start_time = System.monotonic_time(:millisecond)
-
-    try do
-      case parse_args(args) do
-        {:help} ->
-          show_comprehensive_help()
-
-        {:command, command, command_args} ->
-          execute_command_with_monitoring(command, command_args)
-
-        {:error, reason} ->
-          Mix.shell().error("❌ Invalid arguments: #{reason}")
-          show_usage_summary()
-          System.halt(1)
-      end
-    rescue
-      error ->
-        execution_time = System.monotonic_time(:millisecond) - start_time
-        Mix.shell().error([
-          :red, "❌ Documentation task failed after #{execution_time}ms: ",
-          :reset, Exception.message(error)
-        ])
-
-        if System.get_env("MIX_DEBUG") == "1" do
-          Mix.shell().error("Stack trace:")
-          Mix.shell().error(Exception.format_stacktrace(__STACKTRACE__))
-        end
-
-        System.halt(1)
-    end
-  end
-
-  @doc false
-  def parse_args(args) do
-    case args do
-      [] -> {:help}
-      ["--help"] -> {:help}
-      ["-h"] -> {:help}
-      ["help"] -> {:help}
-      [command | rest] when command in ~w(analyze extract_adrs extract_examples trace ai_data validate report) ->
-        {:command, command, rest}
-      [unknown_command | _] ->
-        {:error, "Unknown command '#{unknown_command}'. Available commands: analyze, extract_adrs, extract_examples, trace, ai_data, validate, report"}
-      _ ->
-        {:error, "Invalid argument format"}
-    end
-  end
-
-  defp show_comprehensive_help do
-    Mix.shell().info([
-      :cyan, "\n🔍 Prismatic Documentation Analysis Toolkit", :reset, "\n",
-      String.duplicate("═", 55), "\n"
-    ])
-
-    Mix.shell().info([
-      :green, "CORE ANALYSIS COMMANDS", :reset
-    ])
-
-    show_command_help([
-      {"docs.analyze", "Comprehensive multi-dimensional documentation analysis"},
-      {"docs.validate", "Validate links, references, and structural consistency"},
-      {"docs.report", "Generate detailed health and analysis reports"}
-    ])
-
-    Mix.shell().info([
-      :green, "\nCONTENT EXTRACTION COMMANDS", :reset
-    ])
-
-    show_command_help([
-      {"docs.extract_adrs", "Extract and analyze Architecture Decision Records"},
-      {"docs.extract_examples", "Extract and categorize code examples from docs"},
-      {"docs.trace", "Generate bidirectional traceability markers"}
-    ])
-
-    Mix.shell().info([
-      :green, "\nAI INTEGRATION COMMANDS", :reset
-    ])
-
-    show_command_help([
-      {"docs.ai_data", "Generate AI-optimized structured documentation data"}
-    ])
-
-    show_usage_examples()
-    show_ci_integration_examples()
-  end
-
-  defp show_command_help(commands) do
-    Enum.each(commands, fn {command, description} ->
-      Mix.shell().info("  #{IO.ANSI.yellow()}mix #{command}#{IO.ANSI.reset()} - #{description}")
-    end)
-  end
-
-  defp show_usage_examples do
-    Mix.shell().info([
-      :blue, "\n💡 COMMON USAGE PATTERNS", :reset
-    ])
-
-    examples = [
-      {"Development Workflow", "mix docs.analyze --verbose --output dev-analysis.json"},
-      {"CI/CD Integration", "mix docs.validate --ci --format json --output validation.json"},
-      {"Content Audit", "mix docs.extract_examples --language elixir --executable"},
-      {"Health Reporting", "mix docs.report --format html --sections all"},
-      {"Traceability Matrix", "mix docs.trace --docs docs --code apps --matrix"}
-    ]
-
-    Enum.each(examples, fn {title, command} ->
-      Mix.shell().info([
-        "  ", :cyan, title, :reset, ": ",
-        :light_black, command, :reset
-      ])
-    end)
-  end
-
-  defp show_ci_integration_examples do
-    Mix.shell().info([
-      :blue, "\n🔧 CI/CD INTEGRATION", :reset
-    ])
-
-    Mix.shell().info("""
-      # GitHub Actions example
-      - name: Validate Documentation
-        run: |
-          mix docs.validate --ci --format json --output docs-validation.json
-          mix docs.analyze --output docs-analysis.json
-
-      # Quality gate example
-      - name: Documentation Quality Gate
-        run: mix docs.report --format json --sections summary | jq '.overall_score >= 85'
-    """)
-
-    Mix.shell().info([
-      :yellow, "\n📚 For detailed help on any command:", :reset, " mix docs.[command] --help\n"
-    ])
-  end
-
-  defp show_usage_summary do
-    Mix.shell().info("""
-    Usage: mix docs <command> [options]
-
-    Available commands: analyze, extract_adrs, extract_examples, trace, ai_data, validate, report
-
-    Run 'mix docs --help' for detailed information and examples.
-    """)
-  end
-
-  defp execute_command_with_monitoring(command, args) do
-    start_time = System.monotonic_time(:millisecond)
-
-    Mix.shell().info([
-      :blue, "🚀 Starting ", :cyan, "docs.#{command}", :reset,
-      (if length(args) > 0, do: " with args: #{inspect(args)}", else: "")
-    ])
-
-    result = case command do
-      "analyze" -> Mix.Tasks.Docs.Analyze.run(args)
-      "extract_adrs" -> Mix.Tasks.Docs.ExtractAdrs.run(args)
-      "extract_examples" -> Mix.Tasks.Docs.ExtractExamples.run(args)
-      "trace" -> Mix.Tasks.Docs.Trace.run(args)
-      "ai_data" -> Mix.Tasks.Docs.AiData.run(args)
-      "validate" -> Mix.Tasks.Docs.Validate.run(args)
-      "report" -> Mix.Tasks.Docs.Report.run(args)
-    end
-
-    execution_time = System.monotonic_time(:millisecond) - start_time
-
-    Mix.shell().info([
-      :green, "✅ Command ", :cyan, "docs.#{command}",
-      :green, " completed in #{execution_time}ms", :reset
-    ])
-
-    result
+    Dispatcher.run(args)
   end
 end
 
@@ -832,20 +664,28 @@ defmodule Mix.Tasks.Docs.Analyze do
     summary_items = []
 
     # Add summaries for each analyzed section
-    if Map.has_key?(analysis, :adrs) do
-      summary_items = [{"ADRs Found", length(analysis.adrs.adrs)} | summary_items]
+    summary_items = if Map.has_key?(analysis, :adrs) do
+      [{"ADRs Found", length(analysis.adrs.adrs)} | summary_items]
+    else
+      summary_items
     end
 
-    if Map.has_key?(analysis, :examples) do
-      summary_items = [{"Code Examples", get_in(analysis, [:examples, :summary, :total_examples]) || 0} | summary_items]
+    summary_items = if Map.has_key?(analysis, :examples) do
+      [{"Code Examples", get_in(analysis, [:examples, :summary, :total_examples]) || 0} | summary_items]
+    else
+      summary_items
     end
 
-    if Map.has_key?(analysis, :trace) do
-      summary_items = [{"Traceability Links", get_in(analysis, [:trace, :summary, :successful_links]) || 0} | summary_items]
+    summary_items = if Map.has_key?(analysis, :trace) do
+      [{"Traceability Links", get_in(analysis, [:trace, :summary, :successful_links]) || 0} | summary_items]
+    else
+      summary_items
     end
 
-    if Map.has_key?(analysis, :ai) do
-      summary_items = [{"AI Data Structures", 1} | summary_items]
+    summary_items = if Map.has_key?(analysis, :ai) do
+      [{"AI Data Structures", 1} | summary_items]
+    else
+      summary_items
     end
 
     Enum.each(summary_items, fn {label, count} ->
@@ -865,20 +705,28 @@ defmodule Mix.Tasks.Docs.Analyze do
     sections = [generate_executive_summary(analysis) | sections]
 
     # Individual section reports
-    if Map.has_key?(analysis, :adrs) do
-      sections = [generate_adrs_section_report(analysis.adrs) | sections]
+    sections = if Map.has_key?(analysis, :adrs) do
+      [generate_adrs_section_report(analysis.adrs) | sections]
+    else
+      sections
     end
 
-    if Map.has_key?(analysis, :examples) do
-      sections = [generate_examples_section_report(analysis.examples) | sections]
+    sections = if Map.has_key?(analysis, :examples) do
+      [generate_examples_section_report(analysis.examples) | sections]
+    else
+      sections
     end
 
-    if Map.has_key?(analysis, :trace) do
-      sections = [generate_traceability_section_report(analysis.trace) | sections]
+    sections = if Map.has_key?(analysis, :trace) do
+      [generate_traceability_section_report(analysis.trace) | sections]
+    else
+      sections
     end
 
-    if Map.has_key?(analysis, :ai) do
-      sections = [generate_ai_section_report(analysis.ai) | sections]
+    sections = if Map.has_key?(analysis, :ai) do
+      [generate_ai_section_report(analysis.ai) | sections]
+    else
+      sections
     end
 
     # Footer
@@ -903,7 +751,7 @@ defmodule Mix.Tasks.Docs.Analyze do
     """
   end
 
-  defp generate_executive_summary(analysis) do
+  defp generate_executive_summary(_analysis) do
     """
     ## EXECUTIVE SUMMARY
     ==================
@@ -1130,12 +978,16 @@ defmodule Mix.Tasks.Docs.Analyze do
   defp generate_html_sections(analysis) do
     sections = []
 
-    if Map.has_key?(analysis, :adrs) do
-      sections = [generate_html_adrs_section(analysis.adrs) | sections]
+    sections = if Map.has_key?(analysis, :adrs) do
+      [generate_html_adrs_section(analysis.adrs) | sections]
+    else
+      sections
     end
 
-    if Map.has_key?(analysis, :examples) do
-      sections = [generate_html_examples_section(analysis.examples) | sections]
+    sections = if Map.has_key?(analysis, :examples) do
+      [generate_html_examples_section(analysis.examples) | sections]
+    else
+      sections
     end
 
     Enum.reverse(sections) |> Enum.join("")
@@ -2048,22 +1900,28 @@ defmodule Mix.Tasks.Docs.ExtractAdrs do
   defp format_adr_summary_for_report(summary) do
     parts = []
 
-    if Map.has_key?(summary, :average_complexity) do
-      parts = ["Average Complexity: #{summary.average_complexity}" | parts]
+    parts = if Map.has_key?(summary, :average_complexity) do
+      ["Average Complexity: #{summary.average_complexity}" | parts]
+    else
+      parts
     end
 
-    if Map.has_key?(summary, :domain_distribution) do
+    parts = if Map.has_key?(summary, :domain_distribution) do
       domain_info = summary.domain_distribution
       |> Enum.map(fn {domain, count} -> "#{domain}: #{count}" end)
       |> Enum.join(", ")
-      parts = ["Domains: #{domain_info}" | parts]
+      ["Domains: #{domain_info}" | parts]
+    else
+      parts
     end
 
-    if Map.has_key?(summary, :status_distribution) do
+    parts = if Map.has_key?(summary, :status_distribution) do
       status_info = summary.status_distribution
       |> Enum.map(fn {status, count} -> "#{status}: #{count}" end)
       |> Enum.join(", ")
-      parts = ["Status: #{status_info}" | parts]
+      ["Status: #{status_info}" | parts]
+    else
+      parts
     end
 
     Enum.reverse(parts) |> Enum.join("\n")
@@ -2576,7 +2434,7 @@ defmodule Mix.Tasks.Docs.ExtractExamples do
     max(1, min(10, score))
   end
 
-  defp generate_transformation_recommendations(example, score) do
+  defp generate_transformation_recommendations(_example, score) do
     cond do
       score >= 8 -> ["Ready for automated testing", "Consider adding to CI pipeline"]
       score >= 6 -> ["Needs minor modifications for automation", "Verify completeness"]
@@ -2867,18 +2725,22 @@ defmodule Mix.Tasks.Docs.ExtractExamples do
   defp format_examples_summary_for_report(summary) do
     parts = []
 
-    if Map.has_key?(summary, :by_language) do
+    parts = if Map.has_key?(summary, :by_language) do
       lang_info = summary.by_language
       |> Enum.map(fn {lang, count} -> "#{lang}: #{count}" end)
       |> Enum.join(", ")
-      parts = ["Languages: #{lang_info}" | parts]
+      ["Languages: #{lang_info}" | parts]
+    else
+      parts
     end
 
-    if Map.has_key?(summary, :by_type) do
+    parts = if Map.has_key?(summary, :by_type) do
       type_info = summary.by_type
       |> Enum.map(fn {type, count} -> "#{type}: #{count}" end)
       |> Enum.join(", ")
-      parts = ["Types: #{type_info}" | parts]
+      ["Types: #{type_info}" | parts]
+    else
+      parts
     end
 
     Enum.reverse(parts) |> Enum.join("\n")
@@ -3148,7 +3010,7 @@ defmodule Mix.Tasks.Docs.Trace do
     end)
   end
 
-  defp save_output(result, format, file_path) do
+  defp save_output(result, _format, file_path) do
     json_content = Jason.encode!(result, pretty: true)
     File.write!(file_path, json_content)
   end
