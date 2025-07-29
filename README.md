@@ -114,7 +114,7 @@ Human Planning → AI Implementation → Human Review → Collaborative Refineme
 - **Code Review**: Final approval and quality validation
 - **Strategic Direction**: Feature planning and technical vision
 
-**Learn more**: [`docs/guides/developer-experience.md#ai-assisted-development`](docs/guides/developer-experience.md#ai-assisted-development)
+**Learn more**: [`docs/core/architecture-overview.md#ai-assisted-development`](docs/core/architecture-overview.md#ai-assisted-development)
 
 ## 🔧 Development Commands
 
