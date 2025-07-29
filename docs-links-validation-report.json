@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "validation_date": "2025-07-29T04:49:30.856114Z",
+    "validation_date": "2025-07-29T08:50:48.432740Z",
     "validator_version": "1.0.0",
     "base_directory": "docs",
-    "total_files_scanned": 3516
+    "total_files_scanned": 3593
   },
   "summary_statistics": {
     "total_internal_links": 613,
-    "valid_links": 418,
-    "broken_links": 195,
+    "valid_links": 450,
+    "broken_links": 163,
     "suspicious_links": 0,
-    "validation_success_rate": 68.19
+    "validation_success_rate": 73.41
   },
   "validation_breakdown": {
     "by_link_type": {
@@ -19,19 +19,11 @@
       "anchor": 27
     },
     "broken_by_type": {
-      "internal-relative": 187,
+      "internal-relative": 155,
       "internal-absolute": 2,
       "anchor": 6
     },
     "common_issues": [
-      {
-        "issue": "Target file 'docs/guides/security-guidelines.md' does not exist",
-        "count": 10
-      },
-      {
-        "issue": "Target file 'docs/guides/performance-optimization.md' does not exist",
-        "count": 7
-      },
       {
         "issue": "Target file 'docs/architecture' does not exist",
         "count": 5
@@ -41,7 +33,15 @@
         "count": 4
       },
       {
-        "issue": "Target file 'docs/architecture/system-diagrams.md' does not exist",
+        "issue": "Target file '_meta/maintenance-process.md' does not exist",
+        "count": 4
+      },
+      {
+        "issue": "Target file 'docs/docs/_meta/feature-documentation-workflow.md' does not exist",
+        "count": 4
+      },
+      {
+        "issue": "Target file 'docs/guides/path' does not exist",
         "count": 4
       }
     ]
@@ -143,6 +143,28 @@
         "destination": "reference/glossary.md",
         "link_type": "internal-relative",
         "raw_match": "[Glossary](reference/glossary.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/README.md",
+        "line_number": 19,
+        "link_text": "API Docs",
+        "destination": "reference/api-endpoints.md",
+        "link_type": "internal-relative",
+        "raw_match": "[API Docs](reference/api-endpoints.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/README.md",
+        "line_number": 20,
+        "link_text": "System Diagrams",
+        "destination": "architecture/system-diagrams.md",
+        "link_type": "internal-relative",
+        "raw_match": "[System Diagrams](architecture/system-diagrams.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -303,6 +325,17 @@
       },
       {
         "source_file": "docs/README.md",
+        "line_number": 139,
+        "link_text": "Monitoring Setup",
+        "destination": "operations/monitoring-setup.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Monitoring Setup](operations/monitoring-setup.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/README.md",
         "line_number": 140,
         "link_text": "Troubleshooting",
         "destination": "operations/troubleshooting.md",
@@ -319,6 +352,17 @@
         "destination": "core/architecture-overview.md",
         "link_type": "internal-relative",
         "raw_match": "[Architecture Overview](core/architecture-overview.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/README.md",
+        "line_number": 145,
+        "link_text": "System Diagrams",
+        "destination": "architecture/system-diagrams.md",
+        "link_type": "internal-relative",
+        "raw_match": "[System Diagrams](architecture/system-diagrams.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -710,6 +754,17 @@
       },
       {
         "source_file": "docs/core/README.md",
+        "line_number": 28,
+        "link_text": "System Diagrams",
+        "destination": "../architecture/system-diagrams.md",
+        "link_type": "internal-relative",
+        "raw_match": "[System Diagrams](../architecture/system-diagrams.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/core/README.md",
         "line_number": 38,
         "link_text": "Architecture Overview",
         "destination": "architecture-overview.md",
@@ -809,11 +864,55 @@
       },
       {
         "source_file": "docs/core/architecture-overview.md",
+        "line_number": 23,
+        "link_text": "ADR-0001: Umbrella Structure",
+        "destination": "../architecture/adr-0001-umbrella-structure.md",
+        "link_type": "internal-relative",
+        "raw_match": "[ADR-0001: Umbrella Structure](../architecture/adr-0001-umbrella-structure.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/core/architecture-overview.md",
         "line_number": 124,
         "link_text": "Technical Stack Details",
         "destination": "tech-stack.md",
         "link_type": "internal-relative",
         "raw_match": "[Technical Stack Details](tech-stack.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/core/architecture-overview.md",
+        "line_number": 126,
+        "link_text": "System Diagrams",
+        "destination": "../architecture/system-diagrams.md",
+        "link_type": "internal-relative",
+        "raw_match": "[System Diagrams](../architecture/system-diagrams.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/core/architecture-overview.md",
+        "line_number": 127,
+        "link_text": "Performance Guidelines",
+        "destination": "../guides/performance-optimization.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Performance Guidelines](../guides/performance-optimization.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/core/architecture-overview.md",
+        "line_number": 128,
+        "link_text": "Security Guidelines",
+        "destination": "../guides/security-guidelines.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Security Guidelines](../guides/security-guidelines.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -1249,11 +1348,33 @@
       },
       {
         "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 111,
+        "link_text": "ADR-0001: Umbrella Structure",
+        "destination": "../architecture/adr-0001-umbrella-structure.md",
+        "link_type": "internal-relative",
+        "raw_match": "[ADR-0001: Umbrella Structure](../architecture/adr-0001-umbrella-structure.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
         "line_number": 116,
         "link_text": "standard deployment process",
         "destination": "../operations/deployment-procedures.md#production-deployment",
         "link_type": "internal-relative",
         "raw_match": "[standard deployment process](../operations/deployment-procedures.md#production-deployment)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 133,
+        "link_text": "Command Reference",
+        "destination": "command-reference.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Command Reference](command-reference.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -1293,6 +1414,72 @@
       },
       {
         "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 146,
+        "link_text": "Security Guidelines",
+        "destination": "../guides/security-guidelines.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Security Guidelines](../guides/security-guidelines.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 147,
+        "link_text": "Authentication API",
+        "destination": "../reference/api-authentication.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Authentication API](../reference/api-authentication.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 148,
+        "link_text": "Security Architecture",
+        "destination": "../architecture/adr-0003-security-model.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Security Architecture](../architecture/adr-0003-security-model.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 151,
+        "link_text": "Database Setup",
+        "destination": "../operations/database-setup.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Database Setup](../operations/database-setup.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 152,
+        "link_text": "Query Optimization",
+        "destination": "../guides/performance-optimization.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Query Optimization](../guides/performance-optimization.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
+        "line_number": 153,
+        "link_text": "Schema Reference",
+        "destination": "../reference/database-schema.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Schema Reference](../reference/database-schema.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/cross-reference-guide.md",
         "line_number": 195,
         "link_text": "Naming Conventions",
         "destination": "naming-conventions.md",
@@ -1320,6 +1507,17 @@
         "destination": "../guides/developer-experience.md",
         "link_type": "internal-relative",
         "raw_match": "[Developer Experience](../guides/developer-experience.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/_meta/feature-documentation-workflow.md",
+        "line_number": 294,
+        "link_text": "Configuration Example",
+        "destination": "../reference/config-example.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Configuration Example](../reference/config-example.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -2051,6 +2249,39 @@
         "suggestions": []
       },
       {
+        "source_file": "docs/guides/branch-workflow-migration-plan.md",
+        "line_number": 235,
+        "link_text": "Semantic Versioning Policy",
+        "destination": "semantic-versioning.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Semantic Versioning Policy](semantic-versioning.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/guides/branch-workflow-migration-plan.md",
+        "line_number": 236,
+        "link_text": "CI/CD Pipeline Configuration",
+        "destination": "../operations/cicd-configuration.md",
+        "link_type": "internal-relative",
+        "raw_match": "[CI/CD Pipeline Configuration](../operations/cicd-configuration.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/guides/branch-workflow-migration-plan.md",
+        "line_number": 237,
+        "link_text": "Git Hooks Installation Guide",
+        "destination": "git-hooks-setup.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Git Hooks Installation Guide](git-hooks-setup.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
         "source_file": "docs/guides/coding-standards.md",
         "line_number": 364,
         "link_text": "Architecture Overview",
@@ -2068,6 +2299,28 @@
         "destination": "developer-experience.md",
         "link_type": "internal-relative",
         "raw_match": "[Developer Experience](developer-experience.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/guides/coding-standards.md",
+        "line_number": 366,
+        "link_text": "Security Guidelines",
+        "destination": "security-guidelines.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Security Guidelines](security-guidelines.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/guides/coding-standards.md",
+        "line_number": 367,
+        "link_text": "Performance Optimization",
+        "destination": "performance-optimization.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Performance Optimization](performance-optimization.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -3844,6 +4097,28 @@
         "suggestions": []
       },
       {
+        "source_file": "docs/operations/deployment-procedures.md",
+        "line_number": 370,
+        "link_text": "Performance Optimization",
+        "destination": "../guides/performance-optimization.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Performance Optimization](../guides/performance-optimization.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/operations/deployment-procedures.md",
+        "line_number": 371,
+        "link_text": "Security Guidelines",
+        "destination": "../guides/security-guidelines.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Security Guidelines](../guides/security-guidelines.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
         "source_file": "docs/operations/troubleshooting.md",
         "line_number": 343,
         "link_text": "architecture overview",
@@ -3894,6 +4169,17 @@
         "destination": "deployment-procedures.md",
         "link_type": "internal-relative",
         "raw_match": "[Deployment Procedures](deployment-procedures.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/operations/troubleshooting.md",
+        "line_number": 377,
+        "link_text": "Performance Optimization",
+        "destination": "../guides/performance-optimization.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Performance Optimization](../guides/performance-optimization.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -4120,11 +4406,44 @@
       },
       {
         "source_file": "docs/reference/glossary.md",
+        "line_number": 13,
+        "link_text": "ADR Template",
+        "destination": "../shared/templates/adr-template.md",
+        "link_type": "internal-relative",
+        "raw_match": "[ADR Template](../shared/templates/adr-template.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/reference/glossary.md",
         "line_number": 14,
         "link_text": "Architecture Overview",
         "destination": "../core/architecture-overview.md#architectural-principles",
         "link_type": "internal-relative",
         "raw_match": "[Architecture Overview](../core/architecture-overview.md#architectural-principles)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/reference/glossary.md",
+        "line_number": 15,
+        "link_text": "Example ADR",
+        "destination": "../architecture/adr-0001-umbrella-structure.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Example ADR](../architecture/adr-0001-umbrella-structure.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/reference/glossary.md",
+        "line_number": 23,
+        "link_text": "API Documentation",
+        "destination": "api-endpoints.md",
+        "link_type": "internal-relative",
+        "raw_match": "[API Documentation](api-endpoints.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -4257,6 +4576,17 @@
         "destination": "../operations/deployment-procedures.md#health-checks",
         "link_type": "internal-relative",
         "raw_match": "[Deployment Procedures](../operations/deployment-procedures.md#health-checks)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/reference/glossary.md",
+        "line_number": 121,
+        "link_text": "Monitoring Setup",
+        "destination": "../operations/monitoring-setup.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Monitoring Setup](../operations/monitoring-setup.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -4450,6 +4780,17 @@
       },
       {
         "source_file": "docs/reference/glossary.md",
+        "line_number": 249,
+        "link_text": "Style Guide",
+        "destination": "../guides/style-guide.md",
+        "link_type": "internal-relative",
+        "raw_match": "[Style Guide](../guides/style-guide.md)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/reference/glossary.md",
         "line_number": 250,
         "link_text": "Tailwind Configuration",
         "destination": "../../apps/prismatic_web/assets/tailwind.config.js",
@@ -4477,6 +4818,17 @@
         "destination": "../core/architecture-overview.md#umbrella-application-structure",
         "link_type": "internal-relative",
         "raw_match": "[Architecture Overview](../core/architecture-overview.md#umbrella-application-structure)",
+        "status": "valid",
+        "issues": [],
+        "suggestions": []
+      },
+      {
+        "source_file": "docs/reference/glossary.md",
+        "line_number": 270,
+        "link_text": "ADR: Umbrella Structure",
+        "destination": "../architecture/adr-0001-umbrella-structure.md",
+        "link_type": "internal-relative",
+        "raw_match": "[ADR: Umbrella Structure](../architecture/adr-0001-umbrella-structure.md)",
         "status": "valid",
         "issues": [],
         "suggestions": []
@@ -4660,7 +5012,7 @@
           "Target file 'docs/core' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/mint/ebin/Elixir.Mint.Core.Transport.TCP.beam",
+          "_build/dev/lib/prismatic_web/ebin/Elixir.PrismaticWeb.CoreComponents.beam",
           "_build/dev/lib/mint/ebin/Elixir.Mint.Core.Transport.SSL.beam",
           "apps/prismatic_web/lib/prismatic_web/components/core_components.ex"
         ]
@@ -4690,25 +5042,9 @@
           "Target file 'docs/reference' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/ecto_sql/ebin/Elixir.Ecto.Migration.Reference.beam",
-          "docs/_meta/cross-reference-guide.md"
-        ]
-      },
-      {
-        "source_file": "docs/README.md",
-        "line_number": 19,
-        "link_text": "API Docs",
-        "destination": "reference/api-endpoints.md",
-        "link_type": "internal-relative",
-        "raw_match": "[API Docs](reference/api-endpoints.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/reference/api-endpoints.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto/lib/ecto/query/api.ex",
-          "deps/postgrex/lib/postgrex/extensions/point.ex",
-          "deps/expo/lib/expo/po.ex"
+          "docs/_meta/cross-reference-guide.md",
+          "docs/_meta/command-reference.md",
+          "_build/dev/lib/prismatic/ebin/Elixir.Prismatic.Documentation.ReferenceReplacementSystem.beam"
         ]
       },
       {
@@ -4740,19 +5076,6 @@
         "suggestions": [
           "docs/core/architecture-overview.md"
         ]
-      },
-      {
-        "source_file": "docs/README.md",
-        "line_number": 20,
-        "link_text": "System Diagrams",
-        "destination": "architecture/system-diagrams.md",
-        "link_type": "internal-relative",
-        "raw_match": "[System Diagrams](architecture/system-diagrams.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/system-diagrams.md' does not exist"
-        ],
-        "suggestions": []
       },
       {
         "source_file": "docs/README.md",
@@ -4822,8 +5145,8 @@
           "Target file 'docs/standards' does not exist"
         ],
         "suggestions": [
-          "docs/guides/documentation-navigation-standards.md",
-          "docs/guides/coding-standards.md"
+          "docs/guides/coding-standards.md",
+          "docs/guides/documentation-navigation-standards.md"
         ]
       },
       {
@@ -4914,8 +5237,9 @@
           "Target file 'docs/reference' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/ecto_sql/ebin/Elixir.Ecto.Migration.Reference.beam",
-          "docs/_meta/cross-reference-guide.md"
+          "docs/_meta/cross-reference-guide.md",
+          "docs/_meta/command-reference.md",
+          "_build/dev/lib/prismatic/ebin/Elixir.Prismatic.Documentation.ReferenceReplacementSystem.beam"
         ]
       },
       {
@@ -4935,21 +5259,6 @@
       },
       {
         "source_file": "docs/README.md",
-        "line_number": 139,
-        "link_text": "Monitoring Setup",
-        "destination": "operations/monitoring-setup.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Monitoring Setup](operations/monitoring-setup.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/operations/monitoring-setup.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/expo/lib/expo/mo.ex"
-        ]
-      },
-      {
-        "source_file": "docs/README.md",
         "line_number": 144,
         "link_text": "Architecture Decisions",
         "destination": "architecture/",
@@ -4962,19 +5271,6 @@
         "suggestions": [
           "docs/core/architecture-overview.md"
         ]
-      },
-      {
-        "source_file": "docs/README.md",
-        "line_number": 145,
-        "link_text": "System Diagrams",
-        "destination": "architecture/system-diagrams.md",
-        "link_type": "internal-relative",
-        "raw_match": "[System Diagrams](architecture/system-diagrams.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/system-diagrams.md' does not exist"
-        ],
-        "suggestions": []
       },
       {
         "source_file": "docs/README.md",
@@ -5004,8 +5300,8 @@
           "Target file 'apps' does not exist"
         ],
         "suggestions": [
-          "deps/swoosh/priv/static/assets/app.css",
-          "apps/prismatic_web/assets/css/app.css",
+          "deps/db_connection/lib/db_connection/app.ex",
+          "deps/swoosh/lib/plug/assets/app.css",
           "apps/prismatic_web/priv/static/assets/app.css"
         ]
       },
@@ -5021,37 +5317,9 @@
           "Target file 'config' does not exist"
         ],
         "suggestions": [
-          "deps/thousand_island/lib/thousand_island/server_config.ex",
-          "deps/phoenix_live_view/lib/phoenix_live_view/upload_config.ex",
-          "_build/dev/lib/phoenix/ebin/Elixir.Phoenix.Config.beam"
-        ]
-      },
-      {
-        "source_file": "docs/core/README.md",
-        "line_number": 28,
-        "link_text": "System Diagrams",
-        "destination": "../architecture/system-diagrams.md",
-        "link_type": "internal-relative",
-        "raw_match": "[System Diagrams](../architecture/system-diagrams.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/system-diagrams.md' does not exist"
-        ],
-        "suggestions": []
-      },
-      {
-        "source_file": "docs/core/architecture-overview.md",
-        "line_number": 23,
-        "link_text": "ADR-0001: Umbrella Structure",
-        "destination": "../architecture/adr-0001-umbrella-structure.md",
-        "link_type": "internal-relative",
-        "raw_match": "[ADR-0001: Umbrella Structure](../architecture/adr-0001-umbrella-structure.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/adr-0001-umbrella-structure.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto_sql/lib/ecto/adapter/structure.ex"
+          "apps/prismatic_web/assets/tailwind.config.js",
+          "docs/guides/workflow-configuration-files.md",
+          "deps/thousand_island/lib/thousand_island/server_config.ex"
         ]
       },
       {
@@ -5067,49 +5335,6 @@
         ],
         "suggestions": [
           "deps/ecto_sql/lib/ecto/adapter/structure.ex"
-        ]
-      },
-      {
-        "source_file": "docs/core/architecture-overview.md",
-        "line_number": 126,
-        "link_text": "System Diagrams",
-        "destination": "../architecture/system-diagrams.md",
-        "link_type": "internal-relative",
-        "raw_match": "[System Diagrams](../architecture/system-diagrams.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/system-diagrams.md' does not exist"
-        ],
-        "suggestions": []
-      },
-      {
-        "source_file": "docs/core/architecture-overview.md",
-        "line_number": 127,
-        "link_text": "Performance Guidelines",
-        "destination": "../guides/performance-optimization.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Performance Guidelines](../guides/performance-optimization.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
-      },
-      {
-        "source_file": "docs/core/architecture-overview.md",
-        "line_number": 128,
-        "link_text": "Security Guidelines",
-        "destination": "../guides/security-guidelines.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Security Guidelines](../guides/security-guidelines.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
         ]
       },
       {
@@ -5195,6 +5420,7 @@
           "Target file 'docs/operations/performance-optimization.md' does not exist"
         ],
         "suggestions": [
+          "docs/guides/performance-optimization.md",
           "deps/phoenix_html/lib/phoenix_html/form.ex"
         ]
       },
@@ -5248,11 +5474,9 @@
         "raw_match": "[security guidelines](../guides/security-guidelines.md#authentication-patterns)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
+          "Anchor '#authentication-patterns' not found in target file 'docs/guides/security-guidelines.md'"
         ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
+        "suggestions": []
       },
       {
         "source_file": "docs/_meta/cross-reference-guide.md",
@@ -5263,10 +5487,11 @@
         "raw_match": "[Authentication](../guides/security-guidelines.md#authentication)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
+          "Anchor '#authentication' not found in target file 'docs/guides/security-guidelines.md'"
         ],
         "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
+          "#authentication-and-authorization",
+          "#authentication-requirements"
         ]
       },
       {
@@ -5282,21 +5507,6 @@
         ],
         "suggestions": [
           "#error-handling-standards"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 111,
-        "link_text": "ADR-0001: Umbrella Structure",
-        "destination": "../architecture/adr-0001-umbrella-structure.md",
-        "link_type": "internal-relative",
-        "raw_match": "[ADR-0001: Umbrella Structure](../architecture/adr-0001-umbrella-structure.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/adr-0001-umbrella-structure.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto_sql/lib/ecto/adapter/structure.ex"
         ]
       },
       {
@@ -5325,22 +5535,9 @@
         ],
         "suggestions": [
           "deps/ecto/lib/ecto/query/api.ex",
-          "deps/postgrex/lib/postgrex/extensions/point.ex",
-          "deps/expo/lib/expo/po.ex"
+          "deps/phoenix/lib/phoenix/endpoint.ex",
+          "deps/postgrex/lib/postgrex/extensions/point.ex"
         ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 133,
-        "link_text": "Command Reference",
-        "destination": "command-reference.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Command Reference](command-reference.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/_meta/command-reference.md' does not exist"
-        ],
-        "suggestions": []
       },
       {
         "source_file": "docs/_meta/cross-reference-guide.md",
@@ -5355,99 +5552,6 @@
         ],
         "suggestions": [
           "docs/reference/glossary.md"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 146,
-        "link_text": "Security Guidelines",
-        "destination": "../guides/security-guidelines.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Security Guidelines](../guides/security-guidelines.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 147,
-        "link_text": "Authentication API",
-        "destination": "../reference/api-authentication.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Authentication API](../reference/api-authentication.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/reference/api-authentication.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto/lib/ecto/query/api.ex",
-          "deps/phoenix/priv/templates/phx.gen.auth/auth.ex"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 148,
-        "link_text": "Security Architecture",
-        "destination": "../architecture/adr-0003-security-model.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Security Architecture](../architecture/adr-0003-security-model.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/adr-0003-security-model.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/expo/lib/expo/mo.ex"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 151,
-        "link_text": "Database Setup",
-        "destination": "../operations/database-setup.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Database Setup](../operations/database-setup.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/operations/database-setup.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/bandit/lib/bandit/http2/frame/data.ex"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 152,
-        "link_text": "Query Optimization",
-        "destination": "../guides/performance-optimization.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Query Optimization](../guides/performance-optimization.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/cross-reference-guide.md",
-        "line_number": 153,
-        "link_text": "Schema Reference",
-        "destination": "../reference/database-schema.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Schema Reference](../reference/database-schema.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/reference/database-schema.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix/priv/templates/phx.gen.schema/schema.ex",
-          "deps/bandit/lib/bandit/http2/frame/data.ex",
-          "deps/ecto/lib/ecto/schema.ex"
         ]
       },
       {
@@ -5491,24 +5595,8 @@
         ],
         "suggestions": [
           "deps/phoenix/priv/templates/phx.gen.context/fixtures_module.ex",
-          "deps/expo/lib/expo/mo.ex",
+          "deps/postgrex/lib/postgrex/type_module.ex",
           "_build/dev/lib/postgrex/ebin/Elixir.Postgrex.TypeModule.beam"
-        ]
-      },
-      {
-        "source_file": "docs/_meta/feature-documentation-workflow.md",
-        "line_number": 294,
-        "link_text": "Configuration Example",
-        "destination": "../reference/config-example.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Configuration Example](../reference/config-example.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/reference/config-example.md' does not exist"
-        ],
-        "suggestions": [
-          "config/config.exs",
-          "deps/phoenix/lib/phoenix/config.ex"
         ]
       },
       {
@@ -5542,52 +5630,6 @@
         ]
       },
       {
-        "source_file": "docs/guides/branch-workflow-migration-plan.md",
-        "line_number": 235,
-        "link_text": "Semantic Versioning Policy",
-        "destination": "semantic-versioning.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Semantic Versioning Policy](semantic-versioning.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/semantic-versioning.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/castore/VERSION"
-        ]
-      },
-      {
-        "source_file": "docs/guides/branch-workflow-migration-plan.md",
-        "line_number": 236,
-        "link_text": "CI/CD Pipeline Configuration",
-        "destination": "../operations/cicd-configuration.md",
-        "link_type": "internal-relative",
-        "raw_match": "[CI/CD Pipeline Configuration](../operations/cicd-configuration.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/operations/cicd-configuration.md' does not exist"
-        ],
-        "suggestions": [
-          "config/config.exs",
-          "deps/phoenix/lib/phoenix/config.ex"
-        ]
-      },
-      {
-        "source_file": "docs/guides/branch-workflow-migration-plan.md",
-        "line_number": 237,
-        "link_text": "Git Hooks Installation Guide",
-        "destination": "git-hooks-setup.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Git Hooks Installation Guide](git-hooks-setup.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/git-hooks-setup.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_live_view/assets/js/phoenix_live_view/hooks.js"
-        ]
-      },
-      {
         "source_file": "docs/guides/coding-standards.md",
         "line_number": 15,
         "link_text": "Security Guidelines",
@@ -5596,11 +5638,9 @@
         "raw_match": "[Security Guidelines](security-guidelines.md#password-hashing)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
+          "Anchor '#password-hashing' not found in target file 'docs/guides/security-guidelines.md'"
         ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
+        "suggestions": []
       },
       {
         "source_file": "docs/guides/coding-standards.md",
@@ -5611,41 +5651,9 @@
         "raw_match": "[Security Guidelines](security-guidelines.md#password-policies)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
+          "Anchor '#password-policies' not found in target file 'docs/guides/security-guidelines.md'"
         ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
-      },
-      {
-        "source_file": "docs/guides/coding-standards.md",
-        "line_number": 366,
-        "link_text": "Security Guidelines",
-        "destination": "security-guidelines.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Security Guidelines](security-guidelines.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
-      },
-      {
-        "source_file": "docs/guides/coding-standards.md",
-        "line_number": 367,
-        "link_text": "Performance Optimization",
-        "destination": "performance-optimization.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Performance Optimization](performance-optimization.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
+        "suggestions": []
       },
       {
         "source_file": "docs/guides/comprehensive-feature-branch-workflow.md",
@@ -5720,8 +5728,8 @@
         ],
         "suggestions": [
           "deps/swoosh/lib/swoosh/api_client/req.ex",
-          "deps/phoenix_template/lib/phoenix/template.ex",
-          "deps/mint/lib/mint/http1/request.ex"
+          "deps/mint/lib/mint/http1/request.ex",
+          "deps/phoenix_template/lib/phoenix/template.ex"
         ]
       },
       {
@@ -5752,8 +5760,8 @@
           "Target file 'docs/docs/_meta/feature-documentation-workflow.md' does not exist"
         ],
         "suggestions": [
+          "deps/heroicons/optimized/20/solid/document.svg",
           "docs/_meta/feature-documentation-workflow.md",
-          "deps/heroicons/optimized/24/solid/document.svg",
           "deps/heroicons/optimized/16/solid/document.svg"
         ]
       },
@@ -5824,9 +5832,9 @@
           "Target file 'docs/config' does not exist"
         ],
         "suggestions": [
-          "deps/thousand_island/lib/thousand_island/server_config.ex",
-          "deps/phoenix_live_view/lib/phoenix_live_view/upload_config.ex",
-          "_build/dev/lib/phoenix/ebin/Elixir.Phoenix.Config.beam"
+          "apps/prismatic_web/assets/tailwind.config.js",
+          "docs/guides/workflow-configuration-files.md",
+          "deps/thousand_island/lib/thousand_island/server_config.ex"
         ]
       },
       {
@@ -5880,8 +5888,8 @@
           "Target file 'apps' does not exist"
         ],
         "suggestions": [
-          "deps/swoosh/priv/static/assets/app.css",
-          "apps/prismatic_web/assets/css/app.css",
+          "deps/db_connection/lib/db_connection/app.ex",
+          "deps/swoosh/lib/plug/assets/app.css",
           "apps/prismatic_web/priv/static/assets/app.css"
         ]
       },
@@ -5897,9 +5905,9 @@
           "Target file 'apps/prismatic/lib/prismatic' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/prismatic_web/ebin/Elixir.PrismaticWeb.Gettext.beam",
-          "_build/dev/lib/prismatic_web/ebin/Elixir.PrismaticWeb.ErrorHTML.beam",
-          "_build/dev/lib/prismatic/ebin/Elixir.Prismatic.Application.beam"
+          "_build/dev/lib/prismatic_web/ebin/prismatic_web.app",
+          "_build/dev/lib/prismatic_web/ebin/Elixir.PrismaticWeb.CoreComponents.beam",
+          "apps/prismatic_web/lib/prismatic_web.ex"
         ]
       },
       {
@@ -5914,7 +5922,7 @@
           "Target file 'apps/prismatic_web/lib/prismatic_web' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/prismatic/ebin/prismatic.app",
+          "_build/dev/lib/prismatic_web/ebin/prismatic_web.app",
           "apps/prismatic_web/lib/prismatic_web.ex",
           "apps/prismatic/lib/prismatic.ex"
         ]
@@ -5931,8 +5939,8 @@
           "Target file 'docs/docs/_meta/feature-documentation-workflow.md' does not exist"
         ],
         "suggestions": [
+          "deps/heroicons/optimized/20/solid/document.svg",
           "docs/_meta/feature-documentation-workflow.md",
-          "deps/heroicons/optimized/24/solid/document.svg",
           "deps/heroicons/optimized/16/solid/document.svg"
         ]
       },
@@ -5974,9 +5982,9 @@
           "Target file 'docs/guides/{{docs_link}}' does not exist"
         ],
         "suggestions": [
-          "deps/heroicons/optimized/16/solid/link.svg",
           "deps/nimble_options/lib/nimble_options/docs.ex",
-          "deps/heroicons/optimized/24/outline/link.svg"
+          "apps/prismatic/lib/mix/tasks/docs.ex",
+          "deps/heroicons/optimized/20/solid/link.svg"
         ]
       },
       {
@@ -6007,8 +6015,8 @@
         ],
         "suggestions": [
           "deps/heroicons/optimized/20/solid/home.svg",
-          "deps/postgrex/lib/postgrex/extensions/path.ex",
-          "deps/heroicons/optimized/24/outline/home.svg"
+          "deps/heroicons/optimized/24/outline/home.svg",
+          "deps/postgrex/lib/postgrex/extensions/path.ex"
         ]
       },
       {
@@ -6142,9 +6150,9 @@
           "Target file 'docs/guides/subdirectory1' does not exist"
         ],
         "suggestions": [
+          "deps/ecto/lib/ecto.ex",
           "_build/dev/lib/ecto/ebin/ecto.app",
-          "deps/ecto/lib/mix/ecto.ex",
-          "deps/ecto/lib/ecto.ex"
+          "deps/ecto/lib/mix/tasks/ecto.ex"
         ]
       },
       {
@@ -6189,9 +6197,9 @@
           "Target file 'docs/guides/subdirectory2' does not exist"
         ],
         "suggestions": [
+          "deps/ecto/lib/ecto.ex",
           "_build/dev/lib/ecto/ebin/ecto.app",
-          "deps/ecto/lib/mix/ecto.ex",
-          "deps/ecto/lib/ecto.ex"
+          "deps/ecto/lib/mix/tasks/ecto.ex"
         ]
       },
       {
@@ -6206,7 +6214,9 @@
           "Target file 'docs/guides/subdirectory2/guide.md' does not exist"
         ],
         "suggestions": [
-          "docs/_meta/cross-reference-guide.md"
+          "docs/_meta/cross-reference-guide.md",
+          "docs/guides/style-guide.md",
+          "docs/guides/security-guidelines.md"
         ]
       },
       {
@@ -6221,9 +6231,9 @@
           "Target file 'docs/guides/path/to/document.md' does not exist"
         ],
         "suggestions": [
-          "deps/heroicons/optimized/24/solid/document-arrow-up.svg",
-          "docs/guides/documentation-navigation-standards.md",
-          "docs/guides/documentation-navigation-validation.md"
+          "deps/heroicons/optimized/16/solid/document-minus.svg",
+          "deps/heroicons/optimized/24/outline/clipboard-document.svg",
+          "deps/heroicons/optimized/24/solid/document-check.svg"
         ]
       },
       {
@@ -6238,9 +6248,9 @@
           "Target file 'docs/current-section/README.md' does not exist"
         ],
         "suggestions": [
-          "deps/gettext/README.md",
-          "deps/phoenix_ecto/README.md",
-          "deps/phoenix/README.md"
+          "deps/phoenix_live_dashboard/README.md",
+          "deps/bandit/README.md",
+          "docs/guides/README.md"
         ]
       },
       {
@@ -6255,9 +6265,9 @@
           "Target file 'docs/guides/subdirectory1' does not exist"
         ],
         "suggestions": [
+          "deps/ecto/lib/ecto.ex",
           "_build/dev/lib/ecto/ebin/ecto.app",
-          "deps/ecto/lib/mix/ecto.ex",
-          "deps/ecto/lib/ecto.ex"
+          "deps/ecto/lib/mix/tasks/ecto.ex"
         ]
       },
       {
@@ -6302,9 +6312,9 @@
           "Target file 'docs/guides/subdirectory2' does not exist"
         ],
         "suggestions": [
+          "deps/ecto/lib/ecto.ex",
           "_build/dev/lib/ecto/ebin/ecto.app",
-          "deps/ecto/lib/mix/ecto.ex",
-          "deps/ecto/lib/ecto.ex"
+          "deps/ecto/lib/mix/tasks/ecto.ex"
         ]
       },
       {
@@ -6319,7 +6329,9 @@
           "Target file 'docs/guides/subdirectory2/guide.md' does not exist"
         ],
         "suggestions": [
-          "docs/_meta/cross-reference-guide.md"
+          "docs/_meta/cross-reference-guide.md",
+          "docs/guides/style-guide.md",
+          "docs/guides/security-guidelines.md"
         ]
       },
       {
@@ -6380,9 +6392,9 @@
           "Target file 'docs/guides/path' does not exist"
         ],
         "suggestions": [
+          "_build/dev/lib/postgrex/ebin/Elixir.Postgrex.Path.beam",
           "deps/heroicons/optimized/20/solid/arrow-path.svg",
-          "deps/heroicons/optimized/16/solid/arrow-path.svg",
-          "_build/dev/lib/plug/ebin/Elixir.Plug.Static.InvalidPathError.beam"
+          "deps/heroicons/optimized/24/solid/arrow-path.svg"
         ]
       },
       {
@@ -6397,9 +6409,9 @@
           "Target file 'docs/guides/path' does not exist"
         ],
         "suggestions": [
+          "_build/dev/lib/postgrex/ebin/Elixir.Postgrex.Path.beam",
           "deps/heroicons/optimized/20/solid/arrow-path.svg",
-          "deps/heroicons/optimized/16/solid/arrow-path.svg",
-          "_build/dev/lib/plug/ebin/Elixir.Plug.Static.InvalidPathError.beam"
+          "deps/heroicons/optimized/24/solid/arrow-path.svg"
         ]
       },
       {
@@ -6414,9 +6426,9 @@
           "Target file '/Users/korczis/dev/README.md' does not exist"
         ],
         "suggestions": [
-          "deps/gettext/README.md",
-          "deps/phoenix_ecto/README.md",
-          "deps/phoenix/README.md"
+          "deps/phoenix_live_dashboard/README.md",
+          "deps/bandit/README.md",
+          "docs/guides/README.md"
         ]
       },
       {
@@ -6472,9 +6484,9 @@
           "Target file 'docs/guides/path-to-root/README.md' does not exist"
         ],
         "suggestions": [
-          "deps/gettext/README.md",
-          "deps/phoenix_ecto/README.md",
-          "deps/phoenix/README.md"
+          "deps/phoenix_live_dashboard/README.md",
+          "deps/bandit/README.md",
+          "docs/guides/README.md"
         ]
       },
       {
@@ -6535,9 +6547,9 @@
           "Target file 'docs/guides/path' does not exist"
         ],
         "suggestions": [
+          "_build/dev/lib/postgrex/ebin/Elixir.Postgrex.Path.beam",
           "deps/heroicons/optimized/20/solid/arrow-path.svg",
-          "deps/heroicons/optimized/16/solid/arrow-path.svg",
-          "_build/dev/lib/plug/ebin/Elixir.Plug.Static.InvalidPathError.beam"
+          "deps/heroicons/optimized/24/solid/arrow-path.svg"
         ]
       },
       {
@@ -6552,9 +6564,9 @@
           "Target file 'docs/guides/path' does not exist"
         ],
         "suggestions": [
+          "_build/dev/lib/postgrex/ebin/Elixir.Postgrex.Path.beam",
           "deps/heroicons/optimized/20/solid/arrow-path.svg",
-          "deps/heroicons/optimized/16/solid/arrow-path.svg",
-          "_build/dev/lib/plug/ebin/Elixir.Plug.Static.InvalidPathError.beam"
+          "deps/heroicons/optimized/24/solid/arrow-path.svg"
         ]
       },
       {
@@ -6569,7 +6581,7 @@
           "Target file 'docs/guides/core' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/mint/ebin/Elixir.Mint.Core.Transport.TCP.beam",
+          "_build/dev/lib/prismatic_web/ebin/Elixir.PrismaticWeb.CoreComponents.beam",
           "_build/dev/lib/mint/ebin/Elixir.Mint.Core.Transport.SSL.beam",
           "apps/prismatic_web/lib/prismatic_web/components/core_components.ex"
         ]
@@ -6630,8 +6642,8 @@
           "Target file 'docs/guides/guides/developer-experience.md' does not exist"
         ],
         "suggestions": [
-          "docs/guides/developer-experience.md",
-          "config/dev.exs"
+          "config/dev.exs",
+          "docs/guides/developer-experience.md"
         ]
       },
       {
@@ -6704,8 +6716,9 @@
           "Target file 'docs/guides/reference' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/ecto_sql/ebin/Elixir.Ecto.Migration.Reference.beam",
-          "docs/_meta/cross-reference-guide.md"
+          "docs/_meta/cross-reference-guide.md",
+          "docs/_meta/command-reference.md",
+          "_build/dev/lib/prismatic/ebin/Elixir.Prismatic.Documentation.ReferenceReplacementSystem.beam"
         ]
       },
       {
@@ -6736,8 +6749,8 @@
         ],
         "suggestions": [
           "deps/ecto/lib/ecto/query/api.ex",
-          "deps/postgrex/lib/postgrex/extensions/point.ex",
-          "deps/expo/lib/expo/po.ex"
+          "deps/phoenix/lib/phoenix/endpoint.ex",
+          "deps/postgrex/lib/postgrex/extensions/point.ex"
         ]
       },
       {
@@ -6766,7 +6779,9 @@
         "issues": [
           "Target file 'docs/guides/architecture/system-diagrams.md' does not exist"
         ],
-        "suggestions": []
+        "suggestions": [
+          "docs/architecture/system-diagrams.md"
+        ]
       },
       {
         "source_file": "docs/guides/documentation-navigation-templates.md",
@@ -6780,8 +6795,8 @@
           "Target file 'docs/guides/guides/developer-experience.md' does not exist"
         ],
         "suggestions": [
-          "docs/guides/developer-experience.md",
-          "config/dev.exs"
+          "config/dev.exs",
+          "docs/guides/developer-experience.md"
         ]
       },
       {
@@ -6797,8 +6812,8 @@
         ],
         "suggestions": [
           "deps/ecto/lib/ecto/query/api.ex",
-          "deps/postgrex/lib/postgrex/extensions/point.ex",
-          "deps/expo/lib/expo/po.ex"
+          "deps/phoenix/lib/phoenix/endpoint.ex",
+          "deps/postgrex/lib/postgrex/extensions/point.ex"
         ]
       },
       {
@@ -6859,9 +6874,9 @@
           "Target file 'docs/guides/guides/documentation-navigation-standards.md' does not exist"
         ],
         "suggestions": [
-          "docs/guides/documentation-navigation-standards.md",
-          "deps/heroicons/optimized/24/solid/document.svg",
-          "deps/heroicons/optimized/16/solid/document.svg"
+          "deps/heroicons/optimized/20/solid/document.svg",
+          "deps/heroicons/optimized/16/solid/document.svg",
+          "docs/guides/documentation-navigation-standards.md"
         ]
       },
       {
@@ -7008,9 +7023,9 @@
           "Target file 'operations/README.md' does not exist"
         ],
         "suggestions": [
-          "deps/gettext/README.md",
-          "deps/phoenix_ecto/README.md",
-          "deps/phoenix/README.md"
+          "deps/phoenix_live_dashboard/README.md",
+          "deps/bandit/README.md",
+          "docs/guides/README.md"
         ]
       },
       {
@@ -7056,8 +7071,8 @@
         ],
         "suggestions": [
           "deps/heroicons/optimized/20/solid/home.svg",
-          "deps/postgrex/lib/postgrex/extensions/path.ex",
-          "deps/heroicons/optimized/24/outline/home.svg"
+          "deps/heroicons/optimized/24/outline/home.svg",
+          "deps/postgrex/lib/postgrex/extensions/path.ex"
         ]
       },
       {
@@ -7102,9 +7117,9 @@
           "Target file 'docs/guides/subdirectory/README.md' does not exist"
         ],
         "suggestions": [
-          "deps/gettext/README.md",
-          "deps/phoenix_ecto/README.md",
-          "deps/phoenix/README.md"
+          "deps/phoenix_live_dashboard/README.md",
+          "deps/bandit/README.md",
+          "docs/guides/README.md"
         ]
       },
       {
@@ -7119,9 +7134,9 @@
           "Target file 'docs/guides/subdirectory' does not exist"
         ],
         "suggestions": [
+          "deps/ecto/lib/ecto.ex",
           "_build/dev/lib/ecto/ebin/ecto.app",
-          "deps/ecto/lib/mix/ecto.ex",
-          "deps/ecto/lib/ecto.ex"
+          "deps/ecto/lib/mix/tasks/ecto.ex"
         ]
       },
       {
@@ -7136,9 +7151,9 @@
           "Target file 'guides/README.md' does not exist"
         ],
         "suggestions": [
-          "deps/gettext/README.md",
-          "deps/phoenix_ecto/README.md",
-          "deps/phoenix/README.md"
+          "deps/phoenix_live_dashboard/README.md",
+          "deps/bandit/README.md",
+          "docs/guides/README.md"
         ]
       },
       {
@@ -7192,8 +7207,8 @@
           "Target file 'docs/docs/_meta/feature-documentation-workflow.md' does not exist"
         ],
         "suggestions": [
+          "deps/heroicons/optimized/20/solid/document.svg",
           "docs/_meta/feature-documentation-workflow.md",
-          "deps/heroicons/optimized/24/solid/document.svg",
           "deps/heroicons/optimized/16/solid/document.svg"
         ]
       },
@@ -7209,8 +7224,8 @@
           "Target file 'docs/docs/_meta/feature-documentation-workflow.md' does not exist"
         ],
         "suggestions": [
+          "deps/heroicons/optimized/20/solid/document.svg",
           "docs/_meta/feature-documentation-workflow.md",
-          "deps/heroicons/optimized/24/solid/document.svg",
           "deps/heroicons/optimized/16/solid/document.svg"
         ]
       },
@@ -7226,101 +7241,9 @@
           "Target file 'docs/guides/url' does not exist"
         ],
         "suggestions": [
-          "_build/dev/lib/plug/ebin/Elixir.Plug.Parsers.URLENCODED.beam",
+          "deps/plug/lib/plug/parsers/urlencoded.ex",
           "_build/dev/lib/ecto/ebin/Elixir.Ecto.InvalidURLError.beam",
-          "deps/plug/lib/plug/parsers/urlencoded.ex"
-        ]
-      },
-      {
-        "source_file": "docs/operations/deployment-procedures.md",
-        "line_number": 370,
-        "link_text": "Performance Optimization",
-        "destination": "../guides/performance-optimization.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Performance Optimization](../guides/performance-optimization.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
-      },
-      {
-        "source_file": "docs/operations/deployment-procedures.md",
-        "line_number": 371,
-        "link_text": "Security Guidelines",
-        "destination": "../guides/security-guidelines.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Security Guidelines](../guides/security-guidelines.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
-      },
-      {
-        "source_file": "docs/operations/troubleshooting.md",
-        "line_number": 377,
-        "link_text": "Performance Optimization",
-        "destination": "../guides/performance-optimization.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Performance Optimization](../guides/performance-optimization.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
-      },
-      {
-        "source_file": "docs/reference/glossary.md",
-        "line_number": 13,
-        "link_text": "ADR Template",
-        "destination": "../shared/templates/adr-template.md",
-        "link_type": "internal-relative",
-        "raw_match": "[ADR Template](../shared/templates/adr-template.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/shared/templates/adr-template.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/phoenix_template/lib/phoenix/template.ex"
-        ]
-      },
-      {
-        "source_file": "docs/reference/glossary.md",
-        "line_number": 15,
-        "link_text": "Example ADR",
-        "destination": "../architecture/adr-0001-umbrella-structure.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Example ADR](../architecture/adr-0001-umbrella-structure.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/adr-0001-umbrella-structure.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto_sql/lib/ecto/adapter/structure.ex"
-        ]
-      },
-      {
-        "source_file": "docs/reference/glossary.md",
-        "line_number": 23,
-        "link_text": "API Documentation",
-        "destination": "api-endpoints.md",
-        "link_type": "internal-relative",
-        "raw_match": "[API Documentation](api-endpoints.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/reference/api-endpoints.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto/lib/ecto/query/api.ex",
-          "deps/postgrex/lib/postgrex/extensions/point.ex",
-          "deps/expo/lib/expo/po.ex"
+          "_build/dev/lib/plug/ebin/Elixir.Plug.Parsers.URLENCODED.beam"
         ]
       },
       {
@@ -7376,9 +7299,9 @@
           "Target file 'apps/prismatic/lib/prismatic/accounts/user.ex' does not exist"
         ],
         "suggestions": [
-          "deps/heroicons/optimized/24/outline/user-circle.svg",
-          "deps/heroicons/optimized/20/solid/user-minus.svg",
-          "deps/heroicons/optimized/24/solid/user.svg"
+          "deps/heroicons/optimized/16/solid/user-minus.svg",
+          "deps/heroicons/optimized/24/outline/user-minus.svg",
+          "deps/heroicons/optimized/24/outline/users.svg"
         ]
       },
       {
@@ -7403,26 +7326,9 @@
         "raw_match": "[Security Guidelines](../guides/security-guidelines.md#csrf-protection)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
+          "Anchor '#csrf-protection' not found in target file 'docs/guides/security-guidelines.md'"
         ],
-        "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
-        ]
-      },
-      {
-        "source_file": "docs/reference/glossary.md",
-        "line_number": 121,
-        "link_text": "Monitoring Setup",
-        "destination": "../operations/monitoring-setup.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Monitoring Setup](../operations/monitoring-setup.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/operations/monitoring-setup.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/expo/lib/expo/mo.ex"
-        ]
+        "suggestions": []
       },
       {
         "source_file": "docs/reference/glossary.md",
@@ -7436,9 +7342,9 @@
           "Target file 'apps/prismatic_web/lib/prismatic_web/controllers/health_controller.ex' does not exist"
         ],
         "suggestions": [
+          "deps/phoenix/priv/templates/phx.gen.html/controller.ex",
           "deps/phoenix_live_view/lib/phoenix_live_view/controller.ex",
-          "deps/phoenix/priv/templates/phx.gen.json/controller.ex",
-          "deps/phoenix/lib/phoenix/controller.ex"
+          "deps/phoenix/priv/templates/phx.gen.json/controller.ex"
         ]
       },
       {
@@ -7466,9 +7372,9 @@
           "Target file 'apps/prismatic/priv/repo/migrations' does not exist"
         ],
         "suggestions": [
-          "deps/phoenix/lib/mix/tasks/phx.gen.auth/migration.ex",
           "deps/ecto_sql/lib/ecto/migration.ex",
-          "deps/phoenix/priv/templates/phx.gen.schema/migration.exs"
+          "deps/ecto_sql/lib/ecto/adapter/migration.ex",
+          "_build/dev/lib/ecto_sql/ebin/Elixir.Mix.Tasks.Ecto.Migrations.beam"
         ]
       },
       {
@@ -7480,11 +7386,9 @@
         "raw_match": "[Performance Guidelines](../guides/performance-optimization.md#database-efficiency)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
+          "Anchor '#database-efficiency' not found in target file 'docs/guides/performance-optimization.md'"
         ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
+        "suggestions": []
       },
       {
         "source_file": "docs/reference/glossary.md",
@@ -7510,11 +7414,9 @@
         "raw_match": "[Performance Guidelines](../guides/performance-optimization.md#database-efficiency)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/performance-optimization.md' does not exist"
+          "Anchor '#database-efficiency' not found in target file 'docs/guides/performance-optimization.md'"
         ],
-        "suggestions": [
-          "deps/phoenix_html/lib/phoenix_html/form.ex"
-        ]
+        "suggestions": []
       },
       {
         "source_file": "docs/reference/glossary.md",
@@ -7528,23 +7430,10 @@
           "Target file 'apps/prismatic/lib/prismatic/accounts/user.ex' does not exist"
         ],
         "suggestions": [
-          "deps/heroicons/optimized/24/outline/user-circle.svg",
-          "deps/heroicons/optimized/20/solid/user-minus.svg",
-          "deps/heroicons/optimized/24/solid/user.svg"
+          "deps/heroicons/optimized/16/solid/user-minus.svg",
+          "deps/heroicons/optimized/24/outline/user-minus.svg",
+          "deps/heroicons/optimized/24/outline/users.svg"
         ]
-      },
-      {
-        "source_file": "docs/reference/glossary.md",
-        "line_number": 249,
-        "link_text": "Style Guide",
-        "destination": "../guides/style-guide.md",
-        "link_type": "internal-relative",
-        "raw_match": "[Style Guide](../guides/style-guide.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/guides/style-guide.md' does not exist"
-        ],
-        "suggestions": []
       },
       {
         "source_file": "docs/reference/glossary.md",
@@ -7561,21 +7450,6 @@
       },
       {
         "source_file": "docs/reference/glossary.md",
-        "line_number": 270,
-        "link_text": "ADR: Umbrella Structure",
-        "destination": "../architecture/adr-0001-umbrella-structure.md",
-        "link_type": "internal-relative",
-        "raw_match": "[ADR: Umbrella Structure](../architecture/adr-0001-umbrella-structure.md)",
-        "status": "broken",
-        "issues": [
-          "Target file 'docs/architecture/adr-0001-umbrella-structure.md' does not exist"
-        ],
-        "suggestions": [
-          "deps/ecto_sql/lib/ecto/adapter/structure.ex"
-        ]
-      },
-      {
-        "source_file": "docs/reference/glossary.md",
         "line_number": 279,
         "link_text": "Security Guidelines",
         "destination": "../guides/security-guidelines.md#xss-prevention",
@@ -7583,10 +7457,10 @@
         "raw_match": "[Security Guidelines](../guides/security-guidelines.md#xss-prevention)",
         "status": "broken",
         "issues": [
-          "Target file 'docs/guides/security-guidelines.md' does not exist"
+          "Anchor '#xss-prevention' not found in target file 'docs/guides/security-guidelines.md'"
         ],
         "suggestions": [
-          "deps/postgrex/lib/postgrex/extensions/line.ex"
+          "#cross-site-scripting-xss-prevention"
         ]
       }
     ],
@@ -7617,13 +7491,6 @@
     {
       "type": "broken_navigation_link",
       "source_file": "docs/README.md",
-      "destination": "reference/api-endpoints.md",
-      "line_number": 19,
-      "reason": "Broken link in main navigation file"
-    },
-    {
-      "type": "broken_navigation_link",
-      "source_file": "docs/README.md",
       "destination": "architecture/",
       "line_number": 20,
       "reason": "Broken link in main navigation file"
@@ -7632,13 +7499,6 @@
       "type": "broken_navigation_link",
       "source_file": "docs/README.md",
       "destination": "architecture/",
-      "line_number": 20,
-      "reason": "Broken link in main navigation file"
-    },
-    {
-      "type": "broken_navigation_link",
-      "source_file": "docs/README.md",
-      "destination": "architecture/system-diagrams.md",
       "line_number": 20,
       "reason": "Broken link in main navigation file"
     },
@@ -7729,22 +7589,8 @@
     {
       "type": "broken_navigation_link",
       "source_file": "docs/README.md",
-      "destination": "operations/monitoring-setup.md",
-      "line_number": 139,
-      "reason": "Broken link in main navigation file"
-    },
-    {
-      "type": "broken_navigation_link",
-      "source_file": "docs/README.md",
       "destination": "architecture/",
       "line_number": 144,
-      "reason": "Broken link in main navigation file"
-    },
-    {
-      "type": "broken_navigation_link",
-      "source_file": "docs/README.md",
-      "destination": "architecture/system-diagrams.md",
-      "line_number": 145,
       "reason": "Broken link in main navigation file"
     },
     {
@@ -7769,30 +7615,12 @@
       "reason": "Broken link in main navigation file"
     },
     {
-      "type": "broken_navigation_link",
-      "source_file": "docs/core/README.md",
-      "destination": "../architecture/system-diagrams.md",
-      "line_number": 28,
-      "reason": "Broken link in main navigation file"
-    },
-    {
       "type": "frequently_broken_link",
       "destination": "reference/",
       "reference_count": 3,
       "source_files": [
         "docs/README.md",
         "docs/README.md",
-        "docs/guides/documentation-navigation-templates.md"
-      ],
-      "reason": "Broken link referenced from 3 different files"
-    },
-    {
-      "type": "frequently_broken_link",
-      "destination": "reference/api-endpoints.md",
-      "reference_count": 3,
-      "source_files": [
-        "docs/README.md",
-        "docs/guides/documentation-navigation-templates.md",
         "docs/guides/documentation-navigation-templates.md"
       ],
       "reason": "Broken link referenced from 3 different files"
@@ -7809,52 +7637,6 @@
         "docs/guides/documentation-navigation-templates.md"
       ],
       "reason": "Broken link referenced from 5 different files"
-    },
-    {
-      "type": "frequently_broken_link",
-      "destination": "architecture/system-diagrams.md",
-      "reference_count": 3,
-      "source_files": [
-        "docs/README.md",
-        "docs/README.md",
-        "docs/guides/documentation-navigation-templates.md"
-      ],
-      "reason": "Broken link referenced from 3 different files"
-    },
-    {
-      "type": "frequently_broken_link",
-      "destination": "../architecture/adr-0001-umbrella-structure.md",
-      "reference_count": 4,
-      "source_files": [
-        "docs/core/architecture-overview.md",
-        "docs/_meta/cross-reference-guide.md",
-        "docs/reference/glossary.md",
-        "docs/reference/glossary.md"
-      ],
-      "reason": "Broken link referenced from 4 different files"
-    },
-    {
-      "type": "frequently_broken_link",
-      "destination": "../guides/performance-optimization.md",
-      "reference_count": 4,
-      "source_files": [
-        "docs/core/architecture-overview.md",
-        "docs/_meta/cross-reference-guide.md",
-        "docs/operations/deployment-procedures.md",
-        "docs/operations/troubleshooting.md"
-      ],
-      "reason": "Broken link referenced from 4 different files"
-    },
-    {
-      "type": "frequently_broken_link",
-      "destination": "../guides/security-guidelines.md",
-      "reference_count": 3,
-      "source_files": [
-        "docs/core/architecture-overview.md",
-        "docs/_meta/cross-reference-guide.md",
-        "docs/operations/deployment-procedures.md"
-      ],
-      "reason": "Broken link referenced from 3 different files"
     },
     {
       "type": "frequently_broken_link",

@@ -14,11 +14,11 @@ Welcome to the Prismatic project documentation. This modular documentation syste
 
 | Section | Purpose | Key Documents |
 |---------|---------|---------------|
-| **[Core](core/)** | Essential system knowledge | [Architecture](core/architecture-overview.md), [Tech Stack](core/tech-stack.md) |
-| **[Guides](guides/)** | How-to and best practices | [Developer Experience](guides/developer-experience.md), [Navigation System](guides/documentation-navigation-standards.md) |
-| **[Reference](reference/)** | Lookups and specifications | [Glossary](reference/glossary.md), [API Docs](reference/api-endpoints.md) |
-| **[Architecture](architecture/)** | Design decisions | [ADRs](architecture/), [System Diagrams](architecture/system-diagrams.md) |
-| **[Operations](operations/)** | Deployment and maintenance | [Deployment](operations/deployment-procedures.md), [Troubleshooting](operations/troubleshooting.md) |
+| **[Core](core/README.md)** | Essential system knowledge | [Architecture](core/architecture-overview.md), [Tech Stack](core/tech-stack.md) |
+| **[Guides](guides/README.md)** | How-to and best practices | [Developer Experience](guides/developer-experience.md), [Coding Standards](guides/coding-standards.md) |
+| **[Reference](reference/README.md)** | Lookups and specifications | [Glossary](reference/glossary.md), [API Endpoints](reference/api-endpoints.md) |
+| **[Architecture](architecture/README.md)** | Design decisions | [ADRs](architecture/README.md), [Umbrella Structure](architecture/adr-0001-umbrella-structure.md) |
+| **[Operations](operations/README.md)** | Deployment and maintenance | [Deployment](operations/deployment-procedures.md), [Troubleshooting](operations/troubleshooting.md) |
 
 > **📍 Navigation Note**: Each section directory contains a standardized navigation section in its README.md file, providing consistent signpost navigation throughout the documentation system.
 
@@ -75,19 +75,19 @@ Each navigation section includes:
 
 | Directory | Description | Key Documents |
 |-----------|-------------|---------------|
-| [`workflows/`](workflows/) | Development workflow procedures | [Feature Branch](workflows/feature-branch.md), [Release Process](workflows/release-process.md) |
-| [`standards/`](standards/) | Code quality and style guidelines | [Coding Standards](standards/coding-standards.md), [Review Process](standards/review-process.md) |
+| [`guides/`](guides/README.md) | Development workflow procedures | [Feature Branch Workflow](guides/comprehensive-feature-branch-workflow.md), [Developer Experience](guides/developer-experience.md) |
+| [`_meta/`](_meta/README.md) | Documentation system metadata | [Naming Conventions](_meta/naming-conventions.md), [Cross-Reference Guide](_meta/cross-reference-guide.md) |
 
 ### Quick Links
 
 - **📚 [Parent Directory](../README.md)** - Return to documentation home
 - **🏠 [Documentation Home](../README.md)** - Main documentation index
-- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+- **🔍 [Search Documentation](reference/glossary.md)** - Find terms and concepts
 
 ### Related Documentation
 
-- [Cross-Reference Guide](../_meta/cross-reference-guide.md) - Documentation linking standards
-- [Maintenance Process](../_meta/maintenance-process.md) - How to update documentation
+- [Cross-Reference Guide](_meta/cross-reference-guide.md) - Documentation linking standards
+- [Maintenance Process](_meta/maintenance-process.md) - How to update documentation
 <!-- NAV_END -->
 ```
 
@@ -130,9 +130,9 @@ For complete implementation details, see:
 3. [Coding Standards](guides/coding-standards.md) - Style and conventions
 
 **Developer (Experienced)**
-1. [Reference Materials](reference/) - Quick lookups and specifications
+1. [Reference Materials](reference/README.md) - Quick lookups and specifications
 2. [Troubleshooting](operations/troubleshooting.md) - Problem solving
-3. [Architecture Decisions](architecture/) - Design context and rationale
+3. [Architecture Decisions](architecture/README.md) - Design context and rationale
 
 **Operations/DevOps**
 1. [Deployment Procedures](operations/deployment-procedures.md) - Step-by-step deployment
@@ -141,7 +141,7 @@ For complete implementation details, see:
 
 **Architect/Tech Lead**
 1. [Architecture Overview](core/architecture-overview.md) - System design
-2. [Architecture Decisions](architecture/) - ADRs and design rationale
+2. [Architecture Decisions](architecture/README.md) - ADRs and design rationale
 3. [System Diagrams](architecture/system-diagrams.md) - Visual representations
 
 ### By Task
@@ -180,7 +180,7 @@ For complete implementation details, see:
 - **CI/CD Integration**: Pipeline automation ensures navigation stays synchronized
 - **Manual Override**: Use `mix docs.nav.update --force` for manual navigation updates
 
-For detailed maintenance procedures, see [Documentation Maintenance](/_meta/maintenance-process.md).
+For detailed maintenance procedures, see [Documentation Maintenance](_meta/maintenance-process.md).
 
 ## Contributing to Documentation
 
@@ -232,8 +232,8 @@ docs/                    # This documentation
 ### Important Links
 - **Application**: [http://localhost:4000](http://localhost:4000)
 - **Dashboard**: [http://localhost:4000/dev/dashboard](http://localhost:4000/dev/dashboard)
-- **Code Repository**: [`apps/`](../apps/)
-- **Configuration**: [`config/`](../config/)
+- **Architecture Overview**: [System Design](core/architecture-overview.md)
+- **API Documentation**: [Endpoints Reference](reference/api-endpoints.md)
 
 ## Meta Documentation
 
