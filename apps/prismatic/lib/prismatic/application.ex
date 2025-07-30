@@ -12,7 +12,13 @@ defmodule Prismatic.Application do
       {DNSCluster, query: Application.get_env(:prismatic, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Prismatic.PubSub},
       # Start the Finch HTTP client for sending emails
-      {Finch, name: Prismatic.Finch}
+      {Finch, name: Prismatic.Finch},
+
+      #
+      # LLM System Components
+      {Registry, keys: :unique, name: Prismatic.LLM.CircuitBreakerRegistry},
+
+      Prismatic.LLM.Backend.MetricsCollector
       # Start a worker by calling: Prismatic.Worker.start_link(arg)
       # {Prismatic.Worker, arg}
     ]

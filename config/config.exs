@@ -67,6 +67,45 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# LLM System Configuration
+config :prismatic, Prismatic.LLM,
+  default_backend: :openai,
+  backends: %{
+    test: %{
+      backend_type: :test,
+      api_key: "test-key",
+      model: "test-model",
+      timeout: 30_000,
+      max_retries: 3
+    },
+    # Production backends should be configured in environment-specific files
+    openai: %{
+      backend_type: :openai,
+      api_key: {:system, "OPENAI_API_KEY"},
+      model: "gpt-4",
+      timeout: 30_000,
+      max_retries: 3,
+      base_url: "https://api.openai.com/v1"
+    },
+    anthropic: %{
+      backend_type: :anthropic,
+      api_key: {:system, "ANTHROPIC_API_KEY"},
+      model: "claude-3-sonnet-20240229",
+      timeout: 30_000,
+      max_retries: 3,
+      base_url: "https://api.anthropic.com"
+    }
+  },
+  circuit_breaker: %{
+    failure_threshold: 5,
+    recovery_timeout: 60_000,
+    success_threshold: 3
+  },
+  metrics: %{
+    enabled: true,
+    telemetry_prefix: [:prismatic, :llm, :backend]
+  }
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
