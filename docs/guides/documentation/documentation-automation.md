@@ -1337,7 +1337,7 @@ mix docs.nav.update --incremental
 - [Documentation System Guide](documentation-system.md) - Standards, templates, and architecture
 - [Cross-Reference Guide](../../_meta/cross-reference-guide.md) - Documentation linking standards
 - [Maintenance Process](../../_meta/maintenance-process.md) - How to update documentation
-- [GitHub Actions Implementation](../github-actions-implementation.md) - Existing CI/CD workflows
+- [CI/CD Implementation](../workflow/ci-cd-implementation.md) - Existing CI/CD workflows
 
 ---
 

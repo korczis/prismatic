@@ -15,11 +15,11 @@ Complete guide to semantic versioning practices and release management for the P
 
 ### Related Documentation
 
-- [Git Hooks Setup](git-hooks-setup.md) - Automated version enforcement
-- [CI/CD Configuration](../operations/cicd-configuration.md) - Automated release workflows
-- [Style Guide](style-guide.md) - Code and documentation standards
-- [API Endpoints](../reference/api-endpoints.md) - API versioning considerations
-- [Database Schema](../reference/database-schema.md) - Schema migration versioning
+- [Git Hooks Complete](git-hooks-complete.md) - Automated version enforcement
+- [CI/CD Implementation](ci-cd-implementation.md) - Automated release workflows
+- [Style Guide](../development/style-guide.md) - Code and documentation standards
+- [API Endpoints](../../reference/api-endpoints.md) - API versioning considerations
+- [Database Schema](../../reference/database-schema.md) - Schema migration versioning
 <!-- NAV_END -->
 
 ## Overview
@@ -792,11 +792,11 @@ end
 
 ## Related Documentation
 
-- [Git Hooks Setup](git-hooks-setup.md) - Automated version validation and enforcement
-- [CI/CD Configuration](../operations/cicd-configuration.md) - Automated release workflows and deployment
-- [Style Guide](style-guide.md) - Code and documentation standards that support versioning
-- [API Endpoints](../reference/api-endpoints.md) - API versioning strategies and backward compatibility
-- [Database Schema](../reference/database-schema.md) - Database versioning and migration strategies
+- [Git Hooks Complete](git-hooks-complete.md) - Automated version validation and enforcement
+- [CI/CD Implementation](ci-cd-implementation.md) - Automated release workflows and deployment
+- [Style Guide](../development/style-guide.md) - Code and documentation standards that support versioning
+- [API Endpoints](../../reference/api-endpoints.md) - API versioning strategies and backward compatibility
+- [Database Schema](../../reference/database-schema.md) - Database versioning and migration strategies
 
 ---
 

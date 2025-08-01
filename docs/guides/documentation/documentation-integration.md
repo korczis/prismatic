@@ -625,7 +625,7 @@ if __name__ == "__main__":
 ```bash
 #!/bin/bash
 # Enhanced pre-commit hook with documentation checks
-# Extends existing pre-commit hook from git-hooks-implementation.md
+# Extends existing pre-commit hook from git-hooks-complete.md
 
 # ... existing pre-commit checks ...
 
@@ -970,7 +970,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-# ... (full configuration in github-actions-implementation.md)
+# ... (full configuration in ci-cd-implementation.md)
 ```
 
 ```bash

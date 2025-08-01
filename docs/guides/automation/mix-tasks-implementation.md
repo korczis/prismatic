@@ -1,3 +1,20 @@
+<!-- NAV_START -->
+<div align="center">
+  <strong>🔧 Mix Tasks Implementation Guide</strong><br>
+  <em>Developer automation tooling for the Prismatic project</em><br><br>
+  
+  <a href="../../README.md">🏠 Home</a> | 
+  <a href="../README.md">📖 All Guides</a> | 
+  <a href="README.md">🤖 Automation</a><br>
+  
+  <strong>Quick Links:</strong>
+  <a href="#task-architecture">Architecture</a> |
+  <a href="#task-implementation-specifications">Tasks</a> |
+  <a href="#mix-tasks-integration">Integration</a> |
+  <a href="#usage-examples">Examples</a>
+</div>
+<!-- NAV_END -->
+
 # Mix Tasks Implementation Guide
 
 ## Overview

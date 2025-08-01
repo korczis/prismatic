@@ -15,8 +15,8 @@ Comprehensive guide for setting up and configuring GitHub Actions CI/CD workflow
 
 ### Related Documentation
 
-- [Git Hooks Setup](git-hooks-setup.md) - Local development automation
-- [CI/CD Configuration](../operations/cicd-configuration.md) - Complete CI/CD workflows
+- [Git Hooks Complete](git-hooks-complete.md) - Local development automation
+- [CI/CD Implementation](ci-cd-implementation.md) - Complete CI/CD workflows
 - [Security Guidelines](security-guidelines.md) - CI/CD security best practices
 - [Deployment Procedures](../operations/deployment-procedures.md) - Deployment automation
 - [Performance Optimization](performance-optimization.md) - Performance checks in CI
@@ -382,8 +382,8 @@ env:
 
 ## Related Documentation
 
-- [Git Hooks Setup](git-hooks-setup.md) - Local development automation that complements GitHub Actions
-- [CI/CD Configuration](../operations/cicd-configuration.md) - Complete CI/CD pipeline documentation including other platforms
+- [Git Hooks Complete](git-hooks-complete.md) - Local development automation that complements GitHub Actions
+- [CI/CD Implementation](ci-cd-implementation.md) - Complete CI/CD pipeline documentation including other platforms
 - [Security Guidelines](security-guidelines.md) - Security best practices for CI/CD pipelines
 - [Deployment Procedures](../operations/deployment-procedures.md) - Manual deployment procedures and rollback strategies
 - [Performance Optimization](performance-optimization.md) - Performance testing and optimization in CI/CD

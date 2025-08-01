@@ -233,5 +233,5 @@ Examples:
 ## Related Documentation
 - [Feature Branch Workflow Guide](feature-branch-workflow.md)
 - [Semantic Versioning Policy](semantic-versioning.md)
-- [CI/CD Pipeline Configuration](../operations/cicd-configuration.md)
-- [Git Hooks Installation Guide](git-hooks-setup.md)
+- [CI/CD Implementation](ci-cd-implementation.md)
+- [Git Hooks Complete](git-hooks-complete.md)

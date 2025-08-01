@@ -9,21 +9,21 @@ Comprehensive performance optimization guidelines and best practices for the Pri
 <!-- NAV_START -->
 ## Navigation
 
-**Current Location**: [Home](../README.md) > [Guides](README.md) > Performance Optimization
+**Current Location**: [Home](../../README.md) > [Guides](../README.md) > [Performance](README.md) > Performance Optimization
 
 ### Quick Links
 
-- **📚 [Parent Directory](README.md)** - Return to guides index
-- **🏠 [Documentation Home](../README.md)** - Main documentation index
-- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+- **📚 [Parent Directory](README.md)** - Return to performance guides
+- **🏠 [Documentation Home](../../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../../reference/glossary.md)** - Find terms and concepts
 
 ### Related Documentation
 
-- [Security Guidelines](security-guidelines.md) - Security considerations for performance optimizations
-- [Architecture Overview](../core/architecture-overview.md) - System architecture and design patterns
-- [Database Schema](../reference/database-schema.md) - Database structure and optimization opportunities
-- [Monitoring Setup](../operations/monitoring-setup.md) - Performance monitoring and alerting
-- [System Diagrams](../architecture/system-diagrams.md) - Visual representation of system performance bottlenecks
+- [Security Guidelines](../security/security-guidelines.md) - Security considerations for performance optimizations
+- [Architecture Overview](../../core/architecture-overview.md) - System architecture and design patterns
+- [Database Schema](../../reference/database-schema.md) - Database structure and optimization opportunities
+- [Monitoring Setup](../../operations/monitoring-setup.md) - Performance monitoring and alerting
+- [System Diagrams](../../architecture/system-diagrams.md) - Visual representation of system performance bottlenecks
 <!-- NAV_END -->
 
 ## Overview
@@ -609,12 +609,12 @@ end
 
 ## Related Documentation
 
-- [Security Guidelines](security-guidelines.md) - Security considerations when implementing performance optimizations
-- [Architecture Overview](../core/architecture-overview.md) - Understanding system architecture for optimization opportunities
-- [Database Schema](../reference/database-schema.md) - Database structure and indexing strategies
-- [Monitoring Setup](../operations/monitoring-setup.md) - Comprehensive performance monitoring configuration
-- [System Diagrams](../architecture/system-diagrams.md) - Visual system architecture for identifying bottlenecks
-- [Developer Experience](developer-experience.md) - Development tools and practices that support performance
+- [Security Guidelines](../security/security-guidelines.md) - Security considerations when implementing performance optimizations
+- [Architecture Overview](../../core/architecture-overview.md) - Understanding system architecture for optimization opportunities
+- [Database Schema](../../reference/database-schema.md) - Database structure and indexing strategies
+- [Monitoring Setup](../../operations/monitoring-setup.md) - Comprehensive performance monitoring configuration
+- [System Diagrams](../../architecture/system-diagrams.md) - Visual system architecture for identifying bottlenecks
+- [Developer Experience](../getting-started/developer-experience.md) - Development tools and practices that support performance
 
 ---
 

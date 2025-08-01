@@ -9,20 +9,20 @@ Comprehensive security guidelines and best practices for developing, deploying, 
 <!-- NAV_START -->
 ## Navigation
 
-**Current Location**: [Home](../README.md) > [Guides](README.md) > Security Guidelines
+**Current Location**: [Home](../../README.md) > [Guides](../README.md) > [Security](README.md) > Security Guidelines
 
 ### Quick Links
 
-- **📚 [Parent Directory](README.md)** - Return to guides index
-- **🏠 [Documentation Home](../README.md)** - Main documentation index
-- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+- **📚 [Parent Directory](README.md)** - Return to security guides
+- **🏠 [Documentation Home](../../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../../reference/glossary.md)** - Find terms and concepts
 
 ### Related Documentation
 
-- [Performance Optimization](performance-optimization.md) - Application performance best practices
-- [Architecture Security Model](../architecture/adr-0003-security-model.md) - Security architecture decisions
-- [API Authentication](../reference/api-authentication.md) - Authentication implementation reference
-- [Deployment Procedures](../operations/deployment-procedures.md) - Secure deployment practices
+- [Performance Optimization](../performance/performance-optimization.md) - Application performance best practices
+- [Architecture Security Model](../../architecture/adr-0003-security-model.md) - Security architecture decisions
+- [API Authentication](../../reference/api-authentication.md) - Authentication implementation reference
+- [Deployment Procedures](../../operations/deployment-procedures.md) - Secure deployment practices
 <!-- NAV_END -->
 
 ## Overview
@@ -306,12 +306,12 @@ docker scan image:tag       # Container vulnerability scanning
 
 ## Related Documentation
 
-- [Performance Optimization](performance-optimization.md) - Performance considerations for security implementations
-- [Architecture Security Model](../architecture/adr-0003-security-model.md) - Security architecture decisions and rationale
-- [API Authentication](../reference/api-authentication.md) - Detailed authentication implementation reference
-- [Deployment Procedures](../operations/deployment-procedures.md) - Secure deployment practices and procedures
-- [Monitoring Setup](../operations/monitoring-setup.md) - Security monitoring and alerting configuration
-- [Developer Experience](developer-experience.md) - Security considerations in development workflow
+- [Performance Optimization](../performance/performance-optimization.md) - Performance considerations for security implementations
+- [Architecture Security Model](../../architecture/adr-0003-security-model.md) - Security architecture decisions and rationale
+- [API Authentication](../../reference/api-authentication.md) - Detailed authentication implementation reference
+- [Deployment Procedures](../../operations/deployment-procedures.md) - Secure deployment practices and procedures
+- [Monitoring Setup](../../operations/monitoring-setup.md) - Security monitoring and alerting configuration
+- [Developer Experience](../getting-started/developer-experience.md) - Security considerations in development workflow
 
 ---
 

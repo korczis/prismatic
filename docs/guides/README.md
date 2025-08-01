@@ -23,183 +23,231 @@
 
 ---
 
+## Guide Categories
+
+*Navigate by category to find the guides most relevant to your current needs*
+
+### 🚀 [Getting Started](getting-started/)
+*New to Prismatic? Essential guides for onboarding and initial setup*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Developer Experience](getting-started/developer-experience.md) | 30 min | None | Complete onboarding guide - environment setup, first contribution, daily workflow |
+| [Onboarding Checklist](getting-started/onboarding-checklist.md) | 15 min | None | Step-by-step checklist for new team member setup |
+| [Environment Setup](getting-started/environment-setup.md) | 45 min | Basic dev knowledge | Comprehensive development environment configuration |
+
+### 💻 [Development](development/)
+*Core development practices, standards, and quality guidelines*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Coding Standards](development/coding-standards.md) | 15 min | Basic coding | Code style, patterns, and quality standards |
+| [Style Guide](development/style-guide.md) | 10 min | Coding knowledge | Language-specific formatting and conventions |
+| [Testing Guidelines](development/testing-guidelines.md) | 25 min | Testing experience | Comprehensive testing strategies and best practices |
+
+### 🔄 [Workflow](workflow/)
+*Development workflow, branching strategies, and process automation*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Feature Branch Workflow](workflow/feature-branch-workflow.md) | 45 min | Git knowledge | Complete branching system with CI/CD integration |
+| [Git Hooks Complete](workflow/git-hooks-complete.md) | 20 min | Git hooks experience | Comprehensive git hooks implementation and setup |
+| [CI/CD Implementation](workflow/ci-cd-implementation.md) | 35 min | CI/CD knowledge | GitHub Actions and GitLab CI pipeline setup |
+| [Semantic Versioning](workflow/semantic-versioning.md) | 15 min | Version control | Automated versioning and release management |
+| [Migration Plan](workflow/branch-workflow-migration-plan.md) | 30 min | Team coordination | Strategy for workflow system migration |
+
+### 🚀 [Deployment](deployment/)
+*Production deployment strategies and team adoption processes*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Team Adoption Strategy](deployment/deployment-team-adoption-strategy.md) | 20 min | Team lead experience | Comprehensive deployment and adoption strategy |
+| [Deployment Operations](deployment/deployment-operations.md) | 30 min | DevOps knowledge | Production deployment procedures and best practices |
+
+### 🔒 [Security](security/)
+*Security guidelines, practices, and audit procedures*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Security Guidelines](security/security-guidelines.md) | 25 min | Security basics | Comprehensive security practices for development and deployment |
+| [Security Audit Checklist](security/security-audit-checklist.md) | 20 min | Security knowledge | Systematic security review and audit procedures |
+
+### ⚡ [Performance](performance/)
+*Performance optimization and system monitoring*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Performance Optimization](performance/performance-optimization.md) | 25 min | System knowledge | Best practices for code, database, and infrastructure performance |
+| [Monitoring & Observability](performance/monitoring-observability.md) | 30 min | Monitoring tools | Comprehensive monitoring setup and observability practices |
+
+### 🤖 [Automation](automation/)
+*Development automation, tooling, and AI integration*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Mix Tasks Implementation](automation/mix-tasks-implementation.md) | 20 min | Elixir knowledge | Custom Mix tasks for development automation |
+| [Team Adoption](automation/team-adoption.md) | 25 min | Team coordination | Consolidated guide for adopting automation across teams |
+| [Development Tools](automation/development-tools.md) | 15 min | Dev tools experience | Essential development tooling and automation setup |
+| [AI-Assisted Development](automation/ai-assisted-development-integration.md) | 20 min | AI tools knowledge | Integration of AI tools in development workflow |
+
+### 📚 [Documentation](documentation/)
+*Documentation system, standards, and automation*
+
+| Guide | Time | Prerequisites | Description |
+|-------|------|---------------|-------------|
+| [Documentation System](documentation/documentation-system.md) | 20 min | Documentation experience | Navigation standards, templates, and positioning |
+| [Documentation Automation](documentation/documentation-automation.md) | 25 min | Automation knowledge | Mix tasks, validation, and CI/CD integration |
+| [Integration Guide](documentation/documentation-integration.md) | 15 min | Cross-reference knowledge | Feature integration and workflow synchronization |
+| [Refactoring Guide](documentation/documentation-refactoring-guide.md) | 30 min | Documentation management | Documentation improvement and organization strategies |
+
+---
+
 ## Role-Based Entry Points
 
-Choose your path based on your current goal:
+*Choose your path based on your current role and objectives*
 
-### 🚀 Getting Started
-*New to Prismatic? Start here for foundational knowledge*
+### 👨‍💻 New Developers
+**Complete onboarding path for developers joining the team**
 
-| Guide | Time Estimate | Prerequisites | Description |
-|-------|---------------|---------------|-------------|
-| [`developer-experience.md`](developer-experience.md) | 30 min | None | Complete onboarding guide for new developers - environment setup, first contribution, and daily workflow |
-| [`coding-standards.md`](coding-standards.md) | 15 min | Basic coding knowledge | Code quality and style guidelines - formatting, best practices, and review standards |
+1. **[Developer Experience](getting-started/developer-experience.md)** - Complete setup guide
+2. **[Onboarding Checklist](getting-started/onboarding-checklist.md)** - Step-by-step setup validation
+3. **[Coding Standards](development/coding-standards.md)** - Quality and style guidelines
+4. **[Feature Branch Workflow](workflow/feature-branch-workflow.md)** - Master the development process
 
-### 💻 Daily Development  
-*Building features? These guides support your development workflow*
+### 🏗️ Experienced Developers
+**Advanced guides for optimization and specialization**
 
-| Guide | Time Estimate | Prerequisites | Description |
-|-------|---------------|---------------|-------------|
-| [`coding-standards.md`](coding-standards.md) | Reference | Basic coding | Quick reference for code style, patterns, and quality standards |
-| [`security-guidelines.md`](security-guidelines.md) | 25 min | Intermediate | Comprehensive security practices for application development and deployment |
-| [`performance-optimization.md`](performance-optimization.md) | 25 min | Intermediate | Performance best practices for code, database queries, and infrastructure |
+- **[Performance Optimization](performance/performance-optimization.md)** - System performance mastery
+- **[Security Guidelines](security/security-guidelines.md)** - Security best practices
+- **[CI/CD Implementation](workflow/ci-cd-implementation.md)** - Pipeline automation
+- **[Testing Guidelines](development/testing-guidelines.md)** - Advanced testing strategies
 
-### 🔄 Workflow & Process
-*Setting up processes? Master the development workflow system*
+### 👨‍💼 Team Leads & Managers
+**Strategic guides for team management and process implementation**
 
-| Guide | Time Estimate | Prerequisites | Description |
-|-------|---------------|---------------|-------------|
-| [`comprehensive-feature-branch-workflow.md`](comprehensive-feature-branch-workflow.md) | 45 min | Any team size | Complete feature branch workflow system with automated tagging and CI/CD integration |
-| [`git-hooks-implementation.md`](git-hooks-implementation.md) | 20 min | Git knowledge | Local workflow enforcement with pre-commit, pre-push, and post-merge hooks |
-| [`github-actions-implementation.md`](github-actions-implementation.md) | 30 min | CI/CD knowledge | GitHub Actions workflows for automated testing, validation, and release management |
+- **[Team Adoption Strategy](deployment/deployment-team-adoption-strategy.md)** - Change management
+- **[Migration Plan](workflow/branch-workflow-migration-plan.md)** - Workflow transitions
+- **[Team Adoption](automation/team-adoption.md)** - Automation adoption strategies
+- **[Security Audit Checklist](security/security-audit-checklist.md)** - Security oversight
 
-### 🚀 Operations & Deployment
-*Going to production? Navigate deployment and team adoption*
+### 🔧 DevOps & SRE
+**Infrastructure, automation, and operational excellence**
 
-| Guide | Time Estimate | Prerequisites | Description |
-|-------|---------------|---------------|-------------|
-| [`deployment-team-adoption-strategy.md`](deployment-team-adoption-strategy.md) | 20 min | Team leads | Comprehensive strategy for deploying and adopting workflow across development teams |
+- **[Deployment Operations](deployment/deployment-operations.md)** - Production procedures
+- **[Monitoring & Observability](performance/monitoring-observability.md)** - System monitoring
+- **[CI/CD Implementation](workflow/ci-cd-implementation.md)** - Pipeline management
+- **[Git Hooks Complete](workflow/git-hooks-complete.md)** - Local automation
 
 ---
 
 ## Quick Reference
 
-**Most commonly accessed guides for rapid lookup:**
+**Most frequently accessed guides for daily work:**
 
 ### Daily Essentials
-- **[Coding Standards](coding-standards.md)** - Code style and conventions reference
-- **[Developer Experience](developer-experience.md)** - Daily workflow and common commands
-- **[Security Guidelines](security-guidelines.md)** - Security best practices and patterns
+- **[Coding Standards](development/coding-standards.md)** - Style and conventions reference
+- **[Developer Experience](getting-started/developer-experience.md)** - Daily workflow commands
+- **[Security Guidelines](security/security-guidelines.md)** - Security patterns and practices
 
 ### Workflow Tools
-- **[Feature Branch Workflow](comprehensive-feature-branch-workflow.md)** - Complete workflow system
-- **[Git Hooks](git-hooks-implementation.md)** - Local automation and validation
-- **[GitHub Actions](github-actions-implementation.md)** - CI/CD pipeline automation
+- **[Feature Branch Workflow](workflow/feature-branch-workflow.md)** - Complete workflow system
+- **[Git Hooks Complete](workflow/git-hooks-complete.md)** - Local automation and validation
+- **[CI/CD Implementation](workflow/ci-cd-implementation.md)** - Pipeline automation
 
-### Team Leadership
-- **[Deployment Strategy](deployment-team-adoption-strategy.md)** - Team adoption and change management
-- **[Performance Optimization](performance-optimization.md)** - System performance and scaling
-
----
-
-## Complete Guide Index
-
-### Core Development Guides
-
-| Guide | Focus Area | Key Topics |
-|-------|------------|------------|
-| [`developer-experience.md`](developer-experience.md) | Onboarding & Daily Workflow | Setup, Tools, Development Cycle |
-| [`coding-standards.md`](coding-standards.md) | Code Quality | Formatting, Best Practices, Review Standards |
-| [`security-guidelines.md`](security-guidelines.md) | Application Security | Authentication, Data Protection, Secure Coding |
-| [`performance-optimization.md`](performance-optimization.md) | System Performance | Database, Caching, Infrastructure Optimization |
-
-### Workflow Implementation
-
-| Guide | Focus Area | Key Topics |
-|-------|------------|------------|
-| [`comprehensive-feature-branch-workflow.md`](comprehensive-feature-branch-workflow.md) | Complete Workflow System | Branching, CI/CD, Automation, Documentation |
-| [`git-hooks-implementation.md`](git-hooks-implementation.md) | Local Automation | Pre-commit, Pre-push, Post-merge Hooks |
-| [`github-actions-implementation.md`](github-actions-implementation.md) | CI/CD Automation | Pipeline, Testing, Release Management |
-| [`gitlab-ci-implementation.md`](gitlab-ci-implementation.md) | GitLab CI/CD | Pipeline Configuration, Deployment |
-
-### Team & Process Management
-
-| Guide | Focus Area | Key Topics |
-|-------|------------|------------|
-| [`deployment-team-adoption-strategy.md`](deployment-team-adoption-strategy.md) | Team Adoption | Change Management, Training, Support |
-| [`branch-workflow-migration-plan.md`](branch-workflow-migration-plan.md) | Migration Strategy | Git Migration, Team Transition |
-| [`mix-tasks-implementation.md`](mix-tasks-implementation.md) | Developer Tooling | Custom Mix Tasks, Automation |
-
-### Documentation System
-
-| Guide | Focus Area | Key Topics |
-|-------|------------|------------|
-| [`documentation/`](documentation/) | Complete Documentation System | Comprehensive guides for documentation navigation system |
-| [`documentation/documentation-system.md`](documentation/documentation-system.md) | System Standards & Templates | Navigation standards, HTML markers, templates, positioning |
-| [`documentation/documentation-automation.md`](documentation/documentation-automation.md) | Automation & CI/CD | Mix tasks, validation, migration, CI/CD integration |
-| [`documentation-integration.md`](documentation-integration.md) | Feature Integration | Cross-references, sync, workflow integration |
-
-### AI & Development Integration
-
-| Guide | Focus Area | Key Topics |
-|-------|------------|------------|
-| [`ai-assisted-development-integration.md`](ai-assisted-development-integration.md) | AI Development | Integration, Best Practices, Workflow |
-| [`documentation-refactoring-guide.md`](documentation-refactoring-guide.md) | Documentation Improvement | Refactoring, Organization, Quality |
+### Process Management
+- **[Team Adoption Strategy](deployment/deployment-team-adoption-strategy.md)** - Change management
+- **[Performance Optimization](performance/performance-optimization.md)** - System optimization
+- **[Documentation System](documentation/documentation-system.md)** - Documentation standards
 
 ---
 
-## How to Use These Guides
+## Implementation Pathways
 
-### For New Developers
-1. **Start with** [Developer Experience](developer-experience.md) for complete onboarding
-2. **Learn the standards** from [Coding Standards](coding-standards.md)
-3. **Understand security** with [Security Guidelines](security-guidelines.md)
-4. **Master the workflow** using [Feature Branch Workflow](comprehensive-feature-branch-workflow.md)
+*Structured learning paths for different implementation scenarios*
 
-### For Experienced Developers
-1. **Quick reference** - Use guides as needed for specific topics
-2. **Workflow automation** - [Git Hooks](git-hooks-implementation.md) and [CI/CD](github-actions-implementation.md)
-3. **Performance optimization** - [Performance Guidelines](performance-optimization.md)
-4. **Documentation contributions** - [Documentation Integration](documentation-integration.md)
+### 🆕 New Project Setup
+1. [Environment Setup](getting-started/environment-setup.md)
+2. [Coding Standards](development/coding-standards.md)
+3. [Feature Branch Workflow](workflow/feature-branch-workflow.md)
+4. [CI/CD Implementation](workflow/ci-cd-implementation.md)
+5. [Security Guidelines](security/security-guidelines.md)
 
-### For Team Leads
-1. **Team adoption** - [Deployment Strategy](deployment-team-adoption-strategy.md)
-2. **Workflow migration** - [Migration Plan](branch-workflow-migration-plan.md)
-3. **Process optimization** - [Comprehensive Workflow](comprehensive-feature-branch-workflow.md)
-4. **Quality assurance** - [Performance Optimization](performance-optimization.md)
+### 📈 Existing Project Enhancement
+1. [Performance Optimization](performance/performance-optimization.md)
+2. [Security Audit Checklist](security/security-audit-checklist.md)
+3. [Testing Guidelines](development/testing-guidelines.md)
+4. [Monitoring & Observability](performance/monitoring-observability.md)
 
-### For DevOps/SRE
-1. **Infrastructure setup** - [GitHub Actions](github-actions-implementation.md) or [GitLab CI](gitlab-ci-implementation.md)
-2. **Local automation** - [Git Hooks](git-hooks-implementation.md)
-3. **Performance monitoring** - [Performance Optimization](performance-optimization.md)
-4. **Security implementation** - [Security Guidelines](security-guidelines.md)
+### 🔄 Workflow Migration
+1. [Migration Plan](workflow/branch-workflow-migration-plan.md)
+2. [Team Adoption Strategy](deployment/deployment-team-adoption-strategy.md)
+3. [Git Hooks Complete](workflow/git-hooks-complete.md)
+4. [Team Adoption](automation/team-adoption.md)
+
+### 📖 Documentation Improvement
+1. [Documentation System](documentation/documentation-system.md)
+2. [Documentation Automation](documentation/documentation-automation.md)
+3. [Integration Guide](documentation/documentation-integration.md)
+4. [Refactoring Guide](documentation/documentation-refactoring-guide.md)
 
 ---
 
-## Guide Categories by Complexity
+## Guide Complexity Levels
 
-### Beginner (No prerequisites)
-- [Developer Experience](developer-experience.md)
-- [Coding Standards](coding-standards.md) (basic reference)
+### 🟢 Beginner (No prerequisites)
+- [Developer Experience](getting-started/developer-experience.md)
+- [Onboarding Checklist](getting-started/onboarding-checklist.md)
+- [Coding Standards](development/coding-standards.md) (reference)
+- [Style Guide](development/style-guide.md)
 
-### Intermediate (Some experience required)
-- [Security Guidelines](security-guidelines.md)
-- [Performance Optimization](performance-optimization.md)
-- [Git Hooks Implementation](git-hooks-implementation.md)
+### 🟡 Intermediate (Some experience required)
+- [Security Guidelines](security/security-guidelines.md)
+- [Performance Optimization](performance/performance-optimization.md)
+- [Git Hooks Complete](workflow/git-hooks-complete.md)
+- [Testing Guidelines](development/testing-guidelines.md)
+- [Environment Setup](getting-started/environment-setup.md)
 
-### Advanced (Specialized knowledge)
-- [Comprehensive Feature Branch Workflow](comprehensive-feature-branch-workflow.md)
-- [GitHub Actions Implementation](github-actions-implementation.md)
-- [Deployment Team Adoption Strategy](deployment-team-adoption-strategy.md)
+### 🔴 Advanced (Specialized knowledge)
+- [Feature Branch Workflow](workflow/feature-branch-workflow.md)
+- [CI/CD Implementation](workflow/ci-cd-implementation.md)
+- [Team Adoption Strategy](deployment/deployment-team-adoption-strategy.md)
+- [Monitoring & Observability](performance/monitoring-observability.md)
+- [Security Audit Checklist](security/security-audit-checklist.md)
 
 ---
 
 ## Contributing to Guides
 
-When creating or updating guides:
-- Follow the [Documentation System Guide](documentation/documentation-system.md)
-- Use the navigation templates and standards from the [Documentation System](documentation/)
-- Test examples and procedures before publishing
-- Update related cross-references and links
-- Use the Mix tasks from the [Documentation Automation Guide](documentation/documentation-automation.md)
+### Quality Standards
+- **Clarity**: Clear, actionable instructions with concrete examples
+- **Completeness**: Cover all necessary steps and edge cases
+- **Currency**: Keep information current with latest practices
+- **Cross-references**: Link to related documentation appropriately
+- **Testing**: Verify all examples and procedures work correctly
 
-### Guide Quality Standards
-- **Clarity**: Clear, actionable instructions
-- **Completeness**: Cover all necessary steps and considerations
-- **Currency**: Keep information up-to-date with latest practices
-- **Cross-references**: Link to related documentation
-- **Examples**: Provide concrete, working examples
+### Guide Development Process
+1. Follow the [Documentation System](documentation/documentation-system.md) standards
+2. Use navigation templates from the documentation system
+3. Test all examples and procedures before publishing
+4. Update related cross-references and links
+5. Use Mix tasks from [Documentation Automation](documentation/documentation-automation.md)
+
+### Maintenance Guidelines
+- Regular reviews for accuracy and relevance
+- Update cross-references when files are moved or renamed
+- Validate examples against current system versions
+- Gather feedback from guide users for improvements
 
 ---
 
 ## Related Documentation
 
-- [Operations Procedures](../operations/README.md) - Deployment and maintenance guides
-- [Reference Materials](../reference/README.md) - Quick reference and API documentation
-- [Architecture Documentation](../architecture/README.md) - Design decisions and diagrams
-- [Meta Documentation](../_meta/README.md) - Documentation system metadata
-- [Core System Documentation](../core/README.md) - System architecture and tech stack
+- **[Operations Procedures](../operations/README.md)** - Deployment and maintenance guides
+- **[Reference Materials](../reference/README.md)** - Quick reference and API documentation
+- **[Architecture Documentation](../architecture/README.md)** - Design decisions and diagrams
+- **[Meta Documentation](../_meta/README.md)** - Documentation system metadata
+- **[Core System Documentation](../core/README.md)** - System architecture and tech stack
 
 ---
 
-**💡 Pro Tip**: Bookmark this page and use the role-based entry points to quickly find the guides you need for your current task. Each guide is designed to be self-contained while linking to related information when needed.
+**💡 Pro Tip**: Use the category-based navigation above to quickly find guides relevant to your current task. Each directory contains a comprehensive README with additional navigation and context for that category's guides.

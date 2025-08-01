@@ -237,9 +237,9 @@ Use HTML comments to define navigation section boundaries:
 
 ### Related Documentation
 
-- [Cross-Reference Guide](../_meta/cross-reference-guide.md) - Documentation linking standards
-- [Git Hooks Implementation](git-hooks-implementation.md) - Related workflow automation
-- [GitHub Actions Implementation](github-actions-implementation.md) - CI/CD integration
+- [Cross-Reference Guide](../../_meta/cross-reference-guide.md) - Documentation linking standards
+- [Git Hooks Complete](../workflow/git-hooks-complete.md) - Related workflow automation
+- [CI/CD Implementation](../workflow/ci-cd-implementation.md) - CI/CD integration
 <!-- NAV_END -->
 ```
 

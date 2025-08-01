@@ -15,11 +15,11 @@ Comprehensive coding standards and style guidelines for the Prismatic project, c
 
 ### Related Documentation
 
-- [Git Hooks Setup](git-hooks-setup.md) - Automated style enforcement
-- [Semantic Versioning](semantic-versioning.md) - Version and release standards
-- [CI/CD Configuration](../operations/cicd-configuration.md) - Automated style checking
-- [Security Guidelines](security-guidelines.md) - Security-related coding practices
-- [Performance Optimization](performance-optimization.md) - Performance-conscious coding
+- [Git Hooks Complete](../workflow/git-hooks-complete.md) - Automated style enforcement
+- [Semantic Versioning](../workflow/semantic-versioning.md) - Version and release standards
+- [CI/CD Configuration](../workflow/ci-cd-implementation.md) - Automated style checking
+- [Security Guidelines](../security/security-guidelines.md) - Security-related coding practices
+- [Performance Optimization](../performance/performance-optimization.md) - Performance-conscious coding
 <!-- NAV_END -->
 
 ## Overview
@@ -1327,11 +1327,11 @@ end
 
 ## Related Documentation
 
-- [Git Hooks Setup](git-hooks-setup.md) - Automated enforcement of style guidelines
-- [Semantic Versioning](semantic-versioning.md) - Version management and release standards
-- [CI/CD Configuration](../operations/cicd-configuration.md) - Automated code quality checks and deployments
-- [Security Guidelines](security-guidelines.md) - Security-focused coding practices and standards
-- [Performance Optimization](performance-optimization.md) - Performance-conscious development practices
+- [Git Hooks Complete](../workflow/git-hooks-complete.md) - Automated enforcement of style guidelines
+- [Semantic Versioning](../workflow/semantic-versioning.md) - Version management and release standards
+- [CI/CD Implementation](../workflow/ci-cd-implementation.md) - Automated code quality checks and deployments
+- [Security Guidelines](../security/security-guidelines.md) - Security-focused coding practices and standards
+- [Performance Optimization](../performance/performance-optimization.md) - Performance-conscious development practices
 
 ---
 

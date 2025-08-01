@@ -9,21 +9,21 @@ Code style conventions and quality standards for consistent development across t
 <!-- NAV_START -->
 ## Navigation
 
-**Current Location**: [Home](../README.md) > [Guides](README.md) > Coding Standards
+**Current Location**: [Home](../../README.md) > [Guides](../README.md) > [Development](README.md) > Coding Standards
 
 ### Quick Links
 
-- **📚 [Parent Directory](README.md)** - Return to guides index
-- **🏠 [Documentation Home](../README.md)** - Main documentation index
-- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+- **📚 [Parent Directory](README.md)** - Return to development guides
+- **🏠 [Documentation Home](../../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../../reference/glossary.md)** - Find terms and concepts
 
 ### Related Documentation
 
-- [Developer Experience](developer-experience.md) - Development workflow and tools that support these standards
-- [Architecture Overview](../core/architecture-overview.md) - System design principles that inform coding practices
-- [Security Guidelines](security-guidelines.md) - Security implementation standards and patterns
-- [Performance Optimization](performance-optimization.md) - Performance considerations in code development
-- [Comprehensive Feature Branch Workflow](comprehensive-feature-branch-workflow.md) - Code quality enforcement in branch workflow
+- [Developer Experience](../getting-started/developer-experience.md) - Development workflow and tools that support these standards
+- [Architecture Overview](../../core/architecture-overview.md) - System design principles that inform coding practices
+- [Security Guidelines](../security/security-guidelines.md) - Security implementation standards and patterns
+- [Performance Optimization](../performance/performance-optimization.md) - Performance considerations in code development
+- [Feature Branch Workflow](../workflow/feature-branch-workflow.md) - Code quality enforcement in branch workflow
 <!-- NAV_END -->
 
 ## Elixir Code Style
@@ -36,7 +36,7 @@ defmodule Prismatic.Accounts.User do
   
   Handles user data validation, password hashing, and account management.
   
-  Related: [Security Guidelines](security-guidelines.md#password-hashing)
+  Related: [Security Guidelines](../security/security-guidelines.md#password-hashing)
   """
   
   use Ecto.Schema
@@ -79,7 +79,7 @@ Returns `{:ok, user}` on success or `{:error, changeset}` on validation failure.
 
 ## Security
 Passwords are automatically hashed using Argon2.
-See [Security Guidelines](security-guidelines.md#password-policies) for requirements.
+See [Security Guidelines](../security/security-guidelines.md#password-policies) for requirements.
 """
 @spec create_user(map()) :: {:ok, User.t()} | {:error, Ecto.Changeset.t()}
 def create_user(attrs \\ %{}) do
@@ -385,7 +385,7 @@ def get_user_data(id), do: Repo.get(User, id)
 - Test generated code thoroughly
 
 ## Related Documentation
-- [Architecture Overview](../core/architecture-overview.md) - System design principles
-- [Developer Experience](developer-experience.md) - Development workflow and tools
-- [Security Guidelines](security-guidelines.md) - Security implementation details
-- [Performance Optimization](performance-optimization.md) - Performance best practices
+- [Architecture Overview](../../core/architecture-overview.md) - System design principles
+- [Developer Experience](../getting-started/developer-experience.md) - Development workflow and tools
+- [Security Guidelines](../security/security-guidelines.md) - Security implementation details
+- [Performance Optimization](../performance/performance-optimization.md) - Performance best practices

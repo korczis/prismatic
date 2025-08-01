@@ -9,21 +9,21 @@ Complete guide for developer onboarding, daily workflow, and productivity optimi
 <!-- NAV_START -->
 ## Navigation
 
-**Current Location**: [Home](../README.md) > [Guides](README.md) > Developer Experience
+**Current Location**: [Home](../../README.md) > [Guides](../README.md) > [Getting Started](README.md) > Developer Experience
 
 ### Quick Links
 
-- **📚 [Parent Directory](README.md)** - Return to guides index
-- **🏠 [Documentation Home](../README.md)** - Main documentation index
-- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+- **📚 [Parent Directory](README.md)** - Return to getting started guides
+- **🏠 [Documentation Home](../../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../../reference/glossary.md)** - Find terms and concepts
 
 ### Related Documentation
 
-- [Coding Standards](coding-standards.md) - Code style and conventions for consistent development
-- [Comprehensive Feature Branch Workflow](comprehensive-feature-branch-workflow.md) - Branching strategy and workflow
-- [Architecture Overview](../core/architecture-overview.md) - System design principles and structure
-- [Performance Optimization](performance-optimization.md) - Development tools and practices that support performance
-- [Security Guidelines](security-guidelines.md) - Security considerations in development workflow
+- [Coding Standards](../development/coding-standards.md) - Code style and conventions for consistent development
+- [Feature Branch Workflow](../workflow/feature-branch-workflow.md) - Branching strategy and workflow
+- [Architecture Overview](../../core/architecture-overview.md) - System design principles and structure
+- [Performance Optimization](../performance/performance-optimization.md) - Development tools and practices that support performance
+- [Security Guidelines](../security/security-guidelines.md) - Security considerations in development workflow
 <!-- NAV_END -->
 
 ## Onboarding Process
@@ -51,9 +51,9 @@ Complete guide for developer onboarding, daily workflow, and productivity optimi
 
 ### First Day Checklist
 - [ ] Complete environment setup
-- [ ] Read [architecture overview](../core/architecture-overview.md)
-- [ ] Review [coding standards](coding-standards.md) 
-- [ ] Browse existing code in [`apps/`](../../apps/)
+- [ ] Read [architecture overview](../../core/architecture-overview.md)
+- [ ] Review [coding standards](../development/coding-standards.md) 
+- [ ] Browse existing code in [`apps/`](../../../apps/)
 - [ ] Make first small contribution (documentation fix, typo correction)
 
 ## Daily Development Workflow
@@ -74,9 +74,9 @@ iex -S mix phx.server
    ```
 
 2. **Implement Following Patterns**
-   - Business logic in [`apps/prismatic/lib/prismatic/`](../../apps/prismatic/lib/prismatic/)
-   - Web interface in [`apps/prismatic_web/lib/prismatic_web/`](../../apps/prismatic_web/lib/prismatic_web/)
-   - Follow [coding standards](coding-standards.md) for consistency
+   - Business logic in [`apps/prismatic/lib/prismatic/`](../../../apps/prismatic/lib/prismatic/)
+   - Web interface in [`apps/prismatic_web/lib/prismatic_web/`](../../../apps/prismatic_web/lib/prismatic_web/)
+   - Follow [coding standards](../development/coding-standards.md) for consistency
 
 3. **Test Implementation**
    ```bash
@@ -227,9 +227,9 @@ end
 - **Database**: PostgreSQL on localhost:5432
 
 ### Configuration Management
-- **Development**: [`config/dev.exs`](../../config/dev.exs)
-- **Test**: [`config/test.exs`](../../config/test.exs)
-- **Runtime**: [`config/runtime.exs`](../../config/runtime.exs)
+- **Development**: [`config/dev.exs`](../../../config/dev.exs)
+- **Test**: [`config/test.exs`](../../../config/test.exs)
+- **Runtime**: [`config/runtime.exs`](../../../config/runtime.exs)
 
 ### Environment Variables
 ```bash
@@ -249,7 +249,7 @@ PHX_HOST=localhost
 - **Asset compilation errors**: Delete `_build` and `deps`, run `mix deps.get`
 - **Permission denied**: Check file permissions and ownership
 
-**For detailed troubleshooting**: See [troubleshooting guide](../operations/troubleshooting.md)
+**For detailed troubleshooting**: See [troubleshooting guide](../../operations/troubleshooting.md)
 
 ## Team Collaboration
 
@@ -265,7 +265,7 @@ PHX_HOST=localhost
 - **Feature Ideas**: Propose in team meetings, create ADRs for decisions
 
 ## Related Documentation
-- [Coding Standards](coding-standards.md) - Code style and conventions
-- [Architecture Overview](../core/architecture-overview.md) - System design principles
-- [Deployment Procedures](../operations/deployment-procedures.md) - Production deployment
-- [Troubleshooting](../operations/troubleshooting.md) - Problem diagnosis and solutions
+- [Coding Standards](../development/coding-standards.md) - Code style and conventions
+- [Architecture Overview](../../core/architecture-overview.md) - System design principles
+- [Deployment Procedures](../../operations/deployment-procedures.md) - Production deployment
+- [Troubleshooting](../../operations/troubleshooting.md) - Problem diagnosis and solutions
