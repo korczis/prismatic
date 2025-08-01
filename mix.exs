@@ -62,7 +62,7 @@ defmodule Prismatic.MixProject do
         assets: %{"priv/static/images" => "assets", "docs/images" => "images"},
         formatters: ["html", "epub"],
         groups_for_modules: [
-          "Web": [
+          Web: [
             PrismaticWeb,
             ~r/PrismaticWeb\..*/
           ],
@@ -71,27 +71,27 @@ defmodule Prismatic.MixProject do
             ~r/Prismatic\.Memory\.Protocol/,
             ~r/Prismatic\.LLM\.Backend/
           ],
-          "Implementations": [
+          Implementations: [
             ~r/Prismatic\.Agent\.Impl/,
             ~r/Prismatic\.Memory\.Impl/,
             ~r/Prismatic\.LLM\.Impl/
           ],
-          "Supervision": [
+          Supervision: [
             ~r/Prismatic\.Supervisor\..*/
           ],
-          "Testing": [
+          Testing: [
             ~r/Prismatic\.Test\..*/
           ],
-          "Core": [
+          Core: [
             Prismatic,
             ~r/Prismatic\..*/
           ]
         ],
         groups_for_extras: [
-          "Architecture": ~r/docs\/architecture\/.*/,
-          "Protocols": ~r/docs\/(agents|memory|llm)\/.*/,
-          "Applications": ~r/docs\/applications\/.*/,
-          "Guides": ~r/guides\/[^\/]+\.md/
+          Architecture: ~r/docs\/architecture\/.*/,
+          Protocols: ~r/docs\/(agents|memory|llm)\/.*/,
+          Applications: ~r/docs\/applications\/.*/,
+          Guides: ~r/guides\/[^\/]+\.md/
         ]
       ]
     ]
@@ -177,7 +177,20 @@ defmodule Prismatic.MixProject do
       {:benchee_html, "~> 1.0", only: [:dev, :test]},
 
       # Monitoring & Observability
-      {:telemetry, "~> 1.2"}
+      {:telemetry, "~> 1.2"},
+
+      # TODO: AI Should review naming of this group
+      # Streaming
+      # {:amqp, "~> 4.1"},
+      # {:amqp_client, "~> 4.0"},
+      {:gen_stage, "~> 1.3"},
+      {:flow, "~> 1.2"},
+      {:broadway, "~> 1.2"},
+      # {:broadway_rabbitmq, "~> 0.8.2"},
+      {:broadway_dashboard, "~> 0.4.1"},
+      # {:off_broadway_websocket, "~> 1.0"},
+      {:yaml_elixir, "~> 2.11"},
+      {:toml, "~> 0.7"}
     ]
   end
 
