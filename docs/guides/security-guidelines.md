@@ -2,6 +2,10 @@
 
 Comprehensive security guidelines and best practices for developing, deploying, and maintaining the Prismatic application.
 
+## ⏱️ Time Estimates
+
+📖 Reading time: 25 minutes | 🔧 Implementation time: Varies by feature | 📊 Skill level: Intermediate
+
 <!-- NAV_START -->
 ## Navigation
 

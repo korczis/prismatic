@@ -2,6 +2,10 @@
 
 Comprehensive performance optimization guidelines and best practices for the Prismatic application, covering application code, database queries, infrastructure, and monitoring.
 
+## ⏱️ Time Estimates
+
+📖 Reading time: 25 minutes | 🔧 Implementation time: 2-4 hours | 📊 Skill level: Intermediate
+
 <!-- NAV_START -->
 ## Navigation
 

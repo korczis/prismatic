@@ -2,6 +2,30 @@
 
 Code style conventions and quality standards for consistent development across the Prismatic project.
 
+## ⏱️ Time Estimates
+
+📖 Reading time: 15 minutes | 🔧 Reference time: Ongoing | 📊 Skill level: Beginner
+
+<!-- NAV_START -->
+## Navigation
+
+**Current Location**: [Home](../README.md) > [Guides](README.md) > Coding Standards
+
+### Quick Links
+
+- **📚 [Parent Directory](README.md)** - Return to guides index
+- **🏠 [Documentation Home](../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+
+### Related Documentation
+
+- [Developer Experience](developer-experience.md) - Development workflow and tools that support these standards
+- [Architecture Overview](../core/architecture-overview.md) - System design principles that inform coding practices
+- [Security Guidelines](security-guidelines.md) - Security implementation standards and patterns
+- [Performance Optimization](performance-optimization.md) - Performance considerations in code development
+- [Comprehensive Feature Branch Workflow](comprehensive-feature-branch-workflow.md) - Code quality enforcement in branch workflow
+<!-- NAV_END -->
+
 ## Elixir Code Style
 
 ### Module Organization

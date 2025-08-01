@@ -1,5 +1,31 @@
 # Comprehensive Feature Branch Workflow Guide
 
+Complete workflow system for feature branch development, automated tagging, and seamless integration with documentation and CI/CD pipelines.
+
+## ⏱️ Time Estimates
+
+📖 Reading time: 45 minutes | 🔧 Setup time: 5 minutes | 📊 Skill level: Beginner
+
+<!-- NAV_START -->
+## Navigation
+
+**Current Location**: [Home](../README.md) > [Guides](README.md) > Comprehensive Feature Branch Workflow
+
+### Quick Links
+
+- **📚 [Parent Directory](README.md)** - Return to guides index
+- **🏠 [Documentation Home](../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+
+### Related Documentation
+
+- [Developer Experience](developer-experience.md) - Daily development workflow that integrates with this branching strategy
+- [Coding Standards](coding-standards.md) - Code quality standards enforced by this workflow
+- [Git Hooks Implementation](git-hooks-implementation.md) - Local enforcement mechanisms
+- [GitHub Actions Implementation](github-actions-implementation.md) - CI/CD pipeline automation
+- [Documentation Integration](documentation-integration.md) - Automatic documentation synchronization
+<!-- NAV_END -->
+
 ## Overview
 
 This document provides the complete guide to the Prismatic feature branch workflow - a comprehensive system that enforces proper branching practices, automated tagging, and seamless integration with documentation and CI/CD pipelines.

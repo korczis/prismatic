@@ -2,6 +2,30 @@
 
 Complete guide for developer onboarding, daily workflow, and productivity optimization.
 
+## ⏱️ Time Estimates
+
+📖 Reading time: 30 minutes | 🔧 Implementation time: 30 minutes | 📊 Skill level: Beginner
+
+<!-- NAV_START -->
+## Navigation
+
+**Current Location**: [Home](../README.md) > [Guides](README.md) > Developer Experience
+
+### Quick Links
+
+- **📚 [Parent Directory](README.md)** - Return to guides index
+- **🏠 [Documentation Home](../README.md)** - Main documentation index
+- **🔍 [Search Documentation](../reference/glossary.md)** - Find terms and concepts
+
+### Related Documentation
+
+- [Coding Standards](coding-standards.md) - Code style and conventions for consistent development
+- [Comprehensive Feature Branch Workflow](comprehensive-feature-branch-workflow.md) - Branching strategy and workflow
+- [Architecture Overview](../core/architecture-overview.md) - System design principles and structure
+- [Performance Optimization](performance-optimization.md) - Development tools and practices that support performance
+- [Security Guidelines](security-guidelines.md) - Security considerations in development workflow
+<!-- NAV_END -->
+
 ## Onboarding Process
 
 ### New Developer Setup
