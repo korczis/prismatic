@@ -114,10 +114,10 @@ Choose your path based on your current goal:
 
 | Guide | Focus Area | Key Topics |
 |-------|------------|------------|
-| [`documentation-integration.md`](documentation-integration.md) | Documentation System | Cross-references, Sync, Validation |
-| [`documentation-navigation-standards.md`](documentation-navigation-standards.md) | Navigation System | Templates, Positioning, Standards |
-| [`documentation-navigation-templates.md`](documentation-navigation-templates.md) | Template Usage | Formats, Rules, Examples |
-| [`documentation-navigation-mix-tasks.md`](documentation-navigation-mix-tasks.md) | Documentation Automation | Validation, Migration, Management |
+| [`documentation/`](documentation/) | Complete Documentation System | Comprehensive guides for documentation navigation system |
+| [`documentation/documentation-system.md`](documentation/documentation-system.md) | System Standards & Templates | Navigation standards, HTML markers, templates, positioning |
+| [`documentation/documentation-automation.md`](documentation/documentation-automation.md) | Automation & CI/CD | Mix tasks, validation, migration, CI/CD integration |
+| [`documentation-integration.md`](documentation-integration.md) | Feature Integration | Cross-references, sync, workflow integration |
 
 ### AI & Development Integration
 
@@ -177,11 +177,11 @@ Choose your path based on your current goal:
 ## Contributing to Guides
 
 When creating or updating guides:
-- Follow the [Documentation Standards](documentation-navigation-standards.md)
-- Use the [Navigation Templates](documentation-navigation-templates.md)
+- Follow the [Documentation System Guide](documentation/documentation-system.md)
+- Use the navigation templates and standards from the [Documentation System](documentation/)
 - Test examples and procedures before publishing
 - Update related cross-references and links
-- Use the Mix tasks for navigation management
+- Use the Mix tasks from the [Documentation Automation Guide](documentation/documentation-automation.md)
 
 ### Guide Quality Standards
 - **Clarity**: Clear, actionable instructions
