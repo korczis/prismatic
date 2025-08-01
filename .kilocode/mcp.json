@@ -1,13 +1,5 @@
 {
   "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/home/korczis/dev/prismatic"
-      ]
-    },
     "sequentialthinking": {
       "command": "npx",
       "args": [

@@ -16,21 +16,15 @@ deps.tree:Prints the dependency tree
 deps.unlock:Unlocks the given dependencies
 deps.update:Updates the given dependencies
 do:Executes the tasks separated by plus
-docs:Comprehensive documentation analysis (see --help for specific commands)
-docs.ai_data:Generate AI-friendly structured data
-docs.analyze:Run comprehensive documentation analysis
-docs.extract_adrs:Extract Architecture Decision Records
-docs.extract_examples:Extract and analyze code examples
-docs.health_report:Generate comprehensive synchronization health reports
-docs.migrate_code:Code migration framework operations
-docs.monitor_drift:Drift prevention system monitoring and management
-docs.replace_references:Reference replacement system operations
-docs.report:Generate comprehensive analysis report
-docs.setup_git_hooks:Version control integration setup and management
-docs.sync:Comprehensive documentation-code synchronization (see --help for specific commands)
-docs.sync_bidirectional:Bidirectional synchronization engine operations
-docs.trace:Generate traceability markers
-docs.validate:Validate documentation consistency
+docs:Legacy docs task (DEPRECATED - use prismatic.docs.* tasks)
+docs.tasks.ai_data:Generate AI-friendly structured data
+docs.tasks.analyze:Enterprise comprehensive documentation analysis with progress monitoring
+docs.tasks.extract_adrs:Enterprise ADR extraction with domain filtering and impact analysis
+docs.tasks.extract_examples:Enterprise code example extraction with quality analysis and validation
+docs.tasks.report:Generate comprehensive analysis report
+docs.tasks.trace:Generate traceability markers
+docs.tasks.validate:Validate documentation consistency
+docs_sync:Legacy docs_sync task (DEPRECATED - use prismatic.sync.* tasks)
 ecto:Prints Ecto help information
 ecto.create:Creates the repository storage
 ecto.drop:Drops the repository storage
@@ -101,6 +95,7 @@ phx.new.ecto:Creates a new Ecto project within an umbrella project
 phx.new.web:Creates a new Phoenix web project within an umbrella project
 phx.routes:Prints all routes
 phx.server:Starts applications and their servers
+prismatic:Main entry point for Prismatic tasks with comprehensive help
 profile.cprof:Profiles the given file or expression with cprof
 profile.eprof:Profiles the given file or expression with eprof
 profile.fprof:Profiles the given file or expression with fprof
