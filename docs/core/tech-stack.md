@@ -15,7 +15,7 @@ Detailed breakdown of technologies, libraries, and tools used in the Prismatic p
 - **Purpose**: Actor-based concurrency and fault tolerance
 - **Benefits**: Supervision trees, hot code reloading, distribution
 - **Usage**: Application supervision, GenServer processes, PubSub
-- **Key Concepts**: See [glossary](../reference/glossary.md#otp-open-telecom-platform)
+- **Key Concepts**: See [OTP in glossary](../reference/glossary.md)
 
 ### Web Framework
 **Phoenix 1.7.21**
@@ -35,7 +35,7 @@ Detailed breakdown of technologies, libraries, and tools used in the Prismatic p
 - **Purpose**: Primary data store
 - **Benefits**: ACID compliance, advanced features, performance
 - **Usage**: Application data, user sessions, business records
-- **Configuration**: [`config/dev.exs`](../../config/dev.exs#L3-L11)
+- **Configuration**: [`config/dev.exs`](../../config/dev.exs)
 
 **Ecto 3.10+**
 - **Purpose**: Database wrapper and query builder
@@ -48,7 +48,7 @@ Detailed breakdown of technologies, libraries, and tools used in the Prismatic p
 - **Purpose**: HTTP/1.1 and HTTP/2 server
 - **Benefits**: Modern protocol support, performance, WebSocket support
 - **Usage**: Production HTTP server (replaces Cowboy)
-- **Configuration**: [`config/config.exs`](../../config/config.exs#L32)
+- **Configuration**: [`config/config.exs`](../../config/config.exs)
 
 ## Frontend Technologies
 
@@ -77,7 +77,7 @@ Detailed breakdown of technologies, libraries, and tools used in the Prismatic p
 - **Purpose**: JavaScript bundling and transpilation
 - **Benefits**: Fast builds, ES2017+ support, tree shaking
 - **Usage**: JavaScript compilation and bundling
-- **Configuration**: [`config/config.exs`](../../config/config.exs#L40-L48)
+- **Configuration**: [`config/config.exs`](../../config/config.exs)
 
 **Native CSS Processing**
 - **Purpose**: CSS compilation and optimization
@@ -143,7 +143,7 @@ Detailed breakdown of technologies, libraries, and tools used in the Prismatic p
 - **Purpose**: Automatic browser refresh during development
 - **Benefits**: Rapid feedback, seamless development experience
 - **Usage**: File change detection and browser updates
-- **Configuration**: [`config/dev.exs`](../../config/dev.exs#L55-L63)
+- **Configuration**: [`config/dev.exs`](../../config/dev.exs)
 
 ## Monitoring & Observability
 

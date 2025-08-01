@@ -72,7 +72,7 @@ Include "Related" sections at the end of each file:
 ### Fragment Links
 Link to specific sections within documents:
 ```markdown
-Review the [error handling patterns](../guides/coding-standards.md#error-handling) section.
+Review the [error handling patterns](../guides/coding-standards.md) section.
 ```
 
 ## Content Principles

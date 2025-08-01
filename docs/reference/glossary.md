@@ -160,7 +160,7 @@ The N+1 problem occurs when code executes one query to fetch a list of records, 
 - [Performance Guidelines](../guides/performance-optimization.md#database-efficiency)
 - [Coding Standards](../guides/coding-standards.md#query-optimization)
 
-### OTP (Open Telecom Platform)
+### OTP Open Telecom Platform
 Elixir's actor-based concurrency framework providing fault-tolerance, distribution, and hot code swapping.
 
 OTP is the foundation of Elixir's concurrent programming model, offering battle-tested patterns for building distributed, fault-tolerant systems. It includes supervision trees for managing process failures, behaviors like GenServer for common patterns, and tools for building scalable, maintainable applications that can handle thousands of concurrent operations.

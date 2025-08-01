@@ -8,7 +8,7 @@ This document establishes standards for linking between documentation files in t
 Links should provide context about the relationship:
 ```markdown
 <!-- ✅ Good: Descriptive link text -->
-For database setup details, see [deployment procedures](../operations/deployment-procedures.md#database-setup).
+For database setup details, see [deployment procedures](../operations/deployment-procedures.md).
 
 <!-- ❌ Poor: Generic link text -->
 See [here](../operations/deployment-procedures.md) for more info.
@@ -21,7 +21,7 @@ When one document references another, consider adding a backlink:
 Database queries must follow the [performance guidelines](../operations/performance-optimization.md#query-patterns).
 
 <!-- In performance-optimization.md -->
-These patterns are enforced by our [coding standards](../guides/coding-standards.md#database-access).
+These patterns are enforced by our [coding standards](../guides/coding-standards.md).
 ```
 
 ## Link Types and Formats
@@ -32,7 +32,7 @@ These patterns are enforced by our [coding standards](../guides/coding-standards
 [Developer Experience Guide](../guides/developer-experience.md)
 
 <!-- Link to specific section -->
-[Error Handling Patterns](../guides/coding-standards.md#error-handling)
+[Error Handling Patterns](../guides/coding-standards.md)
 
 <!-- Link with context -->
 Review the [troubleshooting procedures](../operations/troubleshooting.md) before deploying.
@@ -74,7 +74,7 @@ Every document should end with relevant cross-references:
 ### Inline References
 Use inline references for immediate context:
 ```markdown
-When implementing authentication (see [security guidelines](../guides/security-guidelines.md#authentication-patterns)), ensure proper session management.
+When implementing authentication (see [security guidelines](../guides/security-guidelines.md)), ensure proper session management.
 ```
 
 ### Breadcrumb Navigation
@@ -84,7 +84,7 @@ Include navigation context in complex documents:
 
 **Navigation**: [Home](../README.md) > [Reference](../reference/README.md) > API Endpoints
 
-**Related**: [Authentication](../guides/security-guidelines.md#authentication) | [Error Handling](../guides/coding-standards.md#error-handling)
+**Related**: [Authentication](../guides/security-guidelines.md) | [Error Handling](../guides/coding-standards.md)
 ```
 
 ## Cross-Reference Maintenance
@@ -113,7 +113,7 @@ This implements [ADR-0001: Umbrella Structure](../architecture/adr-0001-umbrella
 
 #### Procedure References
 ```markdown
-Follow the [standard deployment process](../operations/deployment-procedures.md#production-deployment) for production releases.
+Follow the [standard deployment process](../operations/deployment-procedures.md) for production releases.
 ```
 
 #### Troubleshooting References

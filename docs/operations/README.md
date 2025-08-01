@@ -57,19 +57,19 @@ This section contains all operational procedures for deploying, monitoring, and 
 ## Quick Start Guides
 
 ### For New Operations Team Members
-1. **Environment Setup** - [Deployment Procedures: Environment Setup](deployment-procedures.md#environment-setup)
+1. **Environment Setup** - [Deployment Procedures: Environment Setup](deployment-procedures.md)
 2. **Monitoring Dashboard** - Access and configure monitoring systems
 3. **Emergency Contacts** - Key personnel and escalation procedures
 
 ### For Developers
-1. **Staging Deployment** - [Deployment Procedures: Staging](deployment-procedures.md#staging-deployment)
+1. **Staging Deployment** - [Deployment Procedures: Staging](deployment-procedures.md)
 2. **Local Development** - [Developer Experience](../guides/developer-experience.md)
 3. **Common Issues** - [Troubleshooting](troubleshooting.md)
 
 ### For Production Deployments
-1. **Pre-deployment Checklist** - [Deployment Procedures: Checklist](deployment-procedures.md#pre-deployment-checklist)
-2. **Blue-Green Deployment** - [Deployment Procedures: Production](deployment-procedures.md#production-deployment)
-3. **Post-deployment Verification** - [Deployment Procedures: Verification](deployment-procedures.md#post-deployment-verification)
+1. **Pre-deployment Checklist** - [Deployment Procedures: Checklist](deployment-procedures.md)
+2. **Blue-Green Deployment** - [Deployment Procedures: Production](deployment-procedures.md)
+3. **Post-deployment Verification** - [Deployment Procedures: Verification](deployment-procedures.md)
 
 ## Standard Operating Procedures
 

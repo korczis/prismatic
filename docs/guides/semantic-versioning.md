@@ -715,7 +715,7 @@ mix prismatic.config.update --version=v2
 ```
 
 ### 4. Update Code
-See the [API Changes](#api-changes) section for required code updates.
+See the API Changes section above for required code updates.
 
 ## Support
 - Migration support available until 2024-12-31

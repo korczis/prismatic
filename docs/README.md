@@ -146,13 +146,13 @@ For complete implementation details, see:
 
 ### By Task
 **Setting Up Development Environment**
-→ [Developer Experience: Onboarding](guides/developer-experience.md#onboarding-process)
+→ [Developer Experience: Onboarding](guides/developer-experience.md)
 
 **Understanding Code Organization**
-→ [Architecture Overview: Structure](core/architecture-overview.md#umbrella-application-structure)
+→ [Architecture Overview: Structure](core/architecture-overview.md)
 
 **Deploying to Production**
-→ [Deployment Procedures](operations/deployment-procedures.md#production-deployment)
+→ [Deployment Procedures](operations/deployment-procedures.md)
 
 **Debugging Issues**
 → [Troubleshooting Guide](operations/troubleshooting.md)
@@ -192,7 +192,7 @@ For detailed maintenance procedures, see [Documentation Maintenance](_meta/maint
 ### Standards
 - Follow [Naming Conventions](_meta/naming-conventions.md)
 - Use [Cross-Reference Guide](_meta/cross-reference-guide.md) for linking
-- Maintain [single responsibility](_meta/naming-conventions.md#content-principles) per file
+- Maintain [single responsibility](_meta/naming-conventions.md) per file
 
 ### AI Collaboration
 - AI generates initial content following established patterns
