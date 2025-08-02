@@ -570,7 +570,7 @@ defmodule Mix.Tasks.Prismatic.Shared.OutputFormatter do
     end)
   end
 
-  defp display_table_interactive(data, columns, headers, opts) do
+  defp display_table_interactive(data, columns, headers, _opts) do
     # Calculate column widths
     col_widths = calculate_column_widths(data, columns, headers)
 

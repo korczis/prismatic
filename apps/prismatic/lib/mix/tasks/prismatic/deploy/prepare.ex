@@ -135,17 +135,15 @@ defmodule Mix.Tasks.Prismatic.Deploy.Prepare do
     :health_checks
   ]
 
-  @impl Mix.Task
+  @impl true
   def run(args) do
     with_task_context(__MODULE__, args, &execute_deployment_preparation/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       env: "production",
@@ -161,7 +159,6 @@ defmodule Mix.Tasks.Prismatic.Deploy.Prepare do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:env] && options[:env] not in @deployment_environments ->
@@ -178,7 +175,6 @@ defmodule Mix.Tasks.Prismatic.Deploy.Prepare do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Check if we're in a Mix project
     unless File.exists?("mix.exs") do
@@ -691,7 +687,7 @@ defmodule Mix.Tasks.Prismatic.Deploy.Prepare do
     OutputFormatter.display_info("Steps: #{Enum.join(config.steps, ", ")}")
   end
 
-  defp confirm_deployment_preparation(config) do
+  defp confirm_deployment_preparation(_config) do
     Mix.shell().yes?("\nProceed with deployment preparation?")
   end
 
@@ -933,7 +929,7 @@ defmodule Mix.Tasks.Prismatic.Deploy.Prepare do
     %{configured: true, provider: cdn_config.provider, endpoints: cdn_config.endpoints}
   end
 
-  defp parse_migration_status(output) do
+  defp parse_migration_status(_output) do
     # Simple migration status parsing
     %{status: "up_to_date", pending_migrations: 0}
   end

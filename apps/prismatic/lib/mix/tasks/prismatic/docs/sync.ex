@@ -85,17 +85,15 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     h: :help
   ]
 
-  @impl Mix.Task
+  @impl true
   def run(args) do
     with_task_context(__MODULE__, args, &execute_sync/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       source: "docs/",
@@ -112,7 +110,6 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:interval] && options[:interval] < 60 ->
@@ -126,7 +123,6 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Validate source directory
     ErrorHandler.validate_file_access(options.source, "Source directory")
@@ -436,7 +432,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     }
   end
 
-  defp identify_potential_issues(source_files, target_files, options) do
+  defp identify_potential_issues(source_files, target_files, _options) do
     issues = []
 
     # Check for large files
@@ -466,7 +462,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
   defp check_sync_needed(state, options) do
     # Simple implementation - check file modification times
     last_check = state.last_sync || state.start_time
-    current_time = System.monotonic_time(:millisecond)
+    _current_time = System.monotonic_time(:millisecond)
 
     # Check if any source files have been modified
     source_files = discover_source_files(options.source)
@@ -482,7 +478,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     end)
   end
 
-  defp perform_quick_sync(options) do
+  defp perform_quick_sync(_options) do
     # Simplified sync for monitoring mode
     %{
       files_synced: 0,

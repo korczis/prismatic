@@ -266,7 +266,7 @@ defmodule Prismatic.Documentation.CodeExampleExtractor do
     end
   end
 
-  defp is_conceptual_example?(example, content) do
+  defp is_conceptual_example?(example, _content) do
     context_keywords = [
       "example", "for example", "like this", "such as", "conceptual",
       "pseudo", "simplified", "illustration", "demonstrates"

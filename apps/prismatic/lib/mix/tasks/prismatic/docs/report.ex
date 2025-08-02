@@ -243,7 +243,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     }
   end
 
-  defp collect_executive_data(base_data, opts) do
+  defp collect_executive_data(base_data, _opts) do
     ProgressMonitor.show_info("Collecting executive summary data...")
 
     # Focused data collection for executive summary
@@ -294,7 +294,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     }
   end
 
-  defp collect_badge_data(base_data, opts) do
+  defp collect_badge_data(base_data, _opts) do
     ProgressMonitor.show_info("Collecting badge generation data...")
 
     # Minimal data collection for badge generation
@@ -472,7 +472,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
 
   # HTML report generators
 
-  defp generate_html_dashboard(data, config, opts) do
+  defp generate_html_dashboard(data, _config, _opts) do
     """
     <!DOCTYPE html>
     <html lang="en">
@@ -529,7 +529,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     """
   end
 
-  defp generate_html_executive(data, config, opts) do
+  defp generate_html_executive(data, _config, _opts) do
     """
     <!DOCTYPE html>
     <html lang="en">
@@ -578,7 +578,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     """
   end
 
-  defp generate_html_detailed(data, config, opts) do
+  defp generate_html_detailed(data, _config, _opts) do
     """
     <!DOCTYPE html>
     <html lang="en">
@@ -638,7 +638,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     """
   end
 
-  defp generate_html_trends(data, config, opts) do
+  defp generate_html_trends(data, _config, opts) do
     """
     <!DOCTYPE html>
     <html lang="en">
@@ -699,7 +699,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
 
   # JSON report generators
 
-  defp generate_json_dashboard(data, config, opts) do
+  defp generate_json_dashboard(data, _config, _opts) do
     Jason.encode!(%{
       type: "dashboard",
       generated_at: DateTime.utc_now(),
@@ -712,7 +712,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     }, pretty: true)
   end
 
-  defp generate_json_detailed(data, config, opts) do
+  defp generate_json_detailed(data, _config, _opts) do
     Jason.encode!(%{
       type: "detailed",
       generated_at: DateTime.utc_now(),
@@ -726,7 +726,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     }, pretty: true)
   end
 
-  defp generate_json_trends(data, config, opts) do
+  defp generate_json_trends(data, _config, opts) do
     Jason.encode!(%{
       type: "trends",
       generated_at: DateTime.utc_now(),
@@ -740,7 +740,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
     }, pretty: true)
   end
 
-  defp generate_json_badge(data, config, opts) do
+  defp generate_json_badge(data, _config, _opts) do
     Jason.encode!(%{
       schemaVersion: 1,
       label: "docs",
@@ -753,7 +753,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
 
   # Badge generation
 
-  defp generate_svg_badge(data, config, opts) do
+  defp generate_svg_badge(data, _config, _opts) do
     message_width = String.length(data.message) * 6 + 10
     total_width = 54 + message_width
 
@@ -783,7 +783,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
 
   # Output and utility functions
 
-  defp output_report(report, config, opts) do
+  defp output_report(report, _config, opts) do
     case opts[:output] do
       nil ->
         # Output to console based on format
@@ -1028,17 +1028,17 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
   # Placeholder implementations for complex functions
   # These would be implemented with proper logic in a real system
 
-  defp run_analysis_for_dashboard(files, opts) do
+  defp run_analysis_for_dashboard(_files, _opts) do
     # Would call Mix.Tasks.Prismatic.Docs.Analyze with dashboard-specific options
     %{health_score: 85, dimensions: [:structure, :content, :links], results: %{}}
   end
 
-  defp run_validation_for_dashboard(files, opts) do
+  defp run_validation_for_dashboard(_files, _opts) do
     # Would call Mix.Tasks.Prismatic.Docs.Validate with dashboard-specific options
     %{total_errors: 3, total_warnings: 7, categories: [:links, :content]}
   end
 
-  defp calculate_dashboard_metrics(analysis, validation) do
+  defp calculate_dashboard_metrics(_analysis, _validation) do
     %{
       total_files: 25,
       total_words: 15420,

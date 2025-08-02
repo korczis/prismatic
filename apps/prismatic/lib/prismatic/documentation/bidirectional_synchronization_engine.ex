@@ -31,10 +31,7 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
 
   require Logger
   alias Prismatic.Documentation.{
-    CodeMigrationFramework,
-    ReferenceReplacementSystem,
-    TraceabilityMarker,
-    ValidationIntegration
+    TraceabilityMarker
   }
 
   @notification_channels [:email, :slack, :webhook]
@@ -402,7 +399,7 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
       code_path: code_path,
       sync_events: [],
       active_conflicts: [],
-      reference_map: ReferenceReplacementSystem.build_reference_map([]),
+      reference_map: %{},
       traceability_data: TraceabilityMarker.generate_markers(docs_path, code_path),
       last_sync: DateTime.utc_now(),
       monitoring_config: build_monitoring_config(opts)
@@ -534,7 +531,7 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
     |> then(&"sync_#{&1}")
   end
 
-  defp perform_periodic_sync(state) do
+  defp perform_periodic_sync(_state) do
     # Periodic synchronization check
     Logger.debug("Performing periodic sync check")
 
@@ -587,7 +584,7 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
 
   # Conflict detection and resolution
 
-  defp detect_conflicts(event, sync_strategy) do
+  defp detect_conflicts(event, _sync_strategy) do
     conflicts = []
 
     # Check for simultaneous edits
@@ -602,18 +599,18 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
     conflicts
   end
 
-  defp check_simultaneous_edits(event, conflicts) do
+  defp check_simultaneous_edits(_event, conflicts) do
     # Check if both source and target files were modified recently
     # This is a simplified implementation
     conflicts
   end
 
-  defp check_reference_mismatches(event, conflicts) do
+  defp check_reference_mismatches(_event, conflicts) do
     # Check if references would be broken by the change
     conflicts
   end
 
-  defp check_dependency_breaks(event, conflicts) do
+  defp check_dependency_breaks(_event, conflicts) do
     # Check if the change would break dependencies
     conflicts
   end
@@ -818,13 +815,13 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
     }
   end
 
-  defp find_documentation_references(code_file) do
+  defp find_documentation_references(_code_file) do
     # Find documentation files that reference this code file
     # This would integrate with the traceability system
     []
   end
 
-  defp find_code_references(doc_file) do
+  defp find_code_references(_doc_file) do
     # Find code files referenced by this documentation
     []
   end
@@ -861,34 +858,34 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
 
   # Update generation and application
 
-  defp generate_documentation_updates(impact_analysis, opts) do
+  defp generate_documentation_updates(impact_analysis, _opts) do
     # Generate specific documentation updates based on impact analysis
     impact_analysis.impact_details
     |> Enum.flat_map(&generate_doc_updates_for_change/1)
   end
 
-  defp generate_code_updates(impact_analysis, opts) do
+  defp generate_code_updates(impact_analysis, _opts) do
     # Generate specific code updates based on impact analysis
     impact_analysis.impact_details
     |> Enum.flat_map(&generate_code_updates_for_change/1)
   end
 
-  defp generate_doc_updates_for_change(impact_detail) do
+  defp generate_doc_updates_for_change(_impact_detail) do
     # Generate documentation updates for a specific change
     []
   end
 
-  defp generate_code_updates_for_change(impact_detail) do
+  defp generate_code_updates_for_change(_impact_detail) do
     # Generate code updates for a specific documentation change
     []
   end
 
-  defp apply_documentation_updates(doc_updates, opts) do
+  defp apply_documentation_updates(doc_updates, _opts) do
     # Apply documentation updates
     Enum.map(doc_updates, &apply_single_doc_update/1)
   end
 
-  defp apply_code_updates(code_updates, opts) do
+  defp apply_code_updates(code_updates, _opts) do
     # Apply code updates
     Enum.map(code_updates, &apply_single_code_update/1)
   end
@@ -989,9 +986,24 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
     true
   end
 
-  defp determine_primary_change_direction(_code_changes, _doc_changes) do
+  defp determine_primary_change_direction(code_changes, doc_changes) do
     # Determine which side has more significant changes
-    :balanced
+    code_impact = calculate_change_impact(code_changes)
+    doc_impact = calculate_change_impact(doc_changes)
+
+    cond do
+      code_impact > doc_impact -> :code_primary
+      doc_impact > code_impact -> :doc_primary
+      true -> :balanced
+    end
+  end
+
+  defp calculate_change_impact(changes) do
+    # Simple impact calculation based on number and type of changes
+    case changes do
+      %{changes: change_list} when is_list(change_list) -> length(change_list)
+      _ -> 1
+    end
   end
 
   defp handle_balanced_changes(event, _code_changes, _doc_changes, _opts) do
@@ -1001,7 +1013,7 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
 
   # Conflict resolution
 
-  defp resolve_single_conflict(conflict, resolution_strategy, opts) do
+  defp resolve_single_conflict(conflict, resolution_strategy, _opts) do
     case resolution_strategy do
       :auto ->
         attempt_auto_resolution(conflict)
@@ -1063,7 +1075,7 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
 
   # Reporting and metrics
 
-  defp collect_sync_events(period_start, period_end) do
+  defp collect_sync_events(_period_start, _period_end) do
     # Collect synchronization events from the specified period
     # This would query a persistent event store
     []
@@ -1235,19 +1247,19 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
     end
   end
 
-  defp send_email_notification(type, content, recipients, opts) do
+  defp send_email_notification(type, _content, recipients, _opts) do
     # Placeholder for email notification
     Logger.info("Sending email notification: #{type}")
     %{channel: :email, status: :success, recipients: recipients}
   end
 
-  defp send_slack_notification(type, content, recipients, opts) do
+  defp send_slack_notification(type, _content, recipients, _opts) do
     # Placeholder for Slack notification
     Logger.info("Sending Slack notification: #{type}")
     %{channel: :slack, status: :success, recipients: recipients}
   end
 
-  defp send_webhook_notification(type, content, recipients, opts) do
+  defp send_webhook_notification(type, _content, recipients, _opts) do
     # Placeholder for webhook notification
     Logger.info("Sending webhook notification: #{type}")
     %{channel: :webhook, status: :success, recipients: recipients}

@@ -383,7 +383,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     sync_state = analyze_current_sync_state()
 
     # Determine if tagging is appropriate
-    if sync_state.is_synchronized and Keyword.get(opts, :force, false) do
+    if sync_state.is_synchronized or Keyword.get(opts, :force, false) do
       # Generate tag name
       tag_name = generate_sync_tag_name(sync_state, opts)
 
@@ -1882,11 +1882,16 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
 
   defp analyze_current_sync_state do
     # Analyze the current synchronization state
+    # This is a simplified implementation - in practice would check actual sync status
+    sync_score = 95
+    issues_count = 0
+    is_synchronized = sync_score >= 90 and issues_count == 0
+
     %{
-      is_synchronized: true,
-      sync_score: 95,
+      is_synchronized: is_synchronized,
+      sync_score: sync_score,
       last_sync: DateTime.utc_now(),
-      issues_count: 0
+      issues_count: issues_count
     }
   end
 

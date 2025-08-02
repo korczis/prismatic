@@ -463,7 +463,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
   end
 
   defp categorize_links(links, files) do
-    file_paths = MapSet.new(files)
+    _file_paths = MapSet.new(files)
 
     Enum.reduce(links, {[], [], []}, fn link, {internal, external, anchor} ->
       case link.type do
@@ -548,7 +548,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     end
   end
 
-  defp validate_anchor_links(anchor_links, context) do
+  defp validate_anchor_links(anchor_links, _context) do
     Enum.map(anchor_links, fn link ->
       source_content = File.read!(link.source_file)
       anchor = link.link
@@ -634,7 +634,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
 
   # Report generation
 
-  defp generate_validation_report(results, context, opts) do
+  defp generate_validation_report(results, context, _opts) do
     execution_time = System.monotonic_time(:millisecond) - context.start_time
 
     # Calculate overall validation metrics
@@ -796,7 +796,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     end
   end
 
-  defp show_validation_plan(categories, file_count, opts) do
+  defp show_validation_plan(categories, file_count, _opts) do
     Enum.each(categories, fn category ->
       description = get_category_description(category)
       OutputFormatter.display_info("#{category}: #{description}")
@@ -825,7 +825,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
 
   # Additional helper implementations (simplified for brevity)
 
-  defp normalize_link_data([text, url]), do: String.trim(url)
+  defp normalize_link_data([_text, url]), do: String.trim(url)
   defp normalize_link_data([url]), do: String.trim(url)
   defp normalize_link_data(link) when is_binary(link), do: String.trim(link)
   defp normalize_link_data(_), do: ""
@@ -841,7 +841,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     end
   end
 
-  defp find_link_line_number(content, _link_data) do
+  defp find_link_line_number(_content, _link_data) do
     # Simplified - would implement actual line number detection
     1
   end
@@ -911,35 +911,35 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
 
   defp validate_file_media(_file_path), do: %{images: [], alt_text: [], issues: []}
   defp consolidate_media_results(results), do: results
-  defp validate_image_references(results), do: %{valid: true, missing: []}
-  defp validate_alt_text_coverage(results), do: %{coverage: 85, missing: []}
-  defp validate_media_file_accessibility(results), do: %{accessible: true, issues: []}
-  defp validate_media_format_compliance(results), do: %{compliant: true, issues: []}
-  defp assess_media_optimization(results), do: %{optimized: 75, recommendations: []}
+  defp validate_image_references(_results), do: %{valid: true, missing: []}
+  defp validate_alt_text_coverage(_results), do: %{coverage: 85, missing: []}
+  defp validate_media_file_accessibility(_results), do: %{accessible: true, issues: []}
+  defp validate_media_format_compliance(_results), do: %{compliant: true, issues: []}
+  defp assess_media_optimization(_results), do: %{optimized: 75, recommendations: []}
 
   defp validate_file_metadata(_file_path), do: %{frontmatter: %{}, title: "", issues: []}
   defp consolidate_metadata_results(results), do: results
-  defp validate_frontmatter_consistency(results), do: %{consistent: true, issues: []}
-  defp validate_title_consistency(results), do: %{consistent: true, issues: []}
-  defp validate_date_formats(results), do: %{valid: true, issues: []}
-  defp validate_tag_consistency(results), do: %{consistent: true, issues: []}
-  defp validate_author_information(results), do: %{complete: true, issues: []}
+  defp validate_frontmatter_consistency(_results), do: %{consistent: true, issues: []}
+  defp validate_title_consistency(_results), do: %{consistent: true, issues: []}
+  defp validate_date_formats(_results), do: %{valid: true, issues: []}
+  defp validate_tag_consistency(_results), do: %{consistent: true, issues: []}
+  defp validate_author_information(_results), do: %{complete: true, issues: []}
 
   defp validate_markdown_syntax(_file_path), do: %{valid: true, issues: []}
   defp consolidate_syntax_results(results), do: results
-  defp assess_markdown_compliance(results), do: %{compliant: true, issues: []}
-  defp validate_code_block_syntax(results), do: %{valid: true, issues: []}
-  defp validate_table_formatting(results), do: %{valid: true, issues: []}
-  defp validate_list_formatting(results), do: %{valid: true, issues: []}
-  defp validate_heading_consistency(results), do: %{consistent: true, issues: []}
+  defp assess_markdown_compliance(_results), do: %{compliant: true, issues: []}
+  defp validate_code_block_syntax(_results), do: %{valid: true, issues: []}
+  defp validate_table_formatting(_results), do: %{valid: true, issues: []}
+  defp validate_list_formatting(_results), do: %{valid: true, issues: []}
+  defp validate_heading_consistency(_results), do: %{consistent: true, issues: []}
 
   defp validate_accessibility_compliance(_file_path), do: %{compliant: true, issues: []}
   defp consolidate_accessibility_results(results), do: results
-  defp assess_wcag_compliance(results), do: %{level: "AA", compliance: 92}
-  defp validate_heading_hierarchy(results), do: %{valid: true, issues: []}
-  defp validate_color_contrast(results), do: %{adequate: true, issues: []}
-  defp validate_language_declarations(results), do: %{present: true, issues: []}
-  defp assess_keyboard_navigation(results), do: %{accessible: true, issues: []}
+  defp assess_wcag_compliance(_results), do: %{level: "AA", compliance: 92}
+  defp validate_heading_hierarchy(_results), do: %{valid: true, issues: []}
+  defp validate_color_contrast(_results), do: %{adequate: true, issues: []}
+  defp validate_language_declarations(_results), do: %{present: true, issues: []}
+  defp assess_keyboard_navigation(_results), do: %{accessible: true, issues: []}
 
   # Summary generation functions
   defp generate_link_validation_summary(_internal, _external, _anchor), do: %{status: "completed", issues: 0}
@@ -998,7 +998,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
 
   defp count_warnings_in_result(_), do: 0
 
-  defp calculate_validation_score(results, total_errors, total_warnings) do
+  defp calculate_validation_score(_results, total_errors, total_warnings) do
     base_score = 100
     error_penalty = total_errors * 5
     warning_penalty = total_warnings * 2
@@ -1031,7 +1031,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     |> Enum.sort_by(& &1.severity, &severity_order/2)
   end
 
-  defp extract_findings_from_result(category, result) when is_map(result) do
+  defp extract_findings_from_result(_category, result) when is_map(result) do
     # This would extract detailed findings from the result structure
     # For now, return empty list as placeholder
     []
