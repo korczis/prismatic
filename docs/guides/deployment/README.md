@@ -33,7 +33,7 @@ This section contains comprehensive guides for deploying Prismatic applications 
 
 | Guide | Time Estimate | Description |
 |-------|---------------|-------------|
-| [**Deployment Procedures**](deployment-procedures.md) | 30 min | *Coming Soon* - Step-by-step deployment procedures for various environments |
+| [**Deployment Procedures**](deployment-procedures.md) | 35 min | Comprehensive deployment strategies, zero-downtime deployment, rollback procedures, and emergency response |
 | [**Deployment Team Adoption Strategy**](deployment-team-adoption-strategy.md) | 20 min | Comprehensive strategy for deploying and adopting workflow across development teams |
 | [**Environment Management**](environment-management.md) | 25 min | *Coming Soon* - Environment configuration, management, and promotion strategies |
 

@@ -34,9 +34,9 @@ This section contains comprehensive guides for core development practices, code 
 | Guide | Time Estimate | Description |
 |-------|---------------|-------------|
 | [**Coding Standards**](coding-standards.md) | 15 min read | Comprehensive code style conventions and quality standards for consistent development |
-| [**Testing Strategy**](testing-strategy.md) | 20 min read | *Coming Soon* - Testing approaches, patterns, and quality assurance practices |
-| [**API Design Guidelines**](api-design-guidelines.md) | 25 min read | *Coming Soon* - REST API design principles and implementation standards |
-| [**Error Handling & Logging**](error-handling-logging.md) | 20 min read | *Coming Soon* - Error management strategies and logging best practices |
+| [**Testing Strategy**](testing-strategy.md) | 25 min read | Comprehensive testing strategies, patterns, and implementation guidelines for reliable code |
+| [**API Design Guidelines**](api-design-guidelines.md) | 30 min read | REST API design principles, JSON responses, authentication, and security patterns |
+| [**Error Handling & Logging**](error-handling-logging.md) | 25 min read | Error management strategies, structured logging, and production observability practices |
 
 ### Development Workflow Support
 

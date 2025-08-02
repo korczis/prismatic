@@ -33,7 +33,7 @@ This section contains comprehensive guides for development automation, custom to
 
 | Guide | Time Estimate | Description |
 |-------|---------------|-------------|
-| [**Mix Tasks Implementation**](mix-tasks-implementation.md) | 45 min | Comprehensive guide for implementing custom Mix tasks for development automation |
+| [**Mix Tasks Implementation**](mix-tasks/) | Varies | Modular guides for implementing custom Mix tasks for development automation |
 | [**Team Adoption**](team-adoption.md) | 30 min | Consolidated strategies for adopting automation tools and processes across development teams |
 
 ### Automation Domains
@@ -41,6 +41,10 @@ This section contains comprehensive guides for development automation, custom to
 These guides cover automation across all aspects of development:
 
 - **Development Tooling** - Custom Mix tasks, scripts, and developer productivity tools
+  - [Branch Management](mix-tasks/branch-management.md) - Automated branch creation and validation
+  - [Version Management](mix-tasks/version-management.md) - Semantic versioning automation
+  - [Workflow Status](mix-tasks/workflow-status.md) - Status reporting and monitoring
+  - [Integration Testing](mix-tasks/integration-testing.md) - Testing and CI/CD integration
 - **Process Automation** - Workflow automation, validation, and quality gates
 - **Team Adoption** - Change management, training, and adoption strategies
 - **Integration Systems** - Tool integration, API automation, and system orchestration

@@ -43,7 +43,9 @@
 |-------|------|---------------|-------------|
 | [Coding Standards](development/coding-standards.md) | 15 min | Basic coding | Code style, patterns, and quality standards |
 | [Style Guide](development/style-guide.md) | 10 min | Coding knowledge | Language-specific formatting and conventions |
-| [Testing Guidelines](development/testing-guidelines.md) | 25 min | Testing experience | Comprehensive testing strategies and best practices |
+| [Testing Strategy](development/testing-strategy.md) | 25 min | Testing experience | Comprehensive testing strategies and implementation patterns |
+| [API Design Guidelines](development/api-design-guidelines.md) | 30 min | API knowledge | RESTful API design, JSON responses, and security patterns |
+| [Error Handling & Logging](development/error-handling-logging.md) | 25 min | Error handling | Error patterns, structured logging, and monitoring strategies |
 
 ### 🔄 [Workflow](workflow/)
 *Development workflow, branching strategies, and process automation*
@@ -63,6 +65,7 @@
 |-------|------|---------------|-------------|
 | [Team Adoption Strategy](deployment/deployment-team-adoption-strategy.md) | 20 min | Team lead experience | Comprehensive deployment and adoption strategy |
 | [Deployment Operations](deployment/deployment-operations.md) | 30 min | DevOps knowledge | Production deployment procedures and best practices |
+| [Deployment Procedures](deployment/deployment-procedures.md) | 35 min | DevOps knowledge | Zero-downtime deployment, rollback, and emergency procedures |
 
 ### 🔒 [Security](security/)
 *Security guidelines, practices, and audit procedures*
@@ -85,7 +88,7 @@
 
 | Guide | Time | Prerequisites | Description |
 |-------|------|---------------|-------------|
-| [Mix Tasks Implementation](automation/mix-tasks-implementation.md) | 20 min | Elixir knowledge | Custom Mix tasks for development automation |
+| [Mix Tasks Implementation](automation/mix-tasks/) | Varies | Elixir knowledge | Modular guides for custom Mix tasks - branch management, versioning, status reporting |
 | [Team Adoption](automation/team-adoption.md) | 25 min | Team coordination | Consolidated guide for adopting automation across teams |
 | [Development Tools](automation/development-tools.md) | 15 min | Dev tools experience | Essential development tooling and automation setup |
 | [AI-Assisted Development](automation/ai-assisted-development-integration.md) | 20 min | AI tools knowledge | Integration of AI tools in development workflow |
@@ -120,7 +123,9 @@
 - **[Performance Optimization](performance/performance-optimization.md)** - System performance mastery
 - **[Security Guidelines](security/security-guidelines.md)** - Security best practices
 - **[CI/CD Implementation](workflow/ci-cd-implementation.md)** - Pipeline automation
-- **[Testing Guidelines](development/testing-guidelines.md)** - Advanced testing strategies
+- **[Testing Strategy](development/testing-strategy.md)** - Advanced testing strategies and patterns
+- **[API Design Guidelines](development/api-design-guidelines.md)** - Professional API design and implementation
+- **[Error Handling & Logging](development/error-handling-logging.md)** - Production-ready error handling
 
 ### 👨‍💼 Team Leads & Managers
 **Strategic guides for team management and process implementation**
@@ -134,7 +139,9 @@
 **Infrastructure, automation, and operational excellence**
 
 - **[Deployment Operations](deployment/deployment-operations.md)** - Production procedures
+- **[Deployment Procedures](deployment/deployment-procedures.md)** - Zero-downtime deployment and rollback
 - **[Monitoring & Observability](performance/monitoring-observability.md)** - System monitoring
+- **[Error Handling & Logging](development/error-handling-logging.md)** - Production error monitoring
 - **[CI/CD Implementation](workflow/ci-cd-implementation.md)** - Pipeline management
 - **[Git Hooks Complete](workflow/git-hooks-complete.md)** - Local automation
 
@@ -175,8 +182,10 @@
 ### 📈 Existing Project Enhancement
 1. [Performance Optimization](performance/performance-optimization.md)
 2. [Security Audit Checklist](security/security-audit-checklist.md)
-3. [Testing Guidelines](development/testing-guidelines.md)
-4. [Monitoring & Observability](performance/monitoring-observability.md)
+3. [Testing Strategy](development/testing-strategy.md)
+4. [API Design Guidelines](development/api-design-guidelines.md)
+5. [Error Handling & Logging](development/error-handling-logging.md)
+6. [Monitoring & Observability](performance/monitoring-observability.md)
 
 ### 🔄 Workflow Migration
 1. [Migration Plan](workflow/branch-workflow-migration-plan.md)
