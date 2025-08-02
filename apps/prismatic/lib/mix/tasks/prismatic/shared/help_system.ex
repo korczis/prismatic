@@ -53,6 +53,15 @@ defmodule Mix.Tasks.Prismatic.Shared.HelpSystem do
   end
 
   @doc """
+  Show categorized help for all available tasks.
+  """
+  @spec show_categorized_help() :: :ok
+  def show_categorized_help do
+    show_command_categories()
+    :ok
+  end
+
+  @doc """
   Find tasks by keyword search.
   """
   @spec find_tasks(String.t()) :: :ok
@@ -61,7 +70,7 @@ defmodule Mix.Tasks.Prismatic.Shared.HelpSystem do
       :cyan, "\n🔍 Tasks matching '#{keyword}':", :reset
     ])
 
-    matches = search_tasks(keyword)
+    matches = search_tasks_internal(keyword)
 
     if Enum.empty?(matches) do
       Mix.shell().info("No tasks found matching '#{keyword}'")
@@ -141,43 +150,141 @@ defmodule Mix.Tasks.Prismatic.Shared.HelpSystem do
     :ok
   end
 
+  @doc """
+  Search for tasks by keyword with scoring.
+  """
+  @spec search_tasks(String.t()) :: {:ok, list(), list()} | {:error, String.t()}
+  def search_tasks(keyword) do
+    matches = search_tasks_internal(keyword)
+    suggestions = if Enum.empty?(matches) do
+      suggest_keywords(keyword)
+    else
+      []
+    end
+
+    scored_matches = Enum.map(matches, fn {task, description, category} ->
+      score = calculate_match_score(task, description, keyword)
+      %{task: task, description: description, category: category, score: score}
+    end)
+    |> Enum.sort_by(& &1.score, :desc)
+
+    {:ok, scored_matches, suggestions}
+ end
+
+ # Helper functions for the new API
+ defp calculate_match_score(task, description, keyword) do
+   keyword_lower = String.downcase(keyword)
+   task_lower = String.downcase(task)
+   desc_lower = String.downcase(description)
+
+   score = 0
+
+   # Exact match in task name gets highest score
+   score = if String.contains?(task_lower, keyword_lower) do
+     score + 100
+   else
+     score
+   end
+
+   # Match in description gets medium score
+   score = if String.contains?(desc_lower, keyword_lower) do
+     score + 50
+   else
+     score
+   end
+
+   # Jaro distance for fuzzy matching
+   task_similarity = String.jaro_distance(task_lower, keyword_lower)
+   desc_similarity = String.jaro_distance(desc_lower, keyword_lower)
+
+   score + (task_similarity * 30) + (desc_similarity * 20)
+ end
+
+ defp find_related_tasks_by_keyword(keyword) do
+   # Find tasks related to a keyword by category or common functionality
+   keyword_lower = String.downcase(keyword)
+
+   all_tasks = task_categories()
+   |> Enum.flat_map(fn {category, tasks} ->
+     Enum.map(tasks, fn {task, description} ->
+       {task, description, category}
+     end)
+   end)
+
+   # Filter tasks that share similar functionality or category
+   all_tasks
+   |> Enum.filter(fn {task, description, _category} ->
+     task_words = String.split(String.downcase(task), ".")
+     desc_words = String.split(String.downcase(description), [" ", "-", "_"])
+
+     Enum.any?(task_words ++ desc_words, fn word ->
+       String.jaro_distance(word, keyword_lower) > 0.7
+     end)
+   end)
+   |> Enum.map(fn {task, _description, _category} -> task end)
+   |> Enum.take(5)
+  end
+
+  @doc """
+  Get related tasks for a given keyword.
+  """
+  @spec get_related_tasks(String.t()) :: {:ok, list()} | {:error, String.t()}
+  def get_related_tasks(keyword) do
+    related = find_related_tasks_by_keyword(keyword)
+    {:ok, related}
+  end
+
   # Private functions
 
   defp show_command_categories do
     Mix.shell().info([
-      :green, "\n📚 DOCUMENTATION ANALYSIS", :reset
+      :green, "\n📚 DOCUMENTATION TASKS", :reset
     ])
 
     show_category_help([
-      {"prismatic.docs.analyze", "Comprehensive multi-dimensional analysis"},
-      {"prismatic.docs.validate", "Link validation and consistency checks"},
-      {"prismatic.docs.report", "Health reporting and dashboards"},
-      {"prismatic.docs.extract.adrs", "Architecture Decision Records extraction"},
-      {"prismatic.docs.extract.examples", "Code examples extraction"},
-      {"prismatic.docs.trace", "Traceability markers and matrices"},
-      {"prismatic.docs.ai_data", "AI-optimized structured data generation"}
+      {"prismatic.docs.sync", "Bidirectional documentation synchronization"}
     ])
 
     Mix.shell().info([
-      :green, "\n⚡ SYNCHRONIZATION OPERATIONS", :reset
+      :green, "\n🌿 BRANCH & WORKFLOW MANAGEMENT", :reset
     ])
 
     show_category_help([
-      {"prismatic.sync.migrate", "Code migration framework"},
-      {"prismatic.sync.references", "Reference replacement system"},
-      {"prismatic.sync.bidirectional", "Real-time bidirectional sync"},
-      {"prismatic.sync.hooks", "Version control integration"},
-      {"prismatic.sync.monitor", "Drift detection and prevention"},
-      {"prismatic.sync.health", "Synchronization health reporting"}
+      {"prismatic.branch.create", "Automated branch creation with templates"},
+      {"prismatic.branch.validate", "Branch compliance validation"},
+      {"prismatic.workflow.status", "Comprehensive workflow monitoring"},
+      {"prismatic.version.bump", "Semantic versioning with changelog generation"}
     ])
 
     Mix.shell().info([
-      :green, "\n🔮 FUTURE EXTENSIONS", :reset
+      :green, "\n🛠️ DEVELOPMENT TASKS", :reset
     ])
 
     show_category_help([
-      {"prismatic.code.*", "Code Analysis & Transformation (planned)"},
-      {"prismatic.system.*", "System Health & Monitoring (planned)"}
+      {"prismatic.setup", "Project setup and initialization"},
+      {"prismatic.check", "Comprehensive health checking"},
+      {"prismatic.test.coverage", "Advanced test coverage analysis"},
+      {"prismatic.quality.check", "Code quality validation and metrics"}
+    ])
+
+    Mix.shell().info([
+      :green, "\n🚀 DEPLOYMENT & RELEASE TASKS", :reset
+    ])
+
+    show_category_help([
+      {"prismatic.deploy.prepare", "Deployment preparation and configuration"},
+      {"prismatic.deploy.validate", "Deployment readiness validation"},
+      {"prismatic.release.create", "Comprehensive release creation and packaging"}
+    ])
+
+    Mix.shell().info([
+      :green, "\n📦 LEGACY TASKS", :reset
+    ])
+
+    show_category_help([
+      {"prismatic.sync.migrate", "Content synchronization between sources"},
+      {"prismatic.docs.analyze", "Documentation analysis and validation"},
+      {"prismatic.docs.validate", "Link validation and consistency checks"}
     ])
   end
 
@@ -246,28 +353,35 @@ defmodule Mix.Tasks.Prismatic.Shared.HelpSystem do
 
   defp task_categories do
     [
-      {"Documentation Analysis", [
-        {"prismatic.docs.analyze", "Comprehensive multi-dimensional analysis"},
-        {"prismatic.docs.validate", "Link validation and consistency checks"},
-        {"prismatic.docs.report", "Health reporting and dashboards"},
-        {"prismatic.docs.extract.adrs", "Architecture Decision Records extraction"},
-        {"prismatic.docs.extract.examples", "Code examples extraction"},
-        {"prismatic.docs.extract.links", "Link inventory and analysis"},
-        {"prismatic.docs.trace", "Traceability markers and matrices"},
-        {"prismatic.docs.ai_data", "AI-optimized structured data generation"}
+      {"Documentation Tasks", [
+        {"prismatic.docs.sync", "Bidirectional documentation synchronization"}
       ]},
-      {"Synchronization Operations", [
-        {"prismatic.sync.migrate", "Code migration framework"},
-        {"prismatic.sync.references", "Reference replacement system"},
-        {"prismatic.sync.bidirectional", "Real-time bidirectional sync"},
-        {"prismatic.sync.hooks", "Version control integration"},
-        {"prismatic.sync.monitor", "Drift detection and prevention"},
-        {"prismatic.sync.health", "Synchronization health reporting"}
+      {"Branch & Workflow Management", [
+        {"prismatic.branch.create", "Automated branch creation with templates"},
+        {"prismatic.branch.validate", "Branch compliance validation"},
+        {"prismatic.workflow.status", "Comprehensive workflow monitoring"},
+        {"prismatic.version.bump", "Semantic versioning with changelog generation"}
+      ]},
+      {"Development Tasks", [
+        {"prismatic.setup", "Project setup and initialization"},
+        {"prismatic.check", "Comprehensive health checking"},
+        {"prismatic.test.coverage", "Advanced test coverage analysis"},
+        {"prismatic.quality.check", "Code quality validation and metrics"}
+      ]},
+      {"Deployment & Release Tasks", [
+        {"prismatic.deploy.prepare", "Deployment preparation and configuration"},
+        {"prismatic.deploy.validate", "Deployment readiness validation"},
+        {"prismatic.release.create", "Comprehensive release creation and packaging"}
+      ]},
+      {"Legacy Tasks", [
+        {"prismatic.sync.migrate", "Content synchronization between sources"},
+        {"prismatic.docs.analyze", "Documentation analysis and validation"},
+        {"prismatic.docs.validate", "Link validation and consistency checks"}
       ]}
     ]
   end
 
-  defp search_tasks(keyword) do
+  defp search_tasks_internal(keyword) do
     all_tasks = task_categories()
     |> Enum.flat_map(fn {category, tasks} ->
       Enum.map(tasks, fn {task, description} ->
