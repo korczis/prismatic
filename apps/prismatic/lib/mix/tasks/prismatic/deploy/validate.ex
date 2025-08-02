@@ -1047,10 +1047,9 @@ defmodule Mix.Tasks.Prismatic.Deploy.Validate do
 
   defp test_app_startup(_env) do
     # Simplified startup test - could fail in some scenarios
-    if :rand.uniform(10) > 1 do
-      {:ok, 2500}  # 2.5 seconds
-    else
-      {:error, "Application failed to start"}
+    case :rand.uniform(10) do
+      1 -> {:error, "Application failed to start"}
+      _ -> {:ok, 2500}  # 2.5 seconds
     end
   end
 
@@ -1085,10 +1084,9 @@ defmodule Mix.Tasks.Prismatic.Deploy.Validate do
 
   defp test_database_connection(_env) do
     # Database connection test - could fail
-    if :rand.uniform(10) > 1 do
-      {:ok, 75}  # 75ms response time
-    else
-      {:error, "Database connection timeout"}
+    case :rand.uniform(10) do
+      1 -> {:error, "Database connection timeout"}
+      _ -> {:ok, 75}  # 75ms response time
     end
   end
 

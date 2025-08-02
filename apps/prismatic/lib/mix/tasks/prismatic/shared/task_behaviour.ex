@@ -178,6 +178,56 @@ defmodule Mix.Tasks.Prismatic.Shared.TaskBehaviour do
     end
   end
 
+  @doc """
+  Parse and validate comma-separated categories/aspects lists.
+  Common pattern used across many tasks.
+  """
+  def parse_and_validate_categories(categories_str, valid_categories, category_type \\ "category")
+  def parse_and_validate_categories("all", valid_categories, _), do: {:ok, valid_categories}
+  def parse_and_validate_categories(nil, valid_categories, _), do: {:ok, valid_categories}
+  def parse_and_validate_categories(categories_str, valid_categories, category_type) when is_binary(categories_str) do
+    requested_categories = categories_str
+    |> String.split(",")
+    |> Enum.map(&String.trim/1)
+    |> Enum.map(&String.to_atom/1)
+
+    invalid_categories = requested_categories -- valid_categories
+
+    if Enum.empty?(invalid_categories) do
+      {:ok, requested_categories}
+    else
+      {:error, "Invalid #{category_type}(s): #{inspect(invalid_categories)}. Available: #{inspect(valid_categories)}"}
+    end
+  end
+  def parse_and_validate_categories(categories, _valid_categories, category_type) do
+    {:error, "#{String.capitalize(category_type)} list must be a string, got: #{inspect(categories)}"}
+  end
+
+  @doc """
+  Validate that a value is one of the allowed values.
+  Common pattern for level, environment, target validation.
+  """
+  def validate_enum_option(value, allowed_values, option_name)
+  def validate_enum_option(nil, _allowed_values, _option_name), do: :ok
+  def validate_enum_option(value, allowed_values, option_name) when is_binary(value) do
+    if value in allowed_values do
+      :ok
+    else
+      {:error, "Invalid #{option_name} '#{value}'. Available: #{Enum.join(allowed_values, ", ")}"}
+    end
+  end
+  def validate_enum_option(value, _allowed_values, option_name) do
+    {:error, "#{String.capitalize(option_name)} must be a string, got: #{inspect(value)}"}
+  end
+
+  @doc """
+  Validate boolean dry-run option.
+  """
+  def validate_dry_run_option(nil), do: :ok
+  def validate_dry_run_option(value) when is_boolean(value), do: :ok
+  def validate_dry_run_option(value) do
+    {:error, "Dry run option must be boolean, got: #{inspect(value)}"}
+  end
 
   defmacro __using__(opts) do
     quote do
@@ -478,57 +528,6 @@ defmodule Mix.Tasks.Prismatic.Shared.TaskBehaviour do
         |> Module.split()
         |> List.last()
         |> String.downcase()
-      end
-
-      @doc """
-      Parse and validate comma-separated categories/aspects lists.
-      Common pattern used across many tasks.
-      """
-      def parse_and_validate_categories(categories_str, valid_categories, category_type \\ "category")
-      def parse_and_validate_categories("all", valid_categories, _), do: {:ok, valid_categories}
-      def parse_and_validate_categories(nil, valid_categories, _), do: {:ok, valid_categories}
-      def parse_and_validate_categories(categories_str, valid_categories, category_type) when is_binary(categories_str) do
-        requested_categories = categories_str
-        |> String.split(",")
-        |> Enum.map(&String.trim/1)
-        |> Enum.map(&String.to_atom/1)
-
-        invalid_categories = requested_categories -- valid_categories
-
-        if Enum.empty?(invalid_categories) do
-          {:ok, requested_categories}
-        else
-          {:error, "Invalid #{category_type}(s): #{inspect(invalid_categories)}. Available: #{inspect(valid_categories)}"}
-        end
-      end
-      def parse_and_validate_categories(categories, _valid_categories, category_type) do
-        {:error, "#{String.capitalize(category_type)} list must be a string, got: #{inspect(categories)}"}
-      end
-
-      @doc """
-      Validate that a value is one of the allowed values.
-      Common pattern for level, environment, target validation.
-      """
-      def validate_enum_option(value, allowed_values, option_name)
-      def validate_enum_option(nil, _allowed_values, _option_name), do: :ok
-      def validate_enum_option(value, allowed_values, option_name) when is_binary(value) do
-        if value in allowed_values do
-          :ok
-        else
-          {:error, "Invalid #{option_name} '#{value}'. Available: #{Enum.join(allowed_values, ", ")}"}
-        end
-      end
-      def validate_enum_option(value, _allowed_values, option_name) do
-        {:error, "#{String.capitalize(option_name)} must be a string, got: #{inspect(value)}"}
-      end
-
-      @doc """
-      Validate boolean dry-run option.
-      """
-      def validate_dry_run_option(nil), do: :ok
-      def validate_dry_run_option(value) when is_boolean(value), do: :ok
-      def validate_dry_run_option(value) do
-        {:error, "Dry run option must be boolean, got: #{inspect(value)}"}
       end
 
       # Allow implementing modules to override these functions

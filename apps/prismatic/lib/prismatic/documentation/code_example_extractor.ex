@@ -16,7 +16,6 @@ defmodule Prismatic.Documentation.CodeExampleExtractor do
 
   require Logger
 
-  @code_block_pattern ~r/```([a-zA-Z0-9]*)\n?(.*?)```/ms
   @inline_code_pattern ~r/`([^`]+)`/
   @file_reference_pattern ~r/(?:file|filename|path):\s*([^\s\n]+)/i
 

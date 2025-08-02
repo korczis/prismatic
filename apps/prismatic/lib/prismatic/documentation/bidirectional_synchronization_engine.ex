@@ -37,9 +37,6 @@ defmodule Prismatic.Documentation.BidirectionalSynchronizationEngine do
     ValidationIntegration
   }
 
-  @sync_marker "<!-- SYNC: "
-  @conflict_marker "<!-- CONFLICT: "
-  @audit_log_file "synchronization_audit.log"
   @notification_channels [:email, :slack, :webhook]
 
   defmodule SyncEvent do

@@ -57,8 +57,6 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     profile: :sync,
     description: "Synchronize documentation system with monitoring"
 
-  @shortdoc "Synchronize documentation system with comprehensive monitoring"
-
   @switches [
     source: :string,
     target: :string,

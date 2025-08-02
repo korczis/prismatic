@@ -79,29 +79,6 @@ defmodule Mix.Tasks.Prismatic.Sync.Health do
     profile: :sync,
     description: "Comprehensive synchronization health monitoring and diagnostics"
 
-  @health_check_categories [
-    :integrity,
-    :sync,
-    :performance,
-    :compliance,
-    :security,
-    :availability
-  ]
-
-  @monitoring_modes [
-    :oneshot,
-    :continuous,
-    :scheduled
-  ]
-
-  @health_score_weights %{
-    integrity: 0.3,
-    sync: 0.25,
-    performance: 0.2,
-    compliance: 0.15,
-    security: 0.05,
-    availability: 0.05
-  }
 
   @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def run(args) do

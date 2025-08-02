@@ -640,7 +640,7 @@ defmodule Mix.Tasks.Prismatic.Test.Coverage do
   # Helper functions and utilities
 
   defp coverage_tool_available? do
-    Code.ensure_loaded?(ExCoveralls) or System.find_executable("mix") != nil
+    Code.ensure_loaded?(ExCoveralls) or not is_nil(System.find_executable("mix"))
   end
 
   defp install_coverage_dependencies do

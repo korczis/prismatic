@@ -79,7 +79,6 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     :accessibility
   ]
 
-  @default_categories [:links, :content, :structure]
 
   @default_timeouts %{
     external_link: 10_000,  # 10 seconds
