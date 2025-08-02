@@ -64,8 +64,6 @@ defmodule Mix.Tasks.Prismatic.Branch.Validate do
     profile: :code,
     description: "Validate branch compliance with workflow standards"
 
-  @shortdoc "Validate branch compliance with project workflow standards"
-
   @switches [
     branch: :string,
     type: :string,

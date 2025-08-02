@@ -30,21 +30,6 @@ defmodule Prismatic.Documentation.ReferenceReplacementSystem do
   require Logger
   alias Prismatic.Documentation.{TraceabilityMarker, CodeExampleExtractor}
 
-  @reference_patterns %{
-    file_link: ~r/\[`([^`]+)`\]\(([^)]+):?(\d+)?(?:-(\d+))?\)/,
-    code_reference: ~r/<!-- CODE_REF: ([^:]+):(\d+)(?:-(\d+))? -->/,
-    function_reference: ~r/<!-- FUNC_REF: ([^:]+)#([^:]+) -->/,
-    module_reference: ~r/<!-- MODULE_REF: ([^:]+) -->/,
-    smart_reference: ~r/<!-- SMART_REF: ([^:]+):([^:]+) -->/
-  }
-
-  @reference_templates %{
-    file_link: "[`%{file_name}`](%{file_path})",
-    line_link: "[`%{file_name}:%{line}`](%{file_path}:%{line})",
-    range_link: "[`%{file_name}:%{start_line}-%{end_line}`](%{file_path}:%{start_line}-%{end_line})",
-    function_link: "[`%{function_name}()`](%{file_path}:%{line}) in `%{module_name}`",
-    module_link: "[`%{module_name}`](%{file_path})"
-  }
 
   defmodule Reference do
     @moduledoc """
@@ -157,7 +142,7 @@ defmodule Prismatic.Documentation.ReferenceReplacementSystem do
   Creates intelligent links that point to specific locations in code files
   with automatic line number tracking and validation.
   """
-  def generate_smart_links(target_files, opts \\ []) do
+  def generate_smart_links(target_files, _opts \\ []) do
     Logger.info("Generating smart links for #{length(target_files)} files")
 
     links = target_files
@@ -214,7 +199,7 @@ defmodule Prismatic.Documentation.ReferenceReplacementSystem do
   Performs comprehensive validation of all documentation references
   and provides detailed health reports.
   """
-  def validate_references(reference_map, opts \\ []) do
+  def validate_references(reference_map, _opts \\ []) do
     Logger.info("Validating #{length(reference_map.references)} references")
 
     validation_results = reference_map.references
@@ -468,7 +453,7 @@ defmodule Prismatic.Documentation.ReferenceReplacementSystem do
     }
   end
 
-  defp create_implementation_reference(candidate, impl, opts) do
+  defp create_implementation_reference(candidate, impl, _opts) do
     target_location = extract_target_location(impl)
 
     %Reference{

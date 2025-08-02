@@ -8,6 +8,9 @@ archive.uninstall:Uninstalls archives
 clean:Deletes generated application files
 cmd:Executes the given command
 compile:Compiles source files
+credo:Run code analysis (use `--help` for options)
+credo.gen.check:Generate a new custom check for Credo
+credo.gen.config:Generate a new config for Credo
 deps:Lists dependencies and their status
 deps.clean:Deletes the given dependencies' files
 deps.compile:Compiles dependencies
@@ -15,16 +18,12 @@ deps.get:Gets all out of date dependencies
 deps.tree:Prints the dependency tree
 deps.unlock:Unlocks the given dependencies
 deps.update:Updates the given dependencies
+dialyzer:Runs dialyzer with default or project-defined flags.
+dialyzer.build:Build the required PLT(s) and exit.
+dialyzer.clean:Delete PLT(s) and exit.
+dialyzer.explain:Display information about Dialyzer warnings.
 do:Executes the tasks separated by plus
-docs:Legacy docs task (DEPRECATED - use prismatic.docs.* tasks)
-docs.tasks.ai_data:Generate AI-friendly structured data
-docs.tasks.analyze:Enterprise comprehensive documentation analysis with progress monitoring
-docs.tasks.extract_adrs:Enterprise ADR extraction with domain filtering and impact analysis
-docs.tasks.extract_examples:Enterprise code example extraction with quality analysis and validation
-docs.tasks.report:Generate comprehensive analysis report
-docs.tasks.trace:Generate traceability markers
-docs.tasks.validate:Validate documentation consistency
-docs_sync:Legacy docs_sync task (DEPRECATED - use prismatic.sync.* tasks)
+docs:Generate documentation for the project
 ecto:Prints Ecto help information
 ecto.create:Creates the repository storage
 ecto.drop:Drops the repository storage
@@ -72,6 +71,7 @@ local.phx:Updates the Phoenix project generator locally
 local.public_keys:Manages public keys
 local.rebar:Installs Rebar locally
 new:Creates a new Elixir project
+nimble_parsec.compile:Compiles a parser and injects its content into the parser file
 phx:Prints Phoenix help information
 phx.digest:Digests and compresses static files
 phx.digest.clean:Removes old versions of static assets.

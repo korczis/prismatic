@@ -571,7 +571,7 @@ defmodule Prismatic.Documentation.ADRExtractor do
 
   defp calculate_decision_velocity(_), do: 0
 
-  defp calculate_avg_time_to_acceptance(adrs) do
+  defp calculate_avg_time_to_acceptance(_adrs) do
     # This would require tracking proposal -> acceptance timeline
     # For now, return a placeholder
     0

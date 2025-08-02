@@ -64,7 +64,6 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     profile: :system,
     description: "Show comprehensive workflow status and health monitoring"
 
-  @shortdoc "Show comprehensive workflow status and health monitoring"
 
   @switches [
     focus: :string,
@@ -112,17 +111,15 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     poor: 0
   }
 
-  @impl Mix.Task
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def run(args) do
     with_task_context(__MODULE__, args, &execute_workflow_status/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       focus: "all",
@@ -139,7 +136,6 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:focus] && not valid_focus_categories?(options[:focus]) ->
@@ -159,7 +155,6 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Validate git repository
     unless git_repository_exists?() do
@@ -305,7 +300,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     }
   end
 
-  defp gather_category_status(:ci_cd, context) do
+  defp gather_category_status(:ci_cd, _context) do
     %{
       build_status: get_build_status(),
       test_results: get_test_results_summary(),
@@ -315,7 +310,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     }
   end
 
-  defp gather_category_status(:quality, context) do
+  defp gather_category_status(:quality, _context) do
     %{
       code_coverage: get_code_coverage_metrics(),
       static_analysis: get_static_analysis_results(),
@@ -345,7 +340,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     }
   end
 
-  defp gather_category_status(:security, context) do
+  defp gather_category_status(:security, _context) do
     %{
       vulnerability_scan: get_security_scan_results(),
       dependency_audit: get_dependency_audit_results(),
@@ -365,7 +360,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     }
   end
 
-  defp gather_category_status(:deployment, context) do
+  defp gather_category_status(:deployment, _context) do
     %{
       deployment_readiness: assess_deployment_readiness(),
       environment_status: get_environment_status(),
@@ -425,7 +420,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
       OutputFormatter.display_section_header("Workflow Status Summary")
 
       overall = report.overall
-      summary = report.summary
+      _summary = report.summary
 
       # Overall health with visual indicator
       health_score = overall.health_score
@@ -523,7 +518,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     OutputFormatter.display_info("Technical debt: #{data.technical_debt.hours}h")
   end
 
-  defp display_category_details(category, data) do
+  defp display_category_details(_category, data) do
     # Generic display for other categories
     Map.keys(data)
     |> Enum.reject(&(&1 == :health_score))
@@ -554,7 +549,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     Mix.shell().info("[#{timestamp}] Check ##{state.check_count} - #{health_emoji} #{health_score}% (#{format_duration(uptime)} uptime)")
   end
 
-  defp check_and_send_alerts(state, current_status, options) do
+  defp check_and_send_alerts(_state, current_status, options) do
     health_score = current_status[:overall].health_score
 
     if health_score < options.threshold do

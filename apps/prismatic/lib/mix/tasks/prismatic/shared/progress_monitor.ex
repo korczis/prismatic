@@ -100,6 +100,17 @@ defmodule Mix.Tasks.Prismatic.Shared.ProgressMonitor do
   end
 
   @doc """
+  Show success message.
+  """
+  @spec show_success(String.t()) :: :ok
+  def show_success(message) do
+    Mix.shell().info([
+      :green, "✅ ", :reset, message
+    ])
+    :ok
+  end
+
+  @doc """
   Show warning message.
   """
   @spec show_warning(String.t()) :: :ok
@@ -160,6 +171,28 @@ defmodule Mix.Tasks.Prismatic.Shared.ProgressMonitor do
     Mix.shell().info([
       "\r  ", :blue, frame, :reset, " #{message}..."
     ], [:stderr])
+    :ok
+  end
+
+  @doc """
+  Start a long-running operation with progress indication.
+  """
+  @spec start_operation(String.t()) :: :ok
+  def start_operation(operation_name) do
+    if not ci_mode?() do
+      show_progress_indicator(operation_name)
+    end
+    :ok
+  end
+
+  @doc """
+  Mark operation as completed with success message.
+  """
+  @spec complete_operation(String.t()) :: :ok
+  def complete_operation(completion_message) do
+    if not ci_mode?() do
+      show_step_completion(completion_message)
+    end
     :ok
   end
 

@@ -389,4 +389,36 @@ defmodule Mix.Tasks.Prismatic.Shared.Config do
       Mix.shell().info("  Alert Threshold: #{config[:alert_threshold]}%")
     end
   end
+
+  @doc """
+  Get configuration for a specific profile with fallback defaults.
+  """
+  @spec get_config(task_profile(), map()) :: map()
+  def get_config(profile, fallback_defaults \\ %{}) do
+    profile_config = profile_defaults(profile)
+    env_overrides = environment_overrides()
+
+    profile_config
+    |> Map.merge(fallback_defaults)
+    |> Map.merge(env_overrides)
+  end
+
+  @doc """
+  Validate base configuration for system health checks.
+  """
+  @spec validate_base_config() :: :ok
+  def validate_base_config do
+    # Basic configuration validation
+    profiles = [:docs, :sync, :code, :system]
+
+    Enum.each(profiles, fn profile ->
+      config = get_config(profile, %{})
+      case validate_config(config) do
+        :ok -> :ok
+        {:error, reason} -> raise "Configuration validation failed for #{profile}: #{reason}"
+      end
+    end)
+
+    :ok
+  end
 end

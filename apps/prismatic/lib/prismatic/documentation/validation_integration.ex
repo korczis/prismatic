@@ -110,7 +110,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
 
   Analyzes validation failures and provides intelligent recommendations.
   """
-  def generate_fix_suggestions(validation_results, opts \\ []) do
+  def generate_fix_suggestions(validation_results, _opts \\ []) do
     Logger.info("Generating AI-powered fix suggestions")
 
     broken_links = extract_broken_links(validation_results)
@@ -298,7 +298,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     }
   end
 
-  defp generate_ai_suggestions(validation_context, opts) do
+  defp generate_ai_suggestions(validation_context, _opts) do
     suggestions = []
 
     # Health-based suggestions
@@ -434,7 +434,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     end
   end
 
-  defp count_traceability_links_for_domain(traceability, domain) do
+  defp count_traceability_links_for_domain(_traceability, _domain) do
     # Count links related to specific domain - simplified implementation
     0  # Placeholder
   end
@@ -462,37 +462,37 @@ defmodule Prismatic.Documentation.ValidationIntegration do
 
   # Analysis helper functions
 
-  defp analyze_naming_consistency(adr_data, code_examples) do
+  defp analyze_naming_consistency(_adr_data, _code_examples) do
     # Analyze consistency in naming conventions
     %{score: 75, issues: [], recommendations: []}
   end
 
-  defp analyze_structure_consistency(adr_data) do
+  defp analyze_structure_consistency(_adr_data) do
     # Analyze consistency in ADR structure
     %{score: 85, issues: [], recommendations: []}
   end
 
-  defp analyze_example_consistency(code_examples) do
+  defp analyze_example_consistency(_code_examples) do
     # Analyze consistency in code examples
     %{score: 70, issues: [], recommendations: []}
   end
 
-  defp analyze_cross_reference_consistency(adr_data) do
+  defp analyze_cross_reference_consistency(_adr_data) do
     # Analyze consistency in cross-references
     %{score: 80, issues: [], recommendations: []}
   end
 
-  defp identify_missing_adrs(code_examples, traceability) do
+  defp identify_missing_adrs(_code_examples, _traceability) do
     # Identify areas where ADRs should exist but don't
     []
   end
 
-  defp identify_missing_examples(adr_data, traceability) do
+  defp identify_missing_examples(_adr_data, _traceability) do
     # Identify ADRs that should have code examples
     []
   end
 
-  defp identify_orphaned_decisions(adr_data, traceability) do
+  defp identify_orphaned_decisions(_adr_data, _traceability) do
     # Identify decisions that aren't connected to implementations
     []
   end
@@ -734,12 +734,12 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     end
   end
 
-  defp extract_python_recommendations(python_results) do
+  defp extract_python_recommendations(_python_results) do
     # Extract actionable items from Python validation results
     []
   end
 
-  defp identify_automation_opportunities(validation_results) do
+  defp identify_automation_opportunities(_validation_results) do
     [
       %{
         opportunity: "Automated link fixing",
@@ -754,37 +754,37 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     ]
   end
 
-  defp extract_broken_links(validation_results) do
+  defp extract_broken_links(_validation_results) do
     # Extract broken links from validation results
     []
   end
 
-  defp extract_missing_files(validation_results) do
+  defp extract_missing_files(_validation_results) do
     # Extract missing files from validation results
     []
   end
 
-  defp extract_orphaned_content(validation_results) do
+  defp extract_orphaned_content(_validation_results) do
     # Extract orphaned content from validation results
     []
   end
 
-  defp generate_link_fix_suggestions(broken_links) do
+  defp generate_link_fix_suggestions(_broken_links) do
     # Generate suggestions for fixing broken links
     []
   end
 
-  defp generate_file_creation_suggestions(missing_files) do
+  defp generate_file_creation_suggestions(_missing_files) do
     # Generate suggestions for creating missing files
     []
   end
 
-  defp generate_content_organization_suggestions(orphaned_content) do
+  defp generate_content_organization_suggestions(_orphaned_content) do
     # Generate suggestions for organizing orphaned content
     []
   end
 
-  defp suggest_quality_improvements(validation_results) do
+  defp suggest_quality_improvements(_validation_results) do
     # Suggest overall quality improvements
     []
   end
@@ -793,7 +793,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     (python_success + ai_health_score) / 2
   end
 
-  defp extract_key_findings(python_results, ai_analysis) do
+  defp extract_key_findings(_python_results, _ai_analysis) do
     [
       "Documentation validation system is operational",
       "AI-enhanced analysis provides additional insights",
@@ -801,7 +801,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     ]
   end
 
-  defp identify_improvement_areas(python_results, ai_analysis) do
+  defp identify_improvement_areas(_python_results, _ai_analysis) do
     [
       "Link validation accuracy",
       "Traceability coverage",
@@ -809,7 +809,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     ]
   end
 
-  defp identify_strengths(python_results, ai_analysis) do
+  defp identify_strengths(_python_results, _ai_analysis) do
     [
       "Comprehensive validation pipeline",
       "AI-powered analysis capabilities",
@@ -839,7 +839,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     }
   end
 
-  defp perform_cross_analysis(combined_results) do
+  defp perform_cross_analysis(_combined_results) do
     # Perform cross-analysis between Python and AI results
     %{
       correlation_analysis: "Analysis of how Python validation correlates with AI insights",
@@ -848,7 +848,7 @@ defmodule Prismatic.Documentation.ValidationIntegration do
     }
   end
 
-  defp generate_next_steps(combined_results) do
+  defp generate_next_steps(_combined_results) do
     [
       "Review and address high-priority recommendations",
       "Implement suggested automation opportunities",

@@ -87,7 +87,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     batch_processing: 30_000  # 30 seconds
   }
 
-  @impl Mix.Task
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def run(args) do
     IO.puts("Validation task called with args: #{inspect(args)}")
     :ok

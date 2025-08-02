@@ -29,9 +29,7 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
   """
 
   require Logger
-  alias Prismatic.Documentation.{CodeExampleExtractor, TraceabilityMarker}
-
-  @migration_marker "<!-- MIGRATION_CANDIDATE -->"
+  alias Prismatic.Documentation.CodeExampleExtractor
   @migration_backup_dir ".migration_backups"
   @supported_languages [:elixir, :javascript, :python, :bash, :sql]
 
@@ -107,7 +105,7 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
   Analyzes documentation files to find code blocks that are suitable for
   migration to actual codebase locations.
   """
-  def identify_migration_candidates(docs_path \\ "docs", opts \\ []) do
+  def identify_migration_candidates(docs_path \\ "docs", _opts \\ []) do
     Logger.info("Identifying migration candidates in #{docs_path}")
 
     # Extract all code examples first
@@ -220,7 +218,7 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
 
   Restores the original documentation and removes migrated code if needed.
   """
-  def rollback_migration(migration_result, opts \\ []) do
+  def rollback_migration(migration_result, _opts \\ []) do
     Logger.info("Rolling back migration #{migration_result.plan_id}")
 
     try do
@@ -530,7 +528,7 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
     "apps/prismatic/test/prismatic/#{test_filename}_test.exs"
   end
 
-  defp suggest_general_location(example) do
+  defp suggest_general_location(_example) do
     # Default location for general implementations
     "apps/prismatic/lib/prismatic/utility.ex"
   end
@@ -561,7 +559,7 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
 
   # Migration execution functions
 
-  defp create_migration_plan(candidate, code_path, opts) do
+  defp create_migration_plan(candidate, _code_path, _opts) do
     # Create detailed migration plan with validation steps
     validation_steps = [
       &validate_target_directory/1,
@@ -872,7 +870,7 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
     Enum.all?(plan.dependencies, &dependency_available?/1)
   end
 
-  defp dependency_available?(module_name) do
+  defp dependency_available?(_module_name) do
     # Simple check - in a real implementation, this would be more sophisticated
     true
   end
@@ -926,12 +924,12 @@ defmodule Prismatic.Documentation.CodeMigrationFramework do
     end
   end
 
-  defp validate_dependencies(file_path, dependencies) do
+  defp validate_dependencies(_file_path, dependencies) do
     # Check if all dependencies resolve correctly
     Enum.all?(dependencies, &dependency_available?/1)
   end
 
-  defp run_integration_tests(file_path, language) do
+  defp run_integration_tests(_file_path, language) do
     # Run any available integration tests
     case language do
       :elixir ->

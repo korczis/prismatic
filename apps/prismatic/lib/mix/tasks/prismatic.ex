@@ -527,7 +527,7 @@ defmodule Mix.Tasks.Prismatic do
 
   # Configuration display helpers
 
-  defp display_config_section(config, profile) do
+  defp display_config_section(config, _profile) do
     # Display key configuration values
     important_keys = [:output_dir, :output_format, :batch_size, :concurrency, :timeout]
 

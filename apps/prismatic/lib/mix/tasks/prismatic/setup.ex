@@ -71,8 +71,6 @@ defmodule Mix.Tasks.Prismatic.Setup do
     profile: :system,
     description: "Project setup and initialization with comprehensive configuration"
 
-  @shortdoc "Project setup and initialization with comprehensive environment configuration"
-
   @switches [
     components: :string,
     interactive: :boolean,

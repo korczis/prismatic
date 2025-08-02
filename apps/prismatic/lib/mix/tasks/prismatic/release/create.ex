@@ -162,7 +162,6 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
     profile: :system,
     description: "Comprehensive release creation with automated packaging"
 
-  @shortdoc "Comprehensive release creation with automated packaging and distribution"
 
   @switches [
     version: :string,
@@ -203,17 +202,15 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
   @pre_release_types ~w(alpha beta rc custom)
   @release_targets ~w(docker kubernetes binary source)
 
-  @impl Mix.Task
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def run(args) do
     with_task_context(__MODULE__, args, &execute_release_creation/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       type: "patch",
@@ -232,7 +229,6 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:type] && options[:type] not in @release_types ->
@@ -252,7 +248,6 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Check if we're in a Mix project
     unless File.exists?("mix.exs") do
@@ -326,23 +321,29 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
   defp validate_release_readiness(context) do
     ProgressMonitor.show_info("Validating release readiness...")
 
-    validations = [
+    base_validations = [
       {"Git repository status", &validate_git_status/1},
       {"Project configuration", &validate_project_config/1},
       {"Dependencies", &validate_dependencies/1}
     ]
 
-    unless context.skip_tests do
-      validations = validations ++ [{"Test suite", &run_test_suite/1}]
+    test_validations = unless context.skip_tests do
+      [{"Test suite", &run_test_suite/1}]
+    else
+      []
     end
 
-    if context.comprehensive do
-      validations = validations ++ [
+    comprehensive_validations = if context.comprehensive do
+      [
         {"Code quality", &validate_code_quality/1},
         {"Security scan", &run_security_scan/1},
         {"Documentation", &validate_documentation/1}
       ]
+    else
+      []
     end
+
+    validations = base_validations ++ test_validations ++ comprehensive_validations
 
     Enum.each(validations, fn {name, validation_fn} ->
       ProgressMonitor.show_info("- #{name}...")
@@ -598,7 +599,7 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
       size: get_docker_image_size("#{image_name}:#{context.version}")
     }
 
-    context = Map.update(context, :artifacts, [], &[artifact | &1])
+    Map.update(context, :artifacts, [], &[artifact | &1])
     {:ok, context}
   end
 
@@ -655,7 +656,7 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
         size: get_file_size(chart_package)
       }
 
-      context = Map.update(context, :artifacts, [], &[artifact | &1])
+      Map.update(context, :artifacts, [], &[artifact | &1])
     end
 
     {:ok, context}
@@ -675,10 +676,11 @@ defmodule Mix.Tasks.Prismatic.Release.Create do
         size: get_directory_size(release_dir)
       }
 
-      context = Map.update(context, :artifacts, [], &[artifact | &1])
+      updated_context = Map.update(context, :artifacts, [], &[artifact | &1])
+      {:ok, updated_context}
+    else
+      {:ok, context}
     end
-
-    {:ok, context}
   end
 
   defp bundle_binary_assets(context) do

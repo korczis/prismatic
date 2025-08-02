@@ -26,7 +26,12 @@ defmodule Prismatic.Umbrella.MixProject do
   defp deps do
     [
       # Required to run "mix format" on ~H/.heex files from the umbrella root
-      {:phoenix_live_view, ">= 0.0.0"}
+      {:phoenix_live_view, ">= 0.0.0"},
+      {:credo, ">= 0.0.0"},
+      {:dialyxir, ">= 0.0.0"},
+      {:ex_doc, ">= 0.0.0"},
+      {:toml, ">= 0.0.0"},
+      {:yaml_elixir, ">= 0.0.0"}
     ]
   end
 

@@ -88,8 +88,6 @@ defmodule Mix.Tasks.Prismatic.Quality.Check do
     profile: :code,
     description: "Comprehensive code quality validation with improvement suggestions"
 
-  @shortdoc "Comprehensive code quality validation with automated improvement suggestions"
-
   @switches [
     aspects: :string,
     quick: :boolean,

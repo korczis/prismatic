@@ -37,11 +37,6 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
   """
 
   require Logger
-  alias Prismatic.Documentation.{
-    BidirectionalSynchronizationEngine,
-    ReferenceReplacementSystem,
-    TraceabilityMarker
-  }
 
   @git_hooks_dir ".git/hooks"
   @backup_hooks_dir ".git/hooks.backup"
@@ -1059,7 +1054,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     }
   end
 
-  defp setup_webhook_integration(pipeline_config, opts) do
+  defp setup_webhook_integration(_pipeline_config, opts) do
     if Keyword.get(opts, :webhook_enabled, false) do
       webhook_config = %{
         endpoint: Keyword.get(opts, :webhook_endpoint, "/webhook/docs-sync"),
@@ -1135,7 +1130,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     :crypto.strong_rand_bytes(32) |> Base.encode64()
   end
 
-  defp create_validation_scripts(pipeline_config) do
+  defp create_validation_scripts(_pipeline_config) do
     # Create helper scripts for the CI/CD pipeline
     scripts = %{
       validation_script: create_validation_script(),
@@ -1308,7 +1303,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     end
   end
 
-  defp perform_validation_checks(sync_impact, config) do
+  defp perform_validation_checks(sync_impact, _config) do
     checks = []
 
     # Reference integrity check
@@ -1380,7 +1375,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     end
   end
 
-  defp create_validation_result(context, checks, auto_fixes, start_time, config) do
+  defp create_validation_result(context, checks, auto_fixes, start_time, _config) do
     overall_status = determine_overall_status(checks)
     issues = extract_issues_from_checks(checks)
     performance_metrics = calculate_performance_metrics(start_time, checks)
@@ -1540,7 +1535,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     Enum.reverse(requirements)
   end
 
-  defp execute_commit_synchronization(sync_requirements, opts) do
+  defp execute_commit_synchronization(sync_requirements, _opts) do
     Enum.map(sync_requirements, fn requirement ->
       case requirement do
         :update_doc_references ->
@@ -1590,7 +1585,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     }
   end
 
-  defp determine_resolution_strategy(conflict_analysis, opts) do
+  defp determine_resolution_strategy(_conflict_analysis, opts) do
     default_strategy = Keyword.get(opts, :resolution_strategy, :manual)
 
     %{
@@ -1600,7 +1595,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     }
   end
 
-  defp apply_conflict_resolution(conflict_analysis, resolution_strategy) do
+  defp apply_conflict_resolution(_conflict_analysis, resolution_strategy) do
     # Apply the chosen resolution strategy
     %{
       conflicts_resolved: 0,
@@ -1738,12 +1733,16 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     recommendations = []
 
     # Add specific recommendations based on validation results
-    if validation_results.documentation_completeness.status == :warning do
-      recommendations = ["Improve documentation coverage for better synchronization" | recommendations]
+    recommendations = if validation_results.documentation_completeness.status == :warning do
+      ["Improve documentation coverage for better synchronization" | recommendations]
+    else
+      recommendations
     end
 
-    if validation_results.performance.avg_sync_time > 5.0 do
-      recommendations = ["Consider optimizing synchronization performance" | recommendations]
+    recommendations = if validation_results.performance.avg_sync_time > 5.0 do
+      ["Consider optimizing synchronization performance" | recommendations]
+    else
+      recommendations
     end
 
     Enum.reverse(recommendations)
@@ -1891,7 +1890,7 @@ defmodule Prismatic.Documentation.VersionControlIntegration do
     }
   end
 
-  defp generate_sync_tag_name(sync_state, opts) do
+  defp generate_sync_tag_name(_sync_state, opts) do
     base_name = Keyword.get(opts, :tag_prefix, "sync")
     version = Keyword.get(opts, :version, "v1.0.0")
     timestamp = DateTime.utc_now() |> DateTime.to_iso8601(:basic)

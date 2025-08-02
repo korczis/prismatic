@@ -101,10 +101,12 @@ defmodule Mix.Tasks.Prismatic.Docs.Report do
   end
 
   # Add required functions to satisfy compilation
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     []
   end
 
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{}
   end

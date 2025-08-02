@@ -80,8 +80,6 @@ defmodule Mix.Tasks.Prismatic.Check do
     profile: :system,
     description: "Comprehensive project health check with detailed analysis"
 
-  @shortdoc "Comprehensive project health check with detailed analysis and recommendations"
-
   @switches [
     categories: :string,
     quick: :boolean,
@@ -126,17 +124,15 @@ defmodule Mix.Tasks.Prismatic.Check do
     repository: 0.05
   }
 
-  @impl Mix.Task
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def run(args) do
     with_task_context(__MODULE__, args, &execute_health_check/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       categories: "all",
@@ -151,7 +147,6 @@ defmodule Mix.Tasks.Prismatic.Check do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:categories] && not valid_categories?(options[:categories]) ->
@@ -165,7 +160,6 @@ defmodule Mix.Tasks.Prismatic.Check do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Check if we're in a Mix project
     unless File.exists?("mix.exs") do

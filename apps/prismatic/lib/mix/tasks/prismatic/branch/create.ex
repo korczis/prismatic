@@ -57,8 +57,6 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     profile: :code,
     description: "Create feature branches with automated templates"
 
-  @shortdoc "Create feature branches with automated templates and validation"
-
   @switches [
     name: :string,
     type: :string,
@@ -98,17 +96,15 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     "chore" => "chore_template"
   }
 
-  @impl Mix.Task
+  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def run(args) do
     with_task_context(__MODULE__, args, &execute_branch_creation/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       type: "feature",
@@ -123,7 +119,6 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:name] && not valid_branch_name?(options[:name]) ->
@@ -143,7 +138,6 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Validate git repository
     unless git_repository_exists?() do
@@ -556,7 +550,7 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
 
   # User interaction helpers
 
-  defp get_user_input(prompt, default \\ nil) do
+  defp get_user_input(prompt, default) do
     default_text = if default, do: " [#{default}]", else: ""
     input = Mix.shell().prompt("#{prompt}#{default_text} ") |> String.trim()
 
@@ -677,7 +671,7 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     OutputFormatter.display_info("Priority: #{config.priority}")
   end
 
-  defp confirm_branch_creation(config) do
+  defp confirm_branch_creation(_config) do
     Mix.shell().yes?("\nCreate this branch?")
   end
 
@@ -704,8 +698,10 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
       "Template application validation"
     ]
 
-    if options[:type] == "hotfix" do
-      checks = checks ++ ["Security vulnerability scan", "Stability impact assessment"]
+    _checks = if options[:type] == "hotfix" do
+      checks ++ ["Security vulnerability scan", "Stability impact assessment"]
+    else
+      checks
     end
 
     Enum.each(checks, fn check ->

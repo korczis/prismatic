@@ -87,8 +87,6 @@ defmodule Mix.Tasks.Prismatic.Test.Coverage do
     profile: :code,
     description: "Advanced test coverage analysis with detailed reporting"
 
-  @shortdoc "Advanced test coverage analysis with detailed reporting and recommendations"
-
   @switches [
     threshold: :integer,
     format: :string,

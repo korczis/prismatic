@@ -155,20 +155,30 @@ defmodule Mix.Tasks.Prismatic.Shared.HelpSystem do
   """
   @spec search_tasks(String.t()) :: {:ok, list(), list()} | {:error, String.t()}
   def search_tasks(keyword) do
-    matches = search_tasks_internal(keyword)
-    suggestions = if Enum.empty?(matches) do
-      suggest_keywords(keyword)
+    # Validate input
+    if String.trim(keyword) == "" do
+      {:error, "Search keyword cannot be empty"}
     else
-      []
+      try do
+        matches = search_tasks_internal(keyword)
+        suggestions = if Enum.empty?(matches) do
+          suggest_keywords(keyword)
+        else
+          []
+        end
+
+        scored_matches = Enum.map(matches, fn {task, description, category} ->
+          score = calculate_match_score(task, description, keyword)
+          %{task: task, description: description, category: category, score: score}
+        end)
+        |> Enum.sort_by(& &1.score, :desc)
+
+        {:ok, scored_matches, suggestions}
+      rescue
+        error ->
+          {:error, "Search failed: #{Exception.message(error)}"}
+      end
     end
-
-    scored_matches = Enum.map(matches, fn {task, description, category} ->
-      score = calculate_match_score(task, description, keyword)
-      %{task: task, description: description, category: category, score: score}
-    end)
-    |> Enum.sort_by(& &1.score, :desc)
-
-    {:ok, scored_matches, suggestions}
  end
 
  # Helper functions for the new API
@@ -230,8 +240,17 @@ defmodule Mix.Tasks.Prismatic.Shared.HelpSystem do
   """
   @spec get_related_tasks(String.t()) :: {:ok, list()} | {:error, String.t()}
   def get_related_tasks(keyword) do
-    related = find_related_tasks_by_keyword(keyword)
-    {:ok, related}
+    if String.trim(keyword) == "" do
+      {:error, "Keyword cannot be empty"}
+    else
+      try do
+        related = find_related_tasks_by_keyword(keyword)
+        {:ok, related}
+      rescue
+        error ->
+          {:error, "Failed to find related tasks: #{Exception.message(error)}"}
+      end
+    end
   end
 
   # Private functions

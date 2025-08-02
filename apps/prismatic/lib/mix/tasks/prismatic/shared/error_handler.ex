@@ -76,11 +76,17 @@ defmodule Mix.Tasks.Prismatic.Shared.ErrorHandler do
       not File.exists?(path) ->
         handle_file_not_found_error(path, description)
 
-      File.dir?(path) and not File.dir?(path) ->
-        handle_directory_access_error(path, description)
+      File.dir?(path) ->
+        case File.ls(path) do
+          {:ok, _} -> :ok
+          {:error, _} -> handle_directory_access_error(path, description)
+        end
 
-      File.regular?(path) and not File.regular?(path) ->
-        handle_file_access_error(path, description)
+      File.regular?(path) ->
+        case File.read(path) do
+          {:ok, _} -> :ok
+          {:error, _} -> handle_file_access_error(path, description)
+        end
 
       true ->
         :ok
@@ -234,7 +240,7 @@ defmodule Mix.Tasks.Prismatic.Shared.ErrorHandler do
     base_cause <> task_context
   end
 
-  defp gather_error_context(error, task_name) do
+  defp gather_error_context(_error, task_name) do
     %{
       environment: Mix.env(),
       task_category: extract_task_category(task_name),
@@ -264,7 +270,7 @@ defmodule Mix.Tasks.Prismatic.Shared.ErrorHandler do
     end
   end
 
-  defp display_error_summary(error, error_context) do
+  defp display_error_summary(_error, error_context) do
     severity_color = case error_context.severity do
       :high -> :red
       :medium -> :yellow

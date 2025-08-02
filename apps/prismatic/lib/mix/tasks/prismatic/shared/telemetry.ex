@@ -170,6 +170,66 @@ defmodule Mix.Tasks.Prismatic.Shared.Telemetry do
     end
   end
 
+  @doc """
+  Get recent task executions for activity monitoring.
+  """
+  @spec get_recent_tasks(integer()) :: {:ok, list()} | {:error, String.t()}
+  def get_recent_tasks(limit \\ 10) do
+    try do
+      events = get_stored_statistics()
+
+      recent_tasks = events
+      |> Enum.filter(&(is_map(&1) and Map.has_key?(&1, :task_name)))
+      |> Enum.take(limit)
+      |> Enum.map(fn event ->
+        %{
+          name: event[:task_name] || "unknown",
+          success: event[:result] == :success,
+          execution_time: event[:execution_time] || 0,
+          timestamp: event[:timestamp] || DateTime.utc_now()
+        }
+      end)
+
+      {:ok, recent_tasks}
+    rescue
+      error -> {:error, Exception.message(error)}
+    end
+  end
+
+  @doc """
+  Record task start for tracking purposes.
+  """
+  @spec record_task_start(String.t(), map()) :: :ok
+  def record_task_start(task_name, metadata \\ %{}) do
+    event_data = %{
+      task_name: task_name,
+      event_type: :start,
+      metadata: metadata,
+      timestamp: DateTime.utc_now()
+    }
+
+    append_to_telemetry_log(event_data)
+    :ok
+  end
+
+  @doc """
+  Record task completion with execution time and success status.
+  """
+  @spec record_task_completion(String.t(), integer(), map()) :: :ok
+  def record_task_completion(task_name, execution_time, metadata \\ %{}) do
+    event_data = %{
+      task_name: task_name,
+      event_type: :completion,
+      execution_time: execution_time,
+      result: if(metadata[:success], do: :success, else: :error),
+      metadata: metadata,
+      timestamp: DateTime.utc_now()
+    }
+
+    append_to_telemetry_log(event_data)
+    :ok
+  end
+
   # Private functions
 
   defp emit_telemetry_event(event_name, measurements, metadata) do

@@ -397,17 +397,17 @@ defmodule Prismatic.Documentation.TraceabilityMarker do
     code_markers = Enum.filter(code_references, &(&1.type == :explicit_trace))
 
     Enum.flat_map(doc_markers, fn doc_marker ->
-      Enum.filter_map(code_markers,
-        &(&1.trace_id == doc_marker.trace_id),
-        fn code_marker ->
-          %{
-            link_type: :explicit,
-            documentation: doc_marker,
-            implementation: code_marker,
-            trace_id: doc_marker.trace_id,
-            confidence: 100
-          }
-        end)
+      code_markers
+      |> Enum.filter(&(&1.trace_id == doc_marker.trace_id))
+      |> Enum.map(fn code_marker ->
+        %{
+          link_type: :explicit,
+          documentation: doc_marker,
+          implementation: code_marker,
+          trace_id: doc_marker.trace_id,
+          confidence: 100
+        }
+      end)
     end)
   end
 
@@ -435,47 +435,47 @@ defmodule Prismatic.Documentation.TraceabilityMarker do
   defp find_module_matches(doc_ref, code_definitions) do
     module_definitions = Enum.filter(code_definitions, &(&1.type == :module_definition))
 
-    Enum.filter_map(module_definitions,
-      &module_name_matches?(&1.module_name, doc_ref.reference),
-      fn module_def ->
-        %{
-          link_type: :implicit_module,
-          documentation: doc_ref,
-          implementation: module_def,
-          confidence: calculate_match_confidence(doc_ref.reference, module_def.module_name)
-        }
-      end)
+    module_definitions
+    |> Enum.filter(&module_name_matches?(&1.module_name, doc_ref.reference))
+    |> Enum.map(fn module_def ->
+      %{
+        link_type: :implicit_module,
+        documentation: doc_ref,
+        implementation: module_def,
+        confidence: calculate_match_confidence(doc_ref.reference, module_def.module_name)
+      }
+    end)
   end
 
   defp find_function_matches(doc_ref, code_definitions) do
     function_definitions = Enum.filter(code_definitions, &(&1.type == :function_definition))
 
-    Enum.filter_map(function_definitions,
-      &function_name_matches?(&1.function_name, doc_ref.reference),
-      fn function_def ->
-        %{
-          link_type: :implicit_function,
-          documentation: doc_ref,
-          implementation: function_def,
-          confidence: calculate_match_confidence(doc_ref.reference, function_def.function_name)
-        }
-      end)
+    function_definitions
+    |> Enum.filter(&function_name_matches?(&1.function_name, doc_ref.reference))
+    |> Enum.map(fn function_def ->
+      %{
+        link_type: :implicit_function,
+        documentation: doc_ref,
+        implementation: function_def,
+        confidence: calculate_match_confidence(doc_ref.reference, function_def.function_name)
+      }
+    end)
   end
 
   defp find_file_matches(doc_ref, code_definitions) do
     # Match file references to actual files
     referenced_file = doc_ref.reference
 
-    Enum.filter_map(code_definitions,
-      &file_path_matches?(&1.source_file, referenced_file),
-      fn code_def ->
-        %{
-          link_type: :implicit_file,
-          documentation: doc_ref,
-          implementation: code_def,
-          confidence: calculate_file_match_confidence(code_def.source_file, referenced_file)
-        }
-      end)
+    code_definitions
+    |> Enum.filter(&file_path_matches?(&1.source_file, referenced_file))
+    |> Enum.map(fn code_def ->
+      %{
+        link_type: :implicit_file,
+        documentation: doc_ref,
+        implementation: code_def,
+        confidence: calculate_file_match_confidence(code_def.source_file, referenced_file)
+      }
+    end)
   end
 
   defp module_name_matches?(module_name, reference) do
@@ -646,7 +646,7 @@ defmodule Prismatic.Documentation.TraceabilityMarker do
     "apps/#{app_name}/lib/#{filename}"
   end
 
-  defp suggest_function_location(function_name) do
+  defp suggest_function_location(_function_name) do
     # Suggest adding to most relevant existing module
     "Consider adding to appropriate module based on functionality"
   end

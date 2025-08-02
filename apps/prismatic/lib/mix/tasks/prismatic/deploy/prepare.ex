@@ -97,8 +97,6 @@ defmodule Mix.Tasks.Prismatic.Deploy.Prepare do
     profile: :system,
     description: "Comprehensive deployment preparation with environment configuration"
 
-  @shortdoc "Comprehensive deployment preparation with environment-specific configuration"
-
   @switches [
     env: :string,
     target: :string,
