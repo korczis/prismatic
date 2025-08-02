@@ -1,0 +1,62 @@
+graph TB
+    subgraph "Layer 1: Foundation Infrastructure"
+        TI[Testing Infrastructure<br/>✅ Complete]
+        CI[CI/CD Pipeline<br/>✅ Complete]
+        DOC[Documentation Framework<br/>✅ Complete]
+        BENCH[Benchmarking System<br/>✅ Complete]
+    end
+    
+    subgraph "Layer 2: Core Protocols"
+        LLM[LLM Backend Protocol<br/>📋 Planned]
+        MEM[Memory Protocol<br/>📋 Planned]
+        AGENT[Agent Protocol<br/>📋 Planned]
+    end
+    
+    subgraph "Layer 3: Implementations"
+        LLMI[LLM Implementations<br/>📋 Planned]
+        MEMI[Memory Implementations<br/>📋 Planned]
+        AGENTI[Agent Implementations<br/>📋 Planned]
+    end
+    
+    subgraph "Layer 4: Integration & Supervision"
+        SUP[Supervision Architecture<br/>📋 Planned]
+        INT[Integration Tests<br/>🚧 Framework Ready]
+        PROP[Property-Based Tests<br/>🚧 Framework Ready]
+    end
+    
+    subgraph "Layer 5: Applications & Documentation"
+        EX[Example Applications<br/>📋 Planned]
+        DOCS[Complete Documentation<br/>🚧 In Progress]
+        API[API Documentation<br/>📋 Planned]
+    end
+    
+    TI --> LLM
+    CI --> LLM
+    DOC --> LLM
+    BENCH --> LLM
+    
+    LLM --> MEM
+    MEM --> AGENT
+    
+    LLM --> LLMI
+    MEM --> MEMI
+    AGENT --> AGENTI
+    
+    LLMI --> SUP
+    MEMI --> SUP
+    AGENTI --> SUP
+    
+    SUP --> INT
+    INT --> PROP
+    PROP --> EX
+    EX --> DOCS
+    DOCS --> API
+    
+    classDef complete fill:#90EE90,stroke:#006400,stroke-width:2px
+    classDef inProgress fill:#FFE4B5,stroke:#FF8C00,stroke-width:2px
+    classDef planned fill:#E6E6FA,stroke:#4B0082,stroke-width:2px
+    classDef ready fill:#F0E68C,stroke:#B8860B,stroke-width:2px
+    
+    class TI,CI,DOC,BENCH complete
+    class DOCS,INT,PROP inProgress
+    class LLM,MEM,AGENT,LLMI,MEMI,AGENTI,SUP,EX,API planned

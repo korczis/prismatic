@@ -23,7 +23,7 @@ config :prismatic_web, PrismaticWeb.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "348H/F/SmW96Kp6pv6cf7zFiRPgYLIbIzuka91P1zpCURoLWTq8+vuab9a3Msi4G",
+  secret_key_base: "TUb0puWsh1Lszq6CeeaDq42nyyvN46+Z2xicx+oUIiNDcEHcqBviR7td+1PUMyLd",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:prismatic_web, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:prismatic_web, ~w(--watch)]}
@@ -55,6 +55,7 @@ config :prismatic_web, PrismaticWeb.Endpoint,
 # Watch static and templates for browser reloading.
 config :prismatic_web, PrismaticWeb.Endpoint,
   live_reload: [
+    web_console_logger: true,
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
@@ -66,20 +67,21 @@ config :prismatic_web, PrismaticWeb.Endpoint,
 config :prismatic_web, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :default_formatter, format: "[$level] $message\n"
+
+# Set a higher stacktrace during development. Avoid configuring such
+# in production as building large stacktraces may be expensive.
+config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
 config :phoenix_live_view,
-  # Include HEEx debug annotations as HTML comments in rendered markup
+  # Include HEEx debug annotations as HTML comments in rendered markup.
+  # Changing this configuration will require mix clean and a full recompile.
   debug_heex_annotations: true,
   # Enable helpful, but potentially expensive runtime checks
   enable_expensive_runtime_checks: true
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
-
-# Set a higher stacktrace during development. Avoid configuring such
-# in production as building large stacktraces may be expensive.
-config :phoenix, :stacktrace_depth, 20

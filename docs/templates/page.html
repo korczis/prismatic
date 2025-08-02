@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="{{ config.default_language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.title }}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ get_url(path='favicon.ico') }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ page.permalink }}">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ page.permalink }}">
+    <meta property="twitter:title" content="{{ page.title }}">
+    <meta property="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="main-nav">
+            <div class="nav-brand">
+                <a href="{{ get_url(path='@/_index.md') }}">{{ config.title }}</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ get_url(path='@/architecture/_index.md') }}">Architecture</a></li>
+                <li><a href="{{ get_url(path='@/agents/_index.md') }}">Agents</a></li>
+                <li><a href="{{ get_url(path='@/applications/_index.md') }}">Applications</a></li>
+                <li><a href="{{ get_url(path='@/societies/_index.md') }}">Societies</a></li>
+                <li><a href="{{ get_url(path='@/scenarios/_index.md') }}">Scenarios</a></li>
+                <li><a href="{{ get_url(path='@/automation/_index.md') }}">Automation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <article class="page-content">
+                <header class="page-header">
+                    <h1>{{ page.title }}</h1>
+                    {% if page.description %}
+                    <p class="page-description">{{ page.description }}</p>
+                    {% endif %}
+                    
+                    <div class="page-meta">
+                        {% if page.date %}
+                        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+                        {% endif %}
+                        
+                        {% if page.taxonomies.tags %}
+                        <div class="page-tags">
+                            {% for tag in page.taxonomies.tags %}
+                            <span class="tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </header>
+
+                <div class="page-body">
+                    {{ page.content | safe }}
+                </div>
+
+                {% if page.taxonomies.categories %}
+                <footer class="page-footer">
+                    <div class="page-categories">
+                        <strong>Categories:</strong>
+                        {% for category in page.taxonomies.categories %}
+                        <a href="{{ get_taxonomy_url(kind='categories', name=category) }}" class="category">{{ category }}</a>
+                        {% endfor %}
+                    </div>
+                </footer>
+                {% endif %}
+            </article>
+
+            <!-- Navigation -->
+            <nav class="page-navigation">
+                {% if page.earlier %}
+                <a href="{{ page.earlier.permalink }}" class="nav-previous">
+                    ← {{ page.earlier.title }}
+                </a>
+                {% endif %}
+                
+                {% if page.later %}
+                <a href="{{ page.later.permalink }}" class="nav-next">
+                    {{ page.later.title }} →
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now() | date(format="%Y") }} Prismatic AI Agent Framework. Licensed under the General Honest License.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ get_url(path='search.js') }}"></script>
+</body>
+</html>

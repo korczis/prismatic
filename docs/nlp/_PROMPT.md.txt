@@ -1,0 +1,102 @@
+Vytvoř podrobnou Markdown dokumentaci NLP patternu [PATTERN_NAME]. Dodržuj přesně následující strukturu:
+
++++
+title = "[PATTERN_NAME]: [PATTERN_SPECIFIC_TITLE]"
+description = "Komplexní analýza techniky [PATTERN_NAME] včetně vědeckého základu, detailních příkladů použití a návaznosti na další NLP vzorce."
+date = 2025-03-12
++++
+
+# [PATTERN_NAME]: [PATTERN_SPECIFIC_TITLE]
+
+## Shrnutí
+
+| **Aspekt**          | **Popis**                                                                 |
+|----------------------|---------------------------------------------------------------------------|
+| **Cíl (Goal)**       | [Stručný popis hlavního cíle techniky]   |
+| **Použití (Usage)**  | [Stručný popis typického použití] |
+| **Motivace**         | [Stručný popis hlavní motivace k použití] |
+| **Environment**      | [Stručný popis vhodného prostředí pro aplikaci] |
+| **Přerekvizity**     | [Stručný popis nutných předpokladů] |
+
+## Metodika techniky
+
+[Detailní popis techniky a jejích základních principů. Vysvětli, jak tento pattern funguje z teoretického i praktického hlediska. Uveď klíčové prvky a charakteristiky, které techniku definují.]
+
+### Neurokognitivní základ techniky
+
+[Hluboký vědecký popis neurobiologických mechanismů a výzkumů souvisejících s technikou. Zahrň relevantní studie, neurobiologické procesy a kognitivní mechanismy, které vysvětlují, proč technika funguje. Používej odbornou terminologii s relevantními zdroji.]
+
+## Vhodné situace pro použití
+
+[Popis situací a kontextů, kdy je vhodné tuto techniku aplikovat. Uveď konkrétní ukazatele a příznaky, které naznačují, že právě tato technika může být efektivní. Vysvětli, jak rozpoznat vhodnou příležitost pro implementaci.]
+
+## Implementace v praxi
+
+### Detailní postup:
+
+- [Krok 1 implementace]
+- [Krok 2 implementace]
+- [Krok 3 implementace]
+- [Krok 4 implementace]
+
+### Praktické příklady:
+
+#### [Příklad 1]:
+- **[Element 1]:** [Popis]
+- **[Element 2]:** [Popis]
+- **[Element 3]:** [Popis]
+- **[Element 4]:** [Popis]
+- **[Element 5]:** [Popis]
+- **[Element 6]:** [Popis]
+
+[Shrnutí jak aplikace v tomto příkladu vede k požadovanému výsledku]
+
+#### [Příklad 2]:
+- **[Element 1]:** [Popis]
+- **[Element 2]:** [Popis]
+- **[Element 3]:** [Popis]
+- **[Element 4]:** [Popis]
+- **[Element 5]:** [Popis]
+- **[Element 6]:** [Popis]
+
+[Shrnutí jak aplikace v tomto příkladu vede k požadovanému výsledku]
+
+## Etické aspekty aplikace
+
+### Pozitivní (White) aplikace:
+- [Konstruktivní příklad použití 1]
+- [Konstruktivní příklad použití 2]
+- [Konstruktivní příklad použití 3]
+- [Etický benefit 1]
+- [Etický benefit 2]
+
+### Problematické (Dark) aplikace:
+- **[Manipulativní technika 1]:** [Detailní popis jak lze techniku zneužít k manipulaci]
+- **[Manipulativní technika 2]:** [Detailní popis další manipulativní aplikace]
+- **[Psychologické riziko 1]:** [Popis potenciálního rizika pro psychiku subjektu]
+- **[Psychologické riziko 2]:** [Popis dalšího rizika zneužití]
+- [Doporučení pro předcházení zneužití s konkrétními opatřeními]
+
+## Závěr a propojení s dalšími technikami
+
+[Shrnutí klíčových benefitů a účinnosti techniky. Vysvětli, jak se technika odlišuje od jiných a jakou přidanou hodnotu přináší. Popiš, jak lze tuto techniku kombinovat s jinými NLP vzorci pro dosažení komplexnějších výsledků.]
+
+### Související techniky a články:
+
+- [Související technika 1](../soubor1.md)
+- [Související technika 2](../soubor2.md)
+- [Související technika 3](../soubor3.md)
+- [Související technika 4](../soubor4.md)
+
+### Odkazy a reference:
+
+1. [Autor, A. (Rok). *Název publikace*. Vydavatel.]
+2. [Autor, B., & Autor, C. (Rok). Název článku. *Název časopisu*, číslo(vydání), strany.]
+3. [Další odborné zdroje a citace související s technikou]
+
+### Glosář termínů:
+
+- **[Termín 1]** - [Stručná definice odborného termínu] - [Odkaz do glosáře](/glossary/termin1.md)
+- **[Termín 2]** - [Stručná definice odborného termínu] - [Odkaz do glosáře](/glossary/termin2.md)
+- **[Termín 3]** - [Stručná definice odborného termínu] - [Odkaz do glosáře](/glossary/termin3.md)
+- [Další relevantní termíny s definicemi a odkazy do glosáře]

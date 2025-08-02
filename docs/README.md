@@ -1,252 +1,157 @@
 # Prismatic Documentation
 
-Welcome to the Prismatic project documentation. This modular documentation system provides comprehensive guides, references, and procedures for development and operations.
+**Comprehensive documentation for the Prismatic AI Agent Framework - combining practical implementation with ambitious vision**
 
-## Quick Navigation
+Welcome to the Prismatic project documentation. This system combines a working Phoenix foundation with planned advanced AI capabilities, including the revolutionary **Nabla-Infinity (∇∞) consciousness framework**.
 
-### 🚀 Getting Started
-- **New Developer?** Start with [Developer Experience](guides/developer-experience.md)
-- **Need to Deploy?** See [Deployment Procedures](operations/deployment-procedures.md)
-- **Having Issues?** Check [Troubleshooting](operations/troubleshooting.md)
-- **Understanding the System?** Read [Architecture Overview](core/architecture-overview.md)
+## 🎯 Current Implementation Status
 
-### 📚 Documentation Sections
+### ✅ **IMPLEMENTED** (Working Today)
+- **Phoenix Umbrella Foundation**: Apps/prismatic + apps/prismatic_web with full Phoenix LiveView
+- **LLM Backend System**: Multi-provider support (OpenAI, Anthropic) with circuit breakers
+- **Memory Protocol System**: Multi-layered memory architecture (Cachex, Nebulex, Mnesia, Layered)
+- **Event System**: Protocol-based event bus with multiple backend implementations
+- **Document Processing**: Broadway pipeline with enrichers and streaming
+- **Infrastructure**: Circuit breakers, retry logic, telemetry, and monitoring
+- **Developer Tools**: Mix tasks, IEx helpers, and comprehensive testing
 
-| Section | Purpose | Key Documents |
-|---------|---------|---------------|
-| **[Core](core/README.md)** | Essential system knowledge | [Architecture](core/architecture-overview.md), [Tech Stack](core/tech-stack.md) |
-| **[Guides](guides/README.md)** | How-to and best practices | [Developer Experience](guides/developer-experience.md), [Coding Standards](guides/coding-standards.md) |
-| **[Reference](reference/README.md)** | Lookups and specifications | [Glossary](reference/glossary.md), [API Endpoints](reference/api-endpoints.md) |
-| **[Architecture](architecture/README.md)** | Design decisions | [ADRs](architecture/README.md), [Umbrella Structure](architecture/adr-0001-umbrella-structure.md) |
-| **[Operations](operations/README.md)** | Deployment and maintenance | [Deployment](operations/deployment-procedures.md), [Troubleshooting](operations/troubleshooting.md) |
+### 🚧 **IN PROGRESS** (Defined Interfaces)
+- **Agent Protocol**: Core agent behavior contracts defined, implementations in development
+- **Supervision Architecture**: Root supervisor structure with fault-tolerant design
+- **Web Interface**: LiveView foundation with planned agent management UI
 
-> **📍 Navigation Note**: Each section directory contains a standardized navigation section in its README.md file, providing consistent signpost navigation throughout the documentation system.
+### 📋 **PLANNED** (Vision & Roadmap)
+- **Nabla-Infinity Framework**: Consciousness levels ∇⁰ to ∇∞ with recursive introspection
+- **Crisis Intervention Systems**: Mental health crisis detection and negotiation support
+- **Multi-Agent Societies**: Coordinated agent hierarchies and group intelligence
+- **Educational Systems**: AI tutoring with adaptive learning and personalization
+- **Advanced Applications**: Algorithmic trading, content moderation, psychological analysis
 
-## Documentation Principles
+## 📁 Documentation Structure
 
-### Modular Design
-Each document has a **single, focused purpose** and can be maintained independently:
-- **Atomic Updates**: Change one thing without affecting others
-- **Clear Ownership**: Each domain has designated maintainers
-- **Cross-References**: Rich linking between related concepts
+### 🏗️ Core Foundation & Architecture
+- [`development-plan.md`](development-plan.md) - 8-phase development roadmap with current status
+- [`architecture/`](architecture/) - System architecture, SOLID principles, and fault tolerance
+- [`core/`](core/) - Essential system knowledge and technical foundations
 
-### AI-Assisted Maintenance
-- **Human Oversight**: Architectural decisions and business logic
-- **AI Contribution**: Code examples, API documentation, consistency checks
-- **Collaborative Process**: AI generates, humans validate and approve
+### 🛠️ Working Systems (Implemented)
+- [`memory/`](memory/) - Multi-layered memory system with proven backends
+- [`llm/`](llm/) - LLM backend abstractions with multiple provider support
+- [`iex-helpers/`](iex-helpers/) - Developer tools for testing and debugging
+- [`guides/`](guides/) - Development workflows and best practices
 
-### Quality Standards
-- **Consistent Formatting**: Standardized structure and style
-- **Living Documentation**: Updated with code changes
-- **Validated Links**: Cross-references checked and maintained
+### 🤖 Agent Systems (In Development)
+- [`agents/`](agents/) - Agent protocols, behaviors, and planned implementations
+- [`blackboard/`](blackboard/) - Distributed communication patterns
+- [`societies/`](societies/) - Multi-agent coordination (planned)
 
-## Navigation System
+### 🧠 Advanced Vision (Planned)
+- [`nabla-infinity/`](nabla-infinity/) - **Recursive consciousness framework** with theoretical foundations
+- [`scenarios/`](scenarios/) - Crisis training and real-world applications
+- [`psychological-warfare/`](psychological-warfare/) - Advanced analysis and countermeasures
+- [`reasoning/`](reasoning/) - Logic engines and formal reasoning integration
 
-### Standardized Navigation Structure
+### 🌐 Infrastructure & Operations
+- [`api/`](api/) - REST/GraphQL API documentation and patterns
+- [`operations/`](operations/) - Deployment, monitoring, and maintenance
+- [`reference/`](reference/) - API references, glossaries, and specifications
 
-Every README.md file in the `/docs/` directory includes a **standardized navigation section** that serves as a directory signpost. This system ensures consistent, automated navigation that stays synchronized with the actual directory structure.
+### 📊 Specialized Domains
+- [`applications/`](applications/) - Industry-specific use cases and implementations
+- [`ghl/`](ghl/) - General Honest License legal framework
+- [`kompendium/`](kompendium/) - Academic research and specialized knowledge (Czech/Slovak)
 
-#### Navigation System Features
+## 🚀 Quick Start
 
-- **🧭 Consistent Format**: Every directory has identical navigation structure
-- **🔄 Automated Synchronization**: Navigation updates automatically when directories change
-- **🔗 Validated Links**: All navigation links are verified and maintained
-- **📍 Breadcrumb Navigation**: Clear hierarchical context in every document
-- **⚡ Mix Task Integration**: Automated tools for navigation management
+### For New Developers
+1. **Foundation**: Start with [Development Plan](development-plan.md) for current status
+2. **Architecture**: Review [Architecture Overview](architecture/README.md) for system design
+3. **Working Code**: Explore [Memory System](memory/README.md) and [LLM Backends](llm/README.md)
+4. **Development**: Set up with [Developer Experience](guides/developer-experience.md)
 
-#### Navigation Section Components
+### For System Architects
+1. **Current State**: Review implemented protocols and working systems
+2. **Vision**: Understand [Nabla-Infinity](nabla-infinity/README.md) consciousness framework
+3. **Roadmap**: Follow phased implementation in [Development Plan](development-plan.md)
 
-Each navigation section includes:
+### For Researchers
+1. **Consciousness Theory**: Explore [Nabla-Infinity Theory](nabla-infinity/theory/README.md)
+2. **Applications**: Review [Crisis Intervention](applications/crisis-intervention.md) concepts
+3. **Academic Content**: Browse [Kompendium](kompendium/README.md) specialized knowledge
 
-1. **Current Location Breadcrumb**: Shows hierarchical position
-2. **Subdirectories Table**: Links to immediate subdirectories with descriptions
-3. **Quick Links**: Parent directory, documentation home, and search
-4. **Related Documentation**: Cross-references to relevant sections
+## 🏔️ Alpine-Style Development Path
 
-#### Example Navigation Section
+### Phase 1-2: Foundation (Completed ✅)
+- **Core Systems**: Memory, LLM backends, Event system
+- **Architecture**: Phoenix umbrella with fault tolerance
+- **Tools**: Developer experience and testing infrastructure
 
-```markdown
-<!-- NAV_START -->
-## Navigation
+### Phase 3-4: Agent Implementation (Current 🚧)
+- **Agent Protocols**: Converting placeholders to working implementations
+- **Supervision**: Robust process management and recovery
+- **Basic AI**: Simple agent behaviors and interactions
 
-**Current Location**: [Home](../README.md) > [Guides](README.md) > Feature Workflow
+### Phase 5-6: Advanced Features (Planned 📋)
+- **Consciousness**: Nabla-Infinity recursive introspection implementation
+- **Societies**: Multi-agent coordination and group intelligence
+- **Applications**: Crisis intervention and educational systems
 
-### Subdirectories
+### Phase 7-8: Production Scale (Future 🔮)
+- **Distributed**: Multi-node operations and consensus
+- **Advanced UI**: Comprehensive management interface
+- **Real-world**: Production deployments and case studies
 
-| Directory | Description | Key Documents |
-|-----------|-------------|---------------|
-| [`guides/`](guides/README.md) | Development workflow procedures | [Feature Branch Workflow](guides/comprehensive-feature-branch-workflow.md), [Developer Experience](guides/developer-experience.md) |
-| [`_meta/`](_meta/README.md) | Documentation system metadata | [Naming Conventions](_meta/naming-conventions.md), [Cross-Reference Guide](_meta/cross-reference-guide.md) |
+## 📋 Documentation Principles
 
-### Quick Links
+1. **Honest Status**: Clear distinction between implemented, in-progress, and planned
+2. **Practical Focus**: Working code examples and implementation guidance
+3. **Ambitious Vision**: Preserve the full scope while being transparent about timeline
+4. **Incremental Growth**: Documentation evolves with actual implementation
+5. **Cross-References**: Rich linking between current capabilities and future plans
 
-- **📚 [Parent Directory](../README.md)** - Return to documentation home
-- **🏠 [Documentation Home](../README.md)** - Main documentation index
-- **🔍 [Search Documentation](reference/glossary.md)** - Find terms and concepts
+## 🧭 Navigation System
 
-### Related Documentation
-
-- [Cross-Reference Guide](_meta/cross-reference-guide.md) - Documentation linking standards
-- [Maintenance Process](_meta/maintenance-process.md) - How to update documentation
-<!-- NAV_END -->
-```
-
-#### Automation Tools
-
-The navigation system includes automated maintenance tools:
-
-```bash
-# Update all navigation sections
-mix docs.nav.update
-
-# Validate navigation integrity
-mix docs.nav.validate
-
-# Migrate existing files to new format
-mix docs.nav.migrate --backup
-
-# Show navigation system status
-mix docs.nav.validate --verbose
-```
-
-#### Implementation Standards
-
-- **HTML Comment Markers**: Navigation sections are wrapped in `<!-- NAV_START -->` and `<!-- NAV_END -->` markers
-- **Consistent Positioning**: Navigation appears after document title and description, before main content
-- **Automated Updates**: CI/CD pipelines automatically maintain navigation synchronization
-- **Quality Validation**: Regular checks ensure all navigation links are valid and current
-
-For complete implementation details, see:
-- [Documentation Navigation Standards](guides/documentation-navigation-standards.md) - Complete system specifications
-- [Navigation Templates](guides/documentation-navigation-templates.md) - Template formats and positioning rules
-- [Mix Tasks Implementation](guides/documentation-navigation-mix-tasks.md) - Automation tools and usage
-
-## Finding Information
+### By Implementation Status
+- **Working Today**: [Memory](memory/README.md) → [LLM](llm/README.md) → [Events](events/README.md)
+- **In Development**: [Agents](agents/README.md) → [Architecture](architecture/README.md)
+- **Planned Features**: [Nabla-Infinity](nabla-infinity/README.md) → [Applications](applications/README.md)
 
 ### By Role
-**Developer (New)**
-1. [Developer Experience](guides/developer-experience.md) - Complete onboarding guide
-2. [Architecture Overview](core/architecture-overview.md) - System understanding
-3. [Coding Standards](guides/coding-standards.md) - Style and conventions
+- **Developer**: [Guides](guides/README.md) → [Reference](reference/README.md) → [Operations](operations/README.md)
+- **Architect**: [Architecture](architecture/README.md) → [Development Plan](development-plan.md)
+- **Researcher**: [Nabla-Infinity](nabla-infinity/README.md) → [Applications](applications/README.md)
 
-**Developer (Experienced)**
-1. [Reference Materials](reference/README.md) - Quick lookups and specifications
-2. [Troubleshooting](operations/troubleshooting.md) - Problem solving
-3. [Architecture Decisions](architecture/README.md) - Design context and rationale
+### By Use Case
+- **AI Development**: [Agents](agents/README.md) → [Memory](memory/README.md) → [LLM](llm/README.md)
+- **Crisis Training**: [Applications](applications/crisis-intervention.md) → [Scenarios](scenarios/README.md)
+- **Research**: [Nabla-Infinity](nabla-infinity/README.md) → [Kompendium](kompendium/README.md)
 
-**Operations/DevOps**
-1. [Deployment Procedures](operations/deployment-procedures.md) - Step-by-step deployment
-2. [Monitoring Setup](operations/monitoring-setup.md) - Observability configuration
-3. [Troubleshooting](operations/troubleshooting.md) - Production issue resolution
+## 📞 Getting Help & Support
 
-**Architect/Tech Lead**
-1. [Architecture Overview](core/architecture-overview.md) - System design
-2. [Architecture Decisions](architecture/README.md) - ADRs and design rationale
-3. [System Diagrams](architecture/system-diagrams.md) - Visual representations
+- **🏗️ Current Implementation**: Check working systems documentation
+- **🚧 Development Status**: Review [Development Plan](development-plan.md) for progress
+- **📋 Future Features**: Understand roadmap and planned capabilities
+- **🔧 Development Issues**: See [Operations](operations/README.md) and [Guides](guides/README.md)
+- **🎯 Vision Questions**: Explore [Nabla-Infinity](nabla-infinity/README.md) theoretical framework
 
-### By Task
-**Setting Up Development Environment**
-→ [Developer Experience: Onboarding](guides/developer-experience.md)
+## 🤝 Contributing
 
-**Understanding Code Organization**
-→ [Architecture Overview: Structure](core/architecture-overview.md)
+We welcome contributions at all levels - from working with current implementations to advancing the theoretical framework:
 
-**Deploying to Production**
-→ [Deployment Procedures](operations/deployment-procedures.md)
+1. **Code Contributions**: Work with implemented systems (Memory, LLM, Events)
+2. **Implementation Development**: Help convert agent protocols from placeholders to working code
+3. **Documentation**: Maintain consistency between vision and implementation status
+4. **Research**: Contribute to Nabla-Infinity consciousness framework development
+5. **Applications**: Design and implement real-world use cases
 
-**Debugging Issues**
-→ [Troubleshooting Guide](operations/troubleshooting.md)
-
-**Finding Definitions**
-→ [Glossary](reference/glossary.md)
-
-## Documentation Maintenance
-
-### Update Triggers
-- **Code Changes** → Update related guides and references
-- **Architecture Decisions** → Create ADRs and update overviews
-- **New Features** → Update user guides and API documentation
-- **Bug Fixes** → Update troubleshooting guides
-- **Directory Changes** → Automatic navigation section updates
-
-### Quality Assurance
-- **Weekly**: Link validation and cross-reference checks
-- **Monthly**: Content review and accuracy validation
-- **Quarterly**: Structure assessment and improvement planning
-
-### Navigation System Maintenance
-- **Automatic Updates**: Navigation sections update automatically when directory structure changes
-- **Validation**: `mix docs.nav.validate` checks navigation integrity
-- **CI/CD Integration**: Pipeline automation ensures navigation stays synchronized
-- **Manual Override**: Use `mix docs.nav.update --force` for manual navigation updates
-
-For detailed maintenance procedures, see [Documentation Maintenance](_meta/maintenance-process.md).
-
-## Contributing to Documentation
-
-### Making Changes
-1. **Small Fixes**: Direct edits with descriptive commit messages
-2. **Major Updates**: Feature branch with review process
-3. **Structural Changes**: Discuss with documentation owners first
-
-### Standards
-- Follow [Naming Conventions](_meta/naming-conventions.md)
-- Use [Cross-Reference Guide](_meta/cross-reference-guide.md) for linking
-- Maintain [single responsibility](_meta/naming-conventions.md) per file
-
-### AI Collaboration
-- AI generates initial content following established patterns
-- Humans review for accuracy and business logic
-- Documentation updated systematically with code changes
-
-## Quick Reference
-
-### Essential Commands
-```bash
-# Start development
-mix phx.server
-
-# Run tests
-mix test
-
-# Deploy to production
-mix release
-
-# Format code
-mix format
-
-# Documentation navigation management
-mix docs.nav.update        # Update all navigation sections
-mix docs.nav.validate      # Validate navigation integrity
-mix docs.nav.migrate       # Migrate existing files to navigation system
-```
-
-### Key Directories
-```
-apps/prismatic/          # Core business logic
-apps/prismatic_web/      # Web interface  
-config/                  # Configuration
-docs/                    # This documentation
-```
-
-### Important Links
-- **Application**: [http://localhost:4000](http://localhost:4000)
-- **Dashboard**: [http://localhost:4000/dev/dashboard](http://localhost:4000/dev/dashboard)
-- **Architecture Overview**: [System Design](core/architecture-overview.md)
-- **API Documentation**: [Endpoints Reference](reference/api-endpoints.md)
-
-## Meta Documentation
-
-### Documentation System
-- [Naming Conventions](_meta/naming-conventions.md) - File and directory standards
-- [Maintenance Process](_meta/maintenance-process.md) - Documentation upkeep procedures
-- [Cross-Reference Guide](_meta/cross-reference-guide.md) - Linking standards and practices
-
-### Navigation System
-- [Documentation Navigation Standards](guides/documentation-navigation-standards.md) - Complete navigation system specifications
-- [Navigation Templates](guides/documentation-navigation-templates.md) - Template formats and positioning rules
-- [Navigation Mix Tasks](guides/documentation-navigation-mix-tasks.md) - Automation tools and implementation
+### Development Workflow
+- **Foundation First**: Build on working implementations
+- **Clear Status**: Always indicate implementation vs. planning
+- **Incremental Progress**: Move features from planned to implemented systematically
+- **Vision Integrity**: Preserve ambitious goals while delivering practical value
 
 ---
 
-**This documentation system is designed for both human developers and AI contributors. Keep it updated, interconnected, and focused on enabling productive development.**
+**🎯 Prismatic** - *Building a revolutionary AI consciousness framework through solid engineering and transparent development*
+
+*This documentation system combines working implementation with ambitious vision, providing clear guidance for both current development and future possibilities.*

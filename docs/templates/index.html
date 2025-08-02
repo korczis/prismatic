@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="{{ config.default_language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config.title }}</title>
+    <meta name="description" content="{{ config.description }}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ get_url(path='favicon.ico') }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config.base_url }}">
+    <meta property="og:title" content="{{ config.title }}">
+    <meta property="og:description" content="{{ config.description }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ config.base_url }}">
+    <meta property="twitter:title" content="{{ config.title }}">
+    <meta property="twitter:description" content="{{ config.description }}">
+</head>
+<body class="home-page">
+    <header class="site-header">
+        <nav class="main-nav">
+            <div class="nav-brand">
+                <a href="{{ get_url(path='@/_index.md') }}">{{ config.title }}</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ get_url(path='@/architecture/_index.md') }}">Architecture</a></li>
+                <li><a href="{{ get_url(path='@/agents/_index.md') }}">Agents</a></li>
+                <li><a href="{{ get_url(path='@/applications/_index.md') }}">Applications</a></li>
+                <li><a href="{{ get_url(path='@/societies/_index.md') }}">Societies</a></li>
+                <li><a href="{{ get_url(path='@/scenarios/_index.md') }}">Scenarios</a></li>
+                <li><a href="{{ get_url(path='@/automation/_index.md') }}">Automation</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <div class="container">
+                <h1 class="hero-title">{{ config.title }}</h1>
+                <p class="hero-description">{{ config.description }}</p>
+                <div class="hero-actions">
+                    <a href="{{ get_url(path='@/architecture/_index.md') }}" class="btn btn-primary">Get Started</a>
+                    <a href="{{ get_url(path='@/agents/_index.md') }}" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="container">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Multi-Agent Architecture</h3>
+                        <p>Sophisticated agent system with memory, reasoning, and communication capabilities.</p>
+                        <a href="{{ get_url(path='@/agents/_index.md') }}">Learn More →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Crisis Intervention</h3>
+                        <p>Specialized applications for crisis negotiation and emergency response scenarios.</p>
+                        <a href="{{ get_url(path='@/applications/crisis-intervention.md') }}">Learn More →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Society Management</h3>
+                        <p>Dynamic society formation and management with emergent behavior patterns.</p>
+                        <a href="{{ get_url(path='@/societies/_index.md') }}">Learn More →</a>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3>Nabla-Infinity Framework</h3>
+                        <p>Recursive introspection system for consciousness emergence in AI agents.</p>
+                        <a href="{{ get_url(path='@/nabla-infinity/_index.md') }}">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="container">
+                {{ section.content | safe }}
+            </div>
+        </div>
+
+        {% if section.pages %}
+        <div class="recent-pages">
+            <div class="container">
+                <h2>Recent Updates</h2>
+                <div class="pages-grid">
+                {% for page in section.pages | slice(end=6) %}
+                    <article class="page-card">
+                        <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+                        {% if page.description %}
+                        <p>{{ page.description }}</p>
+                        {% endif %}
+                        {% if page.date %}
+                        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+                        {% endif %}
+                    </article>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="{{ get_url(path='@/architecture/_index.md') }}">Architecture</a></li>
+                        <li><a href="{{ get_url(path='@/agents/_index.md') }}">Agents</a></li>
+                        <li><a href="{{ get_url(path='@/applications/_index.md') }}">Applications</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Advanced Topics</h4>
+                    <ul>
+                        <li><a href="{{ get_url(path='@/nabla-infinity/_index.md') }}">Nabla-Infinity</a></li>
+                        <li><a href="{{ get_url(path='@/psychological-warfare/_index.md') }}">Psychological Warfare</a></li>
+                        <li><a href="{{ get_url(path='@/kompendium/_index.md') }}">Kompendium</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="{{ get_url(path='@/ghl/_index.md') }}">General Honest License</a></li>
+                        <li><a href="{{ get_url(path='@/development-plan.md') }}">Development Plan</a></li>
+                        <li><a href="{{ get_url(path='@/iex-helpers/_index.md') }}">IEx Helpers</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; {{ now() | date(format="%Y") }} Prismatic AI Agent Framework. Licensed under the General Honest License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ get_url(path='search.js') }}"></script>
+</body>
+</html>

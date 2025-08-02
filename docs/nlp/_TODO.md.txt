@@ -1,0 +1,522 @@
+3. **Parts Integration Process** (#18) - Umožňuje integraci konfliktních aspektů osobnosti, což vede k vnitřní harmonii.
+4. **Belief Change Cycle** (#11) - Cílená transformace limitujících přesvědčení, která formují vnímání reality.
+5. **Identity Level Transformation** (#424) - Nejhlubší úroveň změny zasahující do sebepojetí a identity člověka.
+6. **Memory Reconsolidation Process** (#496) - Využívá neurobiologické mechanismy pro přeprogramování emocionálních pamětí.
+7. **Milton Model Patterning** (#2) - Hypnotické jazykové vzorce pro oslovení nevědomí, které mohou obejít kritické myšlení.
+9. **Submodality Belief Change** (#53) - Přímá manipulace se smyslovými kvalitami vnitřních reprezentací pro změnu přesvědčení.
+11. **Fast Phobia Cure Technique** (#37) - Rychlá technika pro eliminaci fobií s potenciálem radikálně změnit emoční reakce.
+12. **Logical Level Alignment** (#12) - Slaďování různých úrovní změny (prostředí, chování, schopnosti, přesvědčení, identity, spirituality).
+13. **Unconscious Resources Accessing** (#452) - Zpřístupnění nevědomých zdrojů může vést k dramatickým změnám chování a prožívání.
+14. **Trance Induction Patterning** (#52) - Vědomé navozování změněných stavů vědomí s potenciálně hlubokými dopady.
+15. **Perceptual Position Shifting** (#19) - Změna perspektivy vnímání, která může radikálně změnit pochopení situací a vztahů.
+16. **Nested Loop Communication** (#28) - Víceúrovňová komunikace umožňující implantaci sdělení mimo vědomou pozornost.
+17. **Anchoring Installation** (#6) - Vytváření podmíněných reflexů pro rychlé vyvolání specifických stavů.
+18. **Visual-Kinesthetic Dissociation** (#40) - Technika pro odstranění traumatických reakcí oddělením vizuálních a kinestetických reprezentací.
+19. **Embedded Command Installation** (#14) - Vkládání příkazů do běžné konverzace mimo vědomou pozornost posluchače.
+21. **Metaphorical Transformation** (#15) - Využívání metafor k obejití vědomého odporu a facilitaci hluboké změny.
+23. **Compulsion Blowout Pattern** (#39) - Technika specificky zaměřená na eliminaci nutkavého chování a závislostí.
+24. **Spatial Sorting Pattern Utilization** (#93) - Využití prostorového uspořádání pro reorganizaci vnitřních stavů a procesů.
+25. **Strategy Elicitation and Installation** (#21) - Identifikace a instalace nových mentálních strategií pro různé procesy (rozhodování, motivace, učení).
+
+---
+
+* [ ] 1. **Meta Model Questioning**
+* [ ] 2. **Milton Model Patterning**
+* [ ] 3. **Sensory Acuity Development**
+* [ ] 4. **Submodality Shifting**
+* [ ] 5. **Rapport Building Technique**
+* [ ] 6. **Anchoring Installation**
+* [ ] 7. **Future Pacing Strategy**
+* [ ] 8. **Reframing Context/Content**
+* [ ] 9. **Timeline Therapy Technique**
+* [ ] 10. **Values Hierarchy Elicitation**
+* [ ] 11. **Belief Change Cycle**
+* [ ] 12. **Logical Level Alignment**
+* [x] 13. **Swish Pattern Application**
+* [ ] 14. **Embedded Command Installation**
+* [ ] 15. **Metaphorical Transformation**
+* [ ] 16. **Linguistic Presupposition Embedding**
+* [ ] 17. **Representational System Matching**
+* [ ] 18. **Parts Integration Process**
+* [ ] 19. **Perceptual Position Shifting**
+* [ ] 20. **Six-Step Reframing Process**
+* [ ] 21. **Strategy Elicitation and Installation**
+* [ ] 22. **Well-Formed Outcome Framing**
+* [ ] 23. **Resource State Activation**
+* [ ] 24. **Sleight of Mouth Pattern Usage**
+* [ ] 25. **Eye Accessing Cues Reading**
+* [ ] 26. **Precision Language Pattern**
+* [ ] 27. **Calibration to Unconscious Signals**
+* [ ] 28. **Nested Loop Communication**
+* [ ] 29. **New Behavior Generator Process**
+* [ ] 30. **Auditory Digital Accessing**
+* [ ] 31. **Analog Marking Technique**
+* [ ] 32. **Neurological Level Alignment**
+* [ ] 33. **Metamodel Chunking Patterns**
+* [ ] 34. **Spatial Anchoring Application**
+* [ ] 35. **Dissociative Technique Application**
+* [ ] 36. **Core Transformation Process**
+* [ ] 37. **Fast Phobia Cure Technique**
+* [ ] 38. **Modal Operator Transformation**
+* [ ] 39. **Compulsion Blowout Pattern**
+* [ ] 40. **Visual-Kinesthetic Dissociation**
+* [ ] 41. **Meta Program Identification**
+* [ ] 42. **Pacing and Leading Strategy**
+* [ ] 43. **Hierarchy of Criteria Elicitation**
+* [ ] 44. **Decision Strategy Optimization**
+* [ ] 45. **Cross-Modality Translation**
+* [ ] 46. **State Interruption Pattern**
+* [ ] 47. **Chaining Anchors Technique**
+* [ ] 48. **Threshold Pattern Application**
+* [ ] 49. **Positive Intention Reframing**
+* [ ] 50. **Presupposition Utilization**
+* [ ] 51. **Collapsing Anchors Process**
+* [ ] 52. **Trance Induction Patterning**
+* [ ] 53. **Submodality Belief Change**
+* [ ] 54. **Values Clarification Process**
+* [ ] 55. **Conversational Postulate Usage**
+* [ ] 56. **Belief Installation Procedure**
+* [ ] 57. **Double Bind Pattern Creation**
+* [ ] 58. **Ambiguity Pattern Utilization**
+* [ ] 59. **Tag Question Strategy**
+* [ ] 60. **Mapping Across Submodalities**
+* [ ] 61. **Transderivational Search Activation**
+* [ ] 62. **Critical Submodality Identification**
+* [ ] 63. **Process Language Utilization**
+* [ ] 64. **Phonological Ambiguity Creation**
+* [ ] 65. **Circle of Excellence Technique**
+* [ ] 66. **Syntactic Ambiguity Usage**
+* [ ] 67. **Scope Ambiguity Application**
+* [ ] 68. **Punctuation Ambiguity Pattern**
+* [ ] 69. **Metaphorical Mind Reading**
+* [ ] 70. **Linkage Language Pattern**
+* [ ] 71. **Distortion Process Identification**
+* [ ] 72. **Deletion Process Utilization**
+* [ ] 73. **Generalization Process Recognition**
+* [ ] 74. **Language Pattern Interruption**
+* [ ] 75. **Mind Reading Pattern Identification**
+* [ ] 76. **Cause-Effect Pattern Recognition**
+* [ ] 77. **Complex Equivalence Pattern**
+* [ ] 78. **Lost Performative Identification**
+* [ ] 79. **Universal Quantifier Recognition**
+* [ ] 80. **Modal Operator Recognition**
+* [ ] 81. **Simple Deletion Recognition**
+* [ ] 82. **Comparative Deletion Identification**
+* [ ] 83. **Lack of Referential Index Recognition**
+* [ ] 84. **Nominalization Identification**
+* [ ] 85. **Unspecified Verb Recognition**
+* [ ] 86. **Sensory-Based Description**
+* [ ] 87. **Specific Index Retrieval**
+* [ ] 88. **Simple Specification Elicitation**
+* [ ] 89. **Outcome Frame Specification**
+* [ ] 90. **Chunking Direction Shifting**
+* [ ] 91. **Reality Strategy Elicitation**
+* [ ] 92. **Convincer Strategy Identification**
+* [ ] 93. **Spatial Sorting Pattern Utilization**
+* [ ] 94. **Temporal Pattern Recognition**
+* [ ] 95. **Motivation Direction Identification**
+* [ ] 96. **Frame Size Manipulation**
+* [ ] 97. **Attention Direction Patterning**
+* [ ] 98. **Comparison Basis Shifting**
+* [ ] 99. **Relationship Frame Exploration**
+* [ ] 100. **Possibility vs. Necessity Reframing**
+* [ ] 101. **Self/Other Reference Pattern**
+* [ ] 102. **Matching Representational Predicates**
+* [ ] 103. **Pacing Current Experience**
+* [ ] 104. **Leading Into New Experience**
+* [ ] 105. **SCORE Model Application**
+* [ ] 106. **BAGEL Format Recognition**
+* [ ] 107. **TOTE Model Implementation**
+* [ ] 108. **Visual Squash Technique**
+* [ ] 109. **Self-Anchoring Procedure**
+* [ ] 110. **Stacking Anchors Technique**
+* [ ] 111. **Chaining States Process**
+* [ ] 112. **New Behavior Generator Application**
+* [ ] 113. **Pattern Interruption Strategy**
+* [ ] 114. **Content Reframing Application**
+* [ ] 115. **Context Reframing Strategy**
+* [ ] 116. **Accessing States of Excellence**
+* [ ] 117. **Sensory-Based Description Elicitation**
+* [ ] 118. **Extended Quotes Pattern**
+* [ ] 119. **Conversational Postulate Utilization**
+* [ ] 120. **Selectional Restriction Violation**
+* [ ] 121. **Metaphor Construction Process**
+* [ ] 122. **Matching Body Posture**
+* [ ] 123. **Matching Voice Qualities**
+* [ ] 124. **Matching Breathing Patterns**
+* [ ] 125. **Matching Language Patterns**
+* [ ] 126. **Matching Values and Beliefs**
+* [ ] 127. **Eliciting Verbal Cues**
+* [ ] 128. **Eliciting Tonal Cues**
+* [ ] 129. **Eliciting Physiological Cues**
+* [ ] 130. **Multiple Embedded Metaphors**
+* [ ] 131. **Association/Dissociation Patterning**
+* [ ] 132. **Accessing Auditory Representational System**
+* [ ] 133. **Accessing Visual Representational System**
+* [ ] 134. **Accessing Kinesthetic Representational System**
+* [ ] 135. **Accessing Digital Representational System**
+* [ ] 136. **Primary Representational System Identification**
+* [ ] 137. **Lead System Identification**
+* [ ] 138. **Reference System Identification**
+* [ ] 139. **Visual Construction Accessing**
+* [ ] 140. **Visual Recall Accessing**
+* [ ] 141. **Auditory Construction Accessing**
+* [ ] 142. **Auditory Recall Accessing**
+* [ ] 143. **Kinesthetic Accessing**
+* [ ] 144. **Auditory Digital Accessing**
+* [ ] 145. **Sensory-Specific Predicates Usage**
+* [ ] 146. **Visual Predicates Utilization**
+* [ ] 147. **Auditory Predicates Utilization**
+* [ ] 148. **Kinesthetic Predicates Utilization**
+* [ ] 149. **Digital Predicates Utilization**
+* [ ] 150. **Unspecified Predicates Usage**
+* [ ] 151. **Meta Model Specificity Questioning**
+* [ ] 152. **Milton Model Pattern Induction**
+* [ ] 153. **Trance Words Utilization**
+* [ ] 154. **Submodality Drivers Identification**
+* [ ] 155. **Critical Submodality Elicitation**
+* [ ] 156. **Submodality Intensive Distinction**
+* [ ] 157. **Digital Submodality Distinction**
+* [ ] 158. **Leading from Current to Desired State**
+* [ ] 159. **Matching and Mirroring Technique**
+* [ ] 160. **Cross-Over Mirroring Strategy**
+* [ ] 161. **Trigger Anchor Installation**
+* [ ] 162. **Auditory Anchor Setting**
+* [ ] 163. **Visual Anchor Setting**
+* [ ] 164. **Kinesthetic Anchor Setting**
+* [ ] 165. **Spatial Anchor Installation**
+* [ ] 166. **Future Pacing New Behavior**
+* [ ] 167. **Future Pacing New State**
+* [ ] 168. **Content Reframe Application**
+* [ ] 169. **Context Reframe Application**
+* [ ] 170. **Linear Timeline Processing**
+* [ ] 171. **Spatial Timeline Restructuring**
+* [ ] 172. **Values Elicitation Interview**
+* [ ] 173. **Values Hierarchy Determination**
+* [ ] 174. **Criteria Elicitation Technique**
+* [ ] 175. **Logical Level Processing**
+* [ ] 176. **Belief Systems Intervention**
+* [ ] 177. **Reversing Limiting Decision**
+* [ ] 178. **Visual Swish Pattern Installation**
+* [ ] 179. **Auditory Swish Pattern Installation**
+* [ ] 180. **Kinesthetic Swish Pattern Installation**
+* [ ] 181. **Embedded Command Marking**
+* [ ] 182. **Analog Marking for Emphasis**
+* [ ] 183. **Embedded Question Formation**
+* [ ] 184. **Embedded Suggestion Installation**
+* [ ] 185. **Conscious-Unconscious Integration**
+* [ ] 186. **Isomorphic Metaphor Construction**
+* [ ] 187. **Universal Quantifier Detection**
+* [ ] 188. **Linguistic Presupposition Recognition**
+* [ ] 189. **Visual System Matching**
+* [ ] 190. **Auditory System Matching**
+* [ ] 191. **Kinesthetic System Matching**
+* [ ] 192. **Digital System Matching**
+* [ ] 193. **Conflicting Parts Resolution**
+* [ ] 194. **Parts Integration Completion**
+* [ ] 195. **First Position Perception**
+* [ ] 196. **Second Position Perception**
+* [ ] 197. **Third Position Perception**
+* [ ] 198. **Fourth Position Perception**
+* [ ] 199. **Meta Position Perception**
+* [ ] 200. **Six-Step Reframe Process**
+* [ ] 201. **Motivation Strategy Elicitation**
+* [ ] 202. **Decision Strategy Elicitation**
+* [ ] 203. **Convincer Strategy Elicitation**
+* [ ] 204. **TOTE Model Strategy Detection**
+* [ ] 205. **Strategy Installation Process**
+* [ ] 206. **Outcome Specification Process**
+* [ ] 207. **Resource State Amplification**
+* [ ] 208. **Resource State Chaining**
+* [ ] 209. **Sleight of Mouth – Intent**
+* [ ] 210. **Sleight of Mouth – Redefine**
+* [ ] 211. **Sleight of Mouth – Consequence**
+* [ ] 212. **Sleight of Mouth – Chunk Down**
+* [ ] 213. **Sleight of Mouth – Chunk Up**
+* [ ] 214. **Sleight of Mouth – Analogy**
+* [ ] 215. **Sleight of Mouth – Change Frame**
+* [ ] 216. **Sleight of Mouth – Reality Strategy**
+* [ ] 217. **Sleight of Mouth – Counter Example**
+* [ ] 218. **Sleight of Mouth – Hierarchy of Criteria**
+* [ ] 219. **Sleight of Mouth – Apply to Self**
+* [ ] 220. **Sleight of Mouth – Meta Frame**
+* [ ] 221. **Eye Accessing Pattern Recognition**
+* [ ] 222. **Precision Language Pattern Recognition**
+* [ ] 223. **Calibration to Unconscious Signals**
+* [ ] 224. **Nested Loops Storytelling**
+* [ ] 225. **Behavioral Flexibility Increase**
+* [ ] 226. **Auditory Digital Strategy Accessing**
+* [ ] 227. **Analog Marking Technique Application**
+* [ ] 228. **Neurological Level Alignment Process**
+* [ ] 229. **Metamodel Chunking Pattern Recognition**
+* [ ] 230. **Spatial Anchor Application Process**
+* [ ] 231. **Dissociative Technique Utilization**
+* [ ] 232. **Core Transformation Protocol**
+* [ ] 233. **Fast Phobia Cure Protocol**
+* [ ] 234. **Modal Operator Transformation Process**
+* [ ] 235. **Compulsion Blowout Protocol**
+* [ ] 236. **Visual-Kinesthetic Dissociation Process**
+* [ ] 237. **Meta Program Patterns Identification**
+* [ ] 238. **Pacing and Leading Strategy**
+* [ ] 239. **Criteria Hierarchy Elicitation Process**
+* [ ] 240. **Decision Strategy Optimization Process**
+* [ ] 241. **Cross-Modality Translation Application**
+* [ ] 242. **State Interruption Pattern Application**
+* [ ] 243. **Chaining Anchors Technique Application**
+* [ ] 244. **Threshold Pattern Application Process**
+* [ ] 245. **Positive Intention Reframing Protocol**
+* [ ] 246. **Presupposition Utilization Strategy**
+* [ ] 247. **Collapsing Anchors Process Application**
+* [ ] 248. **Trance Induction Patterning Process**
+* [ ] 249. **Submodality Belief Change Protocol**
+* [ ] 250. **Values Clarification Process Application**
+* [ ] 251. **Conversational Postulate Usage Strategy**
+* [ ] 252. **Belief Installation Procedure Protocol**
+* [ ] 253. **Double Bind Pattern Creation Process**
+* [ ] 254. **Ambiguity Pattern Utilization Strategy**
+* [ ] 255. **Tag Question Strategy Implementation**
+* [ ] 256. **Mapping Across Submodalities Process**
+* [ ] 257. **Transderivational Search Activation Technique**
+* [ ] 258. **Critical Submodality Identification Process**
+* [ ] 259. **Process Language Utilization Strategy**
+* [ ] 260. **Phonological Ambiguity Creation Process**
+* [ ] 261. **Circle of Excellence Technique Application**
+* [ ] 262. **Syntactic Ambiguity Usage Strategy**
+* [ ] 263. **Scope Ambiguity Application Process**
+* [ ] 264. **Punctuation Ambiguity Pattern Usage**
+* [ ] 265. **Metaphorical Mind Reading Strategy**
+* [ ] 266. **Linkage Language Pattern Application**
+* [ ] 267. **Distortion Process Identification Protocol**
+* [ ] 268. **Deletion Process Utilization Strategy**
+* [ ] 269. **Generalization Process Recognition Technique**
+* [ ] 270. **Language Pattern Interruption Strategy**
+* [ ] 271. **Mind Reading Pattern Identification Process**
+* [ ] 272. **Cause-Effect Pattern Recognition Technique**
+* [ ] 273. **Complex Equivalence Pattern Identification**
+* [ ] 274. **Lost Performative Identification Process**
+* [ ] 275. **Universal Quantifier Recognition Strategy**
+* [ ] 276. **Modal Operator Recognition Technique**
+* [ ] 277. **Simple Deletion Recognition Process**
+* [ ] 278. **Comparative Deletion Identification Strategy**
+* [ ] 279. **Lack of Referential Index Recognition Process**
+* [ ] 280. **Nominalization Identification Strategy**
+* [ ] 281. **Unspecified Verb Recognition Process**
+* [ ] 282. **Sensory-Based Description Protocol**
+* [ ] 283. **Specific Index Retrieval Process**
+* [ ] 284. **Simple Specification Elicitation Technique**
+* [ ] 285. **Outcome Frame Specification Process**
+* [ ] 286. **Chunking Direction Shifting Strategy**
+* [ ] 287. **Reality Strategy Elicitation Process**
+* [ ] 288. **Convincer Strategy Identification Technique**
+* [ ] 289. **Spatial Sorting Pattern Utilization Strategy**
+* [ ] 290. **Temporal Pattern Recognition Process**
+* [ ] 291. **Motivation Direction Identification Technique**
+* [ ] 292. **Frame Size Manipulation Strategy**
+* [ ] 293. **Attention Direction Patterning Process**
+* [ ] 294. **Comparison Basis Shifting Strategy**
+* [ ] 295. **Relationship Frame Exploration Process**
+* [ ] 296. **Possibility vs. Necessity Reframing Strategy**
+* [ ] 297. **Self/Other Reference Pattern Identification**
+* [ ] 298. **Matching Representational Predicates Process**
+* [ ] 299. **Pacing Current Experience Technique**
+* [ ] 300. **Leading Into New Experience Strategy**
+* [ ] 301. **SCORE Model Application Process**
+* [ ] 302. **BAGEL Format Recognition Strategy**
+* [ ] 303. **TOTE Model Implementation Technique**
+* [ ] 304. **Visual Squash Technique Application**
+* [ ] 305. **Self-Anchoring Procedure Process**
+* [ ] 306. **Stacking Anchors Technique Strategy**
+* [ ] 307. **Chaining States Process Application**
+* [ ] 308. **New Behavior Generator Application Process**
+* [ ] 309. **Pattern Interruption Strategy Technique**
+* [ ] 310. **Content Reframing Application Strategy**
+* [ ] 311. **Context Reframing Strategy Application**
+* [ ] 312. **Accessing States of Excellence Process**
+* [ ] 313. **Sensory-Based Description Elicitation Strategy**
+* [ ] 314. **Extended Quotes Pattern Application**
+* [ ] 315. **Conversational Postulate Utilization Technique**
+* [ ] 316. **Selectional Restriction Violation Strategy**
+* [ ] 317. **Metaphor Construction Process Strategy**
+* [ ] 318. **Matching Body Posture Technique**
+* [ ] 319. **Matching Voice Qualities Process**
+* [ ] 320. **Matching Breathing Patterns Strategy**
+* [ ] 321. **Matching Language Patterns Technique**
+* [ ] 322. **Matching Values and Beliefs Process**
+* [ ] 323. **Eliciting Verbal Cues Strategy**
+* [ ] 324. **Eliciting Tonal Cues Technique**
+* [ ] 325. **Eliciting Physiological Cues Process**
+* [ ] 326. **Multiple Embedded Metaphors Strategy**
+* [ ] 327. **Association/Dissociation Patterning Technique**
+* [ ] 328. **Accessing Auditory Representational System Process**
+* [ ] 329. **Accessing Visual Representational System Strategy**
+* [ ] 330. **Accessing Kinesthetic Representational System Technique**
+* [ ] 331. **Accessing Digital Representational System Process**
+* [ ] 332. **Primary Representational System Identification Strategy**
+* [ ] 333. **Lead System Identification Technique**
+* [ ] 334. **Reference System Identification Process**
+* [ ] 335. **Visual Construction Accessing Strategy**
+* [ ] 336. **Visual Recall Accessing Technique**
+* [ ] 337. **Auditory Construction Accessing Process**
+* [ ] 338. **Auditory Recall Accessing Strategy**
+* [ ] 339. **Kinesthetic Accessing Technique**
+* [ ] 340. **Auditory Digital Accessing Process**
+* [ ] 341. **Sensory-Specific Predicates Usage Strategy**
+* [ ] 342. **Visual Predicates Utilization Technique**
+* [ ] 343. **Auditory Predicates Utilization Process**
+* [ ] 344. **Kinesthetic Predicates Utilization Strategy**
+* [ ] 345. **Digital Predicates Utilization Technique**
+* [ ] 346. **Unspecified Predicates Usage Process**
+* [ ] 347. **Meta Model Specificity Questioning Strategy**
+* [ ] 348. **Milton Model Pattern Induction Technique**
+* [ ] 349. **Trance Words Utilization Process**
+* [ ] 350. **Submodality Drivers Identification Strategy**
+* [ ] 351. **Critical Submodality Elicitation Technique**
+* [ ] 352. **Submodality Intensive Distinction Process**
+* [ ] 353. **Digital Submodality Distinction Strategy**
+* [ ] 354. **Leading from Current to Desired State Technique**
+* [ ] 355. **Matching and Mirroring Technique Process**
+* [ ] 356. **Cross-Over Mirroring Strategy Application**
+* [ ] 357. **Trigger Anchor Installation Process**
+* [ ] 358. **Auditory Anchor Setting Technique**
+* [ ] 359. **Visual Anchor Setting Strategy**
+* [ ] 360. **Kinesthetic Anchor Setting Process**
+* [ ] 361. **Spatial Anchor Installation Technique**
+* [ ] 362. **Future Pacing New Behavior Strategy**
+* [ ] 363. **Future Pacing New State Process**
+* [ ] 364. **Content Reframe Application Technique**
+* [ ] 365. **Context Reframe Application Strategy**
+* [ ] 366. **Linear Timeline Processing Technique**
+* [ ] 367. **Spatial Timeline Restructuring Process**
+* [ ] 368. **Values Elicitation Interview Strategy**
+* [ ] 369. **Values Hierarchy Determination Technique**
+* [ ] 370. **Criteria Elicitation Technique Process**
+* [ ] 371. **Logical Level Processing Strategy**
+* [ ] 372. **Belief Systems Intervention Technique**
+* [ ] 373. **Reversing Limiting Decision Process**
+* [ ] 374. **Visual Swish Pattern Installation Strategy**
+* [ ] 375. **Auditory Swish Pattern Installation Technique**
+* [ ] 376. **Kinesthetic Swish Pattern Installation Process**
+* [ ] 377. **Embedded Command Marking Strategy**
+* [ ] 378. **Analog Marking for Emphasis Technique**
+* [ ] 379. **Embedded Question Formation Process**
+* [ ] 380. **Embedded Suggestion Installation Strategy**
+* [ ] 381. **Conscious-Unconscious Integration Technique**
+* [ ] 382. **Isomorphic Metaphor Construction Process**
+* [ ] 383. **Universal Quantifier Detection Strategy**
+* [ ] 384. **Linguistic Presupposition Recognition Technique**
+* [ ] 385. **Visual System Matching Process**
+* [ ] 386. **Auditory System Matching Strategy**
+* [ ] 387. **Kinesthetic System Matching Technique**
+* [ ] 388. **Digital System Matching Process**
+* [ ] 389. **Conflicting Parts Resolution Strategy**
+* [ ] 390. **Parts Integration Completion Technique**
+* [ ] 391. **First Position Perception Process**
+* [ ] 392. **Second Position Perception Strategy**
+* [ ] 393. **Third Position Perception Technique**
+* [ ] 394. **Fourth Position Perception Process**
+* [ ] 395. **Meta Position Perception Strategy**
+* [ ] 396. **Six-Step Reframe Process Technique**
+* [ ] 397. **Motivation Strategy Elicitation Process**
+* [ ] 398. **Decision Strategy Elicitation Strategy**
+* [ ] 399. **Convincer Strategy Elicitation Technique**
+* [ ] 400. **TOTE Model Strategy Detection Process**
+* [ ] 401. **Strategy Installation Process Application**
+* [ ] 402. **Outcome Specification Process Implementation**
+* [ ] 403. **Resource State Amplification Technique**
+* [ ] 404. **Resource State Chaining Strategy**
+* [ ] 405. **Sleight of Mouth – Intent Pattern**
+* [ ] 406. **Sleight of Mouth – Redefine Pattern**
+* [ ] 407. **Sleight of Mouth – Consequence Pattern**
+* [ ] 408. **Sleight of Mouth – Chunk Down Pattern**
+* [ ] 409. **Sleight of Mouth – Chunk Up Pattern**
+* [ ] 410. **Sleight of Mouth – Analogy Pattern**
+* [ ] 411. **Sleight of Mouth – Change Frame Pattern**
+* [ ] 412. **Sleight of Mouth – Reality Strategy Pattern**
+* [ ] 413. **Sleight of Mouth – Counter Example Pattern**
+* [ ] 414. **Sleight of Mouth – Hierarchy of Criteria Pattern**
+* [ ] 415. **Sleight of Mouth – Apply to Self Pattern**
+* [ ] 416. **Sleight of Mouth – Meta Frame Pattern**
+* [ ] 417. **Foreground-Background Distinction**
+* [ ] 418. **Yes-Set Patterning**
+* [ ] 419. **Unconscious Installation Process**
+* [ ] 420. **Modal Operator of Possibility Expansion**
+* [ ] 421. **Modal Operator of Necessity Reframing**
+* [ ] 422. **Possibility Frame Expansion**
+* [ ] 423. **Motivational Congruency Alignment**
+* [ ] 424. **Identity Level Transformation**
+* [ ] 425. **Somatic Marker Recognition**
+* [ ] 426. **Experience Restructuring Process**
+* [ ] 427. **Motivation Strategy Installation**
+* [ ] 428. **Sensory Language Pattern Recognition**
+* [ ] 429. **Internal Representation Restructuring**
+* [ ] 430. **Presupposition Reframing**
+* [ ] 431. **Hierarchical Reframing**
+* [ ] 432. **Outcome Chaining Process**
+* [ ] 433. **Kinesthetic Anchor Chaining**
+* [ ] 434. **Context-Content Meta Pattern**
+* [ ] 435. **Digital Convincer Pattern**
+* [ ] 436. **Strategy Conversion Process**
+* [ ] 437. **Representational System Translation**
+* [ ] 438. **Metaphorical Identity Shift**
+* [ ] 439. **Criteria Utilization Process**
+* [ ] 440. **Ecology Frame Implementation**
+* [ ] 441. **Experiential Array Installation**
+* [ ] 442. **Sequenced Induction Pattern**
+* [ ] 443. **Quantum Linguistic Pattern**
+* [ ] 444. **Metaphoric Identity Expansion**
+* [ ] 445. **Preference Elicitation Protocol**
+* [ ] 446. **Directional Language Pattern**
+* [ ] 447. **Trans-Contextual Reframing**
+* [ ] 448. **Conscious-Unconscious Reintegration**
+* [ ] 449. **Boundary Condition Expansion**
+* [ ] 450. **Motivational Enhancement Protocol**
+* [ ] 451. **Symbolic Pattern Intervention**
+* [ ] 452. **Unconscious Resources Accessing**
+* [ ] 453. **Systemic Pattern Integration**
+* [ ] 454. **Intentional State Accessing**
+* [ ] 455. **Representational Strategy Modification**
+* [ ] 456. **Embedded Metaphor Construction**
+* [ ] 457. **Decision Threshold Adjustment**
+* [ ] 458. **Experience Transfer Protocol**
+* [ ] 459. **Intervention Strategy Sequencing**
+* [ ] 460. **Integrated State Management**
+* [ ] 461. **Transformational Vocabulary Usage**
+* [ ] 462. **Calibrated Loop Installation**
+* [ ] 463. **Temporal Distortion Pattern**
+* [ ] 464. **Meta-State Application**
+* [ ] 465. **Contextual Reframing Strategy**
+* [ ] 466. **Environmental Anchor Setting**
+* [ ] 467. **Systematic State Induction**
+* [ ] 468. **Language Pattern Sequencing**
+* [ ] 469. **Transformational Identity Shift**
+* [ ] 470. **Recursive Frame Analysis**
+* [ ] 471. **Calibrated Communication Loop**
+* [ ] 472. **Transcendental Question Formation**
+* [ ] 473. **State-Dependent Learning Utilization**
+* [ ] 474. **Timeline-Based Identity Shift**
+* [ ] 475. **Metaphorical State Binding**
+* [ ] 476. **Gestalt Pattern Completion**
+* [ ] 477. **Temporal Marker Installation**
+* [ ] 478. **Representational System Overlap**
+* [ ] 479. **Developmental State Reclamation**x
+* [ ] 480. **Ecological Outcome Projection**
+* [ ] 481. **Hypnotic Language Pattern Usage**
+* [ ] 482. **Multi-Level Communication Strategy**
+* [ ] 483. **Asymmetrical Pattern Disruption**
+* [ ] 484. **Criteria Satisfaction Process**
+* [ ] 485. **Unconscious Priming Process**
+* [ ] 486. **Neuro-Linguistic State Management**
+* [ ] 487. **Rapid Belief Transformation**
+* [ ] 488. **Trans-Frame Reorganization**
+* [ ] 489. **Sensory-Based Trance Induction**
+* [ ] 490. **Linguistic Belief Pattern Restructuring**
+* [ ] 491. **Process-Oriented Metaphor Construction**
+* [ ] 492. **Recursive State Enhancement**
+* [ ] 493. **Contextual Value Reframing**
+* [ ] 494. **Systemic Pattern Intervention**
+* [ ] 495. **Sequential Pattern Disruption**
+* [ ] 496. **Memory Reconsolidation Process**
+* [ ] 497. **Spatial-Temporal Reorientation**
+* [ ] 498. **Experiential Syntax Reordering**
+* [ ] 499. **Identity-Level Pattern Intervention**
+* [ ] 500. **Integrated Neuro-Linguistic Processing**

@@ -1,5 +1,13 @@
 {
   "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/korczis/dev/prismatic"
+      ]
+    },
     "sequentialthinking": {
       "command": "npx",
       "args": [
@@ -12,7 +20,7 @@
       "args": [
         "mcp-server-git",
         "--repository",
-        "/home/korczis/dev/prismatic"
+        "/Users/korczis/dev/prismatic"
       ]
     },
     "memory": {
@@ -30,7 +38,8 @@
       ],
       "env": {
         "DEFAULT_MINIMUM_TOKENS": ""
-      }
+      },
+      "alwaysAllow": []
     }
   }
 }

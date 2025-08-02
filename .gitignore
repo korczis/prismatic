@@ -25,9 +25,19 @@ erl_crash.dump
 
 # Ignore package tarballs (built via "mix hex.build")
 *.tar
+prismatic-*.tar
 
 # Temporary files, for example, from tests
 /tmp/
+
+# Beam files
+*.beam
+
+# Elixir Language Server
+.elixir_ls/
+
+# External stuff
+/external/
 
 # =============================================================================
 # PHOENIX WEB ASSETS
