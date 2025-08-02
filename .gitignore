@@ -294,3 +294,4 @@ docker-compose.local.yml
 .api_key
 credentials.json
 service-account.json
+.mix_tasks
