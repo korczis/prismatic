@@ -11,7 +11,6 @@ defmodule Mix.Tasks.Prismatic.Shared.OutputFormatter do
   - Export capabilities for external tools
   """
 
-  alias Mix.Tasks.Prismatic.Shared.Config
 
   @supported_formats [:json, :yaml, :html, :markdown, :report, :console]
   @status_colors %{
@@ -369,19 +368,8 @@ defmodule Mix.Tasks.Prismatic.Shared.OutputFormatter do
   end
 
   defp encode_yaml(data, opts) do
-    # Basic YAML encoding - could be enhanced with proper YAML library
-    case Code.ensure_loaded(YamlElixir) do
-      {:module, YamlElixir} ->
-        case YamlElixir.write_to_string(data) do
-          {:ok, yaml} -> yaml
-          {:error, reason} ->
-            Mix.shell().error("Failed to encode YAML: #{inspect(reason)}")
-            inspect(data, pretty: true)
-        end
-      _ ->
-        # Fallback to basic key-value format
-        generate_basic_yaml(data, opts)
-    end
+    # Use fallback YAML encoding since YamlElixir is not available
+    generate_basic_yaml(data, opts)
   end
 
   defp generate_basic_yaml(data, _opts) when is_map(data) do

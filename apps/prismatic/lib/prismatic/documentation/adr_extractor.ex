@@ -230,13 +230,6 @@ defmodule Prismatic.Documentation.ADRExtractor do
     end)
   end
 
-  defp count_heading_level(heading_line) do
-    heading_line
-    |> String.trim_leading()
-    |> String.split("", trim: true)
-    |> Enum.take_while(&(&1 == "#"))
-    |> length()
-  end
 
   defp extract_section_content(content, section_names) when is_list(section_names) do
     Enum.find_value(section_names, fn name ->

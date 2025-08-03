@@ -103,17 +103,15 @@ defmodule Mix.Tasks.Prismatic.Setup do
     :team_onboarding
   ]
 
-  @impl Mix.Task
+  @impl true
   def run(args) do
     with_task_context(__MODULE__, args, &execute_setup/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       components: "all",
@@ -128,7 +126,6 @@ defmodule Mix.Tasks.Prismatic.Setup do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:components] && not valid_components?(options[:components]) ->
@@ -142,7 +139,6 @@ defmodule Mix.Tasks.Prismatic.Setup do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Check if we're in a Mix project
     unless File.exists?("mix.exs") do

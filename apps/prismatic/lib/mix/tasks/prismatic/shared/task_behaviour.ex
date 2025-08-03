@@ -26,7 +26,6 @@ defmodule Mix.Tasks.Prismatic.Shared.TaskBehaviour do
         end
 
         # Override get_option_parser_config to add task-specific switches
-        @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
         def get_option_parser_config do
           base_config = super()
 

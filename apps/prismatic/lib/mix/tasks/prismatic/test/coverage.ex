@@ -114,20 +114,17 @@ defmodule Mix.Tasks.Prismatic.Test.Coverage do
     h: :help
   ]
 
-  @coverage_types [:line, :branch, :function, :statement]
   @supported_formats [:console, :json, :html, :xml, :lcov]
 
-  @impl Mix.Task
+  @impl true
   def run(args) do
     with_task_context(__MODULE__, args, &execute_coverage_analysis/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       threshold: 80,
@@ -145,7 +142,6 @@ defmodule Mix.Tasks.Prismatic.Test.Coverage do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:threshold] && (options[:threshold] < 0 || options[:threshold] > 100) ->
@@ -159,7 +155,6 @@ defmodule Mix.Tasks.Prismatic.Test.Coverage do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Check if we're in a Mix project
     unless File.exists?("mix.exs") do
@@ -783,15 +778,118 @@ defmodule Mix.Tasks.Prismatic.Test.Coverage do
     """
   end
 
-  # Placeholder implementations for complex analysis functions
-  defp count_total_lines(_context), do: 1000
-  defp count_covered_lines(_coverage_data), do: 850
-  defp count_total_branches(_context), do: 200
-  defp count_covered_branches(_coverage_data), do: 160
-  defp count_total_functions(_context), do: 150
-  defp count_covered_functions(_coverage_data), do: 135
-  defp count_total_statements(_context), do: 800
-  defp count_covered_statements(_coverage_data), do: 720
+  # Real implementations for coverage analysis
+  defp count_total_lines(context) do
+    source_files = get_source_files(context)
+    Enum.reduce(source_files, 0, fn file_path, acc ->
+      case File.read(file_path) do
+        {:ok, content} ->
+          content
+          |> String.split("\n")
+          |> Enum.reject(&(String.trim(&1) == "" || String.starts_with?(String.trim(&1), "#")))
+          |> length()
+          |> Kernel.+(acc)
+        {:error, _} -> acc
+      end
+    end)
+  end
+
+  defp count_covered_lines(coverage_data) do
+    case coverage_data[:line_coverage] do
+      %{covered_lines: lines} when is_list(lines) -> length(lines)
+      %{percentage: percentage} when is_number(percentage) ->
+        # Estimate based on percentage if actual lines not available
+        trunc(count_total_lines(%{}) * percentage / 100)
+      _ -> 0
+    end
+  end
+
+  defp count_total_branches(context) do
+    source_files = get_source_files(context)
+    Enum.reduce(source_files, 0, fn file_path, acc ->
+      case File.read(file_path) do
+        {:ok, content} ->
+          branch_keywords = ["if", "unless", "case", "cond", "with"]
+          branch_count = content
+          |> String.split("\n")
+          |> Enum.reduce(0, fn line, line_acc ->
+            keyword_count = Enum.count(branch_keywords, &String.contains?(line, &1))
+            line_acc + keyword_count * 2  # Each branch typically has 2 paths
+          end)
+          acc + branch_count
+        {:error, _} -> acc
+      end
+    end)
+  end
+
+  defp count_covered_branches(coverage_data) do
+    case coverage_data[:branch_coverage] do
+      %{covered_branches: branches} when is_list(branches) -> length(branches)
+      %{percentage: percentage} when is_number(percentage) ->
+        # Estimate based on percentage if actual branches not available
+        trunc(count_total_branches(%{}) * percentage / 100)
+      _ -> 0
+    end
+  end
+
+  defp count_total_functions(context) do
+    source_files = get_source_files(context)
+    Enum.reduce(source_files, 0, fn file_path, acc ->
+      case File.read(file_path) do
+        {:ok, content} ->
+          function_count = content
+          |> String.split("\n")
+          |> Enum.count(&String.match?(&1, ~r/^\s*def\s+/))
+          acc + function_count
+        {:error, _} -> acc
+      end
+    end)
+  end
+
+  defp count_covered_functions(coverage_data) do
+    case coverage_data[:function_coverage] do
+      %{covered_functions: functions} when is_list(functions) -> length(functions)
+      %{percentage: percentage} when is_number(percentage) ->
+        # Estimate based on percentage if actual functions not available
+        trunc(count_total_functions(%{}) * percentage / 100)
+      _ -> 0
+    end
+  end
+
+  defp count_total_statements(context) do
+    # For Elixir, statements are roughly equivalent to non-empty, non-comment lines
+    count_total_lines(context)
+  end
+
+  defp count_covered_statements(coverage_data) do
+    # Use line coverage as proxy for statement coverage in Elixir
+    count_covered_lines(coverage_data)
+  end
+
+  # Helper function to get source files
+  defp get_source_files(context) do
+    base_paths = context[:test_paths] || ["lib", "apps/*/lib"]
+
+    Enum.flat_map(base_paths, fn path ->
+      if String.contains?(path, "*") do
+        Path.wildcard(path <> "/**/*.ex")
+      else
+        case File.dir?(path) do
+          true -> Path.wildcard(path <> "/**/*.ex")
+          false -> []
+        end
+      end
+    end)
+    |> Enum.reject(fn path ->
+      excluded?(path, context[:exclude_patterns] || [])
+    end)
+  end
+
+  defp excluded?(path, exclude_patterns) do
+    Enum.any?(exclude_patterns, fn pattern ->
+      String.contains?(path, pattern)
+    end)
+  end
 
   defp analyze_module_line_coverage(_coverage_data, _context) do
     [

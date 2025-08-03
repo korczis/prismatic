@@ -19,7 +19,6 @@ defmodule Prismatic.Documentation.AIAssistantIntegration do
   alias Prismatic.Documentation.{ADRExtractor, CodeExampleExtractor, TraceabilityMarker}
 
   @ai_schema_version "1.0.0"
-  @supported_formats [:json, :yaml, :markdown_structured, :xml]
 
   @doc """
   Generate comprehensive AI-friendly structured data from documentation.
@@ -532,22 +531,22 @@ defmodule Prismatic.Documentation.AIAssistantIntegration do
     }
   end
 
-  defp build_keyword_index(structured_data) do
+  defp build_keyword_index(_structured_data) do
     # Build inverted index for keyword searches
     %{}  # Placeholder implementation
   end
 
-  defp build_domain_index(structured_data) do
+  defp build_domain_index(_structured_data) do
     # Index by architectural domain
     %{}  # Placeholder implementation
   end
 
-  defp build_complexity_index(structured_data) do
+  defp build_complexity_index(_structured_data) do
     # Index by complexity scores
     %{}  # Placeholder implementation
   end
 
-  defp generate_search_hints(structured_data) do
+  defp generate_search_hints(_structured_data) do
     [
       "Search by architectural domain (e.g., 'security', 'performance')",
       "Query specific ADR by ID (e.g., 'ADR-001')",
@@ -559,32 +558,32 @@ defmodule Prismatic.Documentation.AIAssistantIntegration do
 
   # Query method implementations
 
-  defp query_by_domain(structured_data, domain) do
+  defp query_by_domain(_structured_data, _domain) do
     # Implementation for domain-based queries
     {:ok, []}
   end
 
-  defp query_by_decision_id(structured_data, decision_id) do
+  defp query_by_decision_id(_structured_data, _decision_id) do
     # Implementation for decision ID queries
     {:ok, []}
   end
 
-  defp query_by_implementation(structured_data, implementation) do
+  defp query_by_implementation(_structured_data, _implementation) do
     # Implementation for implementation-based queries
     {:ok, []}
   end
 
-  defp query_by_relationship(structured_data, relationship_type) do
+  defp query_by_relationship(_structured_data, _relationship_type) do
     # Implementation for relationship queries
     {:ok, []}
   end
 
-  defp query_by_keyword(structured_data, keyword) do
+  defp query_by_keyword(_structured_data, _keyword) do
     # Implementation for keyword searches
     {:ok, []}
   end
 
-  defp query_by_complexity(structured_data, complexity_level) do
+  defp query_by_complexity(_structured_data, _complexity_level) do
     # Implementation for complexity-based queries
     {:ok, []}
   end
@@ -735,17 +734,17 @@ defmodule Prismatic.Documentation.AIAssistantIntegration do
 
   # Format conversion helpers
 
-  defp convert_to_yaml(data) do
+  defp convert_to_yaml(_data) do
     # Would use a YAML library like YamlElixir
     {:ok, "YAML format not implemented"}
   end
 
-  defp convert_to_markdown_structured(data) do
+  defp convert_to_markdown_structured(_data) do
     # Convert to structured markdown format
     {:ok, "Structured markdown format not implemented"}
   end
 
-  defp convert_to_xml(data) do
+  defp convert_to_xml(_data) do
     # Convert to XML format
     {:ok, "XML format not implemented"}
   end

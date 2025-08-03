@@ -89,20 +89,18 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
     :tables
   ]
 
-  @default_extraction_types [:links, :examples, :toc, :metadata]
-
-  @impl Mix.Task
+  @impl true
   def run(args) do
     IO.puts("Documentation extraction task called with args: #{inspect(args)}")
   end
 
   # Add required functions to satisfy compilation
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl true
   def get_option_parser_config do
     []
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl true
   def get_task_defaults do
     %{}
   end
@@ -621,21 +619,9 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
     %{
       total_unique_domains: count_unique_domains(links),
       most_linked_domains: get_most_linked_domains(links, 10),
-      internal_link_distribution: analyze_internal_link_distribution(links, files),
-      broken_link_candidates: identify_broken_link_candidates(links)
+      internal_link_distribution: %{},
+      broken_link_candidates: []
     }
-  end
-
-  defp build_cross_reference_graph(links) do
-    # Build a graph of cross-references between documents
-    links
-    |> Enum.filter(fn link -> link.type == :internal end)
-    |> Enum.reduce(%{}, fn link, graph ->
-      source = link.source_file
-      target = resolve_internal_link_target(link.url, source)
-
-      Map.update(graph, source, [target], fn targets -> [target | targets] end)
-    end)
   end
 
   defp categorize_examples(examples) do
@@ -654,6 +640,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
       examples_by_file: Enum.group_by(examples, & &1.source_file)
     }
   end
+
 
   defp build_document_structure(file_headings) do
     file_headings
@@ -802,7 +789,21 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
   # Placeholder implementations for complex functions
   # These would be implemented with proper logic in a real system
 
-  defp extract_reference_links(_content), do: []
+  defp extract_reference_links(content) do
+    # Extract reference-style links: [link text][ref] and [ref]: url
+    reference_definitions = Regex.scan(~r/^\[([^\]]+)\]:\s*(.+)$/m, content, capture: :all_but_first)
+    reference_uses = Regex.scan(~r/\[([^\]]*)\]\[([^\]]+)\]/, content, capture: :all_but_first)
+
+    # Build reference map
+    ref_map = Map.new(reference_definitions, fn [ref, url] -> {ref, url} end)
+
+    # Map reference uses to actual URLs
+    Enum.map(reference_uses, fn [text, ref] ->
+      url = Map.get(ref_map, ref, "")
+      [text, url]
+    end)
+  end
+
   defp normalize_link_url([text, url]), do: String.trim(url)
   defp normalize_link_url([url]), do: String.trim(url)
   defp normalize_link_url(url) when is_binary(url), do: String.trim(url)
@@ -828,15 +829,62 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
   defp find_link_line_number(_content, _link_data), do: 1
   defp extract_link_context(_content, _link_data), do: ""
 
-  defp extract_configuration_examples(_content, _file_path), do: []
+  defp extract_configuration_examples(content, file_path) do
+    # Extract YAML/JSON configuration blocks
+    yaml_configs = Regex.scan(~r/```ya?ml\n(.*?)```/s, content, capture: :all_but_first)
+    |> Enum.map(fn [config] ->
+      %{
+        type: :yaml_config,
+        language: "yaml",
+        content: String.trim(config),
+        source_file: file_path
+      }
+    end)
+
+    json_configs = Regex.scan(~r/```json\n(.*?)```/s, content, capture: :all_but_first)
+    |> Enum.map(fn [config] ->
+      %{
+        type: :json_config,
+        language: "json",
+        content: String.trim(config),
+        source_file: file_path
+      }
+    end)
+
+    # Extract environment variable examples
+    env_configs = Regex.scan(~r/```(?:bash|shell|sh)\n(.*?(?:export\s+\w+=|[A-Z_]+=).*?)```/s, content, capture: :all_but_first)
+    |> Enum.map(fn [config] ->
+      %{
+        type: :env_config,
+        language: "bash",
+        content: String.trim(config),
+        source_file: file_path
+      }
+    end)
+
+    yaml_configs ++ json_configs ++ env_configs
+  end
+
   defp generate_heading_anchor(text) do
     text
     |> String.downcase()
     |> String.replace(~r/[^\w\s-]/, "")
     |> String.replace(~r/\s+/, "-")
+    |> String.replace(~r/-+/, "-")
+    |> String.trim("-")
   end
 
-  defp find_heading_line_number(_content, _heading), do: 1
+  defp find_heading_line_number(content, heading) do
+    content
+    |> String.split("\n")
+    |> Enum.with_index(1)
+    |> Enum.find_index(fn {line, _} -> String.contains?(line, heading) end)
+    |> case do
+      nil -> 1
+      index -> index + 1
+    end
+  end
+
   defp calculate_max_heading_depth(headings) do
     headings
     |> Enum.map(& &1.level)
@@ -844,9 +892,26 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
   end
 
   defp build_heading_hierarchy(headings) do
-    # Build nested structure - simplified implementation
+    # Build proper nested structure
     headings
-    |> Enum.group_by(& &1.level)
+    |> Enum.reduce([], fn heading, acc ->
+      build_hierarchy_node(heading, acc)
+    end)
+  end
+
+  defp build_hierarchy_node(heading, acc) do
+    case acc do
+      [] -> [%{heading | children: []}]
+      [current | rest] ->
+        if heading.level > current.level do
+          # Child of current heading
+          updated_current = %{current | children: build_hierarchy_node(heading, current.children)}
+          [updated_current | rest]
+        else
+          # Sibling or parent level
+          [%{heading | children: []} | acc]
+        end
+    end
   end
 
   defp parse_yaml_metadata(yaml_content) do
@@ -914,15 +979,181 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
   end
 
   # Statistics and analysis helpers
-  defp calculate_link_statistics(_links, _categorized), do: %{}
-  defp calculate_example_statistics(_examples, _categorized), do: %{}
-  defp calculate_heading_statistics(_headings), do: %{}
-  defp analyze_heading_depth(_headings), do: %{}
-  defp generate_auto_toc(_tree), do: %{}
-  defp analyze_metadata_schema(_metadata), do: %{}
-  defp check_metadata_consistency(_metadata), do: %{}
-  defp extract_common_metadata_fields(_metadata), do: []
-  defp calculate_metadata_statistics(_metadata), do: %{}
+  defp calculate_link_statistics(links, categorized) do
+    total_links = length(links)
+    external_count = length(Map.get(categorized, :external, []))
+    internal_count = length(Map.get(categorized, :internal, []))
+    anchor_count = length(Map.get(categorized, :anchor, []))
+
+    %{
+      total_links: total_links,
+      external_links: external_count,
+      internal_links: internal_count,
+      anchor_links: anchor_count,
+      external_ratio: (if total_links > 0, do: external_count / total_links, else: 0),
+      internal_ratio: (if total_links > 0, do: internal_count / total_links, else: 0),
+      unique_domains: count_unique_domains(links),
+      broken_links_detected: 0 # Would be implemented with actual link checking
+    }
+  end
+
+  defp calculate_example_statistics(examples, categorized) do
+    total_examples = length(examples)
+    code_blocks = length(Map.get(categorized, :code_block, []))
+    inline_code = length(Map.get(categorized, :inline_code, []))
+
+    languages = examples
+    |> Enum.map(&Map.get(&1, :language, "unknown"))
+    |> Enum.filter(&(&1 != "unknown" and &1 != ""))
+    |> Enum.frequencies()
+
+    avg_length = if total_examples > 0 do
+      total_chars = examples
+      |> Enum.map(&String.length(Map.get(&1, :content, "")))
+      |> Enum.sum()
+      total_chars / total_examples
+    else
+      0
+    end
+
+    %{
+      total_examples: total_examples,
+      code_blocks: code_blocks,
+      inline_code: inline_code,
+      languages_used: Map.keys(languages),
+      language_distribution: languages,
+      average_length: Float.round(avg_length, 1),
+      most_used_language: get_most_frequent_language(languages)
+    }
+  end
+
+  defp calculate_heading_statistics(headings) do
+    all_headings = Enum.flat_map(headings, & &1.headings)
+
+    level_distribution = all_headings
+    |> Enum.map(& &1.level)
+    |> Enum.frequencies()
+
+    %{
+      total_documents: length(headings),
+      total_headings: length(all_headings),
+      level_distribution: level_distribution,
+      average_headings_per_doc: (if length(headings) > 0, do: length(all_headings) / length(headings), else: 0),
+      deepest_level: Enum.max(Map.keys(level_distribution), fn -> 0 end)
+    }
+  end
+
+  defp analyze_heading_depth(headings) do
+    depth_analysis = headings
+    |> Enum.map(fn file_headings ->
+      depths = Enum.map(file_headings.headings, & &1.level)
+      %{
+        file: file_headings.file,
+        max_depth: Enum.max(depths, fn -> 0 end),
+        min_depth: Enum.min(depths, fn -> 1 end),
+        depth_range: Enum.max(depths, fn -> 0 end) - Enum.min(depths, fn -> 1 end)
+      }
+    end)
+
+    %{
+      per_file_analysis: depth_analysis,
+      overall_max_depth: Enum.max(Enum.map(depth_analysis, & &1.max_depth), fn -> 0 end),
+      files_with_deep_nesting: Enum.count(depth_analysis, &(&1.max_depth > 4)),
+      average_max_depth: (if length(depth_analysis) > 0 do
+        Enum.sum(Enum.map(depth_analysis, & &1.max_depth)) / length(depth_analysis)
+      else
+        0
+      end)
+    }
+  end
+
+  defp generate_auto_toc(tree) do
+    %{
+      toc_entries: generate_toc_entries(tree),
+      toc_html: generate_toc_html(tree),
+      toc_markdown: generate_toc_markdown(tree),
+      navigation_structure: extract_navigation_structure(tree)
+    }
+  end
+
+  defp analyze_metadata_schema(metadata) do
+    all_fields = metadata
+    |> Enum.flat_map(fn file_meta -> Map.keys(file_meta.metadata) end)
+    |> Enum.frequencies()
+
+    field_types = metadata
+    |> Enum.reduce(%{}, fn file_meta, acc ->
+      Enum.reduce(file_meta.metadata, acc, fn {key, value}, field_acc ->
+        type = determine_field_type(value)
+        Map.update(field_acc, key, [type], fn types -> [type | types] end)
+      end)
+    end)
+    |> Map.new(fn {key, types} -> {key, Enum.frequencies(types)} end)
+
+    %{
+      total_files_with_metadata: length(metadata),
+      all_fields: Map.keys(all_fields),
+      field_frequencies: all_fields,
+      field_types: field_types,
+      common_fields: Enum.filter(all_fields, fn {_, freq} -> freq > length(metadata) * 0.5 end),
+      schema_consistency: calculate_schema_consistency(field_types)
+    }
+  end
+
+  defp check_metadata_consistency(metadata) do
+    if Enum.empty?(metadata) do
+      %{consistent: true, issues: []}
+    else
+      # Check for common field patterns
+      common_fields = extract_common_metadata_fields(metadata)
+
+      issues = metadata
+      |> Enum.flat_map(fn file_meta ->
+        missing_fields = common_fields -- Map.keys(file_meta.metadata)
+        Enum.map(missing_fields, fn field ->
+          "#{file_meta.file}: Missing common field '#{field}'"
+        end)
+      end)
+
+      %{
+        consistent: Enum.empty?(issues),
+        issues: issues,
+        consistency_score: (if length(metadata) > 0 do
+          (length(metadata) * length(common_fields) - length(issues)) / (length(metadata) * length(common_fields)) * 100
+        else
+          100
+        end)
+      }
+    end
+  end
+
+  defp extract_common_metadata_fields(metadata) do
+    threshold = length(metadata) * 0.6 # Fields present in 60% of files
+
+    metadata
+    |> Enum.flat_map(fn file_meta -> Map.keys(file_meta.metadata) end)
+    |> Enum.frequencies()
+    |> Enum.filter(fn {_, freq} -> freq >= threshold end)
+    |> Enum.map(fn {field, _} -> field end)
+  end
+
+  defp calculate_metadata_statistics(metadata) do
+    if Enum.empty?(metadata) do
+      %{total_files: 0, total_fields: 0, average_fields_per_file: 0}
+    else
+      total_fields = metadata
+      |> Enum.map(fn file_meta -> map_size(file_meta.metadata) end)
+      |> Enum.sum()
+
+      %{
+        total_files: length(metadata),
+        total_fields: total_fields,
+        average_fields_per_file: total_fields / length(metadata),
+        files_with_frontmatter: Enum.count(metadata, & &1.has_frontmatter),
+        frontmatter_usage: Enum.count(metadata, & &1.has_frontmatter) / length(metadata) * 100
+      }
+    end
+  end
   defp organize_api_documentation(docs), do: Enum.group_by(docs, & &1.type)
   defp analyze_api_coverage(_docs), do: %{}
   defp assess_api_documentation_completeness(_docs), do: %{}
@@ -966,10 +1197,6 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
     |> Enum.sort_by(fn {_domain, count} -> count end, :desc)
     |> Enum.take(limit)
   end
-
-  defp analyze_internal_link_distribution(_links, _files), do: %{}
-  defp identify_broken_link_candidates(_links), do: []
-  defp resolve_internal_link_target(url, _source_file), do: url
 
   defp extract_programming_languages(examples) do
     examples
@@ -1043,6 +1270,96 @@ defmodule Mix.Tasks.Prismatic.Docs.Extract do
       :images -> Map.get(data, :total_images, 0)
       :tables -> Map.get(data, :total_tables, 0)
       _ -> 0
+    end
+  end
+
+  # Helper functions for the new implementations
+
+  defp get_most_frequent_language(languages) do
+    case Enum.max_by(languages, fn {_, count} -> count end, fn -> {nil, 0} end) do
+      {nil, 0} -> nil
+      {lang, _count} -> lang
+    end
+  end
+
+  defp generate_toc_entries(tree) do
+    tree
+    |> Enum.flat_map(fn {_file, navigation} ->
+      Enum.map(navigation, fn nav_item ->
+        %{
+          text: nav_item.text,
+          anchor: nav_item.anchor,
+          level: nav_item.level
+        }
+      end)
+    end)
+  end
+
+  defp generate_toc_html(tree) do
+    entries = generate_toc_entries(tree)
+
+    entries
+    |> Enum.map(fn entry ->
+      indent = String.duplicate("  ", entry.level - 1)
+      "#{indent}<li><a href=\"##{entry.anchor}\">#{entry.text}</a></li>"
+    end)
+    |> Enum.join("\n")
+    |> then(fn content -> "<ul>\n#{content}\n</ul>" end)
+  end
+
+  defp generate_toc_markdown(tree) do
+    entries = generate_toc_entries(tree)
+
+    entries
+    |> Enum.map(fn entry ->
+      indent = String.duplicate("  ", entry.level - 1)
+      "#{indent}- [#{entry.text}](##{entry.anchor})"
+    end)
+    |> Enum.join("\n")
+  end
+
+  defp extract_navigation_structure(tree) do
+    Map.new(tree, fn {file, navigation} ->
+      {Path.basename(file), %{
+        file: file,
+        sections: length(navigation),
+        max_depth: Enum.max(Enum.map(navigation, & &1.level), fn -> 0 end),
+        navigation: navigation
+      }}
+    end)
+  end
+
+  defp determine_field_type(value) do
+    cond do
+      is_binary(value) -> :string
+      is_integer(value) -> :integer
+      is_float(value) -> :float
+      is_boolean(value) -> :boolean
+      is_list(value) -> :list
+      is_map(value) -> :map
+      true -> :unknown
+    end
+  end
+
+  defp calculate_schema_consistency(field_types) do
+    # Calculate how consistent field types are across files
+    consistency_scores = Map.new(field_types, fn {field, type_frequencies} ->
+      total_occurrences = Enum.sum(Map.values(type_frequencies))
+      most_common_count = Enum.max(Map.values(type_frequencies), fn -> 0 end)
+
+      consistency = if total_occurrences > 0 do
+        most_common_count / total_occurrences * 100
+      else
+        100
+      end
+
+      {field, Float.round(consistency, 1)}
+    end)
+
+    if Enum.empty?(consistency_scores) do
+      100
+    else
+      Enum.sum(Map.values(consistency_scores)) / map_size(consistency_scores)
     end
   end
 end

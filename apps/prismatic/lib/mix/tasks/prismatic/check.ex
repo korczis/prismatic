@@ -124,7 +124,7 @@ defmodule Mix.Tasks.Prismatic.Check do
     repository: 0.05
   }
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
     with_task_context(__MODULE__, args, &execute_health_check/1)
   end

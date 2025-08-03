@@ -103,7 +103,7 @@ defmodule Mix.Tasks.Prismatic.Sync.Migrate do
   @default_strategy :incremental
   @default_conflict_resolution :merge
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
     IO.puts("Migration task called with args: #{inspect(args)}")
     :ok

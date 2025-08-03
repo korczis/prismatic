@@ -75,12 +75,13 @@ defmodule Mix.Tasks.Prismatic.Sync.Health do
   - Historical data collection
   """
 
+  use Mix.Task
   use Mix.Tasks.Prismatic.Shared.TaskBehaviour,
     profile: :sync,
     description: "Comprehensive synchronization health monitoring and diagnostics"
 
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
     IO.puts("Health monitoring task called with args: #{inspect(args)}")
   end

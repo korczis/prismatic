@@ -111,7 +111,7 @@ defmodule Mix.Tasks.Prismatic.Workflow.Status do
     poor: 0
   }
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
     with_task_context(__MODULE__, args, &execute_workflow_status/1)
   end

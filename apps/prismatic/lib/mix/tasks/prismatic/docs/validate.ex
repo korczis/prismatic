@@ -65,6 +65,7 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
   - Size and optimization validation
   """
 
+  use Mix.Task
   use Mix.Tasks.Prismatic.Shared.TaskBehaviour,
     profile: :docs,
     description: "Comprehensive documentation validation with link and consistency checking"
@@ -86,10 +87,147 @@ defmodule Mix.Tasks.Prismatic.Docs.Validate do
     batch_processing: 30_000  # 30 seconds
   }
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
-    IO.puts("Validation task called with args: #{inspect(args)}")
+    with_task_context(__MODULE__, args, &execute_validation_task/1)
+  end
+
+  def get_option_parser_config do
+    base_config = super()
+
+    # Add validation-specific switches
+    validation_switches = [
+      categories: :string,
+      timeout: :integer,
+      comprehensive: :boolean,
+      links_only: :boolean,
+      strict: :boolean,
+      config: :string,
+      max_concurrent: :integer
+    ]
+
+    validation_aliases = [
+      c: :categories,
+      t: :timeout,
+      comprehensive: :comprehensive,
+      l: :links_only,
+      s: :strict,
+      config: :config,
+      max: :max_concurrent
+    ]
+
+    [
+      switches: base_config[:switches] ++ validation_switches,
+      aliases: base_config[:aliases] ++ validation_aliases
+    ]
+  end
+
+  def get_task_defaults do
+    %{
+      categories: @validation_categories,
+      timeout: 10,
+      format: "console",
+      input: "docs/",
+      comprehensive: false,
+      links_only: false,
+      strict: false,
+      max_concurrent: 10,
+      verbose: false,
+      dry_run: false
+    }
+  end
+
+  def validate_task_options(options) do
+    with :ok <- super(options),
+         :ok <- validate_categories_option(options[:categories]),
+         :ok <- validate_timeout_option(options[:timeout]),
+         :ok <- validate_max_concurrent_option(options[:max_concurrent]),
+         :ok <- validate_config_file(options[:config]) do
+      :ok
+    end
+  end
+
+  # Main task execution function
+  defp execute_validation_task(options) do
+    # Parse categories and validate arguments
+    categories = parse_validation_categories(options[:categories] || @validation_categories)
+    validate_arguments!(options, [])
+
+    # Build configuration
+    config = build_validation_config(options)
+
+    if options[:dry_run] do
+      preview_validation(config, categories, options)
+    else
+      execute_validation(config, categories, options)
+    end
+
     :ok
+  end
+
+  # Validation helper functions
+  defp validate_categories_option(nil), do: :ok
+  defp validate_categories_option(categories) do
+    case parse_and_validate_categories(categories, @validation_categories, "validation category") do
+      {:ok, _} -> :ok
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+  defp validate_timeout_option(nil), do: :ok
+  defp validate_timeout_option(timeout) when is_integer(timeout) and timeout > 0 and timeout <= 300 do
+    :ok
+  end
+  defp validate_timeout_option(timeout) do
+    {:error, "Timeout must be an integer between 1 and 300 seconds, got: #{inspect(timeout)}"}
+  end
+
+  defp validate_max_concurrent_option(nil), do: :ok
+  defp validate_max_concurrent_option(max) when is_integer(max) and max > 0 and max <= 50 do
+    :ok
+  end
+  defp validate_max_concurrent_option(max) do
+    {:error, "Max concurrent must be an integer between 1 and 50, got: #{inspect(max)}"}
+  end
+
+  defp validate_config_file(nil), do: :ok
+  defp validate_config_file(file) when is_binary(file) do
+    if File.exists?(file) do
+      :ok
+    else
+      {:error, "Config file not found: #{file}"}
+    end
+  end
+
+  defp build_validation_config(options) do
+    %{
+      input: options[:input] || "docs/",
+      output_file: options[:output],
+      output_format: determine_output_format(options[:format], options[:output]),
+      comprehensive: options[:comprehensive] || false,
+      links_only: options[:links_only] || false,
+      strict: options[:strict] || false,
+      verbose: options[:verbose] || false,
+      dry_run: options[:dry_run] || false
+    }
+  end
+
+  defp determine_output_format(format, output_file) do
+    cond do
+      format -> String.to_atom(format)
+      output_file -> detect_format_from_extension(output_file)
+      true -> :console
+    end
+  end
+
+  defp detect_format_from_extension(file) do
+    case Path.extname(file) do
+      ".json" -> :json
+      ".html" -> :html
+      ".yaml" -> :yaml
+      ".yml" -> :yaml
+      _ -> :console
+    end
   end
 
   # Private implementation

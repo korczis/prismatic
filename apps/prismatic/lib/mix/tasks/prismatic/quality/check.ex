@@ -136,17 +136,15 @@ defmodule Mix.Tasks.Prismatic.Quality.Check do
     testing: 0.05
   }
 
-  @impl Mix.Task
+  @impl true
   def run(args) do
     with_task_context(__MODULE__, args, &execute_quality_check/1)
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_option_parser_config do
     [switches: @switches, aliases: @aliases]
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def get_task_defaults do
     %{
       aspects: "all",
@@ -162,7 +160,6 @@ defmodule Mix.Tasks.Prismatic.Quality.Check do
     }
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_options(options) do
     cond do
       options[:aspects] && not valid_aspects?(options[:aspects]) ->
@@ -176,7 +173,6 @@ defmodule Mix.Tasks.Prismatic.Quality.Check do
     end
   end
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
   def validate_task_prerequisites(options) do
     # Check if we're in a Mix project
     unless File.exists?("mix.exs") do
@@ -1348,15 +1344,319 @@ defmodule Mix.Tasks.Prismatic.Quality.Check do
     end
   end
 
-  # Placeholder implementations for complex analysis functions
-  defp find_complex_functions, do: []
-  defp find_long_functions, do: []
-  defp find_complex_modules, do: []
-  defp find_deeply_nested_code, do: []
-  defp calculate_complexity_score(_functions), do: 85
-  defp determine_complexity_severity(_complexity), do: :medium
-  defp parse_unformatted_files(_output), do: []
-  defp find_naming_violations, do: []
+  # Real implementations for quality analysis functions
+  defp find_complex_functions do
+    source_paths = get_source_paths()
+    Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+      |> Enum.flat_map(&analyze_file_complexity/1)
+      |> Enum.filter(&(&1.complexity > 10))
+    end)
+  end
+
+  defp find_long_functions do
+    source_paths = get_source_paths()
+    Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+      |> Enum.flat_map(&analyze_function_length/1)
+      |> Enum.filter(&(&1.lines > 50))
+    end)
+  end
+
+  defp find_complex_modules do
+    source_paths = get_source_paths()
+    Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+      |> Enum.map(&analyze_module_complexity/1)
+      |> Enum.filter(&(&1.complexity > 100))
+    end)
+  end
+
+  defp find_deeply_nested_code do
+    source_paths = get_source_paths()
+    Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+      |> Enum.flat_map(&find_deep_nesting/1)
+      |> Enum.filter(&(&1.depth > 4))
+    end)
+  end
+
+  defp calculate_complexity_score(functions) do
+    if Enum.empty?(functions) do
+      100
+    else
+      avg_complexity = Enum.sum(Enum.map(functions, & &1.complexity)) / length(functions)
+      max(0, 100 - trunc(avg_complexity * 2))
+    end
+  end
+
+  defp determine_complexity_severity(complexity) do
+    cond do
+      complexity > 20 -> :high
+      complexity > 10 -> :medium
+      true -> :low
+    end
+  end
+
+  defp parse_unformatted_files(output) do
+    output
+    |> String.split("\n")
+    |> Enum.filter(&String.contains?(&1, ".ex"))
+    |> Enum.map(&String.trim/1)
+    |> Enum.reject(&(&1 == ""))
+  end
+
+  defp find_naming_violations do
+    source_paths = get_source_paths()
+    Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+      |> Enum.flat_map(&check_naming_conventions/1)
+    end)
+  end
+
+  defp find_todo_fixme_items do
+    source_paths = get_source_paths()
+    Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+      |> Enum.flat_map(&extract_todo_fixme/1)
+    end)
+  end
+
+  defp calculate_documentation_coverage do
+    source_paths = get_source_paths()
+    all_files = Enum.flat_map(source_paths, fn path ->
+      Path.wildcard("#{path}/**/*.ex")
+    end)
+
+    if Enum.empty?(all_files) do
+      0
+    else
+      documented_files = Enum.count(all_files, &has_module_doc?/1)
+      trunc((documented_files / length(all_files)) * 100)
+    end
+  end
+
+  # Helper functions for analysis
+  defp analyze_file_complexity(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        content
+        |> String.split("\n")
+        |> Enum.with_index(1)
+        |> extract_functions_with_complexity(file_path)
+      {:error, _} -> []
+    end
+  end
+
+  defp analyze_function_length(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        content
+        |> String.split("\n")
+        |> Enum.with_index(1)
+        |> extract_functions_with_length(file_path)
+      {:error, _} -> []
+    end
+  end
+
+  defp analyze_module_complexity(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        lines = String.split(content, "\n")
+        module_name = extract_module_name(content)
+        complexity = calculate_file_complexity(lines)
+        %{name: module_name, file: file_path, complexity: complexity}
+      {:error, _} -> %{name: "Unknown", file: file_path, complexity: 0}
+    end
+  end
+
+  defp find_deep_nesting(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        content
+        |> String.split("\n")
+        |> Enum.with_index(1)
+        |> find_nesting_violations(file_path)
+      {:error, _} -> []
+    end
+  end
+
+  defp check_naming_conventions(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        content
+        |> String.split("\n")
+        |> Enum.with_index(1)
+        |> find_naming_issues(file_path)
+      {:error, _} -> []
+    end
+  end
+
+  defp extract_todo_fixme(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        content
+        |> String.split("\n")
+        |> Enum.with_index(1)
+        |> Enum.filter(fn {line, _} ->
+          String.contains?(String.downcase(line), ["todo", "fixme"])
+        end)
+        |> Enum.map(fn {line, line_num} ->
+          type = if String.contains?(String.downcase(line), "fixme"), do: "fixme", else: "todo"
+          description = String.trim(String.replace(line, ~r/#\s*(TODO|FIXME):?\s*/i, ""))
+          %{type: type, location: "#{file_path}:#{line_num}", description: description}
+        end)
+      {:error, _} -> []
+    end
+  end
+
+  defp has_module_doc?(file_path) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        String.contains?(content, "@moduledoc") and
+        not String.contains?(content, "@moduledoc false")
+      {:error, _} -> false
+    end
+  end
+
+  # Simplified analysis helpers
+  defp extract_functions_with_complexity(lines_with_index, file_path) do
+    lines_with_index
+    |> Enum.filter(fn {line, _} -> String.match?(line, ~r/^\s*def\s+/) end)
+    |> Enum.map(fn {line, line_num} ->
+      func_name = extract_function_name(line)
+      complexity = calculate_function_complexity_simple(lines_with_index, line_num)
+      %{name: func_name, location: "#{file_path}:#{line_num}", complexity: complexity}
+    end)
+  end
+
+  defp extract_functions_with_length(lines_with_index, file_path) do
+    lines_with_index
+    |> Enum.filter(fn {line, _} -> String.match?(line, ~r/^\s*def\s+/) end)
+    |> Enum.map(fn {line, line_num} ->
+      func_name = extract_function_name(line)
+      func_lines = calculate_function_length(lines_with_index, line_num)
+      %{name: func_name, location: "#{file_path}:#{line_num}", lines: func_lines}
+    end)
+  end
+
+  defp find_nesting_violations(lines_with_index, file_path) do
+    lines_with_index
+    |> Enum.map(fn {line, line_num} ->
+      depth = calculate_indentation_depth(line)
+      if depth > 4 do
+        %{location: "#{file_path}:#{line_num}", depth: depth}
+      else
+        nil
+      end
+    end)
+    |> Enum.reject(&is_nil/1)
+  end
+
+  defp find_naming_issues(lines_with_index, file_path) do
+    lines_with_index
+    |> Enum.flat_map(fn {line, line_num} ->
+      issues = []
+
+      # Check module names (should be PascalCase)
+      issues = if String.match?(line, ~r/^\s*defmodule\s+([a-z])/) do
+        [%{type: "module", name: extract_module_name_from_line(line),
+           location: "#{file_path}:#{line_num}"} | issues]
+      else
+        issues
+      end
+
+      # Check function names (should be snake_case)
+      issues = if String.match?(line, ~r/^\s*def\s+([A-Z]|.*[A-Z])/) do
+        [%{type: "function", name: extract_function_name(line),
+           location: "#{file_path}:#{line_num}"} | issues]
+      else
+        issues
+      end
+
+      issues
+    end)
+  end
+
+  # Basic helper implementations
+  defp extract_module_name(content) do
+    case Regex.run(~r/defmodule\s+([\w\.]+)/, content) do
+      [_, name] -> name
+      _ -> "Unknown"
+    end
+  end
+
+  defp extract_module_name_from_line(line) do
+    case Regex.run(~r/defmodule\s+([\w\.]+)/, line) do
+      [_, name] -> name
+      _ -> "Unknown"
+    end
+  end
+
+  defp extract_function_name(line) do
+    case Regex.run(~r/def\s+([a-zA-Z_][a-zA-Z0-9_]*[?!]?)/, line) do
+      [_, name] -> name
+      _ -> "unknown"
+    end
+  end
+
+  defp calculate_file_complexity(lines) do
+    # Simple complexity calculation based on keywords
+    complexity_keywords = ["if", "case", "cond", "with", "unless", "for", "while"]
+    Enum.reduce(lines, 0, fn line, acc ->
+      keyword_count = Enum.count(complexity_keywords, &String.contains?(line, &1))
+      acc + keyword_count
+    end)
+  end
+
+  defp calculate_function_complexity_simple(lines_with_index, start_line) do
+    # Find function end and count complexity keywords within
+    func_lines = take_function_lines(lines_with_index, start_line)
+    complexity_keywords = ["if", "case", "cond", "with", "unless", "for"]
+
+    Enum.reduce(func_lines, 1, fn {line, _}, acc ->
+      keyword_count = Enum.count(complexity_keywords, &String.contains?(line, &1))
+      acc + keyword_count
+    end)
+  end
+
+  defp calculate_function_length(lines_with_index, start_line) do
+    func_lines = take_function_lines(lines_with_index, start_line)
+    length(func_lines)
+  end
+
+  defp take_function_lines(lines_with_index, start_line) do
+    # Simple heuristic: take lines until next 'def' or 'end' at same indentation
+    start_indent = get_line_indentation(lines_with_index, start_line)
+
+    lines_with_index
+    |> Enum.drop_while(fn {_, line_num} -> line_num < start_line end)
+    |> Enum.take_while(fn {line, line_num} ->
+      line_num == start_line ||
+      (get_indentation(line) > start_indent) ||
+      (get_indentation(line) == start_indent && not String.match?(line, ~r/^\s*def\s+/))
+    end)
+  end
+
+  defp get_line_indentation(lines_with_index, target_line) do
+    case Enum.find(lines_with_index, fn {_, line_num} -> line_num == target_line end) do
+      {line, _} -> get_indentation(line)
+      _ -> 0
+    end
+  end
+
+  defp get_indentation(line) do
+    case Regex.run(~r/^(\s*)/, line) do
+      [_, spaces] -> String.length(spaces)
+      _ -> 0
+    end
+  end
+
+  defp calculate_indentation_depth(line) do
+    div(get_indentation(line), 2) # Assuming 2-space indentation
+  end
+
+  # Stub implementations for complex analysis (to be implemented later)
   defp find_structure_issues, do: []
   defp find_documentation_style_issues, do: []
   defp find_security_vulnerabilities, do: []
@@ -1368,12 +1668,10 @@ defmodule Mix.Tasks.Prismatic.Quality.Check do
   defp find_memory_issues, do: []
   defp find_performance_bottlenecks, do: []
   defp find_code_duplications, do: []
-  defp find_todo_fixme_items, do: []
   defp find_deprecated_patterns, do: []
   defp find_refactoring_opportunities, do: []
   defp find_idiom_violations, do: []
   defp find_framework_practice_violations, do: []
   defp find_error_handling_issues, do: []
   defp find_resource_management_issues, do: []
-  defp calculate_documentation_coverage, do: 85
 end

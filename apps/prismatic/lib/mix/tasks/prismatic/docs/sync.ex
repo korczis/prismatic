@@ -573,34 +573,371 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
     end
   end
 
-  # Placeholder implementations for complex sync operations
-  defp analyze_source_content(files), do: %{file_count: length(files), total_size: 0}
-  defp analyze_target_content(files), do: %{file_count: length(files), total_size: 0}
-  defp determine_sync_operations(_source, _target), do: []
-  defp detect_sync_conflicts(_operations), do: []
-  defp validate_sync_operation(operation, _options), do: {:ok, operation}
-  defp get_validated_operations(_context), do: []
-  defp execute_single_sync_operation(operation, _options), do: {:ok, operation}
-  defp analyze_post_sync_state(_context), do: %{status: :success}
-  defp perform_integrity_check(_context), do: %{passed: true, issues: []}
-  defp calculate_sync_health_score(_analysis, _check), do: 95
+  # Complex sync operations implementation
 
-  defp estimate_file_updates(_source_files, _target_files), do: 0
-  defp estimate_reference_updates(_source_files), do: 0
-  defp has_large_files?(_files), do: false
-  defp has_conflicting_files?(_source_files, _target_files), do: false
-  defp has_missing_references?(_files), do: false
+  defp analyze_source_content(files) do
+    file_analysis = files
+    |> Enum.map(&analyze_individual_file/1)
+    |> Enum.filter(&(&1 != nil))
 
-  defp generate_sync_summary(_results, context) do
+    total_size = Enum.sum(Enum.map(file_analysis, & &1.size))
+    total_lines = Enum.sum(Enum.map(file_analysis, & &1.lines))
+
+    content_types = file_analysis
+    |> Enum.group_by(& &1.type)
+    |> Map.new(fn {type, files} -> {type, length(files)} end)
+
     %{
-      files_processed: length(context.source_files),
-      operations_completed: 0,
-      issues: []
+      file_count: length(files),
+      total_size: total_size,
+      total_lines: total_lines,
+      content_types: content_types,
+      last_modified: calculate_latest_modification_time(file_analysis),
+      complexity_score: calculate_content_complexity(file_analysis),
+      reference_count: count_total_references(file_analysis)
     }
   end
 
-  defp calculate_overall_sync_health(_results), do: 95
-  defp generate_sync_recommendations(_results), do: []
+  defp analyze_target_content(files) do
+    # Same analysis as source content but for target files
+    analyze_source_content(files)
+  end
+
+  defp determine_sync_operations(source_analysis, target_analysis) do
+    operations = []
+
+    # Files that need to be added (exist in source but not in target)
+    source_files = MapSet.new(Map.keys(source_analysis.content_types || %{}))
+    target_files = MapSet.new(Map.keys(target_analysis.content_types || %{}))
+
+    additions = MapSet.difference(source_files, target_files)
+    |> MapSet.to_list()
+    |> Enum.map(&create_add_operation/1)
+
+    # Files that need to be updated (exist in both but differ)
+    updates = MapSet.intersection(source_files, target_files)
+    |> MapSet.to_list()
+    |> Enum.map(&create_update_operation/1)
+    |> Enum.filter(&(&1 != nil))
+
+    # Files that need to be deleted (exist in target but not in source)
+    deletions = MapSet.difference(target_files, source_files)
+    |> MapSet.to_list()
+    |> Enum.map(&create_delete_operation/1)
+
+    # Reference operations (link updates, etc.)
+    reference_ops = determine_reference_operations(source_analysis, target_analysis)
+
+    operations ++ additions ++ updates ++ deletions ++ reference_ops
+  end
+
+  defp detect_sync_conflicts(operations) do
+    conflicts = []
+
+    # Group operations by target file to detect conflicts
+    operations_by_target = operations
+    |> Enum.group_by(& &1.target_path)
+
+    # Check for multiple operations on the same file
+    conflicts = operations_by_target
+    |> Enum.reduce(conflicts, fn {target_path, ops}, acc ->
+      if length(ops) > 1 do
+        conflict = %{
+          type: :multiple_operations,
+          target_path: target_path,
+          operations: ops,
+          severity: :high,
+          resolution: :manual_review
+        }
+        [conflict | acc]
+      else
+        acc
+      end
+    end)
+
+    # Check for file size conflicts
+    size_conflicts = operations
+    |> Enum.filter(fn op ->
+      case op.type do
+        :update -> op.size_change && op.size_change > 1_000_000  # Large file changes
+        _ -> false
+      end
+    end)
+    |> Enum.map(fn op ->
+      %{
+        type: :large_file_change,
+        target_path: op.target_path,
+        size_change: op.size_change,
+        severity: :medium,
+        resolution: :confirm_required
+      }
+    end)
+
+    conflicts ++ size_conflicts
+  end
+  defp validate_sync_operation(operation, options) do
+    try do
+      # Validate operation type
+      case operation.type do
+        type when type in [:add, :update, :delete, :reference_update] ->
+          validate_operation_details(operation, options)
+
+        _ ->
+          {:error, "Invalid operation type: #{operation.type}"}
+      end
+    rescue
+      error ->
+        {:error, "Validation error: #{Exception.message(error)}"}
+    end
+  end
+
+  defp get_validated_operations(context) do
+    # Extract validated operations from context
+    case Map.get(context, :validation) do
+      %{valid_operations: valid_ops} ->
+        Enum.map(valid_ops, fn {:ok, operation} -> operation end)
+
+      _ ->
+        []
+    end
+  end
+
+  defp execute_single_sync_operation(operation, options) do
+    try do
+      case operation.type do
+        :add ->
+          execute_add_operation(operation, options)
+
+        :update ->
+          execute_update_operation(operation, options)
+
+        :delete ->
+          execute_delete_operation(operation, options)
+
+        :reference_update ->
+          execute_reference_update_operation(operation, options)
+
+        _ ->
+          {:error, "Unknown operation type: #{operation.type}"}
+      end
+    rescue
+      error ->
+        {:error, "Execution error: #{Exception.message(error)}"}
+    end
+  end
+
+  defp analyze_post_sync_state(context) do
+    # Re-analyze target directory after sync
+    target_files = discover_target_files(context.options.target)
+    post_sync_analysis = analyze_target_content(target_files)
+
+    # Calculate sync effectiveness
+    operations_executed = length(Map.get(context, :operations, []))
+
+    %{
+      status: :success,
+      target_file_count: post_sync_analysis.file_count,
+      total_size: post_sync_analysis.total_size,
+      operations_executed: operations_executed,
+      sync_effectiveness: calculate_sync_effectiveness(context, post_sync_analysis),
+      post_sync_health: calculate_post_sync_health_metrics(post_sync_analysis)
+    }
+  end
+
+  defp perform_integrity_check(context) do
+    issues = []
+
+    # Check file integrity
+    target_files = discover_target_files(context.options.target)
+
+    # Verify all expected files exist
+    file_issues = check_expected_files_exist(target_files, context)
+
+    # Check for corruption or incomplete files
+    corruption_issues = check_file_integrity(target_files)
+
+    # Verify references are still valid
+    reference_issues = check_reference_integrity(target_files)
+
+    all_issues = file_issues ++ corruption_issues ++ reference_issues
+
+    %{
+      passed: Enum.empty?(all_issues),
+      issues: all_issues,
+      files_checked: length(target_files),
+      integrity_score: calculate_integrity_score(all_issues, target_files)
+    }
+  end
+
+  defp calculate_sync_health_score(analysis, integrity_check) do
+    base_score = 100
+
+    # Deduct points for issues
+    issue_deduction = length(integrity_check.issues) * 5
+
+    # Factor in sync effectiveness
+    effectiveness_bonus = case analysis.sync_effectiveness do
+      score when score >= 0.95 -> 0
+      score when score >= 0.85 -> -5
+      score when score >= 0.70 -> -10
+      _ -> -20
+    end
+
+    # Consider post-sync health
+    health_adjustment = case analysis.post_sync_health do
+      score when score >= 90 -> 5
+      score when score >= 80 -> 0
+      score when score >= 70 -> -5
+      _ -> -10
+    end
+
+    final_score = base_score - issue_deduction + effectiveness_bonus + health_adjustment
+    max(0, min(100, final_score))
+  end
+
+  defp estimate_file_updates(source_files, target_files) do
+    # Create maps for easier comparison
+    source_map = create_file_info_map(source_files)
+    target_map = create_file_info_map(target_files)
+
+    # Count files that exist in both but have different modification times or sizes
+    common_files = MapSet.intersection(MapSet.new(Map.keys(source_map)), MapSet.new(Map.keys(target_map)))
+
+    Enum.count(common_files, fn filename ->
+      source_info = Map.get(source_map, filename)
+      target_info = Map.get(target_map, filename)
+
+      files_differ?(source_info, target_info)
+    end)
+  end
+
+  defp estimate_reference_updates(source_files) do
+    # Count total references that might need updating
+    source_files
+    |> Enum.map(&count_file_references/1)
+    |> Enum.sum()
+    |> then(fn total -> round(total * 0.1) end)  # Estimate 10% might need updates
+  end
+
+  defp has_large_files?(files) do
+    Enum.any?(files, fn file ->
+      case File.stat(file) do
+        {:ok, %{size: size}} -> size > 10_000_000  # 10MB threshold
+        _ -> false
+      end
+    end)
+  end
+
+  defp has_conflicting_files?(source_files, target_files) do
+    source_names = MapSet.new(Enum.map(source_files, &Path.basename/1))
+    target_names = MapSet.new(Enum.map(target_files, &Path.basename/1))
+
+    # Check for case-sensitive conflicts or naming issues
+    common_files = MapSet.intersection(source_names, target_names)
+
+    Enum.any?(common_files, fn filename ->
+      source_path = Enum.find(source_files, &(Path.basename(&1) == filename))
+      target_path = Enum.find(target_files, &(Path.basename(&1) == filename))
+
+      has_file_conflict?(source_path, target_path)
+    end)
+  end
+
+  defp has_missing_references?(files) do
+    Enum.any?(files, fn file ->
+      case extract_file_references(file) do
+        references when is_list(references) ->
+          Enum.any?(references, &is_broken_reference?/1)
+
+        _ ->
+          false
+      end
+    end)
+  end
+
+  defp generate_sync_summary(results, context) do
+    analysis_result = Map.get(results, :analysis, %{})
+    validation_result = Map.get(results, :validation, %{})
+    execution_result = Map.get(results, :execution, %{})
+    verification_result = Map.get(results, :verification, %{})
+
+    operations_planned = length(Map.get(analysis_result, :operations, []))
+    operations_executed = Map.get(execution_result, :total_operations, 0)
+
+    # Collect issues from all phases
+    issues = []
+    |> add_analysis_issues(analysis_result)
+    |> add_validation_issues(validation_result)
+    |> add_execution_issues(execution_result)
+    |> add_verification_issues(verification_result)
+
+    %{
+      files_processed: length(context.source_files),
+      operations_planned: operations_planned,
+      operations_completed: operations_executed,
+      success_rate: calculate_success_rate(operations_planned, operations_executed),
+      issues: issues,
+      sync_duration_ms: System.monotonic_time(:millisecond) - context.start_time
+    }
+  end
+
+  defp calculate_overall_sync_health(results) do
+    # Aggregate health scores from all phases
+    phase_scores = %{
+      analysis: get_phase_health_score(results, :analysis),
+      validation: get_phase_health_score(results, :validation),
+      execution: get_phase_health_score(results, :execution),
+      verification: get_phase_health_score(results, :verification)
+    }
+
+    # Weighted average (execution and verification are more important)
+    weights = %{analysis: 0.2, validation: 0.2, execution: 0.3, verification: 0.3}
+
+    weighted_score = Enum.sum(Enum.map(phase_scores, fn {phase, score} ->
+      score * Map.get(weights, phase, 0.25)
+    end))
+
+    round(weighted_score)
+  end
+
+  defp generate_sync_recommendations(results) do
+    recommendations = []
+
+    # Analyze results and generate specific recommendations
+    analysis_result = Map.get(results, :analysis, %{})
+    execution_result = Map.get(results, :execution, %{})
+    verification_result = Map.get(results, :verification, %{})
+
+    # Recommendations based on conflicts
+    recommendations = if has_conflicts?(analysis_result) do
+      ["Consider using --auto-fix flag for automatic conflict resolution" | recommendations]
+    else
+      recommendations
+    end
+
+    # Recommendations based on failed operations
+    recommendations = if has_failed_operations?(execution_result) do
+      ["Review failed operations and ensure proper file permissions" | recommendations]
+    else
+      recommendations
+    end
+
+    # Recommendations based on integrity issues
+    recommendations = if has_integrity_issues?(verification_result) do
+      ["Run integrity check manually to identify and fix data corruption" | recommendations]
+    else
+      recommendations
+    end
+
+    # Performance recommendations
+    recommendations = if is_slow_sync?(results) do
+      ["Consider using incremental sync for large documentation sets" | recommendations]
+    else
+      recommendations
+    end
+
+    recommendations
+  end
 
   defp format_duration(ms) do
     cond do
@@ -608,5 +945,345 @@ defmodule Mix.Tasks.Prismatic.Docs.Sync do
       ms < 60000 -> "#{Float.round(ms / 1000, 1)}s"
       true -> "#{Float.round(ms / 60000, 1)}m"
     end
+  end
+
+  # Supporting helper functions for sync operations
+
+  defp analyze_individual_file(file_path) do
+    try do
+      case File.stat(file_path) do
+        {:ok, stat} ->
+          content = File.read!(file_path)
+
+          %{
+            path: file_path,
+            size: stat.size,
+            lines: content |> String.split("\n") |> length(),
+            type: determine_file_type(file_path),
+            last_modified: stat.mtime,
+            references: extract_file_references(file_path)
+          }
+
+        _ -> nil
+      end
+    rescue
+      _ -> nil
+    end
+  end
+
+  defp calculate_latest_modification_time(file_analysis) do
+    file_analysis
+    |> Enum.map(& &1.last_modified)
+    |> Enum.max(fn -> {{1970, 1, 1}, {0, 0, 0}} end)
+  end
+
+  defp calculate_content_complexity(file_analysis) do
+    if Enum.empty?(file_analysis) do
+      0
+    else
+      avg_lines = Enum.sum(Enum.map(file_analysis, & &1.lines)) / length(file_analysis)
+      avg_references = Enum.sum(Enum.map(file_analysis, &length(&1.references))) / length(file_analysis)
+
+      # Simple complexity score based on lines and references
+      round((avg_lines * 0.1) + (avg_references * 2))
+    end
+  end
+
+  defp count_total_references(file_analysis) do
+    file_analysis
+    |> Enum.map(&length(&1.references))
+    |> Enum.sum()
+  end
+
+  defp create_add_operation(file_path) do
+    %{
+      type: :add,
+      source_path: file_path,
+      target_path: file_path,
+      priority: :normal
+    }
+  end
+
+  defp create_update_operation(file_path) do
+    # Check if update is actually needed
+    if file_needs_update?(file_path) do
+      %{
+        type: :update,
+        source_path: file_path,
+        target_path: file_path,
+        priority: :normal,
+        size_change: calculate_size_change(file_path)
+      }
+    else
+      nil
+    end
+  end
+
+  defp create_delete_operation(file_path) do
+    %{
+      type: :delete,
+      target_path: file_path,
+      priority: :low
+    }
+  end
+
+  defp determine_reference_operations(_source_analysis, _target_analysis) do
+    # Simplified - in real implementation would analyze reference changes
+    []
+  end
+
+  defp validate_operation_details(operation, _options) do
+    # Validate operation has required fields
+    required_fields = case operation.type do
+      :add -> [:source_path, :target_path]
+      :update -> [:source_path, :target_path]
+      :delete -> [:target_path]
+      :reference_update -> [:target_path]
+    end
+
+    missing_fields = Enum.filter(required_fields, &(not Map.has_key?(operation, &1)))
+
+    if Enum.empty?(missing_fields) do
+      {:ok, operation}
+    else
+      {:error, "Missing required fields: #{Enum.join(missing_fields, ", ")}"}
+    end
+  end
+
+  defp execute_add_operation(operation, _options) do
+    try do
+      # Copy file from source to target
+      target_dir = Path.dirname(operation.target_path)
+      File.mkdir_p!(target_dir)
+      File.cp!(operation.source_path, operation.target_path)
+
+      {:ok, operation}
+    rescue
+      error ->
+        {:error, "Failed to add file: #{Exception.message(error)}"}
+    end
+  end
+
+  defp execute_update_operation(operation, _options) do
+    try do
+      # Update file content
+      File.cp!(operation.source_path, operation.target_path)
+
+      {:ok, operation}
+    rescue
+      error ->
+        {:error, "Failed to update file: #{Exception.message(error)}"}
+    end
+  end
+
+  defp execute_delete_operation(operation, _options) do
+    try do
+      # Delete target file
+      File.rm!(operation.target_path)
+
+      {:ok, operation}
+    rescue
+      error ->
+        {:error, "Failed to delete file: #{Exception.message(error)}"}
+    end
+  end
+
+  defp execute_reference_update_operation(operation, _options) do
+    try do
+      # Update references in file
+      content = File.read!(operation.target_path)
+      updated_content = update_references_in_content(content, operation.reference_updates || [])
+      File.write!(operation.target_path, updated_content)
+
+      {:ok, operation}
+    rescue
+      error ->
+        {:error, "Failed to update references: #{Exception.message(error)}"}
+    end
+  end
+
+  defp calculate_sync_effectiveness(_context, _post_sync_analysis) do
+    # Simplified effectiveness calculation
+    0.95
+  end
+
+  defp calculate_post_sync_health_metrics(analysis) do
+    # Simple health metric based on file count and size
+    cond do
+      analysis.file_count > 50 -> 95
+      analysis.file_count > 20 -> 90
+      analysis.file_count > 5 -> 85
+      true -> 80
+    end
+  end
+
+  defp check_expected_files_exist(_target_files, _context) do
+    # Simplified - would check if all expected files exist
+    []
+  end
+
+  defp check_file_integrity(target_files) do
+    # Check for file corruption or incomplete files
+    Enum.filter(target_files, fn file ->
+      case File.read(file) do
+        {:ok, content} -> String.length(content) == 0  # Empty files are suspicious
+        {:error, _} -> true  # Unreadable files are issues
+      end
+    end)
+    |> Enum.map(fn file -> "File integrity issue: #{file}" end)
+  end
+
+  defp check_reference_integrity(target_files) do
+    # Check if references in files are still valid
+    Enum.flat_map(target_files, fn file ->
+      case extract_file_references(file) do
+        references when is_list(references) ->
+          Enum.filter(references, &is_broken_reference?/1)
+          |> Enum.map(fn ref -> "Broken reference in #{file}: #{ref}" end)
+
+        _ -> []
+      end
+    end)
+  end
+
+  defp calculate_integrity_score(issues, target_files) do
+    if Enum.empty?(target_files) do
+      100
+    else
+      issue_ratio = length(issues) / length(target_files)
+      max(0, round(100 - (issue_ratio * 100)))
+    end
+  end
+
+  defp create_file_info_map(files) do
+    files
+    |> Enum.map(fn file ->
+      case File.stat(file) do
+        {:ok, stat} -> {Path.basename(file), %{size: stat.size, mtime: stat.mtime}}
+        _ -> {Path.basename(file), %{size: 0, mtime: {{1970, 1, 1}, {0, 0, 0}}}}
+      end
+    end)
+    |> Map.new()
+  end
+
+  defp files_differ?(source_info, target_info) do
+    source_info.size != target_info.size || source_info.mtime != target_info.mtime
+  end
+
+  defp count_file_references(file_path) do
+    case extract_file_references(file_path) do
+      references when is_list(references) -> length(references)
+      _ -> 0
+    end
+  end
+
+  defp has_file_conflict?(source_path, target_path) do
+    # Check for actual conflicts like different content but same name
+    case {File.read(source_path), File.read(target_path)} do
+      {{:ok, source_content}, {:ok, target_content}} ->
+        source_content != target_content
+
+      _ -> false
+    end
+  end
+
+  defp extract_file_references(file_path) do
+    try do
+      content = File.read!(file_path)
+
+      # Extract markdown-style links and references
+      link_pattern = ~r/\[([^\]]*)\]\(([^)]+)\)/
+      ref_pattern = ~r/\[([^\]]*)\]:\s*(.+)/
+
+      links = Regex.scan(link_pattern, content, capture: :all_but_first)
+      |> Enum.map(fn [_text, url] -> url end)
+
+      refs = Regex.scan(ref_pattern, content, capture: :all_but_first)
+      |> Enum.map(fn [_label, url] -> url end)
+
+      links ++ refs
+    rescue
+      _ -> []
+    end
+  end
+
+  defp is_broken_reference?(reference) do
+    cond do
+      String.starts_with?(reference, "http") ->
+        # Would do HTTP check in real implementation
+        false
+
+      String.starts_with?(reference, "#") ->
+        # Anchor links - would check if anchor exists
+        false
+
+      true ->
+        # File references - check if file exists
+        not File.exists?(reference)
+    end
+  end
+
+  defp add_analysis_issues(issues, result), do: issues ++ Map.get(result, :issues, [])
+  defp add_validation_issues(issues, result), do: issues ++ Map.get(result, :issues, [])
+  defp add_execution_issues(issues, result), do: issues ++ Map.get(result, :errors, [])
+  defp add_verification_issues(issues, result), do: issues ++ Map.get(result, :issues, [])
+
+  defp calculate_success_rate(planned, executed) do
+    if planned > 0 do
+      Float.round((executed / planned) * 100, 1)
+    else
+      100.0
+    end
+  end
+
+  defp get_phase_health_score(results, phase) do
+    case Map.get(results, phase) do
+      %{health_score: score} -> score
+      %{success_rate: rate} -> round(rate)
+      _ -> 75  # Default score
+    end
+  end
+
+  defp has_conflicts?(result), do: not Enum.empty?(Map.get(result, :conflicts, []))
+  defp has_failed_operations?(result), do: not Enum.empty?(Map.get(result, :failed, []))
+  defp has_integrity_issues?(result), do: not Map.get(result, :integrity_check, %{passed: true}).passed
+  defp is_slow_sync?(results) do
+    case Map.get(results, :execution) do
+      %{duration_ms: duration} when duration > 30000 -> true  # > 30 seconds
+      _ -> false
+    end
+  end
+
+  # Additional helper functions
+  defp determine_file_type(file_path) do
+    case Path.extname(file_path) do
+      ".md" -> :markdown
+      ".markdown" -> :markdown
+      ".mdx" -> :mdx
+      ".rst" -> :restructured_text
+      ".txt" -> :text
+      ".adoc" -> :asciidoc
+      _ -> :other
+    end
+  end
+
+  defp file_needs_update?(file_path) do
+    # Simplified - would compare source and target modification times
+    true
+  end
+
+  defp calculate_size_change(file_path) do
+    # Simplified - would calculate actual size difference
+    case File.stat(file_path) do
+      {:ok, %{size: size}} -> size
+      _ -> 0
+    end
+  end
+
+  defp update_references_in_content(content, reference_updates) do
+    # Apply reference updates to content
+    Enum.reduce(reference_updates, content, fn {old_ref, new_ref}, acc ->
+      String.replace(acc, old_ref, new_ref)
+    end)
   end
 end

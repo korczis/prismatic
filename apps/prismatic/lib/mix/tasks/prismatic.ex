@@ -113,7 +113,7 @@ defmodule Mix.Tasks.Prismatic do
     f: :format
   ]
 
-  @impl Mix.Task
+  @impl true
   def run(args) do
     # Start telemetry tracking
     start_time = System.monotonic_time(:millisecond)

@@ -53,6 +53,7 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
   - Validation: minimal checks
   """
 
+  use Mix.Task
   use Mix.Tasks.Prismatic.Shared.TaskBehaviour,
     profile: :code,
     description: "Create feature branches with automated templates"
@@ -96,7 +97,7 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     "chore" => "chore_template"
   }
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
     with_task_context(__MODULE__, args, &execute_branch_creation/1)
   end
@@ -764,9 +765,43 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
     }
   end
 
-  defp copy_template_files(_template_dir, _target_dir), do: :ok
-  defp process_template_variables(_template, _context), do: :ok
-  defp list_template_files(_template_dir), do: ["README.md"]
+  defp copy_template_files(template_dir, target_dir) do
+    if File.dir?(template_dir) do
+      # Recursively copy all files from template directory
+      copy_directory_contents(template_dir, target_dir)
+      :ok
+    else
+      {:error, "Template directory does not exist: #{template_dir}"}
+    end
+  end
+  defp process_template_variables(template_name, context) do
+    # Define template variables based on context
+    variables = %{
+      "BRANCH_NAME" => context.branch_name,
+      "BRANCH_TYPE" => context.options.type || "feature",
+      "BASE_BRANCH" => context.options.base || "main",
+      "DESCRIPTION" => context.options[:description] || "New branch for #{context.branch_name}",
+      "ASSIGNEE" => context.options[:assignee] || "unassigned",
+      "PRIORITY" => context.options[:priority] || "medium",
+      "ISSUE" => context.options[:issue] || "",
+      "TEMPLATE_NAME" => template_name,
+      "CREATED_DATE" => Date.utc_today() |> Date.to_string(),
+      "CREATED_TIMESTAMP" => DateTime.utc_now() |> DateTime.to_iso8601()
+    }
+
+    # Process all files in current directory for template variables
+    process_template_files_in_directory(".", variables)
+    :ok
+  end
+  defp list_template_files(template_dir) do
+    if File.dir?(template_dir) do
+      get_all_files_in_directory(template_dir)
+      |> Enum.map(fn path -> Path.relative_to(path, template_dir) end)
+      |> Enum.sort()
+    else
+      []
+    end
+  end
   defp create_basic_template(_context), do: File.write!("README.md", "# New Branch\n\nDescription coming soon...\n")
 
   defp validate_branch_name_format(_context), do: %{passed: true}
@@ -813,5 +848,98 @@ defmodule Mix.Tasks.Prismatic.Branch.Create do
         _ -> :ok
       end
     end)
+  end
+
+  # Helper functions for template processing
+
+  defp copy_directory_contents(source_dir, target_dir) do
+    File.ls!(source_dir)
+    |> Enum.each(fn item ->
+      source_path = Path.join(source_dir, item)
+      target_path = Path.join(target_dir, item)
+
+      cond do
+        File.dir?(source_path) ->
+          # Create target directory and recursively copy contents
+          File.mkdir_p!(target_path)
+          copy_directory_contents(source_path, target_path)
+
+        File.regular?(source_path) ->
+          # Copy file, ensuring target directory exists
+          File.mkdir_p!(Path.dirname(target_path))
+          File.copy!(source_path, target_path)
+
+        true ->
+          # Skip other file types (symlinks, etc.)
+          :ok
+      end
+    end)
+  end
+
+  defp get_all_files_in_directory(dir) do
+    File.ls!(dir)
+    |> Enum.flat_map(fn item ->
+      path = Path.join(dir, item)
+
+      cond do
+        File.dir?(path) ->
+          get_all_files_in_directory(path)
+        File.regular?(path) ->
+          [path]
+        true ->
+          []
+      end
+    end)
+  end
+
+  defp process_template_files_in_directory(dir, variables) do
+    get_all_files_in_directory(dir)
+    |> Enum.filter(&is_text_file?/1)
+    |> Enum.each(fn file_path ->
+      process_template_file(file_path, variables)
+    end)
+  end
+
+  defp is_text_file?(file_path) do
+    # Check file extension and basic content to determine if it's a text file
+    text_extensions = [".md", ".txt", ".ex", ".exs", ".json", ".yml", ".yaml",
+                      ".xml", ".html", ".css", ".js", ".sh", ".gitignore"]
+
+    extension = Path.extname(file_path) |> String.downcase()
+
+    cond do
+      extension in text_extensions -> true
+      extension == "" ->
+        # Check if file without extension contains text content
+        case File.read(file_path) do
+          {:ok, content} -> String.printable?(content)
+          _ -> false
+        end
+      true -> false
+    end
+  end
+
+  defp process_template_file(file_path, variables) do
+    case File.read(file_path) do
+      {:ok, content} ->
+        # Replace template variables in format {{VARIABLE_NAME}}
+        processed_content = Enum.reduce(variables, content, fn {key, value}, acc ->
+          String.replace(acc, "{{#{key}}}", to_string(value))
+        end)
+
+        # Also support format ${VARIABLE_NAME}
+        processed_content = Enum.reduce(variables, processed_content, fn {key, value}, acc ->
+          String.replace(acc, "${#{key}}", to_string(value))
+        end)
+
+        # Write back if content changed
+        if processed_content != content do
+          File.write!(file_path, processed_content)
+        end
+
+      {:error, _reason} ->
+        # Skip files that can't be read
+        :ok
+    end
   end
 end

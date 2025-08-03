@@ -52,6 +52,7 @@ defmodule Mix.Tasks.Prismatic.Version.Bump do
   - Contributor attribution
   """
 
+  use Mix.Task
   use Mix.Tasks.Prismatic.Shared.TaskBehaviour,
     profile: :code,
     description: "Automated version bumping with semantic versioning"
@@ -87,7 +88,7 @@ defmodule Mix.Tasks.Prismatic.Version.Bump do
   @version_types ~w(major minor patch prerelease build)
   @prerelease_identifiers ~w(alpha beta rc)
 
-  @impl Mix.Tasks.Prismatic.Shared.TaskBehaviour
+  @impl Mix.Task
   def run(args) do
     with_task_context(__MODULE__, args, &execute_version_bump/1)
   end
