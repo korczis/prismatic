@@ -1,62 +1,76 @@
 defmodule Mix.Tasks.Prismatic.Consolidation do
   @moduledoc """
-  Master Mix task for Phase 2: Advanced Dependency Mapping and Conflict Resolution.
+  Master Mix task orchestrator for Phase 2: Advanced Dependency Mapping and Conflict Resolution.
 
-  Provides comprehensive tooling for the enterprise consolidation strategy:
-  - Dependency graph analysis and visualization
-  - Automated conflict resolution for 196 identified conflicts
-  - Migration planning with 6-app umbrella integration
-  - Execution orchestration with validation and rollback
+  This task provides a central entry point and orchestration for the comprehensive
+  enterprise consolidation strategy. It coordinates individual specialized tasks
+  for dependency analysis, conflict resolution, migration planning, and execution.
+
+  ## Available Sub-tasks
+
+  Use individual tasks for specific operations:
+
+    * `mix prismatic.consolidation.analyze` - Run comprehensive dependency analysis
+    * `mix prismatic.consolidation.resolve` - Execute automated conflict resolution
+    * `mix prismatic.consolidation.plan` - Generate migration plan for umbrella consolidation
+    * `mix prismatic.consolidation.validate` - Run validation framework
+    * `mix prismatic.consolidation.status` - Show consolidation status and progress
+    * `mix prismatic.consolidation.report` - Generate comprehensive reports
 
   ## Usage
 
+      # Use specific sub-tasks (recommended)
+      mix prismatic.consolidation.analyze
+      mix prismatic.consolidation.resolve
+      mix prismatic.consolidation.plan
+
+      # Or use this master task for orchestration
       mix prismatic.consolidation [COMMAND] [OPTIONS]
 
-  ## Commands
+  ## Legacy Commands (for compatibility)
 
-    * `analyze` - Run comprehensive dependency analysis
-    * `resolve` - Execute automated conflict resolution
-    * `plan` - Generate migration plan for umbrella consolidation
-    * `execute` - Execute the full Phase 2 consolidation
-    * `validate` - Run validation framework
-    * `rollback` - Execute rollback procedures
-    * `status` - Show consolidation status and progress
-    * `report` - Generate comprehensive reports
+  This task maintains backward compatibility with the original command structure:
 
-  ## Global Options
-
-    * `--projects` - Comma-separated list of legacy project paths
-    * `--dry-run` - Execute in dry-run mode (no actual changes)
-    * `--parallel` - Enable parallel execution where possible
-    * `--automation-level` - Set automation level: full, semi, manual
-    * `--risk-tolerance` - Set risk tolerance: low, medium, high
-    * `--output-dir` - Directory for outputs (default: consolidation/phase2)
-    * `--verbose` - Enable verbose logging
-    * `--help` - Show detailed help information
+    * `analyze` - Runs `mix prismatic.consolidation.analyze`
+    * `resolve` - Runs `mix prismatic.consolidation.resolve`
+    * `plan` - Runs `mix prismatic.consolidation.plan`
+    * `validate` - Runs `mix prismatic.consolidation.validate`
+    * `status` - Runs `mix prismatic.consolidation.status`
+    * `report` - Runs `mix prismatic.consolidation.report`
 
   ## Examples
 
-      # Run complete Phase 2 consolidation analysis
-      mix prismatic.consolidation analyze --projects="../prismatic-legacy,../prismatic-old"
+      # Recommended: Use individual specialized tasks
+      mix prismatic.consolidation.analyze --projects="../legacy,../old" --format=mermaid
+      mix prismatic.consolidation.resolve --automation-level=full --dry-run
+      mix prismatic.consolidation.plan --parallel --risk-tolerance=low
 
-      # Execute automated conflict resolution
-      mix prismatic.consolidation resolve --automation-level=full --dry-run
+      # Legacy: Use master task with subcommands
+      mix prismatic.consolidation analyze --projects="../legacy,../old"
+      mix prismatic.consolidation status --detailed --export
 
-      # Generate and execute migration plan
-      mix prismatic.consolidation plan --parallel --output-dir=consolidation/migration
-      mix prismatic.consolidation execute --dry-run
+  ## Getting Help
 
-      # Monitor progress and generate reports
-      mix prismatic.consolidation status
-      mix prismatic.consolidation report --format=markdown
+  For detailed help on individual tasks:
+
+      mix help prismatic.consolidation.analyze
+      mix help prismatic.consolidation.resolve
+      mix help prismatic.consolidation.plan
+      mix help prismatic.consolidation.validate
+      mix help prismatic.consolidation.status
+      mix help prismatic.consolidation.report
+
+  ## Architecture Integration
+
+  All tasks integrate seamlessly with the 6-app umbrella architecture:
+  - prismatic_core, prismatic_web, prismatic_auth
+  - prismatic_data, prismatic_distributed, prismatic_monitoring
   """
 
   use Mix.Task
   require Logger
 
-  alias Prismatic.Code.{UmbrellaOrchestrator, DependencyAnalyzer, ConflictResolver, MigrationPlanner}
-
-  @shortdoc "Phase 2: Advanced Dependency Mapping and Conflict Resolution"
+  @shortdoc "Master orchestrator for Phase 2: Advanced Dependency Mapping and Conflict Resolution"
 
   @switches [
     projects: :string,
@@ -83,52 +97,39 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
 
   @impl Mix.Task
   def run(args) do
-    {options, remaining_args, _invalid} = OptionParser.parse(args, switches: @switches, aliases: @aliases)
+    {_options, remaining_args, _invalid} = OptionParser.parse(args, switches: @switches, aliases: @aliases)
 
-    if options[:help] do
-      print_help()
-    else
-      execute_command(remaining_args, options)
+    case remaining_args do
+      [] ->
+        print_help()
+
+      ["help"] ->
+        print_help()
+
+      [command | rest] ->
+        delegate_to_subtask(command, rest)
+
+      _ ->
+        print_help()
     end
   end
 
-  defp execute_command([], options) do
-    # Default command is status
-    execute_command(["status"], options)
-  end
-
-  defp execute_command([command | _rest], options) do
-    setup_logging(options)
-    config = build_consolidation_config(options)
-
-    start_time = System.monotonic_time()
-
-    result = case command do
-      "analyze" -> execute_analyze_command(config, options)
-      "resolve" -> execute_resolve_command(config, options)
-      "plan" -> execute_plan_command(config, options)
-      "execute" -> execute_execute_command(config, options)
-      "validate" -> execute_validate_command(config, options)
-      "rollback" -> execute_rollback_command(config, options)
-      "status" -> execute_status_command(config, options)
-      "report" -> execute_report_command(config, options)
+  defp delegate_to_subtask(command, args) do
+    task_module = case command do
+      "analyze" -> Mix.Tasks.Prismatic.Consolidation.Analyze
+      "resolve" -> Mix.Tasks.Prismatic.Consolidation.Resolve
+      "plan" -> Mix.Tasks.Prismatic.Consolidation.Plan
+      "validate" -> Mix.Tasks.Prismatic.Consolidation.Validate
+      "status" -> Mix.Tasks.Prismatic.Consolidation.Status
+      "report" -> Mix.Tasks.Prismatic.Consolidation.Report
       _ ->
         Mix.shell().error([:red, "Unknown command: #{command}", :reset])
         print_available_commands()
         System.halt(1)
     end
 
-    duration = System.convert_time_unit(System.monotonic_time() - start_time, :native, :millisecond)
-
-    case result do
-      {:ok, data} ->
-        Mix.shell().info([:green, "✅ Command '#{command}' completed successfully in #{duration}ms", :reset])
-        print_command_summary(command, data)
-
-      {:error, reason} ->
-        Mix.shell().error([:red, "❌ Command '#{command}' failed: #{format_error(reason)}", :reset])
-        System.halt(1)
-    end
+    Mix.shell().info([:yellow, "⚡ Delegating to specialized task: prismatic.consolidation.#{command}", :reset])
+    task_module.run(args)
   end
 
   # Command Implementations
@@ -136,7 +137,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
   defp execute_analyze_command(config, options) do
     Mix.shell().info([:blue, "🔍 Starting comprehensive dependency analysis", :reset])
 
-    case DependencyAnalyzer.build_dependency_graph(config.legacy_projects,
+    case Prismatic.Code.DependencyAnalyzer.build_dependency_graph(config.legacy_projects,
          target_architecture: config.target_architecture,
          include_transitive: true,
          max_depth: 10) do
@@ -148,7 +149,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
 
         # Generate visualization if requested
         if options[:format] == "mermaid" do
-          case DependencyAnalyzer.visualize_graph(dependency_graph, :mermaid) do
+          case Prismatic.Code.DependencyAnalyzer.visualize_graph(dependency_graph, :mermaid) do
             {:ok, diagram} ->
               File.write!(Path.join(output_dir, "dependency_graph.mmd"), diagram)
               Mix.shell().info("📊 Dependency graph visualization saved to #{output_dir}/dependency_graph.mmd")
@@ -174,7 +175,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
   defp execute_resolve_command(config, options) do
     Mix.shell().info([:blue, "🔧 Starting automated conflict resolution", :reset])
 
-    case ConflictResolver.resolve_all_conflicts(config.legacy_projects,
+    case Prismatic.Code.ConflictResolver.resolve_all_conflicts(config.legacy_projects,
          strategy_preference: [:upgrade, :pin, :isolate],
          automation_level: config.automation_level,
          risk_tolerance: config.risk_tolerance,
@@ -223,7 +224,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
   defp execute_plan_command(config, options) do
     Mix.shell().info([:blue, "📋 Generating migration plan for umbrella consolidation", :reset])
 
-    case MigrationPlanner.create_migration_plan(config.legacy_projects,
+    case Prismatic.Code.MigrationPlanner.create_migration_plan(config.legacy_projects,
          target_architecture: config.target_architecture,
          migration_strategy: :incremental,
          risk_tolerance: config.risk_tolerance,
@@ -236,7 +237,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
         save_analysis_result("migration_plan.json", migration_plan, output_dir)
 
         # Generate migration scripts
-        scripts = MigrationPlanner.generate_migration_scripts(migration_plan)
+        scripts = Prismatic.Code.MigrationPlanner.generate_migration_scripts(migration_plan)
         scripts_dir = Path.join(output_dir, "scripts")
         File.mkdir_p!(scripts_dir)
 
@@ -265,7 +266,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
   defp execute_execute_command(config, options) do
     Mix.shell().info([:blue, "🚀 Executing Phase 2 consolidation", :reset])
 
-    case UmbrellaOrchestrator.execute_phase2_consolidation(config) do
+    case Prismatic.Code.UmbrellaOrchestrator.execute_phase2_consolidation(config) do
       {:ok, consolidation_result} ->
         output_dir = ensure_output_directory(options[:output_dir] || "consolidation/phase2/execution")
 
@@ -275,7 +276,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
         # Execute migration if not dry-run
         execution_result = if not options[:dry_run] do
           Mix.shell().info("🔄 Executing migration with validation...")
-          case UmbrellaOrchestrator.execute_migration_with_validation(consolidation_result,
+          case Prismatic.Code.UmbrellaOrchestrator.execute_migration_with_validation(consolidation_result,
                dry_run: false,
                parallel: options[:parallel] || true) do
             {:ok, migration_result} ->
@@ -407,7 +408,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
 
     case consolidation_result do
       {:ok, result} ->
-        case UmbrellaOrchestrator.generate_consolidation_reports(result) do
+        case Prismatic.Code.UmbrellaOrchestrator.generate_consolidation_reports(result) do
           {:ok, reports} ->
             output_dir = ensure_output_directory(options[:output_dir] || "consolidation/phase2/reports")
 
@@ -524,7 +525,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
     results = resolution_plans
     |> Enum.take(5)  # Limit to first 5 for safety in this demo
     |> Enum.map(fn plan ->
-      case ConflictResolver.execute_resolution(plan, dry_run: options[:dry_run] || false) do
+      case Prismatic.Code.ConflictResolver.execute_resolution(plan, dry_run: options[:dry_run] || false) do
         {:ok, result} -> result
         {:error, reason} -> %{conflict_id: plan.conflict_id, status: :failed, reason: reason}
       end
@@ -1144,50 +1145,54 @@ defmodule Mix.Tasks.Prismatic.Consolidation do
   defp print_help do
     Mix.shell().info([
       :bright, "mix prismatic.consolidation", :reset, " - Phase 2: Advanced Dependency Mapping\n\n",
+      "Master orchestrator for the enterprise consolidation strategy.\n\n",
 
-      :bright, "USAGE:", :reset, "\n",
+      :bright, "RECOMMENDED USAGE:", :reset, "\n",
+      "Use individual specialized tasks for best results:\n\n",
+      "  mix prismatic.consolidation.analyze    # Comprehensive dependency analysis\n",
+      "  mix prismatic.consolidation.resolve    # Automated conflict resolution\n",
+      "  mix prismatic.consolidation.plan       # Migration planning\n",
+      "  mix prismatic.consolidation.validate   # Validation framework\n",
+      "  mix prismatic.consolidation.status     # Status and progress\n",
+      "  mix prismatic.consolidation.report     # Comprehensive reports\n\n",
+
+      :bright, "LEGACY USAGE:", :reset, "\n",
       "  mix prismatic.consolidation [COMMAND] [OPTIONS]\n\n",
 
-      :bright, "COMMANDS:", :reset, "\n",
+      :bright, "AVAILABLE COMMANDS:", :reset, "\n",
       "  analyze     Run comprehensive dependency analysis\n",
       "  resolve     Execute automated conflict resolution\n",
       "  plan        Generate migration plan for umbrella consolidation\n",
-      "  execute     Execute the full Phase 2 consolidation\n",
       "  validate    Run validation framework\n",
-      "  rollback    Execute rollback procedures\n",
       "  status      Show consolidation status and progress\n",
       "  report      Generate comprehensive reports\n\n",
 
-      :bright, "GLOBAL OPTIONS:", :reset, "\n",
-      "  --projects, -p PATHS       Comma-separated legacy project paths\n",
-      "  --dry-run, -d              Execute in dry-run mode\n",
-      "  --parallel                 Enable parallel execution\n",
-      "  --automation-level, -a LVL Set automation level (full/semi/manual)\n",
-      "  --risk-tolerance, -r LVL   Set risk tolerance (low/medium/high)\n",
-      "  --output-dir, -o DIR       Output directory\n",
-      "  --format, -f FORMAT        Output format (json/markdown/html)\n",
-      "  --verbose, -v              Enable verbose logging\n",
-      "  --help, -h                 Show this help\n\n",
+      :bright, "GETTING DETAILED HELP:", :reset, "\n",
+      "For detailed help on any specific task:\n\n",
+      "  mix help prismatic.consolidation.analyze\n",
+      "  mix help prismatic.consolidation.resolve\n",
+      "  mix help prismatic.consolidation.plan\n",
+      "  mix help prismatic.consolidation.validate\n",
+      "  mix help prismatic.consolidation.status\n",
+      "  mix help prismatic.consolidation.report\n\n",
 
       :bright, "EXAMPLES:", :reset, "\n",
-      "  # Complete Phase 2 analysis\n",
-      "  mix prismatic.consolidation analyze --projects=\"../prismatic-legacy,../prismatic-old\"\n\n",
-      "  # Execute conflict resolution\n",
-      "  mix prismatic.consolidation resolve --automation-level=full --dry-run\n\n",
-      "  # Generate and execute migration plan\n",
-      "  mix prismatic.consolidation plan --parallel\n",
-      "  mix prismatic.consolidation execute --dry-run\n\n",
-      "  # Monitor and report\n",
-      "  mix prismatic.consolidation status\n",
-      "  mix prismatic.consolidation report --format=markdown\n\n"
+      "  # Recommended: Use specialized tasks\n",
+      "  mix prismatic.consolidation.analyze --projects=\"../legacy,../old\" --format=mermaid\n",
+      "  mix prismatic.consolidation.resolve --automation-level=full --dry-run\n",
+      "  mix prismatic.consolidation.plan --parallel --risk-tolerance=low\n\n",
+      "  # Legacy: Use master task\n",
+      "  mix prismatic.consolidation analyze --projects=\"../legacy,../old\"\n",
+      "  mix prismatic.consolidation status --detailed --export\n\n"
     ])
   end
 
   defp print_available_commands do
     Mix.shell().info([
       :yellow, "Available commands:", :reset, "\n",
-      "  analyze, resolve, plan, execute, validate, rollback, status, report\n",
-      "Use --help for detailed information."
+      "  analyze, resolve, plan, validate, status, report\n\n",
+      "For detailed help: mix help prismatic.consolidation.[command]\n",
+      "Example: mix help prismatic.consolidation.analyze"
     ])
   end
 end

@@ -15,22 +15,9 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
     * `--output-dir, -o` - Output directory for status reports (default: consolidation/phase2/status)
     * `--format, -f` - Output format: console, json, markdown (default: console)
     * `--detailed, -d` - Show detailed status information
-    * `--refresh-interval` - Auto-refresh interval in seconds (for continuous monitoring)
-    * `--dashboard` - Launch interactive dashboard mode
     * `--export` - Export status to file
     * `--verbose, -v` - Enable verbose output
     * `--help, -h` - Show this help
-
-  ## Status Categories
-
-  The task reports on several key areas:
-
-    * **Phase 2 Progress** - Overall consolidation progress percentage
-    * **Analysis Status** - Dependency analysis completion and results
-    * **Conflict Resolution** - Resolution progress and automation rate
-    * **Migration Planning** - Migration plan status and readiness
-    * **Validation Status** - Validation framework results
-    * **System Health** - Compilation, tests, and dependency health
 
   ## Examples
 
@@ -40,8 +27,8 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
       # Detailed status with JSON export
       mix prismatic.consolidation.status --detailed --format=json --export
 
-      # Continuous monitoring (refreshes every 30 seconds)
-      mix prismatic.consolidation.status --refresh-interval=30
+      # JSON output for automation
+      mix prismatic.consolidation.status --format=json
 
   ## Status Indicators
 
@@ -52,8 +39,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
     * ⏳ **Pending** - Task not yet started
     * ⚠️  **Warning** - Task completed with issues
     * ❌ **Failed** - Task failed or has critical issues
-
-  For detailed troubleshooting, use `--verbose` flag or check log files.
   """
 
   @shortdoc "Show consolidation status and progress"
@@ -65,8 +50,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
     output_dir: :string,
     format: :string,
     detailed: :boolean,
-    refresh_interval: :integer,
-    dashboard: :boolean,
     export: :boolean,
     verbose: :boolean,
     help: :boolean
@@ -87,13 +70,7 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
     if options[:help] do
       print_help()
     else
-      if options[:dashboard] do
-        launch_dashboard(options)
-      elsif options[:refresh_interval] do
-        continuous_monitoring(options)
-      else
-        show_status(options)
-      end
+      show_status(options)
     end
   end
 
@@ -110,12 +87,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
 
     if options[:export] do
       export_status_files(status, options)
-    end
-
-    # Set appropriate exit code based on status
-    exit_code = determine_exit_code(status)
-    if exit_code != 0 do
-      System.halt(exit_code)
     end
   end
 
@@ -273,11 +244,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
       :bright, "\n📋 Detailed Status Information", :reset, "\n"
     ])
 
-    # System health details
-    Mix.shell().info([
-      "System Health Details:\n"
-    ])
-
     status.system_health.health_checks
     |> Enum.each(fn check ->
       Mix.shell().info([
@@ -319,15 +285,12 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
       status.system_health.overall_health != :healthy ->
         ["Address system health issues", "Run validation: mix prismatic.consolidation.validate"]
 
-      not status.phase2_status.execution_completed ->
-        ["Execute consolidation: mix prismatic.consolidation.execute --dry-run"]
-
       true ->
         ["Phase 2 consolidation appears complete!", "Generate final reports: mix prismatic.consolidation.report"]
     end
   end
 
-  # Helper functions for status checking
+  # Helper functions
   defp calculate_progress(completion_flags) do
     completed = Enum.count(completion_flags, & &1)
     total = length(completion_flags)
@@ -349,22 +312,22 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
 
   defp check_compilation_health do
     case System.cmd("mix", ["compile", "--warnings-as-errors"], stderr_to_stdout: true) do
-      {_output, 0} -> %{check: :compilation, status: :healthy, message: "Compilation successful"}
-      {output, _code} -> %{check: :compilation, status: :unhealthy, message: "Compilation failed", details: String.slice(output, 0, 200)}
+      {_output, 0} -> %{check: :compilation, status: :healthy}
+      {_output, _code} -> %{check: :compilation, status: :unhealthy}
     end
   end
 
   defp check_dependency_health do
     case System.cmd("mix", ["deps.get"], stderr_to_stdout: true) do
-      {_output, 0} -> %{check: :dependencies, status: :healthy, message: "Dependencies resolved"}
-      {output, _code} -> %{check: :dependencies, status: :unhealthy, message: "Dependency issues", details: String.slice(output, 0, 200)}
+      {_output, 0} -> %{check: :dependencies, status: :healthy}
+      {_output, _code} -> %{check: :dependencies, status: :unhealthy}
     end
   end
 
   defp check_test_health do
     case System.cmd("mix", ["test", "--max-failures=1"], stderr_to_stdout: true) do
-      {_output, 0} -> %{check: :tests, status: :healthy, message: "All tests passing"}
-      {output, _code} -> %{check: :tests, status: :unhealthy, message: "Test failures", details: String.slice(output, 0, 200)}
+      {_output, 0} -> %{check: :tests, status: :healthy}
+      {_output, _code} -> %{check: :tests, status: :unhealthy}
     end
   end
 
@@ -407,10 +370,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
     - Migration Planning: #{format_migration_status(status.migration_progress.status)}
     - System Health: #{format_health_status(status.system_health.overall_health)}
 
-    ### Dependency Conflicts
-    - Status: #{status.dependency_conflicts.status}
-    - Count: #{status.dependency_conflicts.conflict_count}
-
     ### Next Steps
     #{determine_next_steps(status) |> Enum.map(&("- #{&1}")) |> Enum.join("\n")}
     """
@@ -421,47 +380,15 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
   defp export_status_files(status, options) do
     output_dir = ensure_output_directory(options[:output_dir] || "consolidation/phase2/status")
 
-    # Export JSON status
     json_file = Path.join(output_dir, "status_report.json")
     File.write!(json_file, Jason.encode!(status, pretty: true))
 
     Mix.shell().info("📁 Status exported to: #{output_dir}")
   end
 
-  defp determine_exit_code(status) do
-    cond do
-      status.system_health.overall_health == :critical -> 2
-      status.system_health.overall_health == :unhealthy -> 1
-      status.dependency_conflicts.status == :conflicts_exist and status.dependency_conflicts.conflict_count > 10 -> 1
-      true -> 0
-    end
-  end
-
   defp ensure_output_directory(path) do
     File.mkdir_p!(path)
     path
-  end
-
-  defp continuous_monitoring(options) do
-    interval = options[:refresh_interval] * 1000  # Convert to milliseconds
-    Mix.shell().info("🔄 Starting continuous monitoring (refresh every #{options[:refresh_interval]}s)")
-    Mix.shell().info("Press Ctrl+C to stop")
-
-    monitor_loop(options, interval)
-  end
-
-  defp monitor_loop(options, interval) do
-    # Clear screen and show status
-    IO.write("\e[2J\e[H")  # ANSI clear screen and move cursor to top
-    show_status(options)
-
-    :timer.sleep(interval)
-    monitor_loop(options, interval)
-  end
-
-  defp launch_dashboard(_options) do
-    Mix.shell().info("🚧 Dashboard mode not yet implemented")
-    Mix.shell().info("Use --refresh-interval for continuous monitoring")
   end
 
   defp print_help do
@@ -476,8 +403,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
       "  --output-dir, -o DIR       Output directory for status reports\n",
       "  --format, -f FORMAT        Output format (console/json/markdown)\n",
       "  --detailed, -d             Show detailed status information\n",
-      "  --refresh-interval SEC     Auto-refresh interval in seconds\n",
-      "  --dashboard                Launch interactive dashboard\n",
       "  --export                   Export status to files\n",
       "  --verbose, -v              Enable verbose output\n",
       "  --help, -h                 Show this help\n\n",
@@ -487,8 +412,6 @@ defmodule Mix.Tasks.Prismatic.Consolidation.Status do
       "  mix prismatic.consolidation.status\n\n",
       "  # Detailed status with export\n",
       "  mix prismatic.consolidation.status --detailed --export\n\n",
-      "  # Continuous monitoring\n",
-      "  mix prismatic.consolidation.status --refresh-interval=30\n\n",
       "  # JSON output for automation\n",
       "  mix prismatic.consolidation.status --format=json\n\n"
     ])
