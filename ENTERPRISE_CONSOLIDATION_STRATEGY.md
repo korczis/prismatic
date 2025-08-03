@@ -118,7 +118,7 @@ prismatic_umbrella/
 ### AST-Based Analysis Tools
 
 ```elixir
-defmodule PrismaticConsolidation.CodeAnalyzer do
+defmodule Prismatic.Code.Analyzer do
   @moduledoc """
   Comprehensive static analysis for legacy code migration.
   Uses Elixir AST parsing for deep code analysis.
@@ -177,7 +177,7 @@ end
 ### Dependency Graph Visualization
 
 ```elixir
-defmodule PrismaticConsolidation.DependencyMapper do
+defmodule Prismatic.Code.DependencyMapper do
   @moduledoc """
   Creates visual dependency graphs for migration planning.
   """
@@ -246,17 +246,21 @@ echo "✅ Analysis complete. Results in analysis/ directory."
 #### **Phase 1: Schema Inventory & Conflict Detection**
 
 ```elixir
-defmodule PrismaticConsolidation.SchemaAnalyzer do
+defmodule Prismatic.Code.SchemaAnalyzer do
   @moduledoc """
   Analyzes existing schemas across legacy applications
   and identifies conflicts for consolidation.
   """
   
-  def analyze_schemas do
+  def analyze_schemas(project_paths \\ []) do
+    projects = if Enum.empty?(project_paths) do
+      discover_umbrella_apps()
+    else
+      project_paths
+    end
+    
     %{
-      legacy_schemas: extract_schemas("../prismatic-legacy"),
-      old_schemas: extract_schemas("../prismatic-old"),
-      current_schemas: extract_schemas("./apps/prismatic/priv/repo/migrations"),
+      analyzed_projects: Enum.map(projects, &extract_schemas/1),
       conflicts: detect_schema_conflicts(),
       consolidation_plan: generate_consolidation_plan()
     }
@@ -285,7 +289,7 @@ end
 #### **Phase 2: Blue-Green Database Migration**
 
 ```elixir
-defmodule PrismaticConsolidation.BlueGreenMigration do
+defmodule Prismatic.Code.BlueGreenMigration do
   @moduledoc """
   Implements zero-downtime database migration using Blue-Green deployment.
   """

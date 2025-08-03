@@ -1,0 +1,1309 @@
+{
+  "metadata": {
+    "analysis_config": {
+      "scope": "project",
+      "format": "json",
+      "depth": "deep",
+      "target": "project: /Users/korczis/dev/prismatic-old",
+      "include_hotspots": true,
+      "exclude_patterns": []
+    },
+    "analysis_timestamp": "2025-08-03T07:41:17.446492Z",
+    "analyzer_version": "0.1.0"
+  },
+  "projects": [
+    {
+      "name": "prismatic-old",
+      "type": "external_project",
+      "path": "/Users/korczis/dev/prismatic-old",
+      "modules": [
+        {
+          "exports": [],
+          "name": "Prismatic",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [],
+          "dependencies": [],
+          "line_count": 10,
+          "complexity_score": 0,
+          "module_attributes": [
+            {
+              "name": "moduledoc",
+              "value": "Prismatic keeps the contexts that define your domain\nand business logic.\n\nContexts are also responsible for managing your data, regardless\nif it comes from the database, an external API or others.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [
+            {
+              "arity": 3,
+              "line": 16,
+              "name": "handle_call",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 12,
+              "name": "get_state",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 8,
+              "name": "init",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 4,
+              "name": "start_link",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "Prismatic.Agents.BasicAgent",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "GenServer"
+          ],
+          "dependencies": [
+            "GenServer"
+          ],
+          "line_count": 20,
+          "complexity_score": 4,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic/agents/basic_agent.ex",
+          "function_count": 4
+        },
+        {
+          "exports": [
+            {
+              "arity": 3,
+              "line": 32,
+              "name": "config_change",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 2,
+              "line": 9,
+              "name": "start",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "Prismatic.Application",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "Application"
+          ],
+          "dependencies": [
+            "Application"
+          ],
+          "line_count": 37,
+          "complexity_score": 2,
+          "module_attributes": [
+            {
+              "name": "impl",
+              "value": true
+            },
+            {
+              "name": "impl",
+              "value": true
+            },
+            {
+              "name": "moduledoc",
+              "value": false
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic/application.ex",
+          "function_count": 2
+        },
+        {
+          "exports": [
+            {
+              "arity": 3,
+              "line": 22,
+              "name": "handle_call",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 3,
+              "line": 18,
+              "name": "handle_call",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 16,
+              "name": "init",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 12,
+              "name": "read",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 2,
+              "line": 8,
+              "name": "write",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 4,
+              "name": "start_link",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "Prismatic.Blackboard",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "GenServer"
+          ],
+          "dependencies": [
+            "GenServer"
+          ],
+          "line_count": 27,
+          "complexity_score": 6,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic/blackboard.ex",
+          "function_count": 6
+        },
+        {
+          "exports": [
+            {
+              "arity": 1,
+              "line": 51,
+              "name": "errors_on",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 38,
+              "name": "setup_sandbox",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "Prismatic.DataCase",
+          "behaviours": [],
+          "aliases": [
+            {
+              "module": "Prismatic.Repo",
+              "as": null
+            }
+          ],
+          "documentation": null,
+          "imports": [
+            "Prismatic.DataCase",
+            "Ecto.Query",
+            "Ecto.Changeset",
+            "Ecto"
+          ],
+          "requires": [],
+          "uses": [
+            "ExUnit.CaseTemplate"
+          ],
+          "dependencies": [
+            "Prismatic.DataCase",
+            "Ecto.Query",
+            "Ecto.Changeset",
+            "Ecto",
+            "ExUnit.CaseTemplate",
+            "Prismatic.Repo"
+          ],
+          "line_count": 59,
+          "complexity_score": 2,
+          "module_attributes": [
+            {
+              "name": "doc",
+              "value": "A helper that transforms changeset errors into a map of messages.\n\n    assert {:error, changeset} = Accounts.create_user(%{password: \"short\"})\n    assert \"password is too short\" in errors_on(changeset).password\n    assert %{password: [\"password is too short\"]} = errors_on(changeset)\n\n"
+            },
+            {
+              "name": "doc",
+              "value": "Sets up the sandbox based on the test tags.\n"
+            },
+            {
+              "name": "moduledoc",
+              "value": "This module defines the setup for tests requiring\naccess to the application's data layer.\n\nYou may define functions here to be used as helpers in\nyour tests.\n\nFinally, if the test case interacts with the database,\nwe enable the SQL sandbox, so changes done to the database\nare reverted at the end of every test. If you are using\nPostgreSQL, you can even run database tests asynchronously\nby setting `use Prismatic.DataCase, async: true`, although\nthis option is not recommended for other databases.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/test/support/data_case.ex",
+          "function_count": 2
+        },
+        {
+          "exports": [],
+          "name": "Prismatic.Mailer",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "Swoosh.Mailer"
+          ],
+          "dependencies": [
+            "Swoosh.Mailer"
+          ],
+          "line_count": 4,
+          "complexity_score": 0,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic/mailer.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [],
+          "name": "Prismatic.Repo",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "Ecto.Repo"
+          ],
+          "dependencies": [
+            "Ecto.Repo"
+          ],
+          "line_count": 6,
+          "complexity_score": 0,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic/repo.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [
+            {
+              "arity": 2,
+              "line": 2,
+              "name": "respond_with_personality",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "Prismatic.Traits",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [],
+          "dependencies": [],
+          "line_count": 12,
+          "complexity_score": 1,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic/traits.ex",
+          "function_count": 1
+        },
+        {
+          "exports": [
+            {
+              "arity": 0,
+              "line": 98,
+              "name": "verified_routes",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 82,
+              "name": "html_helpers",
+              "type": "private",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 69,
+              "name": "html",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 61,
+              "name": "live_component",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 52,
+              "name": "live_view",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 39,
+              "name": "controller",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 33,
+              "name": "channel",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 22,
+              "name": "router",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 20,
+              "name": "static_paths",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "PrismaticWeb",
+          "behaviours": [],
+          "aliases": [
+            {
+              "module": "Phoenix.LiveView.JS",
+              "as": null
+            }
+          ],
+          "documentation": null,
+          "imports": [
+            "PrismaticWeb.Gettext",
+            "PrismaticWeb.CoreComponents",
+            "Phoenix.HTML",
+            "Phoenix.Controller",
+            "PrismaticWeb.Gettext",
+            "Plug.Conn",
+            "Phoenix.LiveView.Router",
+            "Phoenix.Controller",
+            "Plug.Conn"
+          ],
+          "requires": [],
+          "uses": [
+            "Phoenix.VerifiedRoutes",
+            "Phoenix.Component",
+            "Phoenix.LiveComponent",
+            "Phoenix.LiveView",
+            "Phoenix.Controller",
+            "Phoenix.Channel",
+            "Phoenix.Router"
+          ],
+          "dependencies": [
+            "PrismaticWeb.Gettext",
+            "PrismaticWeb.CoreComponents",
+            "Phoenix.HTML",
+            "Phoenix.Controller",
+            "Plug.Conn",
+            "Phoenix.LiveView.Router",
+            "Phoenix.VerifiedRoutes",
+            "Phoenix.Component",
+            "Phoenix.LiveComponent",
+            "Phoenix.LiveView",
+            "Phoenix.Channel",
+            "Phoenix.Router",
+            "Phoenix.LiveView.JS"
+          ],
+          "line_count": 114,
+          "complexity_score": 9,
+          "module_attributes": [
+            {
+              "name": "doc",
+              "value": "When used, dispatch to the appropriate controller/live_view/etc.\n"
+            },
+            {
+              "name": "moduledoc",
+              "value": "The entrypoint for defining your web interface, such\nas controllers, components, channels, and so on.\n\nThis can be used in your application as:\n\n    use PrismaticWeb, :controller\n    use PrismaticWeb, :html\n\nThe definitions below will be executed for every controller,\ncomponent, etc, so keep them short and clean, focused\non imports, uses and aliases.\n\nDo NOT define functions inside the quoted expressions\nbelow. Instead, define additional modules and import\nthose modules here.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web.ex",
+          "function_count": 9
+        },
+        {
+          "exports": [],
+          "name": "PrismaticWeb.ConnCase",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [
+            "PrismaticWeb.ConnCase",
+            "Phoenix.ConnTest",
+            "Plug.Conn"
+          ],
+          "requires": [],
+          "uses": [
+            "PrismaticWeb",
+            "ExUnit.CaseTemplate"
+          ],
+          "dependencies": [
+            "PrismaticWeb.ConnCase",
+            "Phoenix.ConnTest",
+            "Plug.Conn",
+            "PrismaticWeb",
+            "ExUnit.CaseTemplate"
+          ],
+          "line_count": 39,
+          "complexity_score": 0,
+          "module_attributes": [
+            {
+              "name": "endpoint",
+              "value": {
+                "module": "PrismaticWeb.Endpoint"
+              }
+            },
+            {
+              "name": "moduledoc",
+              "value": "This module defines the test case to be used by\ntests that require setting up a connection.\n\nSuch tests rely on `Phoenix.ConnTest` and also\nimport other functionality to make it easier\nto build common data structures and query the data layer.\n\nFinally, if the test case interacts with the database,\nwe enable the SQL sandbox, so changes done to the database\nare reverted at the end of every test. If you are using\nPostgreSQL, you can even run database tests asynchronously\nby setting `use PrismaticWeb.ConnCase, async: true`, although\nthis option is not recommended for other databases.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/test/support/conn_case.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [
+            {
+              "arity": 2,
+              "line": 673,
+              "name": "when",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 652,
+              "name": "translate_error",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 2,
+              "line": 637,
+              "name": "hide_modal",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 2,
+              "line": 624,
+              "name": "when",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 2,
+              "line": 613,
+              "name": "hide",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 2,
+              "line": 602,
+              "name": "show",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 594,
+              "name": "icon",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 559,
+              "name": "back",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 536,
+              "name": "list",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 469,
+              "name": "table",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 428,
+              "name": "header",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 410,
+              "name": "error",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 397,
+              "name": "label",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 370,
+              "name": "input",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 350,
+              "name": "input",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 331,
+              "name": "input",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 305,
+              "name": "input",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 294,
+              "name": "input",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 229,
+              "name": "button",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 202,
+              "name": "simple_form",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 147,
+              "name": "flash_group",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 108,
+              "name": "flash",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 44,
+              "name": "modal",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "PrismaticWeb.CoreComponents",
+          "behaviours": [],
+          "aliases": [
+            {
+              "module": "Phoenix.LiveView.JS",
+              "as": null
+            }
+          ],
+          "documentation": null,
+          "imports": [
+            "PrismaticWeb.Gettext"
+          ],
+          "requires": [],
+          "uses": [
+            "Phoenix.Component"
+          ],
+          "dependencies": [
+            "PrismaticWeb.Gettext",
+            "Phoenix.Component",
+            "Phoenix.LiveView.JS"
+          ],
+          "line_count": 677,
+          "complexity_score": 23,
+          "module_attributes": [
+            {
+              "name": "doc",
+              "value": "Translates the errors for a field from a keyword list of errors.\n"
+            },
+            {
+              "name": "doc",
+              "value": "Translates an error message using gettext.\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a [Heroicon](https://heroicons.com).\n\nHeroicons come in three styles – outline, solid, and mini.\nBy default, the outline style is used, but solid and mini may\nbe applied by using the `-solid` and `-mini` suffix.\n\nYou can customize the size and colors of the icons by setting\nwidth, height, and background color classes.\n\nIcons are extracted from the `deps/heroicons` directory and bundled within\nyour compiled app.css by the plugin in your `assets/tailwind.config.js`.\n\n## Examples\n\n    <.icon name=\"hero-x-mark-solid\" />\n    <.icon name=\"hero-arrow-path\" class=\"ml-1 w-3 h-3 animate-spin\" />\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a back navigation link.\n\n## Examples\n\n    <.back navigate={~p\"/posts\"}>Back to posts</.back>\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a data list.\n\n## Examples\n\n    <.list>\n      <:item title=\"Title\"><%= @post.title %></:item>\n      <:item title=\"Views\"><%= @post.views %></:item>\n    </.list>\n"
+            },
+            {
+              "name": "doc",
+              "value": {
+                "function_call": {
+                  "args": [
+                    {
+                      "function_call": {
+                        "args": [
+                          "Renders a table with generic styling.\n\n## Examples\n\n    <.table id=\"users\" rows={@users}>\n      <:col :let={user} label=\"id\"><%= user.id %></:col>\n      <:col :let={user} label=\"username\"><%= user.username %></:col>\n    </.table>\n"
+                        ],
+                        "name": "<<>>"
+                      }
+                    },
+                    []
+                  ],
+                  "name": "sigil_S"
+                }
+              }
+            },
+            {
+              "name": "doc",
+              "value": "Renders a header with title.\n"
+            },
+            {
+              "name": "doc",
+              "value": "Generates a generic error message.\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a label.\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders an input with label and error messages.\n\nA `Phoenix.HTML.FormField` may be passed as argument,\nwhich is used to retrieve the input name, id, and values.\nOtherwise all attributes may be passed explicitly.\n\n## Types\n\nThis function accepts all HTML input types, considering that:\n\n  * You may also set `type=\"select\"` to render a `<select>` tag\n\n  * `type=\"checkbox\"` is used exclusively to render boolean values\n\n  * For live file uploads, see `Phoenix.Component.live_file_input/1`\n\nSee https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input\nfor more information. Unsupported types, such as hidden and radio,\nare best written directly in your templates.\n\n## Examples\n\n    <.input field={@form[:email]} type=\"email\" />\n    <.input name=\"my-input\" errors={[\"oh no!\"]} />\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a button.\n\n## Examples\n\n    <.button>Send!</.button>\n    <.button phx-click=\"go\" class=\"ml-2\">Send!</.button>\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a simple form.\n\n## Examples\n\n    <.simple_form for={@form} phx-change=\"validate\" phx-submit=\"save\">\n      <.input field={@form[:email]} label=\"Email\"/>\n      <.input field={@form[:username]} label=\"Username\" />\n      <:actions>\n        <.button>Save</.button>\n      </:actions>\n    </.simple_form>\n"
+            },
+            {
+              "name": "doc",
+              "value": "Shows the flash group with standard titles and content.\n\n## Examples\n\n    <.flash_group flash={@flash} />\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders flash notices.\n\n## Examples\n\n    <.flash kind={:info} flash={@flash} />\n    <.flash kind={:info} phx-mounted={show(\"#flash\")}>Welcome Back!</.flash>\n"
+            },
+            {
+              "name": "doc",
+              "value": "Renders a modal.\n\n## Examples\n\n    <.modal id=\"confirm-modal\">\n      This is a modal.\n    </.modal>\n\nJS commands may be passed to the `:on_cancel` to configure\nthe closing/cancel event, for example:\n\n    <.modal id=\"confirm\" on_cancel={JS.navigate(~p\"/posts\")}>\n      This is another modal.\n    </.modal>\n\n"
+            },
+            {
+              "name": "moduledoc",
+              "value": "Provides core UI components.\n\nAt first glance, this module may seem daunting, but its goal is to provide\ncore building blocks for your application, such as modals, tables, and\nforms. The components consist mostly of markup and are well-documented\nwith doc strings and declarative assigns. You may customize and style\nthem in any way you want, based on your application growth and needs.\n\nThe default components use Tailwind CSS, a utility-first CSS framework.\nSee the [Tailwind CSS documentation](https://tailwindcss.com) to learn\nhow to customize them or feel free to swap in another framework altogether.\n\nIcons are provided by [heroicons](https://heroicons.com). See `icon/1` for usage.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/components/core_components.ex",
+          "function_count": 23
+        },
+        {
+          "exports": [],
+          "name": "PrismaticWeb.Endpoint",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "Phoenix.Endpoint"
+          ],
+          "dependencies": [
+            "Phoenix.Endpoint"
+          ],
+          "line_count": 54,
+          "complexity_score": 0,
+          "module_attributes": [
+            {
+              "name": "session_options",
+              "value": [
+                {
+                  "tuple": [
+                    "store",
+                    "cookie"
+                  ]
+                },
+                {
+                  "tuple": [
+                    "key",
+                    "_prismatic_key"
+                  ]
+                },
+                {
+                  "tuple": [
+                    "signing_salt",
+                    "7g3uAy8s"
+                  ]
+                },
+                {
+                  "tuple": [
+                    "same_site",
+                    "Lax"
+                  ]
+                }
+              ]
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/endpoint.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [
+            {
+              "arity": 2,
+              "line": 21,
+              "name": "render",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "PrismaticWeb.ErrorHTML",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "PrismaticWeb"
+          ],
+          "dependencies": [
+            "PrismaticWeb"
+          ],
+          "line_count": 25,
+          "complexity_score": 1,
+          "module_attributes": [
+            {
+              "name": "moduledoc",
+              "value": "This module is invoked by your endpoint in case of errors on HTML requests.\n\nSee config/config.exs.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/controllers/error_html.ex",
+          "function_count": 1
+        },
+        {
+          "exports": [
+            {
+              "arity": 2,
+              "line": 18,
+              "name": "render",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "PrismaticWeb.ErrorJSON",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [],
+          "dependencies": [],
+          "line_count": 22,
+          "complexity_score": 1,
+          "module_attributes": [
+            {
+              "name": "moduledoc",
+              "value": "This module is invoked by your endpoint in case of errors on JSON requests.\n\nSee config/config.exs.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/controllers/error_json.ex",
+          "function_count": 1
+        },
+        {
+          "exports": [],
+          "name": "PrismaticWeb.Gettext",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "Gettext"
+          ],
+          "dependencies": [
+            "Gettext"
+          ],
+          "line_count": 25,
+          "complexity_score": 0,
+          "module_attributes": [
+            {
+              "name": "moduledoc",
+              "value": "A module providing Internationalization with a gettext-based API.\n\nBy using [Gettext](https://hexdocs.pm/gettext),\nyour module gains a set of macros for translations, for example:\n\n    import PrismaticWeb.Gettext\n\n    # Simple translation\n    gettext(\"Here is the string to translate\")\n\n    # Plural translation\n    ngettext(\"Here is the string to translate\",\n             \"Here are the strings to translate\",\n             3)\n\n    # Domain-based translation\n    dgettext(\"errors\", \"Here is the error message to translate\")\n\nSee the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/gettext.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [],
+          "name": "PrismaticWeb.Layouts",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "PrismaticWeb"
+          ],
+          "dependencies": [
+            "PrismaticWeb"
+          ],
+          "line_count": 15,
+          "complexity_score": 0,
+          "module_attributes": [
+            {
+              "name": "moduledoc",
+              "value": "This module holds different layouts used by your application.\n\nSee the `layouts` directory for all templates available.\nThe \"root\" layout is a skeleton rendered as part of the\napplication router. The \"app\" layout is set as the default\nlayout on both `use PrismaticWeb, :controller` and\n`use PrismaticWeb, :live_view`.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/components/layouts.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [
+            {
+              "arity": 2,
+              "line": 4,
+              "name": "home",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "PrismaticWeb.PageController",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "PrismaticWeb"
+          ],
+          "dependencies": [
+            "PrismaticWeb"
+          ],
+          "line_count": 10,
+          "complexity_score": 1,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/controllers/page_controller.ex",
+          "function_count": 1
+        },
+        {
+          "exports": [],
+          "name": "PrismaticWeb.PageHTML",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [],
+          "requires": [],
+          "uses": [
+            "PrismaticWeb"
+          ],
+          "dependencies": [
+            "PrismaticWeb"
+          ],
+          "line_count": 11,
+          "complexity_score": 0,
+          "module_attributes": [
+            {
+              "name": "moduledoc",
+              "value": "This module contains pages rendered by PageController.\n\nSee the `page_html` directory for all templates available.\n"
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/controllers/page_html.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [],
+          "name": "PrismaticWeb.Router",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [
+            "Phoenix.LiveDashboard.Router"
+          ],
+          "requires": [],
+          "uses": [
+            "PrismaticWeb"
+          ],
+          "dependencies": [
+            "Phoenix.LiveDashboard.Router",
+            "PrismaticWeb"
+          ],
+          "line_count": 45,
+          "complexity_score": 0,
+          "module_attributes": [],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/router.ex",
+          "function_count": 0
+        },
+        {
+          "exports": [
+            {
+              "arity": 0,
+              "line": 85,
+              "name": "periodic_measurements",
+              "type": "private",
+              "complexity": 1
+            },
+            {
+              "arity": 0,
+              "line": 22,
+              "name": "metrics",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 10,
+              "name": "init",
+              "type": "public",
+              "complexity": 1
+            },
+            {
+              "arity": 1,
+              "line": 5,
+              "name": "start_link",
+              "type": "public",
+              "complexity": 1
+            }
+          ],
+          "name": "PrismaticWeb.Telemetry",
+          "behaviours": [],
+          "aliases": [],
+          "documentation": null,
+          "imports": [
+            "Telemetry.Metrics"
+          ],
+          "requires": [],
+          "uses": [
+            "Supervisor"
+          ],
+          "dependencies": [
+            "Telemetry.Metrics",
+            "Supervisor"
+          ],
+          "line_count": 93,
+          "complexity_score": 4,
+          "module_attributes": [
+            {
+              "name": "impl",
+              "value": true
+            }
+          ],
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/telemetry.ex",
+          "function_count": 4
+        }
+      ],
+      "test_coverage": {
+        "coverage_percentage": 75.0,
+        "total_test_files": 3,
+        "missing_tests": [],
+        "recommendations": [
+          "Increase overall test coverage",
+          "Add integration tests for critical paths",
+          "Implement property-based testing for complex logic"
+        ],
+        "critical_path_coverage": {
+          "total": 0,
+          "covered": 0,
+          "percentage": 0.0
+        },
+        "test_patterns": {
+          "integration_tests": 0,
+          "property_tests": 0,
+          "unit_tests": 0
+        }
+      },
+      "dependencies": {
+        "outdated": [],
+        "conflicts": [],
+        "dev_dependencies": [],
+        "direct_dependencies": [],
+        "locked_dependencies": [
+          {
+            "name": "decimal",
+            "version": "unknown"
+          },
+          {
+            "name": "bandit",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_template",
+            "version": "unknown"
+          },
+          {
+            "name": "nimble_options",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_pubsub",
+            "version": "unknown"
+          },
+          {
+            "name": "postgrex",
+            "version": "unknown"
+          },
+          {
+            "name": "dns_cluster",
+            "version": "unknown"
+          },
+          {
+            "name": "mint",
+            "version": "unknown"
+          },
+          {
+            "name": "telemetry_poller",
+            "version": "unknown"
+          },
+          {
+            "name": "jason",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_live_view",
+            "version": "unknown"
+          },
+          {
+            "name": "thousand_island",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_ecto",
+            "version": "unknown"
+          },
+          {
+            "name": "websock",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_live_reload",
+            "version": "unknown"
+          },
+          {
+            "name": "expo",
+            "version": "unknown"
+          },
+          {
+            "name": "hpax",
+            "version": "unknown"
+          },
+          {
+            "name": "esbuild",
+            "version": "unknown"
+          },
+          {
+            "name": "plug",
+            "version": "unknown"
+          },
+          {
+            "name": "telemetry_metrics",
+            "version": "unknown"
+          },
+          {
+            "name": "file_system",
+            "version": "unknown"
+          },
+          {
+            "name": "telemetry",
+            "version": "unknown"
+          },
+          {
+            "name": "castore",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_live_dashboard",
+            "version": "unknown"
+          },
+          {
+            "name": "plug_crypto",
+            "version": "unknown"
+          },
+          {
+            "name": "nimble_pool",
+            "version": "unknown"
+          },
+          {
+            "name": "swoosh",
+            "version": "unknown"
+          },
+          {
+            "name": "ecto_sql",
+            "version": "unknown"
+          },
+          {
+            "name": "mime",
+            "version": "unknown"
+          },
+          {
+            "name": "gettext",
+            "version": "unknown"
+          },
+          {
+            "name": "floki",
+            "version": "unknown"
+          },
+          {
+            "name": "tailwind",
+            "version": "unknown"
+          },
+          {
+            "name": "heroicons",
+            "version": "unknown"
+          },
+          {
+            "name": "websock_adapter",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix_html",
+            "version": "unknown"
+          },
+          {
+            "name": "phoenix",
+            "version": "unknown"
+          },
+          {
+            "name": "finch",
+            "version": "unknown"
+          },
+          {
+            "name": "ecto",
+            "version": "unknown"
+          },
+          {
+            "name": "db_connection",
+            "version": "unknown"
+          }
+        ],
+        "prod_dependencies": [],
+        "total_count": 39
+      },
+      "overview": {
+        "analysis_timestamp": "2025-08-03T07:41:17.443045Z",
+        "total_modules": 20,
+        "total_dependencies": 39,
+        "total_schemas": 0,
+        "total_endpoints": 0,
+        "largest_module": {
+          "name": "PrismaticWeb.CoreComponents",
+          "line_count": 677
+        },
+        "most_complex_module": {
+          "name": "PrismaticWeb.CoreComponents",
+          "complexity_score": 23
+        },
+        "total_files": 20
+      },
+      "technical_debt": {
+        "overall_score": 12.0,
+        "complexity_issues": [
+          {
+            "module": "PrismaticWeb.CoreComponents",
+            "score": 23
+          }
+        ],
+        "todo_comments": [],
+        "recommendations": [
+          "Improve code documentation coverage",
+          "Refactor complex functions",
+          "Address TODO/FIXME comments",
+          "Implement automated code quality checks"
+        ],
+        "documentation_issues": {
+          "total_modules": 20,
+          "coverage_percentage": 0.0,
+          "documented_modules": 0
+        },
+        "code_smells": []
+      },
+      "performance_hotspots": [
+        {
+          "module": "PrismaticWeb.CoreComponents",
+          "issue": "large_module",
+          "recommendation": "Consider breaking this module into smaller, more focused modules",
+          "file_path": "/Users/korczis/dev/prismatic-old/lib/prismatic_web/components/core_components.ex"
+        }
+      ],
+      "endpoints": [],
+      "schemas": []
+    }
+  ],
+  "summary": {
+    "total_modules": 20,
+    "total_dependencies": 39,
+    "total_schemas": 0,
+    "total_endpoints": 0,
+    "avg_technical_debt": 12.0,
+    "avg_test_coverage": 75.0,
+    "projects_by_type": {
+      "external_project": 1
+    },
+    "total_projects": 1
+  }
+}

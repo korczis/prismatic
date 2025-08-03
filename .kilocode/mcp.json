@@ -6,6 +6,9 @@
         "-y",
         "@modelcontextprotocol/server-filesystem",
         "/Users/korczis/dev/prismatic"
+      ],
+      "alwaysAllow": [
+        "read_text_file"
       ]
     },
     "sequentialthinking": {

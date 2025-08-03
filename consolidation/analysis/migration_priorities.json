@@ -1,0 +1,230 @@
+{
+  "metadata": {
+    "generated_at": "2025-08-03T07:38:00Z",
+    "analyzer_version": "0.1.0",
+    "analysis_source": "baseline_analysis.json",
+    "priority_algorithm": "weighted_technical_debt_matrix"
+  },
+  "priority_matrix": {
+    "high_priority": [
+      {
+        "component": "prismatic_core",
+        "type": "umbrella_app",
+        "priority_score": 95,
+        "technical_debt": 111.5,
+        "performance_hotspots": 43,
+        "modules": 51,
+        "complexity_issues": "high",
+        "migration_effort": "high",
+        "business_impact": "critical",
+        "dependencies": "needs_investigation",
+        "migration_phase": "phase_2_priority",
+        "recommendations": [
+          "Break down large modules with >500 lines",
+          "Address 43 performance hotspots immediately",
+          "Refactor high complexity modules first",
+          "Implement comprehensive testing before migration",
+          "Consider gradual module-by-module migration"
+        ],
+        "risk_factors": [
+          "High technical debt may introduce migration bugs",
+          "43 hotspots indicate complex interdependencies",
+          "Large codebase requires careful planning"
+        ]
+      }
+    ],
+    "medium_priority": [],
+    "low_priority": [
+      {
+        "component": "prismatic_web",
+        "type": "umbrella_app",
+        "priority_score": 25,
+        "technical_debt": 12.0,
+        "performance_hotspots": 1,
+        "modules": 13,
+        "complexity_issues": "low",
+        "migration_effort": "low",
+        "business_impact": "moderate",
+        "dependencies": "needs_investigation",
+        "migration_phase": "phase_3_or_4",
+        "recommendations": [
+          "Minimal refactoring required",
+          "Can be migrated after core stabilization",
+          "Good candidate for testing migration patterns",
+          "Address single performance hotspot"
+        ],
+        "risk_factors": [
+          "Low technical debt reduces migration risk",
+          "Smaller codebase easier to validate"
+        ]
+      }
+    ]
+  },
+  "migration_sequence": {
+    "phase_1_foundation": {
+      "priority": 1,
+      "focus": "Analysis and tooling preparation",
+      "components": [
+        "all"
+      ],
+      "deliverables": [
+        "Complete legacy codebase analysis",
+        "Set up development environment",
+        "Create migration tooling framework",
+        "Generate dependency conflict resolution plan"
+      ],
+      "status": "in_progress",
+      "completion_percentage": 45
+    },
+    "phase_2_core_refactoring": {
+      "priority": 2,
+      "focus": "prismatic_core technical debt reduction",
+      "components": [
+        "prismatic_core"
+      ],
+      "deliverables": [
+        "Refactor 43 performance hotspots",
+        "Break down large modules",
+        "Reduce technical debt below 50",
+        "Implement comprehensive testing"
+      ],
+      "status": "pending",
+      "estimated_effort": "high",
+      "dependencies": [
+        "phase_1_foundation"
+      ]
+    },
+    "phase_3_infrastructure": {
+      "priority": 3,
+      "focus": "Core infrastructure migration",
+      "components": [
+        "prismatic_core"
+      ],
+      "deliverables": [
+        "Migrate core business logic",
+        "Consolidate schemas and dependencies",
+        "Implement unified data access patterns"
+      ],
+      "status": "pending",
+      "dependencies": [
+        "phase_2_core_refactoring"
+      ]
+    },
+    "phase_4_web_migration": {
+      "priority": 4,
+      "focus": "Web application consolidation",
+      "components": [
+        "prismatic_web"
+      ],
+      "deliverables": [
+        "Migrate web components",
+        "Consolidate routes and controllers",
+        "Update authentication integration"
+      ],
+      "status": "pending",
+      "dependencies": [
+        "phase_3_infrastructure"
+      ]
+    }
+  },
+  "technical_debt_analysis": {
+    "critical_modules": [
+      {
+        "name": "Unknown_High_Complexity",
+        "estimated_complexity": 89,
+        "file_path": "apps/prismatic/lib/**/*.ex",
+        "priority": "immediate",
+        "effort": "high",
+        "recommendations": [
+          "Break into smaller functions",
+          "Extract business logic into separate modules",
+          "Add comprehensive documentation",
+          "Implement unit tests for each function"
+        ]
+      }
+    ],
+    "performance_hotspots": {
+      "prismatic_core": {
+        "count": 43,
+        "severity": "high",
+        "impact": "performance_degradation",
+        "action_required": "immediate_refactoring"
+      },
+      "prismatic_web": {
+        "count": 1,
+        "severity": "low",
+        "impact": "minimal",
+        "action_required": "scheduled_optimization"
+      }
+    }
+  },
+  "dependency_analysis": {
+    "status": "needs_investigation",
+    "issues": [
+      "Dependency parsing returned 0 dependencies (configuration issue)",
+      "Mix.exs and mix.lock parsing requires debugging",
+      "Transitive dependency analysis pending"
+    ],
+    "next_steps": [
+      "Debug dependency parsing logic",
+      "Manual review of mix.exs files",
+      "Validate mix.lock parsing",
+      "Generate comprehensive dependency matrix"
+    ]
+  },
+  "migration_automation": {
+    "tooling_priority": [
+      {
+        "tool": "dependency_resolver",
+        "priority": "critical",
+        "reason": "Dependency conflicts block migration progress"
+      },
+      {
+        "tool": "module_migrator",
+        "priority": "high",
+        "reason": "51 modules require systematic migration"
+      },
+      {
+        "tool": "schema_merger",
+        "priority": "medium",
+        "reason": "No schemas detected, may need configuration"
+      },
+      {
+        "tool": "code_quality_gates",
+        "priority": "high",
+        "reason": "High technical debt requires quality validation"
+      }
+    ]
+  },
+  "success_metrics": {
+    "technical_debt_reduction": {
+      "current": 123.5,
+      "target": 30.0,
+      "reduction_percentage": 76
+    },
+    "performance_hotspots": {
+      "current": 44,
+      "target": 5,
+      "reduction_percentage": 89
+    },
+    "test_coverage": {
+      "current": 75,
+      "target": 90,
+      "improvement_percentage": 20
+    }
+  },
+  "risk_assessment": {
+    "high_risk_factors": [
+      "High technical debt in core application",
+      "43 performance hotspots indicate complex code",
+      "Dependency analysis configuration issues",
+      "Large module count requiring systematic approach"
+    ],
+    "mitigation_strategies": [
+      "Implement comprehensive testing before any migration",
+      "Use gradual migration approach with rollback capabilities",
+      "Address performance hotspots before structural changes",
+      "Establish quality gates for each migration phase"
+    ]
+  }
+}
