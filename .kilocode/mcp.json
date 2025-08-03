@@ -8,7 +8,9 @@
         "/Users/korczis/dev/prismatic"
       ],
       "alwaysAllow": [
-        "read_text_file"
+        "read_text_file",
+        "write_file",
+        "create_directory"
       ]
     },
     "sequentialthinking": {
