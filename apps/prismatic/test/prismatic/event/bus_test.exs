@@ -1,17 +1,11 @@
 defmodule Prismatic.Event.BusTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
 
   alias Prismatic.Event.{Bus, Protocol}
 
-  # Helper to generate unique names for GenServers
-  defp unique_name(base \\ "test_bus") do
-    timestamp = System.unique_integer([:positive])
-    :"#{base}_#{timestamp}"
-  end
-
   describe "start_link/1" do
     test "starts bus with default configuration" do
-      {:ok, pid} = Bus.start_link(name: unique_name("bus_start"))
+      {:ok, pid} = Bus.start_link(name: :test_bus_start)
 
       assert is_pid(pid)
       assert Process.alive?(pid)
@@ -22,11 +16,11 @@ defmodule Prismatic.Event.BusTest do
 
     test "starts bus with custom configuration" do
       {:ok, config} = Protocol.create_config(:test, %{
-        name: unique_name("custom_bus"),
+        name: :custom_bus,
         enable_sourcing: false
       })
 
-      {:ok, pid} = Bus.start_link(name: unique_name("bus_custom"), config: config)
+      {:ok, pid} = Bus.start_link(name: :test_bus_custom, config: config)
 
       assert is_pid(pid)
       assert Process.alive?(pid)
@@ -37,7 +31,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "publish/2" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_publish"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_publish)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end
@@ -83,7 +77,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "subscribe/4" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_subscribe"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_subscribe)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end
@@ -123,7 +117,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "unsubscribe/2" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_unsubscribe"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_unsubscribe)
       handler = fn _event -> :ok end
       {:ok, subscription_id} = Bus.subscribe(bus, "test.*", handler)
 
@@ -144,7 +138,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "list_subscriptions/1" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_list"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_list)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end
@@ -171,12 +165,11 @@ defmodule Prismatic.Event.BusTest do
 
   describe "replay/2" do
     setup do
-      name = unique_name("bus_replay")
       {:ok, config} = Protocol.create_config(:test, %{
-        name: name,
+        name: :test_bus_replay,
         enable_sourcing: true
       })
-      {:ok, bus} = Bus.start_link(name: name, config: config)
+      {:ok, bus} = Bus.start_link(name: :test_bus_replay, config: config)
 
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
@@ -202,12 +195,11 @@ defmodule Prismatic.Event.BusTest do
     end
 
     test "handles sourcing disabled" do
-      name = unique_name("bus_no_sourcing")
       {:ok, config} = Protocol.create_config(:test, %{
-        name: name,
+        name: :test_bus_no_sourcing,
         enable_sourcing: false
       })
-      {:ok, bus} = Bus.start_link(name: name, config: config)
+      {:ok, bus} = Bus.start_link(name: :test_bus_no_sourcing, config: config)
 
       result = Bus.replay(bus, %{})
 
@@ -219,7 +211,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "get_stats/1" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_stats"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_stats)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end
@@ -263,7 +255,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "health_check/1" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_health"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_health)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end
@@ -273,7 +265,7 @@ defmodule Prismatic.Event.BusTest do
     end
 
     test "fails health check for stopped bus" do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_stopped"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_stopped)
       GenServer.stop(bus)
 
       # Health check should fail for stopped process
@@ -284,7 +276,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "integration scenarios" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_integration"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_integration)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end
@@ -408,7 +400,7 @@ defmodule Prismatic.Event.BusTest do
 
   describe "pattern matching integration" do
     setup do
-      {:ok, bus} = Bus.start_link(name: unique_name("bus_patterns"))
+      {:ok, bus} = Bus.start_link(name: :test_bus_patterns)
       on_exit(fn -> GenServer.stop(bus) end)
       %{bus: bus}
     end

@@ -43,7 +43,10 @@ defmodule Prismatic.MixProject do
       {:ecto_psql_extras, "~> 0.8"},
       {:jason, "~> 1.2"},
       {:swoosh, "~> 1.5"},
-      {:finch, "~> 0.13"}
+      {:finch, "~> 0.13"},
+      {:anthropix, "~> 0.5"},
+      {:openai, "~> 0.6"},
+      {:req, "~> 0.4"}
     ]
   end
 

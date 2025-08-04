@@ -1,5 +1,5 @@
 defmodule Prismatic.Event.ProtocolTest do
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
 
   alias Prismatic.Event.Protocol
 
