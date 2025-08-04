@@ -28,7 +28,6 @@ defmodule Prismatic.Memory.Manager do
   use GenServer
   require Logger
 
-  alias Prismatic.Memory.Backend.CircuitBreaker
   alias Prismatic.Memory.Impl.{CachexBackend, MnesiaBackend, NebulexBackend}
   alias Prismatic.Memory.Protocol
 
@@ -38,8 +37,7 @@ defmodule Prismatic.Memory.Manager do
   @type memory_metadata :: map()
   @type manager_state :: %{
     backends: %{memory_type() => module()},
-    configs: %{memory_type() => map()},
-    circuit_breaker: pid()
+    configs: %{memory_type() => map()}
   }
 
   @doc """
@@ -181,9 +179,6 @@ defmodule Prismatic.Memory.Manager do
 
   @impl GenServer
   def init(opts) do
-    # Start circuit breaker
-    {:ok, circuit_breaker} = CircuitBreaker.start_link()
-
     # Default backend configurations
     backends = Keyword.get(opts, :backends, default_backends())
     configs = Keyword.get(opts, :configs, default_configs())
@@ -193,8 +188,7 @@ defmodule Prismatic.Memory.Manager do
       :ok ->
         state = %{
           backends: backends,
-          configs: configs,
-          circuit_breaker: circuit_breaker
+          configs: configs
         }
 
         Logger.info("Memory Manager started with backends: #{inspect(Map.keys(backends))}")

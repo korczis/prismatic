@@ -23,7 +23,7 @@ defmodule Prismatic.MixProject do
   def application do
     [
       mod: {Prismatic.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :os_mon, :tools]
     ]
   end
 
@@ -46,7 +46,10 @@ defmodule Prismatic.MixProject do
       {:finch, "~> 0.13"},
       {:anthropix, "~> 0.5"},
       {:openai, "~> 0.6"},
-      {:req, "~> 0.4"}
+      {:req, "~> 0.4"},
+      {:broadway, "~> 1.0"},
+      {:gen_stage, "~> 1.0"},
+      {:flow, "~> 1.2"}
     ]
   end
 

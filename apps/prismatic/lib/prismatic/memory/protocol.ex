@@ -122,7 +122,6 @@ defmodule Prismatic.Memory.Protocol do
   - `[:prismatic, :memory, :protocol, :circuit_breaker]` - Circuit breaker state changes
   """
 
-  alias Prismatic.Memory.Backend.{CircuitBreaker, RetryLogic}
   alias Prismatic.Memory.Impl.{CachexBackend, LayeredBackend, MnesiaBackend, NebulexBackend, TestBackend}
 
   @typedoc "Memory backend configuration map"
@@ -463,13 +462,8 @@ defmodule Prismatic.Memory.Protocol do
          :ok <- validate_key(key),
          {:ok, backend_module} <- get_backend_module(config.backend_type) do
 
-      # Apply circuit breaker protection
-      CircuitBreaker.call(config.backend_type, fn ->
-        # Apply retry logic
-        RetryLogic.with_retry(fn ->
-          backend_module.store(config, memory_type, key, value)
-        end, RetryLogic.memory_retry_config())
-      end)
+      # Circuit breaker and retry logic are now handled by the shared backend macro
+      backend_module.store(config, memory_type, key, value)
     end
   end
 
@@ -491,11 +485,8 @@ defmodule Prismatic.Memory.Protocol do
          :ok <- validate_key(key),
          {:ok, backend_module} <- get_backend_module(config.backend_type) do
 
-      CircuitBreaker.call(config.backend_type, fn ->
-        RetryLogic.with_retry(fn ->
-          backend_module.retrieve(config, memory_type, key)
-        end, RetryLogic.memory_retry_config())
-      end)
+      # Circuit breaker and retry logic are now handled by the shared backend macro
+      backend_module.retrieve(config, memory_type, key)
     end
   end
 
@@ -514,11 +505,8 @@ defmodule Prismatic.Memory.Protocol do
     with :ok <- validate_config(config),
          {:ok, backend_module} <- get_backend_module(config.backend_type) do
 
-      CircuitBreaker.call(config.backend_type, fn ->
-        RetryLogic.with_retry(fn ->
-          backend_module.consolidate(config)
-        end, RetryLogic.memory_retry_config())
-      end)
+      # Circuit breaker and retry logic are now handled by the shared backend macro
+      backend_module.consolidate(config)
     end
   end
 
@@ -539,11 +527,8 @@ defmodule Prismatic.Memory.Protocol do
          :ok <- validate_key(key),
          {:ok, backend_module} <- get_backend_module(config.backend_type) do
 
-      CircuitBreaker.call(config.backend_type, fn ->
-        RetryLogic.with_retry(fn ->
-          backend_module.forget(config, memory_type, key)
-        end, RetryLogic.memory_retry_config())
-      end)
+      # Circuit breaker and retry logic are now handled by the shared backend macro
+      backend_module.forget(config, memory_type, key)
     end
   end
 
@@ -565,11 +550,8 @@ defmodule Prismatic.Memory.Protocol do
          :ok <- validate_pattern(pattern),
          {:ok, backend_module} <- get_backend_module(config.backend_type) do
 
-      CircuitBreaker.call(config.backend_type, fn ->
-        RetryLogic.with_retry(fn ->
-          backend_module.search(config, memory_type, pattern)
-        end, RetryLogic.memory_retry_config())
-      end)
+      # Circuit breaker and retry logic are now handled by the shared backend macro
+      backend_module.search(config, memory_type, pattern)
     end
   end
 

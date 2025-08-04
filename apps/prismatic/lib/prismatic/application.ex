@@ -59,9 +59,6 @@ defmodule Prismatic.Application do
        name: Prismatic.Blackboard.Manager
       },
 
-      # LLM Backend Metrics Collector (if needed)
-      {Prismatic.LLM.Backend.MetricsCollector, name: Prismatic.LLM.Backend.MetricsCollector}
-
       # Additional workers can be added here
       # {Prismatic.Worker, arg}
     ]

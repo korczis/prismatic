@@ -3,8 +3,8 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
   Anthropic backend implementation for the Prismatic LLM system.
 
   This module provides integration with Anthropic's Claude models through their API.
-  It implements the `Prismatic.LLM.Backend` behavior with full support for
-  circuit breakers, retries, and comprehensive error handling.
+  It uses the shared backend macro for automatic circuit breaker, retry logic,
+  telemetry, and error handling functionality.
 
   ## Features
 
@@ -12,13 +12,15 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
   - Streaming and non-streaming responses
   - Token usage tracking and cost estimation
   - Rate limiting and quota management
-  - Comprehensive error handling and recovery
+  - Automatic circuit breaker protection and retry logic
+  - Comprehensive telemetry and error handling
 
   ## Configuration
 
   ```elixir
   config = %{
     backend_type: :anthropic,
+    name: :anthropic_backend,
     api_key: "your-anthropic-api-key",
     model: "claude-3-sonnet-20240229",
     timeout: 30_000,
@@ -28,66 +30,37 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
   ```
   """
 
-  @behaviour Prismatic.LLM.Backend
+  use Prismatic.Shared.Backend,
+    system: :llm,
+    required_config_fields: [:api_key],
+    circuit_breaker_config: [
+      failure_threshold: 5,
+      recovery_timeout: 60_000,
+      success_threshold: 3
+    ],
+    telemetry_prefix: [:prismatic, :llm, :backend],
+    default_timeout: 30_000,
+    default_max_retries: 3
 
   require Logger
 
-  alias Prismatic.LLM.Backend.{CircuitBreaker, MetricsCollector, RetryLogic}
-
   @default_model "claude-3-sonnet-20240229"
-  @default_timeout 30_000
   @default_max_tokens 4096
   @default_temperature 0.7
   @base_url "https://api.anthropic.com"
   @api_version "2023-06-01"
 
-  @impl true
-  def generate_response(config, prompt, context \\ %{}) do
-    with :ok <- validate_config(config),
-         {:ok, request_body} <- build_request_body(config, prompt, context),
+  ## Required Callback Implementations
+
+  @impl Prismatic.Shared.Backend
+  def execute_operation(config, :generate_response, {prompt, context}) do
+    with {:ok, request_body} <- build_request_body(config, prompt, context),
          {:ok, response} <- make_api_request(config, request_body) do
-
-      # Track metrics
-      MetricsCollector.record_request(:anthropic, :success, response)
-
       parse_response(response)
-    else
-      {:error, reason} = error ->
-        MetricsCollector.record_request(:anthropic, :error, reason)
-        Logger.error("Anthropic API request failed: #{inspect(reason)}")
-        error
     end
   end
 
-  @impl true
-  def validate_config(config) do
-    required_fields = [:backend_type, :api_key]
-
-    case validate_required_fields(config, required_fields) do
-      :ok -> validate_api_key_format(config.api_key)
-      error -> error
-    end
-  end
-
-  @impl true
-  def health_check(config) do
-    with :ok <- validate_config(config) do
-      # Make a minimal API call to check connectivity
-      test_request = %{
-        model: Map.get(config, :model, @default_model),
-        max_tokens: 1,
-        messages: [%{role: "user", content: "test"}]
-      }
-
-      case make_api_request(config, test_request) do
-        {:ok, _response} -> :ok
-        {:error, reason} -> {:error, {:health_check_failed, reason}}
-      end
-    end
-  end
-
-  @impl true
-  def get_model_info(config) do
+  def execute_operation(config, :get_model_info, _params) do
     model = Map.get(config, :model, @default_model)
 
     model_info = %{
@@ -102,18 +75,84 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
     {:ok, model_info}
   end
 
-  # Private helper functions
-
-  defp validate_required_fields(config, required_fields) do
-    missing_fields = Enum.filter(required_fields, fn field ->
-      not Map.has_key?(config, field) or is_nil(Map.get(config, field))
-    end)
-
-    case missing_fields do
-      [] -> :ok
-      fields -> {:error, {:missing_required_fields, fields}}
+  @impl Prismatic.Shared.Backend
+  def validate_system_config(config) do
+    with :ok <- validate_api_key_format(config.api_key) do
+      :ok
     end
   end
+
+  @impl Prismatic.Shared.Backend
+  def perform_health_check(config) do
+    # Make a minimal API call to check connectivity
+    test_request = %{
+      model: Map.get(config, :model, @default_model),
+      max_tokens: 1,
+      messages: [%{role: "user", content: "test"}]
+    }
+
+    case make_api_request(config, test_request) do
+      {:ok, _response} -> :ok
+      {:error, reason} -> {:error, {:health_check_failed, reason}}
+    end
+  end
+
+  @impl Prismatic.Shared.Backend
+  def get_backend_info(config) do
+    model = Map.get(config, :model, @default_model)
+
+    info = %{
+      backend_type: :anthropic,
+      name: Map.get(config, :name, :anthropic_backend),
+      model: model,
+      max_tokens: get_model_max_tokens(model),
+      supports_streaming: true,
+      cost_per_token: get_model_cost_per_token(model),
+      provider: :anthropic,
+      capabilities: get_model_capabilities(model),
+      base_url: Map.get(config, :base_url, @base_url),
+      api_version: @api_version
+    }
+
+    {:ok, info}
+  end
+
+  ## Public API (maintains compatibility with original)
+
+  def generate_response(config, prompt, context \\ %{}) do
+    handle_circuit_breaker(config, fn ->
+      with_retry(fn ->
+        execute_operation(config, :generate_response, {prompt, context})
+      end, config)
+    end)
+  end
+
+  def get_model_info(config) do
+    handle_circuit_breaker(config, fn ->
+      execute_operation(config, :get_model_info, nil)
+    end)
+  end
+
+  ## Enhanced Error Classification for Anthropic Operations
+
+  # Anthropic-specific error classification
+  def classify_error({:api_error, "invalid_request_error", _}), do: {:non_retryable, :validation_error}
+  def classify_error({:api_error, "authentication_error", _}), do: {:non_retryable, :authentication_error}
+  def classify_error({:api_error, "permission_error", _}), do: {:non_retryable, :authorization_error}
+  def classify_error({:api_error, "not_found_error", _}), do: {:non_retryable, :not_found}
+  def classify_error({:api_error, "rate_limit_error", _}), do: {:retryable, :rate_limit}
+  def classify_error({:api_error, "api_error", _}), do: {:retryable, :server_error}
+  def classify_error({:api_error, "overloaded_error", _}), do: {:retryable, :server_error}
+  def classify_error({:api_error, status, _}) when status in 500..599, do: {:retryable, :server_error}
+  def classify_error({:api_error, 429, _}), do: {:retryable, :rate_limit}
+  def classify_error({:api_error, status, _}) when status in 400..499, do: {:non_retryable, :client_error}
+  def classify_error(:invalid_api_key_format), do: {:non_retryable, :authentication_error}
+  def classify_error({:request_failed, _}), do: {:retryable, :network_error}
+
+  # Fall back to base classification
+  def classify_error(error), do: super(error)
+
+  ## Private Implementation (Anthropic-specific logic only)
 
   defp validate_api_key_format(api_key) when is_binary(api_key) do
     if String.starts_with?(api_key, "sk-ant-") and String.length(api_key) > 20 do
@@ -182,7 +221,7 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
   end
 
   defp make_api_request(config, request_body) do
-    timeout = Map.get(config, :timeout, @default_timeout)
+    timeout = Map.get(config, :timeout, 30_000)
 
     # Configure Anthropix client
     anthropix_config = [
@@ -190,12 +229,7 @@ defmodule Prismatic.LLM.Impl.AnthropicBackend do
       http_options: [receive_timeout: timeout]
     ]
 
-    # Use circuit breaker and retry logic
-    CircuitBreaker.call(:anthropic, fn ->
-      RetryLogic.with_retry(fn ->
-        execute_anthropix_request(request_body, anthropix_config)
-      end, max_retries: Map.get(config, :max_retries, 3))
-    end)
+    execute_anthropix_request(request_body, anthropix_config)
   end
 
   defp execute_anthropix_request(request_body, anthropix_config) do

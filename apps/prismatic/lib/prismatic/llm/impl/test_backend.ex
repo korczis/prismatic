@@ -3,8 +3,8 @@ defmodule Prismatic.LLM.Impl.TestBackend do
   Test backend implementation for the Prismatic LLM system.
 
   This module provides a test implementation that can be used for development,
-  testing, and demonstration purposes. It implements the `Prismatic.LLM.Backend`
-  behavior with configurable responses and predictable behavior.
+  testing, and demonstration purposes. It uses the shared backend macro for
+  automatic circuit breaker, retry logic, telemetry, and error handling functionality.
 
   ## Features
 
@@ -13,12 +13,15 @@ defmodule Prismatic.LLM.Impl.TestBackend do
   - Simulated latency and error conditions
   - Token usage simulation
   - No external API dependencies
+  - Automatic circuit breaker protection and retry logic
+  - Comprehensive telemetry and error handling
 
   ## Configuration
 
   ```elixir
   config = %{
     backend_type: :test,
+    name: :test_backend,
     responses: %{
       "hello" => "Hello! How can I help you today?",
       "error" => {:error, :simulated_error}
@@ -29,7 +32,17 @@ defmodule Prismatic.LLM.Impl.TestBackend do
   ```
   """
 
-  @behaviour Prismatic.LLM.Backend
+  use Prismatic.Shared.Backend,
+    system: :llm,
+    required_config_fields: [],
+    circuit_breaker_config: [
+      failure_threshold: 5,
+      recovery_timeout: 60_000,
+      success_threshold: 3
+    ],
+    telemetry_prefix: [:prismatic, :llm, :backend],
+    default_timeout: 30_000,
+    default_max_retries: 3
 
   require Logger
 
@@ -38,40 +51,24 @@ defmodule Prismatic.LLM.Impl.TestBackend do
   @model_name "test-model-v1"
   @max_tokens 4096
 
-  @impl true
-  def generate_response(config, prompt, context \\ %{}) do
-    with :ok <- validate_config(config) do
-      # Simulate latency
-      simulate_latency(config)
+  ## Required Callback Implementations
 
-      # Check for error simulation
-      case maybe_simulate_error(config) do
-        :ok ->
-          response = get_response_for_prompt(config, prompt, context)
-          {:ok, response}
-        error ->
-          error
-      end
+  @impl Prismatic.Shared.Backend
+  def execute_operation(config, :generate_response, {prompt, context}) do
+    # Simulate latency
+    simulate_latency(config)
+
+    # Check for error simulation
+    case maybe_simulate_error(config) do
+      :ok ->
+        response = get_response_for_prompt(config, prompt, context)
+        {:ok, response}
+      error ->
+        error
     end
   end
 
-  @impl true
-  def validate_config(config) do
-    if Map.get(config, :backend_type) == :test do
-      :ok
-    else
-      {:error, :invalid_backend_type}
-    end
-  end
-
-  @impl true
-  def health_check(_config) do
-    # Test backend is always healthy
-    :ok
-  end
-
-  @impl true
-  def get_model_info(_config) do
+  def execute_operation(_config, :get_model_info, _params) do
     model_info = %{
       name: @model_name,
       max_tokens: @max_tokens,
@@ -84,7 +81,68 @@ defmodule Prismatic.LLM.Impl.TestBackend do
     {:ok, model_info}
   end
 
-  # Private helper functions
+  @impl Prismatic.Shared.Backend
+  def validate_system_config(config) do
+    if Map.get(config, :backend_type) == :test do
+      :ok
+    else
+      {:error, :invalid_backend_type}
+    end
+  end
+
+  @impl Prismatic.Shared.Backend
+  def perform_health_check(_config) do
+    # Test backend is always healthy
+    :ok
+  end
+
+  @impl Prismatic.Shared.Backend
+  def get_backend_info(config) do
+    info = %{
+      backend_type: :test,
+      name: Map.get(config, :name, :test_backend),
+      model: @model_name,
+      max_tokens: @max_tokens,
+      supports_streaming: false,
+      cost_per_token: 0.0,
+      provider: :test,
+      capabilities: [:chat, :testing, :deterministic],
+      latency_ms: Map.get(config, :latency_ms, @default_latency),
+      error_rate: Map.get(config, :error_rate, 0.0)
+    }
+
+    {:ok, info}
+  end
+
+  ## Public API (maintains compatibility with original)
+
+  def generate_response(config, prompt, context \\ %{}) do
+    handle_circuit_breaker(config, fn ->
+      with_retry(fn ->
+        execute_operation(config, :generate_response, {prompt, context})
+      end, config)
+    end)
+  end
+
+  def get_model_info(config) do
+    handle_circuit_breaker(config, fn ->
+      execute_operation(config, :get_model_info, nil)
+    end)
+  end
+
+  ## Enhanced Error Classification for Test Operations
+
+  # Test-specific error classification
+  def classify_error(:simulated_error), do: {:retryable, :simulated_error}
+  def classify_error(:simulated_test_error), do: {:retryable, :test_error}
+  def classify_error(:simulated_network_error), do: {:retryable, :network_error}
+  def classify_error(:forced_error), do: {:non_retryable, :forced_error}
+  def classify_error(:invalid_backend_type), do: {:non_retryable, :configuration_error}
+
+  # Fall back to base classification
+  def classify_error(error), do: super(error)
+
+  ## Private Implementation (Test-specific logic only)
 
   defp simulate_latency(config) do
     latency = Map.get(config, :latency_ms, @default_latency)
